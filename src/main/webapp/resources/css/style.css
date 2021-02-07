@@ -1,0 +1,113 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+/*공통*/
+body {font-family:'Nanum Gothic', sans-serif;}
+h3 {color:BLACK;} 
+h4 {color:GRAY;} 
+a {color:BLACK; text-decoration: none;}
+
+/*footer*/
+.mypffooter {width : 100%; background-color: BLACK; }
+.mypffooter .ftext {text-align: center;}
+
+/*회원 가입*/
+.regist {width:80%; margin-left: auto; margin-right: auto;}
+.regist .regform {width:80%; border-spacing: 5px;}
+.regist .regform .title {width:15%; font-weight: bold; }
+.regist .regform .infield {width:70%; border: 0px; border-bottom : 1px solid BLACK; }
+.regist .regform .infield02 {width:50%; border: 0px; border-bottom : 1px solid BLACK; }
+.regist .regform .infield03 {width:40%; border: 0px; border-bottom : 1px solid BLACK; }
+.regist .regform .bbtpos2 {padding-left: 60%;}
+.regist .regform .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+.regist .regform .sOpt {vertical-align: middle; text-align-last: center; width:200px; height:30px; padding : 3px; border : 1px solid black; border-radius:0px;}
+
+/*정보 확인 및 수정*/
+.regist {width:80%; margin-left: auto; margin-right: auto;}
+.regist .modform {width:80%; border-spacing: 5px;}
+.regist .modform .title {width:15%; font-weight: bold; }
+.regist .modform .infield {width:70%; border: 0px; border-bottom : 1px solid BLACK; }
+.regist .modform .infield02 {width:50%; border: 0px; border-bottom : 1px solid BLACK; }
+.regist .modform .infield03 {width:40%; border: 0px; border-bottom : 1px solid BLACK; }
+.regist .modform .bbtpos2 {padding-left: 60%;}
+.regist .modform .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+.regist .modform .sOpt {vertical-align: middle; text-align-last: center; width:200px; height:30px; padding : 3px; border : 1px solid black; border-radius:0px;}
+
+/*관리자 회원 정보 */
+.regist {width:80%; margin-left: auto; margin-right: auto;}
+.regist .modform {width:80%; border-spacing: 5px;}
+.regist .modform .title {width:15%; font-weight: bold; }
+.regist .modform .infield {width:70%; border: 0px; border-bottom : 1px solid BLACK; }
+.regist .modform .infield02 {width:50%; border: 0px; border-bottom : 1px solid BLACK; }
+.regist .modform .infield03 {width:40%; border: 0px; border-bottom : 1px solid BLACK; }
+.regist .modform .bbtpos2 {padding-left: 60%;}
+.regist .modform .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+.regist .modform .sOpt {vertical-align: middle; text-align-last: center; width:200px; height:30px; padding : 3px; border : 1px solid black; border-radius:0px;}
+
+/*프로필*/
+.mypro {width : 80%; margin-left: auto; margin-right: auto;}
+.mypro .prodetail {width:70%; border-spacing: 5px;}
+.mypro .prodetail .prophoto {width:150px; height: 150px;}
+.mypro .prodetail .prophoto img {width: 140px; height: 140px;}
+.mypro .prodetail .title02 {font-weight: bold;}
+
+/* 프로젝트 게시판 상세 내역*/
+.project {width: 80%; margin-left: auto; margin-right: auto;}
+.project .pboard {width:70%; border-spacing:5px 5px;}
+.project .pboard .info {height : 30px;}
+.project .pboard .thumb {width:210px; height:210px;} 
+.project .pboard .thumb img {width:200px; height:200px;} 
+.project .pboard .underline {border-bottom:  1px solid BLACK;}
+.project .pboard .title {font-weight: bold;}
+.project .pboard .bbtpos1 {padding-left: 80%;}
+.project .pboard .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+
+/*프로젝트 게시판 등록 및 수정*/
+.project .wform {width:80%; border-spacing: 5px;}
+.project .wform .title {width:15%; font-weight: bold; }
+.project .wform .con {width:70%; height:100px; resize : none; border: 1px solid BLACK;}
+.project .wform .sOpt  {vertical-align: middle; text-align-last: center; width:150px; padding : 3px; border : 1px solid black; border-radius:0px;}
+.project .infield{width:70%; border: 0px; border-bottom : 1px solid BLACK; }
+.project .wform .bbtpos2 {padding-left: 60%;}
+.project .wform .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+
+/*기술 게시판 리스트*/
+.tech {width:80%; margin-left: auto; margin-right: auto;}
+.tech .tlist {width:70%; border-spacing: 5px;}
+.tech .tlist .title01 {font-weight: bold; text-align: center;}
+.tech .tlist .title02 {font-weight: bold;}
+.tech .tlist .underline {border-bottom : 1px solid BLACK;}
+.tech .searcht {width:70%; border-spacing: 5px; margin-left: auto; margin-right:auto;}
+.tech .searcht .underline {width : 70%;  border : 0px solid black; border-bottom: 1px solid black;}
+.tech .searcht .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+.tech .searcht .sOpt {vertical-align: middle; text-align-last: center; width:100px; padding : 3px; border : 1px solid black; border-radius:0px;}
+
+/*기술 게시판 등록 및 수정*/
+.tech .wform {width:80%; border-spacing: 5px;}
+.tech .wform .title {width:15%; font-weight: bold; }
+.tech .wform .con {width:70%; height:100px; resize : none; border: 1px solid BLACK;}
+.tech .wform .sOpt  {vertical-align: middle; text-align-last: center; width:150px; padding : 3px; border : 1px solid black; border-radius:0px;}
+.tech .infield{width:70%; border: 0px; border-bottom : 1px solid BLACK; }
+.tech .wform .bbtpos2 {padding-left: 60%;}
+.tech .wform .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+
+/*문의 게시판 리스트*/
+.inquery {width:80%; margin-left: auto; margin-right: auto;}
+.inquery .ilist {width:70%; border-spacing: 5px;}
+.inquery .ilist .title01 {font-weight: bold; text-align: center;}
+.inquery .ilist .title02 {font-weight: bold;}
+.inquery .ilist .underline {border-bottom : 1px solid BLACK;}
+.inquery .searcht {width:70%; border-spacing: 5px; margin-left: auto; margin-right:auto;}
+.inquery .searcht .underline {width : 70%; height:28px; border : 0px solid black; border-bottom: 1px solid black;}
+.inquery .searcht .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+.inquery .searcht .sOpt {vertical-align: middle; text-align-last: center; width:100px; height:30px; padding : 3px; border : 1px solid black; border-radius:0px;}
+
+/*문의 게시판 등록 및 답변*/
+.inquery {width:80%; margin-left: auto; margin-right: auto;}
+.inquery .wform {width:80%; border-spacing: 5px;}
+.inquery .wform .title {width:15%; font-weight: bold; }
+.inquery .wform .con {width:70%; height:100px; resize : none; border: 1px solid BLACK;}
+.inquery .wform .sOpt  {vertical-align: middle; text-align-last: center; width:150px; padding : 3px; border : 1px solid black; border-radius:0px;}
+.inquery .infield{width:70%; border: 0px; border-bottom : 1px solid BLACK; }
+.inquery .wform .bbtpos2 {padding-left: 60%;}
+.inquery .wform .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}

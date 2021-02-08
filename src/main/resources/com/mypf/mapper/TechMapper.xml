@@ -28,11 +28,6 @@
 		select * from tech_board where tech_num = #{tech_num}
 	</select>
 	
-	<!-- 기술 게시판 글 삭제 -->
-	<delete id="techDel">
-		delete from tech_board where tech_num = #{tech_num}
-	</delete>
-	
 	<!-- 기술 게시판 글 수정 -->
 	<update id="techMod">
 		update tech_board
@@ -42,4 +37,10 @@
 		upt_dt = sysdate
 		where tech_num = #{tech_num}
 	</update>
+	
+	<!-- 기술 게시판 글 삭제 -->
+	<delete id="techDel">
+		delete from tech_board where tech_num = #{tech_num}
+	</delete>
+	
 </mapper>

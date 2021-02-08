@@ -16,7 +16,6 @@
 				<h4 style="text-align: center;">기술 게시판</h4>
 			</header>
 				<section id="techDetail">
-					<form action="tech_modify.do" method="post">
 						<input type="hidden" id="techNum" name="tech_num" value="${board.tech_num}" />
 							<table class="tech" border=1>
 								<tbody>
@@ -37,9 +36,8 @@
 									</tr>
 									<tr>
 										<td>
-											<input type="button" value="수정 " onclick="location.href='tech_modify.do?tech_num=<c:out value="${board.tech_num }"/>'">
-					  						<input type="button" value="삭제" onclick="location.href='delete?techNum=${board.tech_num}'">
-											<input type="button" value="목록" onclick="location.href='tech_list.do'">
+											<button data-oper='tech_modify.do' onclick="location.href='tech_modify.do?tech_num=<c:out value="${board.tech_num}"/>'">수정</button>
+											<button data-oper='tech_list.do' onclick="location.href='tech_list.do'">목록</button>
 										</td>
 									</tr>		
 								</tbody>

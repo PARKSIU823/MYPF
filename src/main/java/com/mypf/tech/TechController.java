@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,7 +37,7 @@ public class TechController {
 	
 	// 기술 게시판 글 작성
 	@RequestMapping(value="tech_write.do", method=RequestMethod.POST)
-	public String techWrite(TechVO techVO, RedirectAttributes rttr) throws Exception{
+	public String techWrite(TechVO techVO, RedirectAttributes rttr) throws Exception {
 		service.techWrite(techVO);
 		rttr.addFlashAttribute("result", techVO.getTech_num());
 		return "redirect:tech_list.do";
@@ -44,25 +45,31 @@ public class TechController {
 	
 	// 기술 게시판 글 상세 조회
 	@RequestMapping(value="tech_detail.do", method=RequestMethod.GET)
-	public void techDetail(@RequestParam("tech_num") int tech_num, Model model) throws Exception{
+	public void techDetail(@RequestParam("tech_num") int tech_num, Model model) throws Exception {
+		model.addAttribute("board", service.techDetail(tech_num));
+	}
+	
+	// 기술 게시판 글 수정 화면
+	@RequestMapping(value="tech_modify.do", method=RequestMethod.GET)
+	public void techMod(@RequestParam("tech_num") int tech_num, Model model) throws Exception {
 		model.addAttribute("board", service.techDetail(tech_num));
 	}
 	
 	// 기술 게시판 글 수정
 	@RequestMapping(value="tech_modify.do", method=RequestMethod.POST)
-	public String techMod(TechVO techVO, RedirectAttributes rttr) throws Exception{
+	public String techMod(TechVO techVO, RedirectAttributes rttr) throws Exception {
 		if (service.techMod(techVO)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:tech/tech_list.do";
+		return "redirect:tech_list.do";
 	}
 	
 	// 기술 게시판 글 삭제
 	@RequestMapping(value="tech_del.do", method=RequestMethod.POST)
-	public String techDel(@RequestParam("tech_num") int tech_num, RedirectAttributes rttr) throws Exception{
+	public String techDel(@RequestParam("tech_num") int tech_num, RedirectAttributes rttr) throws Exception {
 		if (service.techDel(tech_num)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:tech/tech_list.do";
+		return "redirect:tech_list.do";
 	}
 }

@@ -14,10 +14,10 @@ public interface TechMapper {
 	public List<TechVO> techList() throws Exception;
 	
 	// 기술게시판 목록 페이징
-	public List<TechVO> getListWithPaging(Criteria cri);
+	public List<TechVO> getListWithPaging(Criteria cri) throws Exception;
 	
 	// 기술 게시판 전체 데이터의 개수 처리
-	public int getTotalCount(Criteria cri);
+	public int getTotalCount(Criteria cri) throws Exception;
 	
 	public void techWrite(TechVO techVO) throws Exception;
 	

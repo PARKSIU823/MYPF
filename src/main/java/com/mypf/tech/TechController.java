@@ -29,12 +29,17 @@ public class TechController {
 		model.addAttribute("list", service.techList());
 	}
 	
+	// 기술 게시판 글 작성 화면
+	@RequestMapping(value="tech_write.do", method=RequestMethod.GET)
+	public void techWrite() {
+	}
+	
 	// 기술 게시판 글 작성
 	@RequestMapping(value="tech_write.do", method=RequestMethod.POST)
 	public String techWrite(TechVO techVO, RedirectAttributes rttr) throws Exception{
 		service.techWrite(techVO);
 		rttr.addFlashAttribute("result", techVO.getTech_num());
-		return "redirect:tech/tech_list.do";
+		return "redirect:tech_list.do";
 	}
 	
 	// 기술 게시판 글 상세 조회

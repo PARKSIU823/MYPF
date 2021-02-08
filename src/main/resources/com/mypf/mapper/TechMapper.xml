@@ -14,13 +14,13 @@
 		values (tech_board_seq.nextval, #{user_id}, #{tech_category}, #{tech_title}, #{tech_con})
 	</insert>
 	
-	<insert id="techWriteSelectKey">
+	<insert id="techWriteSelectKey" parameterType="com.mypf.tech.vo.TechVO">
 		<selectKey keyProperty="tech_num" order="BEFORE" resultType="int">
 			select tech_board_seq.nextval from dual
 		</selectKey>
 		
 		insert into tech_board (tech_num, user_id, tech_category, tech_title, tech_con)
-		values(#{tech_num}, #{user_id}, #{tech_category}, #{tech_title}, #{tech_con})	
+		values (#{tech_num}, #{user_id}, #{tech_category}, #{tech_title}, #{tech_con})	
 	</insert>
 	
 	<!-- 기술 게시판 글 상세 조회 -->

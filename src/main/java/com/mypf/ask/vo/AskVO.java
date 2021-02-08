@@ -8,14 +8,14 @@ import lombok.Data;
 public class AskVO {
 
 	/*
-	 * userId : 회원 아이디
-	 * askNum : 글 번호
-	 * writerNm : 작성자 이름
-	 * writerMail : 작성자 이메일
-	 * askTitle : 글 제목
-	 * askCon : 글 내용
-	 * commYn : 답변 여부
-	 * intDt : 작성일
+	 * user_id : 회원 아이디
+	 * ask_num : 글 번호
+	 * writer_nm : 작성자 이름
+	 * writer_mail : 작성자 이메일
+	 * ask_title : 글 제목
+	 * ask_con : 글 내용
+	 * comm_yn : 답변 여부
+	 * ins_dt : 작성일
 	 */
 	
 	private String user_id;

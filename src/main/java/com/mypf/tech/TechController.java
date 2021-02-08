@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.log4j.Log4j;
-
+/* 기술 게시판 컨트롤러 */
 @Controller
 @Log4j
 @RequestMapping("/tech/*")

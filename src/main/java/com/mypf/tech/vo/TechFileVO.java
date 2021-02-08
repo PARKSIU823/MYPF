@@ -8,23 +8,23 @@ import lombok.Data;
 public class TechFileVO {
 	
 	/*
-	 * userId : 회원 아이디
-	 * techNum : 글 번호
-	 * fileNm : 파일 이름
-	 * fileNum : 파일 순서
-	 * filePath : 파일 경로
-	 * insDt : 작성일
-	 * uptDt : 수정일
+	 * user_nm : 회원 이름
+	 * user_id : 회원 아이디
+	 * tech_num : 글 번호
+	 * file_num : 파일 번호
+	 * file_path : 파일 경로
+	 * file_nm : 파일 이름
+	 * ins_dt : 작성일
+	 * upt_dt : 수정일
 	 */
 	
-	private String userNm;
-	private String userId;
-	private int techNum;
-	private String techCategory;
-	private String techTitle;
-	private String techCon;
-	private int techHit;
-	private Date insDt;
-	private Date uptDt;
+	private String user_nm;
+	private String user_id;
+	private int tech_num;
+	private String file_num;
+	private String file_path;
+	private int file_nm;
+	private Date ins_dt;
+	private Date upt_dt;
 
 }

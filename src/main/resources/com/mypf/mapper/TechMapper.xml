@@ -8,6 +8,23 @@
 		select * from tech_board where tech_num > 0
 	</select>
 	
+	<!-- 기술게시판 목록 페이징 -->
+	<select id="getListWithPaging" resultType="com.mypf.tech.vo.TechVO">
+		<![CDATA[
+			select
+				tech_num, tech_title, user_id, ins_dt, upt_dt, hit
+			from
+			(
+				select /*+INDEX_DESC(tech_board tech_board_seq)*/
+					rownum rn, tech_num, tech_title, user_id, ins_dt, upt_dt, hit
+				from
+					tech_board
+			where rownum <= #{pageNum} * #{amount}
+			)
+			where rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
 	<!-- 기술 게시판 글 작성 -->
 	<insert id="techWrite" parameterType="com.mypf.tech.vo.TechVO">
 		insert into tech_board (tech_num, user_id, tech_category, tech_title, tech_con)

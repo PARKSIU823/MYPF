@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mypf.tech.vo.Criteria;
 import com.mypf.tech.vo.TechVO;
 /* 기술 게시판 메퍼 인터페이스 */
 @Mapper
@@ -11,6 +12,9 @@ public interface TechMapper {
 
 	// 기술 게시판 목록 조회
 	public List<TechVO> techList() throws Exception;
+	
+	// 기술게시판 목록 페이징
+	public List<TechVO> getListWithPaging(Criteria cri);
 	
 	public void techWrite(TechVO techVO) throws Exception;
 	

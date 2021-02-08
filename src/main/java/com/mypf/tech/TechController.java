@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mypf.tech.service.TechService;
+import com.mypf.tech.vo.Criteria;
+import com.mypf.tech.vo.PageDTO;
 import com.mypf.tech.vo.TechVO;
 
 import lombok.extern.log4j.Log4j;
@@ -26,8 +28,9 @@ public class TechController {
 	
 	// 기술 게시판 목록 조회
 	@RequestMapping(value="tech_list.do", method=RequestMethod.GET)
-	public void techList(HttpServletRequest request, Model model) throws Exception {
-		model.addAttribute("list", service.techList());
+	public void techList(HttpServletRequest request, Criteria cri, Model model) throws Exception {
+		model.addAttribute("list", service.techList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, 123));
 	}
 	
 	// 기술 게시판 글 작성 화면

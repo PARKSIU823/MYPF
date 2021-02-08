@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mypf.mapper.TechMapper;
 import com.mypf.tech.service.TechService;
+import com.mypf.tech.vo.Criteria;
 import com.mypf.tech.vo.TechVO;
 
 /* 기술 게시판 서비스 구현 */
@@ -19,8 +20,8 @@ public class TechServiceImpl implements TechService{
 	
 	// 기술 게시판 목록 조회
 	@Override
-	public List<TechVO> techList() throws Exception {
-		return mapper.techList();
+	public List<TechVO> techList(Criteria cri) throws Exception {
+		return mapper.getListWithPaging(cri);
 	}
 
 	// 기술 게시판 글 작성

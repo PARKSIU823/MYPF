@@ -10,28 +10,37 @@ import com.mypf.mapper.PortfolioMapper;
 import com.mypf.portfolio.service.PortfolioService;
 import com.mypf.portfolio.vo.PortfolioVO;
 
+import lombok.extern.log4j.Log4j;
+
 @Service
+@Log4j
 public class PortfolioServiceImpl implements PortfolioService{
 
 	@Autowired
 	private PortfolioMapper pfMapper;
+	
+	@Autowired
+	private PortfolioService pfService;
+	
 	//포폴 리스트 불러오기
 	@Override
 	public List<PortfolioVO> pfList() throws Exception {
-		return null;
+		log.info("목록 조회");
+		return pfMapper.pfList();
 	}
 
 	//포폴 조회하기
 	@Override
-	public PortfolioVO pfDetail(int prtfNum) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public PortfolioVO pfDetail(int prtf_num) throws Exception {
+		log.info("조회 : " + prtf_num);
+		return pfMapper.pfDetail(prtf_num);
 	}
 
 	//포폴 등록하기
+	@Override
 	public void pfAdd(PortfolioVO pf) throws Exception {
-		// TODO Auto-generated method stub
-		
+		log.info("등록 : " + pf);
+		pfMapper.pfAdd(pf);
 	}
 
 	//포폴 수정하기
@@ -41,9 +50,9 @@ public class PortfolioServiceImpl implements PortfolioService{
 	}
 
 	//포폴 삭제하기
-	public boolean pfDel(int prftNum) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean pfDel(int prft_num) throws Exception {
+		log.info("remove : " + prft_num);
+		return pfMapper.pfDel(prft_num)==1;
 	}
 	
 	

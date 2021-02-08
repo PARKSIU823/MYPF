@@ -16,10 +16,10 @@ public class AskCommVO {
 	 * intDt : 작성일
 	 */
 	
-	private String userNm;
-	private String userId;
-	private int askNum;
-	private String commTitle;
-	private String commCon;
-	private Date intDt;
+	private String user_nm;
+	private String user_id;
+	private int ask_num;
+	private String comm_title;
+	private String comm_con;
+	private Date int_dt;
 }

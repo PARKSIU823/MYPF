@@ -49,7 +49,7 @@ public class TechController {
 	}
 	
 	// 기술 게시판 글 수정
-	@RequestMapping(value="tech_mod.do", method=RequestMethod.POST)
+	@RequestMapping(value="tech_modify.do", method=RequestMethod.POST)
 	public String techMod(TechVO techVO, RedirectAttributes rttr) throws Exception{
 		if (service.techMod(techVO)) {
 			rttr.addFlashAttribute("result", "success");

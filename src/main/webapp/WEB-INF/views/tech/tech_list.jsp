@@ -29,7 +29,8 @@
 	 			<c:forEach items="${list }" var="board">
 	 				<tr>
 	 					<td><c:out value="${board.tech_num}" /></td>
-	 					<td><c:out value="[${board.tech_category }]${board.tech_title}" /></td>
+	 					<td><a href='tech_detail.do?tech_num=<c:out value="${board.tech_num }"/>'>
+	 					<c:out value="[${board.tech_category }]${board.tech_title}" /></a></td>
 	 					<td><c:out value="${board.user_id}" /></td>
 	 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 	 					value="${board.ins_dt}" /></td>

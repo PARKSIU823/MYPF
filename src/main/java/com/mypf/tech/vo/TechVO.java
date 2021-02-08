@@ -17,14 +17,14 @@ public class TechVO {
 	 * insDt : 작성일
 	 * uptDt : 수정일
 	 */
-	private String userNm;
-	private String userId;
-	private int techNum;
-	private String techCategory;
-	private String techTitle;
-	private String techCon;
-	private int Hit;
-	private Date insDt;
-	private Date uptDt;
+	private String user_nm;
+	private String user_id;
+	private int tech_num;
+	private String tech_category;
+	private String tech_title;
+	private String tech_con;
+	private int hit;
+	private Date ins_dt;
+	private Date upt_dt;
 
 }

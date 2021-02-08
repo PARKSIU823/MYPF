@@ -2,29 +2,34 @@ package com.mypf.ask.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.mypf.ask.service.AskService;
 import com.mypf.ask.vo.AskVO;
+import com.mypf.mapper.AskMapper;
 
 import lombok.extern.log4j.Log4j;
-
+/* 문의 게시판 서비스 구현 */
 @Service
 @Log4j
 public class AskServiceImpl implements AskService{
 	
+	@Resource(name="askMapper")
+	AskMapper askMapper;
+	
 	//문의하기
 	@Override
 	public void sendAsk(AskVO askVO) throws Exception {
-		// TODO Auto-generated method stub
+		askMapper.sendAsk(askVO);
 		
 	}
 
-	//문의 리스트
+	// 문의 게시판 글 목록
 	@Override
 	public List<AskVO> askList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return askMapper.askList();
 	}
 
 	//문의 상세 보기

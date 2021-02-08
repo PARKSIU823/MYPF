@@ -3,7 +3,7 @@ package com.mypf.ask.vo;
 import java.util.Date;
 
 import lombok.Data;
-
+/* 문의 게시판 브이오 */
 @Data
 public class AskVO {
 
@@ -18,13 +18,13 @@ public class AskVO {
 	 * intDt : 작성일
 	 */
 	
-	private String userId;
-	private int askNum;
-	private String writerNm;
-	private String writerMail;
-	private String askTitle;
-	private String askCon;
-	private char commYn;
-	private Date insDt;
+	private String user_id;
+	private int ask_num;
+	private String writer_nm;
+	private String writer_mail;
+	private String ask_title;
+	private String ask_con;
+	private char comm_yn;
+	private Date ins_dt;
 	
 }

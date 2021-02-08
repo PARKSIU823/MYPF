@@ -11,9 +11,45 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-
-이 안에 내용을 입력하세요 ask_write
-
+<div class="inquery">
+		<header>
+			<h4 style="text-align: center;">문의 글 작성</h4>
+		</header>
+			<section id="askWrite">
+				<form method="post" action="send_ask">
+					<table class="wform" border=1>
+						<tbody class="wform">
+							<tr>
+								<td>
+									<label for="writer_nm">이름</label><input class="title" type="text" id="writer_nm" name="writer_nm"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label for="writer_mail">이메일</label><input class="title" type="text" id="writer_mail" name="writer_mail"/>
+								</td>
+							</tr>	
+							<tr>
+								<td>
+									<label for="ask_title">제목</label><input class="title" type="text" id="ask_title" name="ask_title"/>
+								</td>
+							</tr>	
+							<tr>
+								<td>
+									<label for="ask_con">내용</label><textarea class="con" id="ask_con" name="ask_con"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td>						
+									<input type="submit" value="작성"/>
+									<input type="button" value="취소" onclick="location.href='ask_write.do'">
+								</td>
+							</tr>			
+						</tbody>			
+					</table>
+				</form>
+			</section>
+		</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

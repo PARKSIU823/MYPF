@@ -10,18 +10,18 @@ import com.mypf.portfolio.vo.PortfolioVO;
 public interface PortfolioMapper {
 
 	//포폴 리스트
-	public List<PortfolioVO> pfList();
+	public List<PortfolioVO> pfList() throws Exception;
 	
 	//포폴 등록
-	public void pfAdd(PortfolioVO pf);
+	public void pfAdd(PortfolioVO pf) throws Exception;
 	
 	//포폴 상세 보기
-	public PortfolioVO pfDetail(int prtfNum);
+	public PortfolioVO pfDetail(int prtfNum) throws Exception;
 	
 	//포폴 수정
-	public int pfMod(PortfolioVO pf);
+	public int pfMod(PortfolioVO pf) throws Exception;
 	
 	//포폴 삭제
-	public int pfDel(int prtfNum);
+	public int pfDel(int prtfNum) throws Exception;
 	
 }

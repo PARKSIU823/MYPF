@@ -2,15 +2,19 @@ package com.mypf.portfolio.service.Impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.mypf.mapper.PortfolioMapper;
 import com.mypf.portfolio.service.PortfolioService;
 import com.mypf.portfolio.vo.PortfolioVO;
 
 @Service
 public class PortfolioServiceImpl implements PortfolioService{
 
+	@Autowired
+	private PortfolioMapper pfMapper;
 	//포폴 리스트 불러오기
 	@Override
 	public List<PortfolioVO> pfList() throws Exception {

@@ -1,4 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mypf.mapper.PortfolioMapper"> 
+
+<!-- 포폴 리스트 -->
+<select id="pfList" resultType="com.mypf.portfolio.vo.PortfolioVO">
+	<![CDATA[
+		SELECT * FROM PRTF_BOARD
+		WHERE PRTF_NUM > 0
+	]]>
+	<if test="'category' =='siu'">
+		AND CATEGORY = 'SIU'
+	</if>
+	<if test="'category' == 'ej'">
+		AND CATEGORY == 'EJ'
+	</if>
+</select>
+
+<!-- 포폴 등록 -->
+<insert id="pfAdd" parameterType="com.mypf.portfolio.vo.PortfolioVO">
+	<selectKey keyProperty="prtf_num" order="BEFORE" resultType="int">
+		<![CDATA[SELECT SEQ_PRTF_BOARD.NEXTVAL FROM DUAL]]>	
+	</selectKey>
+	<![CDATA[
+		INSERT INTO PRTF_BOARD (
+			user_id
+			,prtf_num
+			,prtf_title
+			,prtf_con
+			,frm_dt
+			,to_dt
+			,position
+			,idea
+			,hit
+			,category
+			,ins_dt
+		) VALUES (
+			#{user_id}
+			,#{prtf_num}
+			,#{prtf_title}
+			,#{prtf_con}
+			,#{frm_dt}
+			,#{to_dt}
+			,#{position}
+			,#{idea}
+			,0
+			,#{category}
+			,sysdate)
+	]]>
+</insert>
+
+<!-- 포폴 조회 -->
+<select id="pfDetail" resultType="com.mypf.portfolio.vo.PortfolioVO">
+	<![CDATA[
+		SELECT 
+			A.user_id
+			,B.user_nm
+			,A.prtf_title
+			,A.prtf_con
+			,A.frm_dt
+			,A.to_dt
+			,A.position
+			,A.category
+			,A.idea
+		FROM PRTF_BOARD A
+			LEFT OUTER JOIN user_info B ON A.user_id = B.user_id
+		WHERE prtf_num = #{prtf_num}
+	]]>
+</select>
+
+<!-- 포폴 수정 -->
+<update id="pfMod" parameterType="com.mypf.portfolio.vo.PortfolioVO">
+	<![CDATA[
+		UPDATE PRTF_BOARD SET
+			prtf_title = #{prtf_title}
+			,prtf_con = #{prtf_con}
+			,frm_dt = #{frm_dt}
+			,to_dt = #{to_dt}
+			,position = #{position}
+			,idea = #{idea}
+			,category = #{category}
+			,upt_dt = sysdate
+		WHERE prtf_num = #{prtf_num}
+	]]>
+</update>
+
+<!-- 포폴 삭제 -->
+<delete id="pfDel">
+	DELETE FROM PRTF_BOARD
+	WHERE prtf_num = #{prtf_num}
+</delete>
 </mapper>

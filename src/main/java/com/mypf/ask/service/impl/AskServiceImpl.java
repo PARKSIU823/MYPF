@@ -19,11 +19,10 @@ public class AskServiceImpl implements AskService{
 	@Resource(name="askMapper")
 	AskMapper askMapper;
 	
-	//문의하기
+	// 문의 게시판 글 작성
 	@Override
 	public void sendAsk(AskVO askVO) throws Exception {
 		askMapper.sendAsk(askVO);
-		
 	}
 
 	// 문의 게시판 글 목록

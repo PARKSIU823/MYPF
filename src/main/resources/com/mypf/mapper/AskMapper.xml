@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 문의 게시판 매퍼 -->
-<mapper namespace="com.mypf.mapper.AskMapper"> 
+<mapper namespace="com.mypf.mapper.AskMapper">
+
 	<!-- 문의 게시판 글 작성 -->
 	<insert id="sendAsk" parameterType="com.mypf.ask.vo.AskVO">
 		INSERT INTO ASK_BOARD (WRITER_NM, ASK_NUM, WRITER_MAIL, ASK_TITLE, ASK_CON, COMM_YN)

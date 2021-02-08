@@ -14,14 +14,15 @@
 
 <div id="inquery">
 		<header>
-			<h4 style="text-align: center;">문의 목록</h4>
+			<h4 style="text-align: center;">문의 게시판 목록</h4>
 		</header>
 				<section id="askList">
 					<table class="inquery" style="text-align: center">
 						<tr class="ilist">
 							<th style="width:100px">번호</th>
 							<th style="width:450px">제목</th>
-							<th style="width:200px">이름</th>		
+							<th style="width:200px">이름</th>
+							<th style="width:100px">답변여부</th>		
 							<th style="width:200px">작성일</th>
 						</tr>
 							<c:forEach items="${list}" var="list">
@@ -31,6 +32,7 @@
 										<a href="/ask_detail.do?ask_num=${list.ask_num}">${list.ask_title}</a>
 									</td>
 									<td><c:out value="${list.writer_nm}"/></td>
+									<td><c:out value="${list.comm_yn}"/></td>
 									<td><fmt:formatDate value="${list.ins_dt}" pattern="yyyy-MM-dd"/></td>
 								</tr>
 							</c:forEach>

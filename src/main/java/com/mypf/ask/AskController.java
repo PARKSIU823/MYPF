@@ -23,14 +23,14 @@ public class AskController {
 	
 	// 문의 게시판 글 작성 화면
 	@RequestMapping(value="ask_write.do", method = RequestMethod.GET)
-	public String sendAsk(HttpServletRequest request, Model model) throws Exception {
+	public String askWrite(HttpServletRequest request, Model model) throws Exception {
 		return "ask/ask_write";
 	}
-	//문의하기 글 작성
-	@RequestMapping(value="send_ask", method=RequestMethod.POST)
-	public String sedAsk(AskVO askVO, HttpServletRequest request, Model model) throws Exception{
+	// 문의하기 게시판 글 작성
+	@RequestMapping(value="send_ask.do", method=RequestMethod.POST)
+	public String sendAsk(AskVO askVO, HttpServletRequest request, Model model) throws Exception{
 		askService.sendAsk(askVO);
-		return "redirect:ask/ask_write.do";
+		return "redirect:ask_write.do";
 	}
 	
 	// 문의 게시판 글 목록

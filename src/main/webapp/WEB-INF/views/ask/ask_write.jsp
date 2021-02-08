@@ -13,10 +13,10 @@
 <jsp:include page="../main/header.jsp"/>
 <div class="inquery">
 		<header>
-			<h4 style="text-align: center;">문의 글 작성</h4>
+			<h4 style="text-align: center;">문의 게시판 글 작성</h4>
 		</header>
 			<section id="askWrite">
-				<form method="post" action="send_ask">
+				<form method="post" action="send_ask.do">
 					<table class="wform" border=1>
 						<tbody class="wform">
 							<tr>

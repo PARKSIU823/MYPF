@@ -38,8 +38,14 @@
 	 					<td><c:out value="${board.hit}" /></td>
 			 		</tr>
 	 		</c:forEach>
+	 			<tr>
+						<td colspan="6">
+							<input type="button" value="글작성" style="float: right;" onclick="location.href='tech_write.do'">
+						</td>
+				</tr>
 		</table>
 	</div>
+	
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

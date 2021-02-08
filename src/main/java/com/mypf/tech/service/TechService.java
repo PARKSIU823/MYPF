@@ -10,6 +10,9 @@ public interface TechService {
 	// 기술 게시판 목록 조회
 	public List<TechVO> techList(Criteria cri) throws Exception;
 	
+	// 기술 게시판 전체 데이터의 개수 처리
+	public int getTotal(Criteria cri) throws Exception;
+	
 	// 기술 게시판 글 작성
 	public void techWrite(TechVO techVO) throws Exception;
 	

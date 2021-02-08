@@ -23,7 +23,13 @@ public class TechServiceImpl implements TechService{
 	public List<TechVO> techList(Criteria cri) throws Exception {
 		return mapper.getListWithPaging(cri);
 	}
-
+	
+	// 기술 게시판 전체 데이터의 개수 처리
+	@Override
+	public int getTotal(Criteria cri) throws Exception {
+		return mapper.getTotalCount(cri);
+	}
+	
 	// 기술 게시판 글 작성
 	@Override
 	public void techWrite(TechVO techVO) throws Exception {
@@ -47,5 +53,4 @@ public class TechServiceImpl implements TechService{
 	public boolean techDel(int techNum) throws Exception {
 		return mapper.techDel(techNum) == 1;
 	}
-
 }

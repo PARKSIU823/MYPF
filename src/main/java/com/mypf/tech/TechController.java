@@ -30,7 +30,10 @@ public class TechController {
 	@RequestMapping(value="tech_list.do", method=RequestMethod.GET)
 	public void techList(HttpServletRequest request, Criteria cri, Model model) throws Exception {
 		model.addAttribute("list", service.techList(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, 123));
+		
+		int total = service.getTotal(cri);
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	
 	// 기술 게시판 글 작성 화면

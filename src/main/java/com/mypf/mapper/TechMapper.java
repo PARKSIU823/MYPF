@@ -16,6 +16,9 @@ public interface TechMapper {
 	// 기술게시판 목록 페이징
 	public List<TechVO> getListWithPaging(Criteria cri);
 	
+	// 기술 게시판 전체 데이터의 개수 처리
+	public int getTotalCount(Criteria cri);
+	
 	public void techWrite(TechVO techVO) throws Exception;
 	
 	// 기술 게시판 글 작성

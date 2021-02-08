@@ -40,7 +40,7 @@ public class PortfolioController {
 	
 	//포트폴리오 게시판 글 수정
 	@RequestMapping(value = "pf_modify.do", method = RequestMethod.POST)
-	public String pfModify(HttpServletRequest request, Model model)  throws Exception{
+	public String pfMod(HttpServletRequest request, Model model)  throws Exception{
 		return "portfolio/modify";
 	}
 	

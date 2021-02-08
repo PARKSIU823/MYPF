@@ -3,7 +3,7 @@ package com.mypf.tech.vo;
 import java.util.Date;
 
 import lombok.Data;
-
+/* 기술 게시판 브이오 */
 @Data
 public class TechVO {
 	/*

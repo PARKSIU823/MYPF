@@ -2,48 +2,49 @@ package com.mypf.tech.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.mypf.mapper.TechMapper;
 import com.mypf.tech.service.TechService;
 import com.mypf.tech.vo.TechVO;
 
+/* 기술 게시판 서비스 구현 */
 @Service
 public class TechServiceImpl implements TechService{
 
-	//기술 게시판 목록 조회
+	@Autowired
+	private TechMapper mapper;
+	
+	// 기술 게시판 목록 조회
 	@Override
 	public List<TechVO> techList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.techList();
 	}
 
-	//기술 게시판 글 작성
+	// 기술 게시판 글 작성
 	@Override
 	public void techWrite(TechVO techVO) throws Exception {
-		// TODO Auto-generated method stub
-		
+		mapper.techWriteSelectKey(techVO);
 	}
 
-	//기술 게시판 글 상세 조회
+	// 기술 게시판 글 상세 조회
 	@Override
 	public TechVO techDetail(int techNum) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.techDetail(techNum);
 	}
 
-	//기술 게시판 글 수정
+	// 기술 게시판 글 수정
 	@Override
-	public void techMod(TechVO techVO) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public boolean techMod(TechVO techVO) throws Exception {
+		return mapper.techMod(techVO) == 1;
 	}
 
-	//기술 게시판 글 삭제
+	// 기술 게시판 글 삭제
 	@Override
-	public void techDel(int techNum) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public boolean techDel(int techNum) throws Exception {
+		return mapper.techDel(techNum) == 1;
 	}
 
 }

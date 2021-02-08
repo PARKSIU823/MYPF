@@ -1,4 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 기술 게시판 메퍼 -->
 <mapper namespace="com.mypf.mapper.TechMapper"> 
+
+	<!-- 기술 게시판 목록 조회 -->
+	<select id="techList" resultType="com.mypf.tech.vo.TechVO">
+		select * from tech_board where tech_num > 0
+	</select>
+	
+	<!-- 기술 게시판 글 작성 -->
+	<insert id="techWrite" parameterType="com.mypf.tech.vo.TechVO">
+		insert into tech_board (tech_num, user_id, tech_category, tech_title, tech_con)
+		values (tech_board_seq.nextval, #{user_id}, #{tech_category}, #{tech_title}, #{tech_con})
+	</insert>
+	
+	<insert id="techWriteSelectKey">
+		<selectKey keyProperty="tech_num" order="BEFORE" resultType="int">
+			select tech_board_seq.nextval from dual
+		</selectKey>
+		
+		insert into tech_board (tech_num, user_id, tech_category, tech_title, tech_con)
+		values(#{tech_num}, #{user_id}, #{tech_category}, #{tech_title}, #{tech_con})	
+	</insert>
+	
+	<!-- 기술 게시판 글 상세 조회 -->
+	<select id="techDetail" resultType="com.mypf.tech.vo.TechVO">
+		select * from tech_board where tech_num = #{tech_num}
+	</select>
+	
+	<!-- 기술 게시판 글 삭제 -->
+	<delete id="techDel">
+		delete from tech_board where tech_num = #{tech_num}
+	</delete>
+	
+	<!-- 기술 게시판 글 수정 -->
+	<update id="techMod">
+		update tech_board
+		set tech_category = #{tech_category},
+		tech_title = #{tech_title},
+		tech_con = #{tech_con},
+		upt_dt = sysdate
+		where tech_num = #{tech_num}
+	</update>
 </mapper>

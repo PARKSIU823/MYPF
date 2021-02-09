@@ -7,7 +7,7 @@
 <html>
 <head>
    <meta charset="utf-8">
-   <title>기술 게시판 목록</title>
+   <title>기술 게시판</title>
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
    <style type="text/css">
 			li {list-style: none; float: left; padding: 6px;}
@@ -17,7 +17,6 @@
 <jsp:include page="../main/header.jsp"/>
 <div class="tech">
 	<h3 style="text-align:center;">기술 게시판</h3>
-<!-- 	<h4 style="text-align: center;">기술 게시판</h4> -->
 	<table class="tlist">
  		<thead>
  			<th class="underline title01">번호</th>

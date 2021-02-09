@@ -7,13 +7,13 @@
 <html>
 <head>
    <meta charset="utf-8">
+   <title>기술 게시판</title>
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<div id="tech">
 		<h3 style="text-align: center;">기술 게시판</h3>
-<!-- 		<h4 style="text-align: center;">기술 게시판</h4> -->
 		<section id="techDetail">
 				<input type="hidden" id="techNum" name="tech_num" value="${board.tech_num}" />
 					<table class="tech" border=1>

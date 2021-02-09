@@ -7,6 +7,7 @@
 <html>
 <head>
    <meta charset="utf-8">
+   <title>기술 게시판 </title>
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
 </head>
 <body>

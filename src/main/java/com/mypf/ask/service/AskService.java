@@ -16,8 +16,8 @@ public interface AskService {
 	// 문의 게시판 글 총 갯수
 	public int askCount() throws Exception;
 	
-	// 문의 상세 보기
-	public AskVO askDetatil(int askNum) throws Exception;
+	// 문의 게시판 상세 조회 및 답변
+	public AskVO askDetail(int ask_num) throws Exception;
 
 	// 문의 답변하기
 	public void sendAnswer(AskVO askVO) throws Exception;

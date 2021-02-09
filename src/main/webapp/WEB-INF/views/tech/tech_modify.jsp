@@ -7,10 +7,13 @@
 <html>
 <head>
    <meta charset="utf-8">
+   <title>기술 게시판</title>
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
+<br>
+<br>
 <div id="tech">
 	<h4 style="text-align: center;">기술 게시판</h4>
 	<section id="techDetail">

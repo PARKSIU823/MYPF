@@ -38,11 +38,10 @@ public class AskServiceImpl implements AskService{
 		return askMapper.askCount();
 	}
 	
-	//문의 상세 보기
+	// 문의 게시판 상세 조회 및 답변
 	@Override
-	public AskVO askDetatil(int askNum) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public AskVO askDetail(int ask_num) throws Exception {
+		return askMapper.askDetail(ask_num);
 	}
 
 	//문의 답변하기

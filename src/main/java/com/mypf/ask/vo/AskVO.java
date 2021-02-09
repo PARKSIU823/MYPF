@@ -4,6 +4,10 @@ import java.util.Date;
 
 import lombok.Data;
 /* 문의 게시판 브이오 */
+/**
+ * @author chaeu
+ *
+ */
 @Data
 public class AskVO {
 

@@ -7,6 +7,7 @@
 <html>
 <head>
    <meta charset="utf-8">
+   <title>문의 게시판</title>
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
    <style type="text/css">
 			li {list-style: none; float: left; padding: 6px;}
@@ -31,7 +32,7 @@
 						<tr>
 							<td class="title02"><c:out value="${list.ask_num}"/></td>
 							<td class="title02"style="text-align: left;">
-								<a href="/ask_detail.do?ask_num=${list.ask_num}">${list.ask_title}</a>
+								<a href="ask_detail.do?ask_num=${list.ask_num}">${list.ask_title}</a>
 							</td>
 							<td class="title02"><c:out value="${list.writer_nm}"/></td>
 							<td class="title02"><c:out value="${list.comm_yn}"/></td>

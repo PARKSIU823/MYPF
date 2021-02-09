@@ -50,7 +50,7 @@ public class TechController {
 	}
 	
 	// 기술 게시판 글 상세 조회
-	@RequestMapping(value="tech_detail.do", method=RequestMethod.GET)
+	@RequestMapping(value="tech_detail.do")
 	public void techDetail(@RequestParam("tech_num") int tech_num, Model model) throws Exception {
 		model.addAttribute("board", service.techDetail(tech_num));
 	}

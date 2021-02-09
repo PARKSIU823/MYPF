@@ -25,11 +25,11 @@ public interface TechMapper {
 	public void techWriteSelectKey(TechVO techVO) throws Exception;
 	
 	// 기술 게시판 글 상세 조회
-	public TechVO techDetail(int techNum) throws Exception;
+	public TechVO techDetail(int tech_num) throws Exception;
 	
 	// 기술 게시판 글 수정
 	public int techMod(TechVO techVO) throws Exception;
 		
 	// 기술 게시판 글 삭제
-	public int techDel(int techNum) throws Exception;
+	public int techDel(int tech_num) throws Exception;
 }

@@ -38,10 +38,10 @@ public class TechServiceImpl implements TechService{
 
 	// 기술 게시판 글 상세 조회
 	@Override
-	public TechVO techDetail(int techNum) throws Exception {
-		return mapper.techDetail(techNum);
+	public TechVO techDetail(int tech_num) throws Exception {
+		return mapper.techDetail(tech_num);
 	}
-
+	
 	// 기술 게시판 글 수정
 	@Override
 	public boolean techMod(TechVO techVO) throws Exception {
@@ -50,7 +50,7 @@ public class TechServiceImpl implements TechService{
 
 	// 기술 게시판 글 삭제
 	@Override
-	public boolean techDel(int techNum) throws Exception {
-		return mapper.techDel(techNum) == 1;
+	public boolean techDel(int tech_num) throws Exception {
+		return mapper.techDel(tech_num) == 1;
 	}
 }

@@ -11,59 +11,55 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-	<div id="tech">
-			<header>
-				<h4 style="text-align: center;">기술 게시판</h4>
-			</header>
-				<section id="techWrite">
-					<form method="post" action="tech_write.do">
-						<table class="tech" border=1>
-							<tbody class="wform">
-								<tr>
-									<td>
-										<label for="user_id">이름</label><input class="title" type="text" name="user_id"/>
-									</td>
-								</tr>
-								<tr>
-									<td>
-									<label for="tech_category">카테고리</label>
-										<select name="tech_category">
-											<optgroup label="카테고리 선택">
-												<option value="Java">Java</option>
-												<option value="JavaScript">JavaScript</option>
-												<option value="Jsp">Jsp</option>
-												<option value="Spring">Spring</option>
-												<option value="기타">기타</option>
-											</optgroup>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label for="tech_title">제목</label><input class="title" type="text" name="tech_title"/>
-									</td>
-								</tr>	
-								<tr>
-									<td>
-										<label for="tech_con">내용</label><textarea class="con" name="tech_con"></textarea>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<label for="File">파일</label><input class="con" type="file" name="file"></textarea>
-									</td>
-								</tr>
-								<tr>
-									<td>						
-										<button type="submit">작성</button>
-										<input type="button" value="취소" onclick="location.href='tech_list.do'">
-									</td>
-								</tr>			
-							</tbody>			
-						</table>
-					</form>
-				</section>
-			</div>
+	<div class="tech">
+		<h3 style="text-align: center;">TECH BOARD</h3>
+		<section id="techWrite">
+			<form method="post" action="tech_write.do">
+				<table class="wform">
+					<tr>
+						<td class="title">
+							<label for="user_id">이름</label><input class="infield" type="text" name="user_id"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="title">
+						<label for="tech_category">카테고리</label>
+							<select name="tech_category" class="sOpt">
+								<optgroup label="카테고리 선택">
+									<option value="Java">Java</option>
+									<option value="JavaScript">JavaScript</option>
+									<option value="Jsp">Jsp</option>
+									<option value="Spring">Spring</option>
+									<option value="기타">기타</option>
+								</optgroup>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="title">
+							<label for="tech_title">제목</label><input class="infield" type="text" name="tech_title"/>
+						</td>
+					</tr>	
+					<tr>
+						<td class="title">
+							<label for="tech_con">내용</label><textarea class="con" name="tech_con"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="title">
+							<label for="File">파일</label><input class="con" type="file" name="file"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="bbspos2">						
+							<button type="submit" class="bbt">작성</button>
+							<input type="button" class="bbt"value="취소" onclick="location.href='tech_list.do'">
+						</td>
+					</tr>			
+				</table>
+			</form>
+		</section>
+	</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

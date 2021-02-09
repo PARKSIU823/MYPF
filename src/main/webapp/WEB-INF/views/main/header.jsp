@@ -10,8 +10,33 @@
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
 </head>
 <body>
-
-이 안에 내용을 입력하세요 header <br/>
+<header>
+	<div class="navi">
+		<table>
+			<tr>
+				<td rowspan="2"><h1>MY PORTFOLIO</h1></td>
+				<td>
+					<ul>
+						<li class="loginfo">로그인</li>
+						<li class="loginfo">회원가입</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<ul>
+						<li class="menu">MAIN</li>
+						<li class="menu">INFORMATION</li>
+						<li class="menu">PORTFOLIO</li>
+						<li class="menu">TECHNOLOGY</li>
+						<li class="menu">INQUERY</li>
+						<li class="menu">MANAGEMENT</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+</header>
 
 </body>
 </html>

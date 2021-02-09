@@ -44,12 +44,14 @@ public class PortfolioServiceImpl implements PortfolioService{
 	}
 
 	//포폴 수정하기
+	@Override
 	public boolean pfMod(PortfolioVO pf) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		log.info("modify : " + pf);
+		return pfMapper.pfMod(pf) == 1;
 	}
 
 	//포폴 삭제하기
+	@Override
 	public boolean pfDel(int prft_num) throws Exception {
 		log.info("remove : " + prft_num);
 		return pfMapper.pfDel(prft_num)==1;

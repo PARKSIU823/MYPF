@@ -11,8 +11,31 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-
-이 안에 내용을 입력하세요 pf_list
+	<div class="project">
+		<ul>
+			<li><a href="#">SIU</a></li>
+			<li><a href="#">EJ</a></li>
+		</ul>
+	</div>
+	<div class="project">
+		<table class="pfview">
+			<tr>
+				<c:forEach items="${pfList}" var="list" begin="1" end="3" step="1">
+				<td ><a><img src="img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<c:forEach items="${pfList}" var="list" begin="4" end="6" step="1">
+				<td ><a><img src="img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<c:forEach items="${pfList}" var="list" begin="7" end="9" step="1">
+				<td ><a><img src="img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				</c:forEach>
+			</tr>
+		</table>
+	</div>
 
 <jsp:include page="../main/footer.jsp"/>
 </body>

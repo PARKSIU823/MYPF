@@ -10,8 +10,11 @@
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
 </head>
 <body>
-
-<br/>이 안에 내용을 입력하세요 footer
+<footer>
+	<div class="mypffooter">
+		<h4>MY PORTFOLIO <br/> COPYRIGHTⓒ 2021 ES ALL RIGHT RESERVED</h4>
+	</div>
+</footer>
 
 </body>
 </html>

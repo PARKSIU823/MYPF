@@ -13,30 +13,32 @@
 <jsp:include page="../main/header.jsp"/>
 
 <div id="inquery">
-		<header>
-			<h4 style="text-align: center;">문의 게시판 목록</h4>
-		</header>
-				<section id="askList">
-					<table class="inquery" style="text-align: center">
-						<tr class="ilist">
-							<th style="width:100px">번호</th>
-							<th style="width:450px">제목</th>
-							<th style="width:200px">이름</th>
-							<th style="width:100px">답변여부</th>		
-							<th style="width:200px">작성일</th>
+	<h3 style="text-align: center;">문의 게시판 목록</h3>
+<!-- 	<h4 style="text-align: center;">문의 게시판 목록</h4> -->
+		<section id="askList">
+			<table class="inquery" style="text-align: center">
+				<tr class="ilist">
+					<th class="underline title01" style="width:100px">번호</th>
+					<th class="underline title01" style="width:450px">제목</th>
+					<th class="underline title01" style="width:200px">이름</th>
+					<th class="underline title01" style="width:100px">답변여부</th>		
+					<th class="underline title01" style="width:200px">작성일</th>
+				</tr>
+					<c:forEach items="${list}" var="list">
+						<tr>
+							<td class="title02"><c:out value="${list.ask_num}"/></td>
+							<td class="title02"style="text-align: left;">
+								<a href="/ask_detail.do?ask_num=${list.ask_num}">${list.ask_title}</a>
+							</td>
+							<td class="title02"><c:out value="${list.writer_nm}"/></td>
+							<td class="title02"><c:out value="${list.comm_yn}"/></td>
+							<td class="title02"><fmt:formatDate value="${list.ins_dt}" pattern="yyyy-MM-dd"/></td>
 						</tr>
-							<c:forEach items="${list}" var="list">
-								<tr style="font-weight:bold; background: rgba(238, 227, 226, 1); font-size: 1.1em;">
-									<td><c:out value="${list.ask_num}"/></td>
-									<td style="text-align: left;">
-										<a href="/ask_detail.do?ask_num=${list.ask_num}">${list.ask_title}</a>
-									</td>
-									<td><c:out value="${list.writer_nm}"/></td>
-									<td><c:out value="${list.comm_yn}"/></td>
-									<td><fmt:formatDate value="${list.ins_dt}" pattern="yyyy-MM-dd"/></td>
-								</tr>
-							</c:forEach>
-					</table>
+					</c:forEach>
+					<tr>
+ 					<td colspan="5" class="underline"></td>
+ 				</tr>
+			</table>
 					
 				</section>
 	</div>

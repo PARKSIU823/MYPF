@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mypf.ask.service.AskService;
 import com.mypf.ask.vo.AskVO;
+import com.mypf.ask.vo.Criteria;
+import com.mypf.ask.vo.PageMaker;
 
 import lombok.extern.log4j.Log4j;
 /* 문의 게시판 컨트롤러 */
@@ -35,8 +37,14 @@ public class AskController {
 	
 	// 문의 게시판 글 목록
 	@RequestMapping(value="ask_list.do", method = RequestMethod.GET)
-	public String askList(HttpServletRequest request, Model model) throws Exception {
-		model.addAttribute("list",askService.askList());
+	public String askList(Criteria cri, HttpServletRequest request, Model model) throws Exception {
+		model.addAttribute("list",askService.askList(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(askService.askCount());
+		
+		model.addAttribute("pageMaker", pageMaker);
 		return "ask/ask_list";
 	}
 	

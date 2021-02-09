@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.mypf.ask.service.AskService;
 import com.mypf.ask.vo.AskVO;
+import com.mypf.ask.vo.Criteria;
 import com.mypf.mapper.AskMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -27,10 +28,16 @@ public class AskServiceImpl implements AskService{
 
 	// 문의 게시판 글 목록
 	@Override
-	public List<AskVO> askList() throws Exception {
-		return askMapper.askList();
+	public List<AskVO> askList(Criteria cri) throws Exception {
+		return askMapper.askList(cri);
 	}
 
+	// 문의 게시판 글 총 갯수
+	@Override
+	public int askCount() throws Exception {
+		return askMapper.askCount();
+	}
+	
 	//문의 상세 보기
 	@Override
 	public AskVO askDetatil(int askNum) throws Exception {

@@ -12,11 +12,11 @@
 	<select id="getListWithPaging" resultType="com.mypf.tech.vo.TechVO">
 		<![CDATA[
 			select
-				tech_num, tech_title, user_id, ins_dt, upt_dt, hit
+				tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit
 			from
 			(
 				select /*+INDEX_DESC(tech_board tech_board_seq)*/
-					rownum rn, tech_num, tech_title, user_id, ins_dt, upt_dt, hit
+					rownum rn, tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit
 				from
 					tech_board
 			where rownum <= #{pageNum} * #{amount}

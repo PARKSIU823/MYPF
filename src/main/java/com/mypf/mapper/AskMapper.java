@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.mypf.ask.vo.AskVO;
+import com.mypf.ask.vo.Criteria;
 /* 문의 게시판 메퍼 인터페이스 */
 @Mapper
 public interface AskMapper {
@@ -13,6 +14,9 @@ public interface AskMapper {
 	public void sendAsk(AskVO askVO) throws Exception;
 	
 	// 문의 게시판 글 목록
-	public List<AskVO> askList() throws Exception;
+	public List<AskVO> askList(Criteria cri) throws Exception;
+	
+	// 문의 게시판 글 총 갯수
+	public int askCount() throws Exception;
 
 }

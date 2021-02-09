@@ -10,7 +10,14 @@
 	</insert>
 	
 	<!-- 문의 게시판 목록 조회 -->
-	<select id="askList" resultType="com.mypf.ask.vo.AskVO">
-		SELECT * FROM ASK_BOARD
+	<select id="askList" resultType="com.mypf.ask.vo.AskVO" parameterType="com.mypf.ask.vo.Criteria">
+		SELECT  ASK_NUM, ASK_TITLE, WRITER_NM, COMM_YN, INS_DT
+		FROM (SELECT ASK_NUM, ASK_TITLE, WRITER_NM, COMM_YN, INS_DT, ROW_NUMBER() OVER(ORDER BY ASK_NUM DESC) AS RNUM
+		FROM ASK_BOARD) WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd} ORDER BY ASK_NUM DESC
+	</select>
+	
+	<!-- 문의 게시판 글 총 갯수 -->
+	<select id="askCount" resultType="int">
+		SELECT COUNT(ASK_NUM) FROM ASK_BOARD WHERE ASK_NUM > 0
 	</select>
 </mapper>

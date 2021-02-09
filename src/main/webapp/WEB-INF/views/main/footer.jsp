@@ -12,7 +12,7 @@
 <body>
 <footer>
 	<div class="mypffooter">
-		<h4>MY PORTFOLIO <br/> COPYRIGHTⓒ 2021 ES ALL RIGHT RESERVED</h4>
+		<h4>MY PORTFOLIO <br/> COPYRIGHTⓒ 2021 ES ALL RIGHT RESERVED </h4>
 	</div>
 </footer>
 

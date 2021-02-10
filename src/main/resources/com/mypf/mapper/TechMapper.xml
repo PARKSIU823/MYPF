@@ -50,6 +50,13 @@
 		select * from tech_board where tech_num = #{tech_num}
 	</select>
 	
+	<!-- 기술 게시판 글 조회수 +1 증가 -->
+	<update id="updateHit">
+		update tech_board 
+		set hit = (select NVL(hit, 0) + 1 from tech_board where tech_num = #{tech_num})
+		where tech_num = #{tech_num}
+	</update>
+	
 	<!-- 기술 게시판 글 수정 -->
 	<update id="techMod">
 		update tech_board

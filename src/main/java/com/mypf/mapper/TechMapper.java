@@ -27,6 +27,9 @@ public interface TechMapper {
 	// 기술 게시판 글 상세 조회
 	public TechVO techDetail(int tech_num) throws Exception;
 	
+	// 기술 게시판 글 조회수 +1 증가
+	public void updateHit(int tech_num) throws Exception;
+	
 	// 기술 게시판 글 수정
 	public int techMod(TechVO techVO) throws Exception;
 		

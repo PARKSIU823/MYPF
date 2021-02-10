@@ -53,6 +53,7 @@ public class TechController {
 	@RequestMapping(value="tech_detail.do")
 	public void techDetail(@RequestParam("tech_num") int tech_num, Model model) throws Exception {
 		model.addAttribute("board", service.techDetail(tech_num));
+		service.updateHit(tech_num);
 	}
 	
 	// 기술 게시판 글 수정 화면

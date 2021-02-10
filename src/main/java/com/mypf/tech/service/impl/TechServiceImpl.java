@@ -42,6 +42,12 @@ public class TechServiceImpl implements TechService{
 		return mapper.techDetail(tech_num);
 	}
 	
+	// 기술 게시판 글 조회수 +1 증가
+	@Override
+	public void updateHit(int tech_num) throws Exception {
+		mapper.updateHit(tech_num);	
+	}
+	
 	// 기술 게시판 글 수정
 	@Override
 	public boolean techMod(TechVO techVO) throws Exception {

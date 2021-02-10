@@ -2,6 +2,7 @@ package com.mypf.ask.service;
 
 import java.util.List;
 
+import com.mypf.ask.vo.AskCommVO;
 import com.mypf.ask.vo.AskVO;
 import com.mypf.ask.vo.Criteria;
 /* 문의 게시판 서비스 */
@@ -19,6 +20,12 @@ public interface AskService {
 	// 문의 게시판 상세 조회 및 답변
 	public AskVO askDetail(int ask_num) throws Exception;
 
-	// 문의 답변하기
-	public void sendAnswer(AskVO askVO) throws Exception;
+	// 문의 게시판 답변 이메일 전송
+	public void sendMail(AskCommVO askcommVO) throws Exception;
+	
+	// 문의 게시판 답변 DB 저장
+	public void sendAnswer(AskCommVO askcommVO) throws Exception;
+
+	// 문의 게시판 답변 여부 update
+	public void updateCommYn(int ask_num) throws Exception;
 }

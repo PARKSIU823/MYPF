@@ -12,7 +12,7 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-	<div id="tech">
+	<div class="tech">
 		<h3 style="text-align: center;">기술 게시판</h3>
 		<section id="techDetail">
 				<input type="hidden" id="techNum" name="tech_num" value="${board.tech_num}" />

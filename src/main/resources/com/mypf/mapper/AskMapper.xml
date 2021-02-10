@@ -25,4 +25,15 @@
 	<select id="askDetail" resultType="com.mypf.ask.vo.AskVO">
 		SELECT * FROM ASK_BOARD WHERE ASK_NUM = #{ask_num}
 	</select>
+	
+	<!-- 문의 게시판 글 답변 저장  -->
+ 	<insert id="sendAnswer">
+	   INSERT INTO ASK_COMM (USER_ID, ASK_NUM, COMM_TITLE, COMM_CON)
+	   VALUES (#{user_id}, #{ask_num}, #{comm_title}, #{comm_con})
+	</insert>
+
+	<!-- 문의 게시판 답변 여부 수정 -->
+	<update id="updateCommYn">
+		update ask_board set comm_yn = 'Y' where ask_num = #{ask_num}
+	</update>
 </mapper>

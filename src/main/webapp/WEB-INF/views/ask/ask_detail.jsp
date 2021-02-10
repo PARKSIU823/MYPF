@@ -14,37 +14,92 @@
 <jsp:include page="../main/header.jsp"/>
 <br>
 <br>
-<div id="ask">
-		<h3 style="text-align: center;">문의 게시판 상세 조회 및 답변</h3>
+<div class="inquery">
+		<h3 style="text-align: center;">문의 게시판</h3>
 		<section id="askDetail">
 				<input type="hidden" id="ask_num" name="ask_num" value="${read.ask_num}" />
 					<table class="ask" border=1>
 						<tbody>
 							<tr>
 								<td>
-									<label for="writer_nm">이름</label> ${read.writer_nm }
+									<label for="writer_nm">이름</label> 
+								</td>
+								<td>	
+									${read.writer_nm }
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<label for="writer_mail">이메일</label> ${read.writer_mail }
+									<label for="writer_mail">이메일</label>
+								</td>
+								<td>	
+									${read.writer_mail }
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="ask_title">제목</label> ${read.ask_title }
+									<label for="ask_title">문의 제목</label>
+								</td>
+								<td>	
+									${read.ask_title }
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="ask_con">내용</label> ${read.ask_con }
+									<label for="ask_con">문의 내용</label>
+								</td>
+								<td>	
+									${read.ask_con }
 								</td>
 							</tr>
 						</tbody>
 					</table>
-					
-			</section>
-	</div>
-<jsp:include page="../main/footer.jsp"/>
+					<br>
+						<form action="send_answer.do" method="post">
+							<table border="1">
+								<input type="hidden" id="ask_num" name="ask_num" value="${read.ask_num}" />
+									<tr>
+										<td>
+											<label>보내는 사람</label>
+										</td>
+										<td>
+											<input type="text" name="user_id" value="MYPF 관리자" readonly>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>받는 사람 email 주소</label>
+										</td>
+										<td>
+											<input type="text" name="writer_mail" value=${read.writer_mail } readonly>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>답변 제목</label>
+										</td>
+										<td>
+											<input text="text" name="comm_title">
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>답변 내용</label>
+										</td>
+										<td>
+											<textarea rows="5"  cols="80" name="comm_con"></textarea>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<input type="submit" class="bbt" value="전송"/>
+											<input type="button" class="bbt" value="목록" onclick="location.href='ask_list.do'">
+										<td>
+									</tr>
+								</table>
+							</form>	
+					</section>
+				</div>
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

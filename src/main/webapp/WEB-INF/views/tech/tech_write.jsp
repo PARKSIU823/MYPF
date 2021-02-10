@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<div class="tech">
-		<h3 style="text-align: center;">TECH BOARD</h3>
+		<h3 style="text-align: center;">기술 게시판</h3>
 		<section id="techWrite">
 			<form method="post" action="tech_write.do">
 				<table class="wform">

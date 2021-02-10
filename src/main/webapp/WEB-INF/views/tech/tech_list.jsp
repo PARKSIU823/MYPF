@@ -17,7 +17,7 @@
 <jsp:include page="../main/header.jsp"/>
 <div class="tech">
 	<h3 style="text-align:center;">기술 게시판</h3>
-	<table class="tlist">
+	<table class="tlist" style="text-align: center">
  		<thead>
  			<th class="underline title01">번호</th>
  			<th class="underline title01">제목</th>
@@ -26,18 +26,16 @@
  			<th class="underline title01">수정일</th>
  			<th class="underline title01">조회</th>
  		</thead>
- 	
  			<c:forEach items="${list }" var="board">
  				<tr>
- 					<td><c:out value="${board.tech_num}" /></td>
- 					<td class="title02"><a href='tech_detail.do?tech_num=<c:out value="${board.tech_num }"/>'>
- 					<c:out value="[${board.tech_category }]${board.tech_title}" /></a></td>
- 					<td><c:out value="${board.user_id}" /></td>
- 					<td><fmt:formatDate pattern="yyyy-MM-dd"
- 					value="${board.ins_dt}" /></td>
- 					<td><fmt:formatDate pattern="yyyy-MM-dd"
- 					value="${board.upt_dt}" /></td>
- 					<td><c:out value="${board.hit}" /></td>
+ 					<td class="title02"><c:out value="${board.tech_num}" /></td>
+ 					<td class="title02" style="text-align: left;">
+ 						<a href='tech_detail.do?tech_num=<c:out value="${board.tech_num }"/>'>
+ 						<c:out value="[${board.tech_category }]${board.tech_title}" /></a></td>
+ 					<td class="title02"><c:out value="${board.user_id}" /></td>
+ 					<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.ins_dt}" /></td>
+ 					<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.upt_dt}" /></td>
+ 					<td class="title02"><c:out value="${board.hit}" /></td>
 		 		</tr>
  		</c:forEach>
 		 		<tr>
@@ -53,7 +51,7 @@
 		<input type='hidden' name='pageNum' value = '${pageMaker.cri.pageNum }'>
 		<input type='hidden' name='amount' value = '${pageMaker.cri.amount }'>
 	</form>
-	<div class='paging'>
+	<div class='paging' style="margin: 0 auto; width:70%; border: 3px">
 		<ul class="pagination">
 			<c:if test="${pageMaker.prev}">
 				<li><a href="${pageMaker.startPage -1}">Previous</a></li>

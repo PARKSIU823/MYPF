@@ -13,8 +13,7 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 <div class="inquery">
-			<h3 style="text-align: center;">문의 게시판 글 작성</h3>
-<!-- 			<h4 style="text-align: center;">문의 게시판 글 작성</h4> -->
+			<h3 style="text-align: center;">문의 게시판</h3>
 			<section id="askWrite">
 				<form method="post" action="send_ask.do">
 					<table class="wform">

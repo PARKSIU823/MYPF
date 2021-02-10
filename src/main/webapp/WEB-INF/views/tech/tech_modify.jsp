@@ -14,8 +14,8 @@
 <jsp:include page="../main/header.jsp"/>
 <br>
 <br>
-<div id="tech">
-	<h4 style="text-align: center;">기술 게시판</h4>
+<div class="tech">
+	<h3 style="text-align:center;">기술 게시판</h3>
 	<section id="techDetail">
 		<form action="tech_modify.do" method="post">
 			<input type="hidden" name="tech_num" value="${board.tech_num}" />

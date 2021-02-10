@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mypf.ask.vo.AskCommVO;
 import com.mypf.ask.vo.AskVO;
 import com.mypf.ask.vo.Criteria;
-import com.mypf.tech.vo.TechVO;
 /* 문의 게시판 메퍼 인터페이스 */
 @Mapper
 public interface AskMapper {
@@ -22,5 +22,11 @@ public interface AskMapper {
 	
 	// 문의 게시판 글 상세 조회 및 답변
 	public AskVO askDetail(int ask_num) throws Exception;
+
+	// 문의 게시판 답변 DB 저장
+	public void sendAnswer(AskCommVO askcommVO) throws Exception;
+	
+	// 문의 게시판 답변 여부 update
+	public void updateCommYn(int ask_num) throws Exception;
 
 }

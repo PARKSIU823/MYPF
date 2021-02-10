@@ -27,12 +27,12 @@
 							</tr>
 							<tr>
 								<td>
-									<label for="writer_mail">이메일</label>${read.writer_mail }
+									<label for="writer_mail">이메일</label> ${read.writer_mail }
 								</td>
 							</tr>	
 							<tr>
 								<td>
-									<label for="ask_title">제목</label>${read.ask_title }
+									<label for="ask_title">제목</label> ${read.ask_title }
 								</td>
 							</tr>	
 							<tr>

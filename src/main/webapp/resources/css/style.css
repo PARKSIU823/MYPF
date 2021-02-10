@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 /*공통*/
 body {font-family:'Nanum Gothic', sans-serif;}
@@ -49,7 +50,7 @@ a {color:BLACK; text-decoration: none;}
 .introduce .int01{width:150px; height:150px; float:left; overflow:auto;}
 .introduce .intro012 {margih-left:30%;}
 .introduce .int02{width:150px; height:150px; float:right; margin-right:30px; margin-top : 30px; overflow:auto;}
-.introduce .intro012 .intname, .introduce .intro022 .intnamePfomt-weight:bold;}
+.introduce .intro012 .intname, .introduce .intro022 .intname{fomt-weight:bold;}
 
 /* 프로젝트 게시판 상세 내역*/
 .project {width: 80%; margin-top:10%; margin-left: auto; margin-right: auto;}
@@ -93,7 +94,7 @@ a {color:BLACK; text-decoration: none;}
 .tech .wform .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
 
 /*문의 게시판 리스트*/
-.inquery {width:80%; margin-left: auto; margin-right: auto;}
+.inquery {width:80%; margin-top:10%; margin-left: auto; margin-right: auto;}
 .inquery .ilist {width:70%; border-spacing: 5px;}
 .inquery .ilist .title01 {font-weight: bold; text-align: center;}
 .inquery .ilist .title02 {font-weight: bold;}
@@ -104,7 +105,6 @@ a {color:BLACK; text-decoration: none;}
 .inquery .searcht .sOpt {vertical-align: middle; text-align-last: center; width:100px; height:30px; padding : 3px; border : 1px solid black; border-radius:0px;}
 
 /*문의 게시판 등록 및 답변*/
-.inquery {width:80%; margin-top:10%; margin-left: auto; margin-right: auto;}
 .inquery .wform {width:80%; border-spacing: 5px;}
 .inquery .wform .title {width:15%; font-weight: bold; }
 .inquery .wform .con {width:70%; height:100px; resize : none; border: 1px solid BLACK;}
@@ -121,6 +121,8 @@ header {
 /*header 메뉴*/
 .navi .menu, .navi .loginfo {display: inline-block;margin: 0; padding: 0}
 .navi .loginfo {margin: 0}
+.navi .menu a {color:WHITE; text-decoration: none;}
+.navi .pagename {font-family: 'Anton', sans-serif; font-size: 50px;}
 
 /*footer*/
 footer{

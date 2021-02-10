@@ -7,27 +7,29 @@ import lombok.Data;
 @Data
 public class UserVO {
 	/*
-	 * userNm : 회원 이름
-	 * userId : 회원 아이디
-	 * userPw : 회원 비밀번호
-	 * userMail : 회원 이메일
-	 * userAddr : 회원 주소
-	 * userTel : 회원 전화번호
-	 * userPhoto : 회원 사진
-	 * userAuth : 회원 권한 (A:관리자 / U:일반회원)
-	 * joinDate : 회원 가입일자
-	 * uptDate : 정보 수정일자
+	 * user_nm : 회원 이름
+	 * user_id : 회원 아이디
+	 * user_pw : 회원 비밀번호
+	 * user_mail : 회원 이메일
+	 * user_addr : 회원 주소
+	 * user_tel : 회원 전화번호
+	 * user_photo : 회원 사진
+	 * url : 홈페이지 주소
+	 * user_auth : 회원 권한 (A:관리자 / U:일반회원)
+	 * join_dt : 회원 가입일자
+	 * upt_dt : 정보 수정일자
 	 */
 	
-	private String userNm;
-	private String userId;
-	private String userPw;
-	private String userMail;
-	private String userAddr;
-	private String userTel;
-	private String userPhoto;
-	private char userAuth;
-	private Date joinDate;
-	private Date uptDate;
+	private String user_nm;
+	private String user_id;
+	private String user_pw;
+	private String user_mail;
+	private String user_addr;
+	private String user_tel;
+	private String user_photo;
+	private String url;
+	private char user_auth;
+	private Date join_dt;
+	private Date upt_dt;
 	
 }

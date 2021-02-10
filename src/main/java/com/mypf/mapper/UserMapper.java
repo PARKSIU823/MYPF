@@ -25,7 +25,7 @@ public interface UserMapper {
 	public boolean userLogout(UserVO user) throws Exception;
 
 	// 정보 관리
-	public List<UserVO> userInfo(UserVO user) throws Exception;
+	public List<UserVO> userInfo() throws Exception;
 
 	// 비밀번호 확인
 	public boolean checkPW(UserVO user) throws Exception;
@@ -35,5 +35,8 @@ public interface UserMapper {
 
 	// 회원 탈퇴
 	public boolean userDel(String userID) throws Exception;
+	
+	//관리자 소개
+	public List<UserVO> mUserInfoList() throws Exception;
 
 }

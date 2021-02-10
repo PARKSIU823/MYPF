@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mypf.mapper.UserMapper"> 
+
+<!-- 관리자 소개 화면 -->
+<select id="mUserInfoList" resultType="com.mypf.user.vo.UserVO">
+	<![CDATA[
+		SELECT 
+			user_nm
+			,url
+			,user_mail
+		FROM user_info
+		WHERE user_id = 'mypf01' OR user_id = 'mypf02'
+	]]>
+</select>
 </mapper>

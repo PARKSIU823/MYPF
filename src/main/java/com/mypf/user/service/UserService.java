@@ -10,10 +10,10 @@ public interface UserService {
 	public void register(UserVO user) throws Exception;
 	
 	//아이디 찾기
-	public UserVO findID(String userId) throws Exception;
+	public UserVO findID(String user_id) throws Exception;
 	
 	//비밀번호 찾기
-	public UserVO findPW(String userId) throws Exception;
+	public UserVO findPW(String user_id) throws Exception;
 	
 	//로그인
 	public boolean userLogin(UserVO user) throws Exception;
@@ -22,7 +22,7 @@ public interface UserService {
 	public boolean userLogout(UserVO user) throws Exception;
 	
 	//정보 관리
-	public List<UserVO> userInfo(UserVO user) throws Exception;
+	public List<UserVO> userInfo() throws Exception;
 	
 	//비밀번호 확인
 	public boolean checkPW(UserVO user) throws Exception;
@@ -31,7 +31,8 @@ public interface UserService {
 	public boolean userMod(UserVO user) throws Exception;
 	
 	//회원 탈퇴
-	public boolean userDel(String userID) throws Exception;
+	public boolean userDel(String user_id) throws Exception;
 	
-
+	//관리자 소개
+	public List<UserVO> mUserInfoList() throws Exception;
 }

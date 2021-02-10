@@ -14,7 +14,7 @@
 	<div class="navi">
 		<table>
 			<tr>
-				<td rowspan="2"><h1>MY PORTFOLIO</h1></td>
+				<td rowspan="2"><h1 class="pagename">MY PORTFOLIO</h1></td>
 				<td>
 					<ul>
 						<li class="loginfo">로그인</li>
@@ -26,7 +26,7 @@
 				<td>
 					<ul>
 						<li class="menu"><a href="<c:url value='/index.do'/>">MAIN</a></li>
-						<li class="menu"><a href="<c:url value='/user/introduce.do'/>">INFORMATION</a></li>
+						<li class="menu"><a href="<c:url value='/user/information.do'/>">INFORMATION</a></li>
 						<li class="menu"><a href="<c:url value='/portfolio/pf_list.do'/>">PORTFOLIO</a></li>
 						<li class="menu"><a href="<c:url value='/tech/tech_list.do'/>">TECHNOLOGY</a></li>
 						<li class="menu"><a href="<c:url value='/ask/ask_write.do'/>">INQUERY</a></li>

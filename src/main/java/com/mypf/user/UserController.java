@@ -2,10 +2,13 @@ package com.mypf.user;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.mypf.user.service.UserService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -14,6 +17,9 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/user/*")
 public class UserController {
 
+	@Autowired
+	private UserService uService;
+	
 	//회원 가입 페이지
 	@RequestMapping(value = "register.do", method = RequestMethod.POST)
 	public String register(HttpServletRequest request, Model model) throws Exception{
@@ -60,5 +66,13 @@ public class UserController {
 	@RequestMapping(value = "user_management.do", method = RequestMethod.POST)
 	public String userManagement(HttpServletRequest request, Model model) throws Exception{
 		return "user/user_management";
+	}
+
+	//관리자 소개 페이지
+	@RequestMapping(value="information.do", method = RequestMethod.GET)
+	public String information(Model model) throws Exception {
+		log.info("mUserIntroList");
+		model.addAttribute("information", uService.mUserInfoList());
+		return "user/information";
 	}
 }

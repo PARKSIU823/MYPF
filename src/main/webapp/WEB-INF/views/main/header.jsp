@@ -25,12 +25,12 @@
 			<tr>
 				<td>
 					<ul>
-						<li class="menu">MAIN</li>
-						<li class="menu">INFORMATION</li>
-						<li class="menu">PORTFOLIO</li>
-						<li class="menu">TECHNOLOGY</li>
-						<li class="menu">INQUERY</li>
-						<li class="menu">MANAGEMENT</li>
+						<li class="menu"><a href="<c:url value='/index.do'/>">MAIN</a></li>
+						<li class="menu"><a href="<c:url value='/user/introduce.do'/>">INFORMATION</a></li>
+						<li class="menu"><a href="<c:url value='/portfolio/pf_list.do'"/>PORTFOLIO</li>
+						<li class="menu"><a href="<c:url value='/tech/tech_list.do'/>">TECHNOLOGY</a></li>
+						<li class="menu"><a href="<c:url value='/ask/ask_write.do'/>">INQUERY</a></li>
+						<li class="menu"><a href="<c:url value='/user/user_manage.do'/>">MANAGEMENT</a></li>
 					</ul>
 				</td>
 			</tr>

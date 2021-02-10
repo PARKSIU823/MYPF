@@ -21,17 +21,17 @@
 		<table class="pfview">
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="1" end="3" step="1">
-				<td ><a><img src="img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				<td ><a><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
 				</c:forEach>
 			</tr>
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="4" end="6" step="1">
-				<td ><a><img src="img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				<td ><a><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
 				</c:forEach>
 			</tr>
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="7" end="9" step="1">
-				<td ><a><img src="img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				<td ><a><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
 				</c:forEach>
 			</tr>
 		</table>

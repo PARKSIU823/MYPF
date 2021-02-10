@@ -50,10 +50,10 @@ a {color:BLACK; text-decoration: none;}
 .introduce .int01{width:150px; height:150px; float:left; overflow:auto;}
 .introduce .intro012 {margih-left:30%;}
 .introduce .int02{width:150px; height:150px; float:right; margin-right:30px; margin-top : 30px; overflow:auto;}
-.introduce .intro012 .intname, .introduce .intro022 .intname{fomt-weight:bold;}
+.introduce .intro012 .intname,.introduce .intro022 .intname{font-weight:bold;}
 
 /* 프로젝트 게시판 상세 내역*/
-.project {width: 80%; margin-top:10%; margin-left: auto; margin-right: auto;}
+.project {width: 80%; margin-top:10%; margin-left: auto; margin-right: auto; margin-bottom:10%;}
 .project .pboard {width:70%; border-spacing:5px 5px;}
 .project .pboard .info {height : 30px;}
 .project .pboard .thumb {width:210px; height:210px;} 

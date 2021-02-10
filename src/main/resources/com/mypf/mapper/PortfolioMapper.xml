@@ -9,7 +9,7 @@
 		WHERE PRTF_NUM > 0
 	]]>
 <!-- 	<if test="'category' =='siu'"> -->
-<!-- 		AND CATEGORY = 'SIU' -->
+		AND CATEGORY = 'siu'
 <!-- 	</if> -->
 <!-- 	<if test="'category' == 'ej'"> -->
 <!-- 		AND CATEGORY == 'EJ' -->

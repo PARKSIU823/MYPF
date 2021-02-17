@@ -16,21 +16,23 @@
 			<li><a href="#">SIU</a></li>
 			<li><a href="#">EJ</a></li>
 		</ul>
-	</div>
-	<div class="project">
 		<table class="pfview">
 			<tr>
-				<c:forEach items="${pfList}" var="list" begin="1" end="3" step="1">
+				<td colspan="3"><a href="<c:url value='/portfolio/pf_write.do'/>">글 작성</a>
+				</td>
+			</tr>
+			<tr>
+				<c:forEach items="${pfList}" var="list" begin="0" end="2" step="1">
 				<td ><a><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
 				</c:forEach>
 			</tr>
 			<tr>
-				<c:forEach items="${pfList}" var="list" begin="4" end="6" step="1">
+				<c:forEach items="${pfList}" var="list" begin="3" end="5" step="1">
 				<td ><a><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
 				</c:forEach>
 			</tr>
 			<tr>
-				<c:forEach items="${pfList}" var="list" begin="7" end="9" step="1">
+				<c:forEach items="${pfList}" var="list" begin="6" end="8" step="1">
 				<td ><a><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
 				</c:forEach>
 			</tr>

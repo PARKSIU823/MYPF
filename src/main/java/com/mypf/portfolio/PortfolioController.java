@@ -36,13 +36,20 @@ public class PortfolioController {
 		return "portfolio/pf_read";
 	}
 	
+	//포트폴리오 게시판 글 작성 페이지
+	@RequestMapping(value="pf_write.do", method = RequestMethod.GET)
+	public String pfWriteform(Model model) throws Exception {
+		log.info("포트폴리오 작성화면");
+		return "portfolio/pf_write";
+	}
+	
 	//포트폴리오 게시판 글 작성
 	@RequestMapping(value="pf_write.do", method = RequestMethod.POST)
 	public String pfWrite(PortfolioVO pf, Model model)  throws Exception{
 		log.info("register" + pf);
 		pfService.pfAdd(pf);
 		model.addAttribute("result", pf.getPrtf_num());
-		return "redirect:/portfolio/pf_list";
+		return "redirect:/portfolio/pf_list.do";
 	}
 	
 	//포트폴리오 게시판 글 수정

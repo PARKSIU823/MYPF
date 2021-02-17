@@ -1,9 +1,11 @@
 package com.mypf.portfolio.service.Impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.mypf.mapper.PortfolioMapper;
@@ -40,6 +42,11 @@ public class PortfolioServiceImpl implements PortfolioService{
 	@Override
 	public void pfAdd(PortfolioVO pf) throws Exception {
 		log.info("등록 : " + pf);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date frm_dt = new Date();
+		Date to_dt = new Date();
+		pf.setFrm_dt(frm_dt);
+		pf.setTo_dt(to_dt);
 		pfMapper.pfAdd(pf);
 	}
 

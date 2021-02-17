@@ -7,9 +7,10 @@
 	<![CDATA[
 		SELECT * FROM PRTF_BOARD
 		WHERE PRTF_NUM > 0
+		AND CATEGORY = 'siu'
+	ORDER BY PRTF_NUM DESC
 	]]>
 <!-- 	<if test="'category' =='siu'"> -->
-		AND CATEGORY = 'siu'
 <!-- 	</if> -->
 <!-- 	<if test="'category' == 'ej'"> -->
 <!-- 		AND CATEGORY == 'EJ' -->

@@ -11,9 +11,52 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-
-이 안에 내용을 입력하세요 pf_read
-
+<div class="project">
+	<h3>PORTFOLIO</h3>
+	<!-- 섬네일 테이블 -->
+	<table class="pboard">
+		<tr>
+			<td rowspan="4" class="thumb"> 
+<%-- 				<img src="<c:out vlaue='${pfFileRead.file_path }'/>"> --%>
+				<img src="${path }/resources/img/prthumb.png">
+			</td>
+			<td class="info title">프로젝트명 <c:out value="${pfRead.prtf_title }"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="info title"> 개발기간 <c:out value="${pfRead.frm_dt }"/> ~ <c:out value="${pfRead.to_dt }"/></td>
+		</tr>
+		<tr>
+			<td class="info title"> 사용 툴 </td>
+		</tr>
+		<tr>
+			<td class="info">
+<%-- 				 ◀ <c:forEach items="${pfFileList }" var="fList"> <img src="<c:out value='${thumb.file_path }'/>"></c:forEach>▶</td> --%>
+				 ◀ <img src="${path }/resources/img/pfview.png" style="height: 150px; width: 150px;"> ▶</td>
+		</tr>	
+	</table>
+	<!-- 상세 내용 테이블 -->
+	<table class="pboard">
+		<tr>
+			<td class="underline title"> 프로젝트 내용 </td>
+			<td class="underline"><c:out value="${pfRead.prtf_title}"/></td>
+		</tr>
+		<tr>
+			<td class="underline title"> 맡은 역할 </td>
+			<td class="underline"><c:out value="${pfRead.position}"/></td>
+		</tr>
+		<tr>
+			<td class="underline title"> 느낀 점 </td>
+			<td class="underline"><c:out value="${pfRead.idea}"/></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="bbtpos1">
+				<input type="button" class="bbt" value="목록" onclick="<c:url value='/portfolio/pf_list.do'/>"/>
+<%-- 				<input type="button" class="bbt" value="수정" onclick='<c:url value="/portfolio/pf_modify.do?prtf_num=<c:out value='${pfRead.prtf_num }'>"/>'/> --%>
+			</td>
+		</tr>
+	</table>
+</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

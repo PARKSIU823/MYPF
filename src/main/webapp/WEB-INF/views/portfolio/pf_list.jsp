@@ -26,17 +26,17 @@
 			</tr>
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="0" end="2" step="1">
-				<td ><a><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
 				</c:forEach>
 			</tr>
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="3" end="5" step="1">
-				<td ><a><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				<td ><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
 				</c:forEach>
 			</tr>
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="6" end="8" step="1">
-				<td ><a><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				<td ><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
 				</c:forEach>
 			</tr>
 		</table>

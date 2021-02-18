@@ -6,9 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="utf-8">
-   <title>기술 게시판</title>
-   <link href="${path}/resources/css/style.css" rel="stylesheet" >
+<meta charset="utf-8">
+<title>기술 게시판</title>
+<link href="${path}/resources/css/style.css" rel="stylesheet" >
+<script type="text/javascript" src="/resources/js/reply.js"></script>
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>

@@ -3,8 +3,10 @@ package com.mypf.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.mypf.tech.vo.Criteria;
+import com.mypf.tech.vo.TechCommVO;
 import com.mypf.tech.vo.TechVO;
 /* 기술 게시판 메퍼 인터페이스 */
 @Mapper
@@ -35,4 +37,20 @@ public interface TechMapper {
 		
 	// 기술 게시판 글 삭제
 	public int techDel(int tech_num) throws Exception;
+	
+	// 기술 게시판 댓글 작성
+	public int insert(TechCommVO techcommVO) throws Exception;
+	
+	// 기술 게시판 댓글 조회
+	public TechCommVO read(int tech_num) throws Exception;
+	
+	// 기술 게시판 댓글 삭제
+	public int delete(int comm_num) throws Exception;
+	
+	// 기술 게시판 댓글 수정
+	public int update(TechCommVO techcommVO) throws Exception;
+	
+	// 기술 게시판 댓글 목록 조회(TechMapper.xml에서 #{tech_num}이 @Param("tech_num")와 매칭)
+	public List<TechCommVO> getListWithPagingComm(
+			@Param("cri") Criteria cri, @Param("tech_num") int tech_num) throws Exception;
 }

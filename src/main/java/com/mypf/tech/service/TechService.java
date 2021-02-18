@@ -3,6 +3,7 @@ package com.mypf.tech.service;
 import java.util.List;
 
 import com.mypf.tech.vo.Criteria;
+import com.mypf.tech.vo.TechCommVO;
 import com.mypf.tech.vo.TechVO;
 /* 기술 게시판 서비스 */
 public interface TechService {
@@ -27,4 +28,19 @@ public interface TechService {
 	
 	// 기술 게시판 글 삭제
 	public boolean techDel(int techNum) throws Exception;
+	
+	// 기술 게시판 댓글 작성
+	public int register(TechCommVO techcommVO) throws Exception;
+	
+	// 기술 게시판 댓글 조회
+	public TechCommVO get(int comm_num) throws Exception;
+	
+	// 기술 게시판 댓글 수정
+	public int modify(TechCommVO techcommVO) throws Exception;
+	
+	// 기술 게시판 댓글 삭제
+	public int remove(int comm_num) throws Exception;
+	
+	// 기술 게시판 댓글 목록 조회
+	public List<TechCommVO> getList(Criteria cri, int tech_num) throws Exception;
 }

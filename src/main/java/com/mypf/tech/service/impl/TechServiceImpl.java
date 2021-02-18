@@ -3,16 +3,19 @@ package com.mypf.tech.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.mypf.mapper.TechMapper;
 import com.mypf.tech.service.TechService;
 import com.mypf.tech.vo.Criteria;
+import com.mypf.tech.vo.TechCommVO;
 import com.mypf.tech.vo.TechVO;
+
+import lombok.extern.log4j.Log4j;
 
 /* 기술 게시판 서비스 구현 */
 @Service
+@Log4j
 public class TechServiceImpl implements TechService{
 
 	@Autowired
@@ -58,5 +61,35 @@ public class TechServiceImpl implements TechService{
 	@Override
 	public boolean techDel(int tech_num) throws Exception {
 		return mapper.techDel(tech_num) == 1;
+	}
+
+	// 기술 게시판 댓글 작성
+	@Override
+	public int register(TechCommVO techcommVO) throws Exception {
+		return mapper.insert(techcommVO);
+	}
+
+	// 기술 게시판 댓글 조회
+	@Override
+	public TechCommVO get(int comm_num) throws Exception {
+		return mapper.read(comm_num);
+	}
+
+	// 기술 게시판 댓글 수정
+	@Override
+	public int modify(TechCommVO techcommVO) throws Exception {
+		return mapper.update(techcommVO);
+	}
+	
+	// 기술 게시판 댓글 삭제
+	@Override
+	public int remove(int comm_num) throws Exception {
+		return mapper.delete(comm_num);
+	}
+
+	// 기술 게시판 댓글 목록 조회
+	@Override
+	public List<TechCommVO> getList(Criteria cri, int tech_num) throws Exception {
+		return mapper.getListWithPagingComm(cri, tech_num);
 	}
 }

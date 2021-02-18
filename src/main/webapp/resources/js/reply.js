@@ -3,4 +3,29 @@
  */
 console.log("Reply Module.......");
 
-var TechService = {};
+var replyService = (function() {
+	
+	function add(comm_con, callback, error) {
+		console.log("add reply.............");
+		
+		$.ajax({
+				type : 'post',
+				url : '/replies/new.do',
+				data : JSON.stringify(comm_con),
+				contentType : "application/json; charset=utf-8",
+				success : function(result, status, xhr) {
+					if (callback) {
+						callback(result);
+					}
+				},
+				error : function(xhr, status, er) {
+					if (error) {
+						error(er);
+					}
+				}
+		})
+	}
+	return {
+		add : add
+	};
+})();

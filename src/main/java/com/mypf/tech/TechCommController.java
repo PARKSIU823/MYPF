@@ -30,7 +30,7 @@ public class TechCommController {
 	private TechService service;
 	
 	// 기술 게시판 댓글 작성
-	@PostMapping(value = "/new",
+	@PostMapping(value = "/new.do",
 			consumes = "application/json",
 			produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> create (@RequestBody TechCommVO techcommVO) throws Exception {
@@ -41,45 +41,45 @@ public class TechCommController {
 				//삼항 연산자 처리
 	}
 	
-	// 기술 게시판 댓글 목록 조회
-	@GetMapping(value = "/pages/{tech_num}/{page}",
-			produces = {
-					MediaType.APPLICATION_XML_VALUE,
-					MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<List<TechCommVO>> getList(
-			@PathVariable("page") int page,
-			@PathVariable("tech_num") int tech_num) throws Exception {
-	Criteria cri = new Criteria(page, 10);
-	return new ResponseEntity<>(service.getList(cri, tech_num), HttpStatus.OK);
-	}
-	
-	// 기술 게시판 댓글 조회
-	@GetMapping(value = "/{comm_num}",
-			produces = { MediaType.APPLICATION_XML_VALUE,
-						 MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<TechCommVO> get(@PathVariable("comm_num") int comm_num) throws Exception {
-		return new ResponseEntity<>(service.get(comm_num), HttpStatus.OK);
-	}
-	
-	// 기술 게시판 댓글 삭제
-	@DeleteMapping(value = "/{comm_num}", produces = { MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> remove(@PathVariable("comm_num") int comm_num) throws Exception {
-		return service.remove(comm_num) == 1
-				? new ResponseEntity<>("success", HttpStatus.OK)
-				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-	
-	// 기술 게시판 댓글 수정
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH },
-			value = "/{comm_num}",
-			consumes = "application/json",
-			produces = { MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> modify(
-			@RequestBody TechCommVO techcommVO,
-			@PathVariable("comm_num") int comm_num) throws Exception {
-		techcommVO.setComm_num(comm_num);
-		return service.modify(techcommVO) == 1
-				? new ResponseEntity<>("success", HttpStatus.OK)
-				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+//	// 기술 게시판 댓글 목록 조회
+//	@GetMapping(value = "/pages/{tech_num}/{page}",
+//			produces = {
+//					MediaType.APPLICATION_XML_VALUE,
+//					MediaType.APPLICATION_JSON_UTF8_VALUE })
+//	public ResponseEntity<List<TechCommVO>> getList(
+//			@PathVariable("page") int page,
+//			@PathVariable("tech_num") int tech_num) throws Exception {
+//	Criteria cri = new Criteria(page, 10);
+//	return new ResponseEntity<>(service.getList(cri, tech_num), HttpStatus.OK);
+//	}
+//	
+//	// 기술 게시판 댓글 조회
+//	@GetMapping(value = "/{comm_num}",
+//			produces = { MediaType.APPLICATION_XML_VALUE,
+//						 MediaType.APPLICATION_JSON_UTF8_VALUE })
+//	public ResponseEntity<TechCommVO> get(@PathVariable("comm_num") int comm_num) throws Exception {
+//		return new ResponseEntity<>(service.get(comm_num), HttpStatus.OK);
+//	}
+//	
+//	// 기술 게시판 댓글 삭제
+//	@DeleteMapping(value = "/{comm_num}", produces = { MediaType.TEXT_PLAIN_VALUE })
+//	public ResponseEntity<String> remove(@PathVariable("comm_num") int comm_num) throws Exception {
+//		return service.remove(comm_num) == 1
+//				? new ResponseEntity<>("success", HttpStatus.OK)
+//				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
+//	
+//	// 기술 게시판 댓글 수정
+//	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH },
+//			value = "/{comm_num}",
+//			consumes = "application/json",
+//			produces = { MediaType.TEXT_PLAIN_VALUE })
+//	public ResponseEntity<String> modify(
+//			@RequestBody TechCommVO techcommVO,
+//			@PathVariable("comm_num") int comm_num) throws Exception {
+//		techcommVO.setComm_num(comm_num);
+//		return service.modify(techcommVO) == 1
+//				? new ResponseEntity<>("success", HttpStatus.OK)
+//				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
 }

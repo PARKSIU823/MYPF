@@ -9,7 +9,25 @@
 <meta charset="utf-8">
 <title>기술 게시판</title>
 <link href="${path}/resources/css/style.css" rel="stylesheet" >
-<script type="text/javascript" src="/resources/js/reply.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="${path}/resources/js/reply.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		console.log("===================");
+		console.log("JS TEST");
+		
+		var tech_numValue = '<c:out value="${board.tech_num}"/>';
+		
+		//for replyService add test
+		replyService.add(
+			{comm_con:"JS TEST", user_id:"tester", tech_num:tech_numValue}
+			,
+			function(result){
+				alert("RESULT: " + result);
+			}
+		);
+	});
+</script>
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>

@@ -25,7 +25,25 @@ var replyService = (function() {
 				}
 		})
 	}
+	
+	function getList(param, callback, error) {
+		
+		var tech_num = param.tech_num;
+		var page = param.page || 1;
+		
+		$.getJSON("/replies/pages/" + tech_num + "/" + page + ".do",
+				function(data) {
+					if (callback) {
+						callback(data);
+					}
+		}).fail(function(xhr, status, err){
+			if (error) {
+				error();
+			}
+		});
+	}
 	return {
-		add : add
+		add : add,
+		getList : getList
 	};
 })();

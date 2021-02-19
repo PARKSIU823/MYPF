@@ -41,17 +41,18 @@ public class TechCommController {
 				//삼항 연산자 처리
 	}
 	
-//	// 기술 게시판 댓글 목록 조회
-//	@GetMapping(value = "/pages/{tech_num}/{page}",
-//			produces = {
-//					MediaType.APPLICATION_XML_VALUE,
-//					MediaType.APPLICATION_JSON_UTF8_VALUE })
-//	public ResponseEntity<List<TechCommVO>> getList(
-//			@PathVariable("page") int page,
-//			@PathVariable("tech_num") int tech_num) throws Exception {
-//	Criteria cri = new Criteria(page, 10);
-//	return new ResponseEntity<>(service.getList(cri, tech_num), HttpStatus.OK);
-//	}
+	// 기술 게시판 댓글 목록 조회
+	@GetMapping(value = "/pages/{tech_num}/{page}.do",
+			produces = {
+					MediaType.APPLICATION_XML_VALUE,
+					MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<List<TechCommVO>> getList(
+			@PathVariable("page") int page,
+			@PathVariable("tech_num") int tech_num) throws Exception {
+			
+			Criteria cri = new Criteria(page, 10);
+			return new ResponseEntity<>(service.getList(cri, tech_num), HttpStatus.OK);
+	}
 //	
 //	// 기술 게시판 댓글 조회
 //	@GetMapping(value = "/{comm_num}",

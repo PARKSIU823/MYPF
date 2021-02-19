@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <title>기술 게시판</title>
 <link href="${path}/resources/css/style.css" rel="stylesheet" >
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="${path}/resources/js/reply.js"></script>
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
@@ -26,6 +26,12 @@
 				alert("RESULT: " + result);
 			}
 		);
+		
+		replyService.getList({tech_num:tech_numValue, page : 1}, function(list){
+			for(var i = 0, len = list.length||0; i < len; i++){
+				console.log(list[i]);
+			}
+		});
 	});
 </script>
 </head>

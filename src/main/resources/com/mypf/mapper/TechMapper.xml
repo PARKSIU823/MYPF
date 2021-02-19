@@ -15,7 +15,7 @@
 				tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit
 			from
 			(
-				select /*+INDEX_DESC(tech_board tech_board_seq)*/
+				select /*+INDEX_DESC(tech_board pk_tech_board)*/
 					rownum rn, tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit
 				from
 					tech_board

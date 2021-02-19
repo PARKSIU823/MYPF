@@ -49,6 +49,9 @@
 			}, function(result) {
 				alert("수정 완료..");
 			});
+		replyService.get(6, function(data){
+			console.log(data);
+		});
 	});
 </script>
 </head>

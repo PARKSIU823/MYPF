@@ -53,15 +53,15 @@ public class TechCommController {
 			Criteria cri = new Criteria(page, 10);
 			return new ResponseEntity<>(service.getList(cri, tech_num), HttpStatus.OK);
 	}
-//	
-//	// 기술 게시판 댓글 조회
-//	@GetMapping(value = "/{comm_num}",
-//			produces = { MediaType.APPLICATION_XML_VALUE,
-//						 MediaType.APPLICATION_JSON_UTF8_VALUE })
-//	public ResponseEntity<TechCommVO> get(@PathVariable("comm_num") int comm_num) throws Exception {
-//		return new ResponseEntity<>(service.get(comm_num), HttpStatus.OK);
-//	}
-//	
+	
+	// 기술 게시판 댓글 조회
+	@GetMapping(value = "/{comm_num}.do",
+			produces = { MediaType.APPLICATION_XML_VALUE,
+						 MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<TechCommVO> get(@PathVariable("comm_num") int comm_num) throws Exception {
+		return new ResponseEntity<>(service.get(comm_num), HttpStatus.OK);
+	}
+	
 	// 기술 게시판 댓글 삭제
 	@DeleteMapping(value = "/{comm_num}.do", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> remove(@PathVariable("comm_num") int comm_num) throws Exception {

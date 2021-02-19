@@ -77,15 +77,29 @@ var replyService = (function() {
 			error : function(xhr, status, er) {
 				if (error) {
 					error(er);
+					}
 			}
-	}
-	});
+		});
 	}
 
+	function get(comm_num, callback, error) {
+		$.get("/replies/" + comm_num + ".do", function(result){
+		
+		if(callback) {
+			callback(result);
+		}
+		
+	}).fail(function(xhr, status, err) {
+		if(error) {
+		error();
+				}
+		});
+	}
 	return {
-	 add : add,
-	getList : getList,
-	remove : remove,
-	update : update
-	};
+		add : add,
+		getList : getList,
+		remove : remove,
+		update : update,
+		get : get
+};
 })();

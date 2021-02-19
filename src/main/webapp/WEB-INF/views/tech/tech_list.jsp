@@ -6,12 +6,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="utf-8">
-   <title>기술 게시판</title>
-   <link href="${path}/resources/css/style.css" rel="stylesheet" >
-   <style type="text/css">
-			li {list-style: none; float: left; padding: 6px;}
-		</style>
+<meta charset="utf-8">
+<title>기술 게시판</title>
+<link href="${path}/resources/css/style.css" rel="stylesheet" >
+<style type="text/css">
+	li {list-style: none; float: left; padding: 6px;}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		var actionForm = $("#actionForm");
+		
+		$(".paginate_button a").on("click", function(e){
+			
+			e.preventDefault();
+			
+			console.log('click');
+			
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			actionForm.submit();
+		})
+	});
+</script>
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
@@ -54,15 +70,19 @@
 	<div class='paging' style="margin: 0 auto; width:70%; border: 3px">
 		<ul class="pagination">
 			<c:if test="${pageMaker.prev}">
-				<li><a href="${pageMaker.startPage -1}">Previous</a></li>
+				<li class="paginate_button previous">
+					<a href="${pageMaker.startPage -1}">Previous</a>
+				</li>
 			</c:if>
 			
 			<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-				<li class="${pageMaker.cri.pageNum == num ? "active":"" }"><a href="${num }">${num }</a></li>
+				<li class="paginate_button ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="${num }">${num }</a></li>
 			</c:forEach>
 			
 			<c:if test="${pageMaker.next }">
-				<li><a href="${pageMaker.endPage +1 }">Next</a></li>
+				<li class="paginate_button next">
+					<a href="${pageMaker.endPage +1 }">Next</a>
+				</li>
 			</c:if>
 		</ul>
 	</div>

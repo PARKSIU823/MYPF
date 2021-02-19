@@ -42,8 +42,26 @@ var replyService = (function() {
 			}
 		});
 	}
+	
+	function remove(comm_num, callback, error) {
+		$.ajax({
+			type : 'delete',
+			url : '/replies/' + comm_num + '.do',
+			success : function(deleteResult, status, xhr) {
+				if (callback) {
+					callback(deleteResult);
+				}
+			},
+			error : function(xhr, status, er) {
+				if (error) {
+					error(er);
+				} 
+			}
+		});
+	}
 	return {
 		add : add,
-		getList : getList
+		getList : getList,
+		remove :remove
 	};
 })();

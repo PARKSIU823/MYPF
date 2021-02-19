@@ -62,13 +62,13 @@ public class TechCommController {
 //		return new ResponseEntity<>(service.get(comm_num), HttpStatus.OK);
 //	}
 //	
-//	// 기술 게시판 댓글 삭제
-//	@DeleteMapping(value = "/{comm_num}", produces = { MediaType.TEXT_PLAIN_VALUE })
-//	public ResponseEntity<String> remove(@PathVariable("comm_num") int comm_num) throws Exception {
-//		return service.remove(comm_num) == 1
-//				? new ResponseEntity<>("success", HttpStatus.OK)
-//				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//	}
+	// 기술 게시판 댓글 삭제
+	@DeleteMapping(value = "/{comm_num}.do", produces = { MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity<String> remove(@PathVariable("comm_num") int comm_num) throws Exception {
+		return service.remove(comm_num) == 1
+				? new ResponseEntity<>("success", HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 //	
 //	// 기술 게시판 댓글 수정
 //	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH },

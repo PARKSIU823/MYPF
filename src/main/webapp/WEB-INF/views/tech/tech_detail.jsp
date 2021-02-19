@@ -26,11 +26,20 @@
 				alert("RESULT: " + result);
 			}
 		);
-		
+		//reply List Test
 		replyService.getList({tech_num:tech_numValue, page : 1}, function(list){
 			for(var i = 0, len = list.length||0; i < len; i++){
 				console.log(list[i]);
 			}
+		});
+		//4번 댓글 삭제 테스트
+		replyService.remove(4, function(count){
+			console.log(count);
+			if (count === "success") {
+				alert("REMOVED");
+			}
+		}, function(err) {
+			alert('ERROR...');
 		});
 	});
 </script>

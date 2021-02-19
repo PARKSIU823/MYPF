@@ -41,6 +41,14 @@
 		}, function(err) {
 			alert('ERROR...');
 		});
+		//6번 댓글 수정
+		replyService.update({
+			comm_num : 6,
+			tech_num : tech_numValue,
+			comm_con : "Modified Reply..."
+			}, function(result) {
+				alert("수정 완료..");
+			});
 	});
 </script>
 </head>

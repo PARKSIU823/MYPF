@@ -59,9 +59,33 @@ var replyService = (function() {
 			}
 		});
 	}
+
+	function update(comm_con, callback, error) {
+		
+		console.log("tech_num", comm_con.comm_num);
+
+		$.ajax({
+			type : 'put',
+			url : '/replies/' + comm_con.comm_num + '.do',
+			data : JSON.stringify(comm_con),
+			contentType : "application/json; charset=utf-8",
+			success : function(result, status, xhr) {
+				if(callback) {
+				callback(result);
+				}
+			},
+			error : function(xhr, status, er) {
+				if (error) {
+					error(er);
+			}
+	}
+	});
+	}
+
 	return {
-		add : add,
-		getList : getList,
-		remove :remove
+	 add : add,
+	getList : getList,
+	remove : remove,
+	update : update
 	};
 })();

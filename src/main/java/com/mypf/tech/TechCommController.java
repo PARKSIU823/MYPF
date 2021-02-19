@@ -69,18 +69,18 @@ public class TechCommController {
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-//	
-//	// 기술 게시판 댓글 수정
-//	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH },
-//			value = "/{comm_num}",
-//			consumes = "application/json",
-//			produces = { MediaType.TEXT_PLAIN_VALUE })
-//	public ResponseEntity<String> modify(
-//			@RequestBody TechCommVO techcommVO,
-//			@PathVariable("comm_num") int comm_num) throws Exception {
-//		techcommVO.setComm_num(comm_num);
-//		return service.modify(techcommVO) == 1
-//				? new ResponseEntity<>("success", HttpStatus.OK)
-//				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//	}
+	
+	// 기술 게시판 댓글 수정
+	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH },
+			value = "/{comm_num}.do",
+			consumes = "application/json",
+			produces = { MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity<String> modify(
+			@RequestBody TechCommVO techcommVO,
+			@PathVariable("comm_num") int comm_num) throws Exception {
+		techcommVO.setComm_num(comm_num);
+		return service.modify(techcommVO) == 1
+				? new ResponseEntity<>("success", HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }

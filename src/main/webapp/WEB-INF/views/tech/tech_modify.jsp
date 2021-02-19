@@ -6,9 +6,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="utf-8">
-   <title>기술 게시판</title>
-   <link href="${path}/resources/css/style.css" rel="stylesheet" >
+<meta charset="utf-8">
+<title>기술 게시판</title>
+<link href="${path}/resources/css/style.css" rel="stylesheet" >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+	var formObj = $("form");
+
+	$('button').on("click", function(e){
+	
+	e.preventDefault();
+
+	var operation = $(this).data("oper");
+
+	console.log(operation);
+
+	if(operation === 'tech_del.do'){
+		formObj.attr("action", "tech_del.do");
+	}else if(operation === 'tech_list.do'){
+		formObj.attr("action", "tech_list.do").attr("method","get");
+	}
+
+	formObj.submit();
+
+	});
+});
+</script>
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>

@@ -7,6 +7,9 @@
 <html>
 <head>
    <meta charset="utf-8">
+   	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
 </head>
 <body>
@@ -51,20 +54,25 @@
 				<td class="title">관련 URL</td>
 				<td><input type="url" class="infield" name="url"/></td>
 			</tr>
-<!-- 			<tr> -->
-<!-- 				<td class="title">첨부파일</td> -->
-<!-- 				<td><input type="file" class="infield"/></td> -->
-<!-- 			</tr> -->
+			<tr>
+				<td class="title">첨부파일</td>
+				<td><input type="file" class="infield" name="file_nm"  multiple/></td>
+			</tr>
 			<tr>
 				<td colspan="2" class="bbtpos2">
 					<button type="submit" class="bbt">작성</button>
 					<button type="reset" class="bbt">초기화</button>
-					<button type="button" class="bbt">목록</button>
+					<button type="button" class="bbt" onclick="location.href='/portfolio/pf_list.do'">목록</button>
 				</td>
 			</tr>
 		</table>
 	</div>
+	<div class="pf_thumb">
+	
+	</div>
 </form>
+<script>
+</script>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

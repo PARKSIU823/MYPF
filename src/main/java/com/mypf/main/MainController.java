@@ -15,6 +15,7 @@ public class MainController {
 
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
 	public String index(HttpServletRequest request, Model model) throws Exception {
+		log.info("index");
 		return "main/index";
 	}
 }

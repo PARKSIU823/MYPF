@@ -7,6 +7,9 @@
 <html>
 <head>
    <meta charset="utf-8">
+      	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
 </head>
 <body>
@@ -18,12 +21,18 @@
 		<!-- 등록 테이블 -->
 		<table class="wform">
 			<tr>
+				<td class="title">글 번호</td>
+				<td>
+					<input type="text" name="prtf_num" value='<c:out value="${pfModify.prtf_num }"/>' readonly="readonly" style="border:none;"/>
+				</td>
+			</tr>
+			<tr>
 				<td class="title">카테고리 선택</td>
 				<td>
 					<select name="category" class="sOpt">
 						<option>카테고리</option>
-						<option value="siu" <c:if test="${pfModify.category=='siu' }"/> selected="selected">시우</option>
-						<option value="ej" <c:if test="${pfModify.category=='ej' }"/> selected="selected">은주</option>
+						<option value="siu" <c:if test="${pfModify.category=='siu'}"> selected='selected'</c:if>>시우</option>
+						<option value="ej" <c:if test="${pfModify.category=='ej'}"> selected='selected'</c:if>>은주</option>
 					</select>
 				</td>
 			</tr>
@@ -59,7 +68,7 @@
 				<td colspan="2" class="bbtpos2">
 					<button type="submit" class="bbt">수정</button>
 					<button type="reset" class="bbt">초기화</button>
-					<button type="button" class="bbt">목록</button>
+					<button type="button" class="bbt" onclick="location.href='/portfolio/pf_list.do'">목록</button>
 				</td>
 			</tr>
 		</table>

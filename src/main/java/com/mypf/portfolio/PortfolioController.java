@@ -52,6 +52,14 @@ public class PortfolioController {
 		return "redirect:/portfolio/pf_list.do";
 	}
 	
+	//포트폴리오 게시판 글 수정 페이지
+	@RequestMapping(value = "pf_modify.do", method = RequestMethod.GET)
+	public String pfModForm(@RequestParam("prtf_num") int prtf_num, Model model) throws Exception{
+		log.info("포폴 글 수정 페이지");
+		model.addAttribute("pfModify", pfService.pfDetail(prtf_num));
+		return "portfolio/pf_modify";
+	}
+	
 	//포트폴리오 게시판 글 수정
 	@RequestMapping(value = "pf_modify.do", method = RequestMethod.POST)
 	public String pfMod(PortfolioVO pf , Model model)  throws Exception{
@@ -59,7 +67,7 @@ public class PortfolioController {
 		if(pfService.pfMod(pf)) {
 			model.addAttribute("result", pf);
 		}
-		return "redirect:/fortfolil/pf_read/"+pf.getPrtf_num();
+		return "redirect:/portfolio/pf_read.do?prtf_num="+pf.getPrtf_num();
 	}
 	
 	//포트폴리오 게시판 글 삭제

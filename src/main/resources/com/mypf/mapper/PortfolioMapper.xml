@@ -7,7 +7,6 @@
 	<![CDATA[
 		SELECT * FROM PRTF_BOARD
 		WHERE PRTF_NUM > 0
-		AND CATEGORY = 'siu'
 	ORDER BY PRTF_NUM DESC
 	]]>
 <!-- 	<if test="'category' =='siu'"> -->
@@ -32,6 +31,7 @@
 			,to_dt
 			,position
 			,idea
+			,url
 			,hit
 			,category
 			,ins_dt
@@ -44,6 +44,7 @@
 			,#{to_dt}
 			,#{position}
 			,#{idea}
+			,#{url}
 			,0
 			,#{category}
 			,sysdate)
@@ -55,6 +56,7 @@
 	<![CDATA[
 		SELECT 
 			A.user_id
+			,A.prtf_num
 			,B.user_nm
 			,A.prtf_title
 			,A.prtf_con
@@ -63,6 +65,7 @@
 			,A.position
 			,A.category
 			,A.idea
+			,A.url
 		FROM PRTF_BOARD A
 			LEFT OUTER JOIN user_info B ON A.user_id = B.user_id
 		WHERE prtf_num = #{prtf_num}
@@ -75,14 +78,23 @@
 		UPDATE PRTF_BOARD SET
 			prtf_title = #{prtf_title}
 			,prtf_con = #{prtf_con}
-			,frm_dt = #{frm_dt}
-			,to_dt = #{to_dt}
 			,position = #{position}
 			,idea = #{idea}
 			,category = #{category}
+			,url = #{url}
 			,upt_dt = sysdate
 		WHERE prtf_num = #{prtf_num}
 	]]>
+<!-- 		UPDATE PRTF_BOARD SET -->
+<!-- 			prtf_title = #{prtf_title} -->
+<!-- 			,prtf_con = #{prtf_con} -->
+<!-- 			,frm_dt = #{frm_dt} -->
+<!-- 			,to_dt = #{to_dt} -->
+<!-- 			,position = #{position} -->
+<!-- 			,idea = #{idea} -->
+<!-- 			,category = #{category} -->
+<!-- 			,upt_dt = sysdate -->
+<!-- 		WHERE prtf_num = #{prtf_num} -->
 </update>
 
 <!-- 포폴 삭제 -->

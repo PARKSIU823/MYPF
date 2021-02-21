@@ -14,12 +14,18 @@
 <div class="project">
 	<h3>PORTFOLIO</h3>
 	<!-- 섬네일 테이블 -->
+	<form method="get" action="/portfolio/pf_modify.do">
 	<table class="pboard">
 		<tr>
-			<td rowspan="4" class="thumb"> 
+			<td rowspan="5" class="thumb"> 
 <%-- 				<img src="<c:out vlaue='${pfFileRead.file_path }'/>"> --%>
 				<img src="${path }/resources/img/prthumb.png">
 			</td>
+			<td class="info title"> 
+				글번호 <input type="text" name="prtf_num" value='<c:out value="${pfRead.prtf_num }"/>' readonly="readonly" style="border:none;"/>
+			</td>
+		</tr>
+		<tr>
 			<td class="info title">프로젝트명 <c:out value="${pfRead.prtf_title }"/>
 			</td>
 		</tr>
@@ -42,6 +48,10 @@
 			<td class="underline"><c:out value="${pfRead.prtf_title}"/></td>
 		</tr>
 		<tr>
+			<td class="underline title"> 관련 URL</td>
+			<td class="underline"><a href='<c:out value="${pfRead.url}"/>'><c:out value="${pfRead.url}"/></a></td>
+		</tr>
+		<tr>
 			<td class="underline title"> 맡은 역할 </td>
 			<td class="underline"><c:out value="${pfRead.position}"/></td>
 		</tr>
@@ -51,11 +61,12 @@
 		</tr>
 		<tr>
 			<td colspan="2" class="bbtpos1">
-				<input type="button" class="bbt" value="목록" onclick="<c:url value='/portfolio/pf_list.do'/>"/>
-<%-- 				<input type="button" class="bbt" value="수정" onclick='<c:url value="/portfolio/pf_modify.do?prtf_num=<c:out value='${pfRead.prtf_num }'>"/>'/> --%>
+				<input type="button" class="bbt" value="목록" onclick="location='/portfolio/pf_list.do'"/>
+				<input type="submit" class="bbt" value="수정" />
 			</td>
 		</tr>
 	</table>
+	</form>
 </div>
 <jsp:include page="../main/footer.jsp"/>
 </body>

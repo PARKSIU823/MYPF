@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.mypf.mapper.PortfolioMapper;
 import com.mypf.portfolio.service.PortfolioService;
+import com.mypf.portfolio.vo.PfFileVO;
 import com.mypf.portfolio.vo.PortfolioVO;
 
 import lombok.extern.log4j.Log4j;
@@ -41,6 +42,7 @@ public class PortfolioServiceImpl implements PortfolioService{
 	//포폴 등록하기
 	@Override
 	public void pfAdd(PortfolioVO pf) throws Exception {
+//	public void pfAdd(PortfolioVO pf, PfFileVO pfFile) throws Exception {
 		log.info("등록 : " + pf);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date frm_dt = new Date();
@@ -48,14 +50,23 @@ public class PortfolioServiceImpl implements PortfolioService{
 		pf.setFrm_dt(frm_dt);
 		pf.setTo_dt(to_dt);
 		pfMapper.pfAdd(pf);
+//		pfMapper.pfFileAdd(pfFile);
 	}
 
 	//포폴 수정하기
 	@Override
 	public boolean pfMod(PortfolioVO pf) throws Exception {
+//	public boolean pfMod(PortfolioVO pf, PfFileVO pfFile) throws Exception {
 		log.info("modify : " + pf);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date frm_dt = new Date();
+		Date to_dt = new Date();
+		pf.setFrm_dt(frm_dt);
+		pf.setTo_dt(to_dt);
 		return pfMapper.pfMod(pf) == 1;
+//		return pfMapper.pfMod(pf) == 1 && pfMapper.pfFileMod(pfFile) == 1;
 	}
+	
 
 	//포폴 삭제하기
 	@Override

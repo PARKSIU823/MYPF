@@ -49,7 +49,7 @@ public class PortfolioController {
 		log.info("register" + pf);
 		pfService.pfAdd(pf);
 		model.addAttribute("result", pf.getPrtf_num());
-		return "redirect:/portfolio/pf_list.do";
+		return "redirect:/portfolio/pf_read.do?prtf_num="+pf.getPrtf_num();
 	}
 	
 	//포트폴리오 게시판 글 수정 페이지
@@ -77,6 +77,6 @@ public class PortfolioController {
 		if(pfService.pfDel(prtf_num)) {
 			model.addAttribute("result", prtf_num);
 		}
-		return "redirect:portfolio/pf_list";
+		return "redirect:/portfolio/pf_list.do";
 	}
 }

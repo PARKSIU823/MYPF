@@ -66,14 +66,30 @@
 <!-- 			</tr> -->
 			<tr>
 				<td colspan="2" class="bbtpos2">
-					<button type="submit" class="bbt">수정</button>
-					<button type="reset" class="bbt">초기화</button>
-					<button type="button" class="bbt" onclick="location.href='/portfolio/pf_list.do'">목록</button>
+					<button type="submit" data-oper="modify" class="bbt">수정</button>
+					<button type="submit" data-oper="delete" class="bbt">삭제</button>
+					<button type="submit" data-oper="list" class="bbt">목록</button>
 				</td>
 			</tr>
 		</table>
 	</div>
 </form>
+<script type="text/javascript">
+$(document).ready(function(){
+	var formObj = $("form");
+	$('button').on("click", function(e) {
+		e.preventDefault();
+		var operation = $(this).data("oper");
+		console.log(operation);
+		if(operation === 'delete') {
+			formObj.attr("action","/portfolio/pf_delete.do");
+		}else if(operation==='list') {
+			self.location = "/portfolio/pf_list.do";
+			return;
+		}
+		formObj.submit();
+	})
+})</script>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

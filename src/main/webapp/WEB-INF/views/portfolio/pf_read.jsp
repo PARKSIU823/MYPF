@@ -62,7 +62,7 @@
 		<tr>
 			<td colspan="2" class="bbtpos1">
 				<input type="button" class="bbt" value="목록" onclick="location='/portfolio/pf_list.do'"/>
-				<input type="submit" class="bbt" value="수정" />
+				<input type="submit" class="bbt" value="수정 / 삭제" />
 			</td>
 		</tr>
 	</table>

@@ -18,6 +18,7 @@ public class UserVO {
 	 * user_auth : 회원 권한 (A:관리자 / U:일반회원)
 	 * join_dt : 회원 가입일자
 	 * upt_dt : 정보 수정일자
+	 * user_count : 회원 수
 	 */
 	
 	private String user_nm;
@@ -31,5 +32,6 @@ public class UserVO {
 	private char user_auth;
 	private Date join_dt;
 	private Date upt_dt;
+	private int user_cnt;
 	
 }

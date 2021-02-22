@@ -24,7 +24,8 @@ public class UserServiceImpl implements UserService{
 	//회원 가입
 	@Override
 	public void register(UserVO user) throws Exception {
-		// TODO Auto-generated method stub
+		log.info("회원 가입 : " +user);
+		uMapper.register(user);
 		
 	}
 	

@@ -23,8 +23,16 @@ public class UserController {
 	private UserService uService;
 	
 	//회원 가입
+	@RequestMapping(value = "register.do", method = RequestMethod.GET)
+	public String registerForm() throws Exception{
+		return "user/register";
+	}
 	@RequestMapping(value = "register.do", method = RequestMethod.POST)
-	public String register(HttpServletRequest request, Model model) throws Exception{
+	public String register(UserVO user, Model model) throws Exception{
+		log.info("회원 가입");
+		String user_mail = "testmail@test.com";
+		user.setUser_mail(user_mail);
+		uService.register(user);
 		return "user/register";
 	}
 	

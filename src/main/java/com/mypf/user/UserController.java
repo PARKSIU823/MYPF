@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mypf.user.service.UserService;
+import com.mypf.user.vo.UserVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -20,10 +22,18 @@ public class UserController {
 	@Autowired
 	private UserService uService;
 	
-	//회원 가입 페이지
+	//회원 가입
 	@RequestMapping(value = "register.do", method = RequestMethod.POST)
 	public String register(HttpServletRequest request, Model model) throws Exception{
 		return "user/register";
+	}
+	
+	//아이디 중복 체크
+	@ResponseBody
+	@RequestMapping(value="chkID.do", method = RequestMethod.POST)
+	public int chkID(UserVO user) throws Exception{
+		int chkResult = uService.chkID(user);
+		return chkResult;
 	}
 	
 	//아이디 찾기 페이지

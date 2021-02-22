@@ -28,6 +28,12 @@ public class UserServiceImpl implements UserService{
 		
 	}
 	
+	//@아이디 중복 찾기
+	@Override
+	public int chkID(UserVO user) throws Exception{
+		log.info("아이디 중복 체크 : " + user);
+		return uMapper.chkID(user);
+	}
 	//아이디 찾기
 	@Override
 	public UserVO findID(String userId) throws Exception {

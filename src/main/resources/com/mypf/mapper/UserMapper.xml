@@ -13,4 +13,12 @@
 		WHERE user_id = 'mypf01' OR user_id = 'mypf02'
 	]]>
 </select>
+
+<!-- 아이디 중복 확인 -->
+<select id="chkID" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*) FROM user_info
+		WHERE user_id = #{user_id}
+	]]>
+</select>
 </mapper>

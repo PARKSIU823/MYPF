@@ -14,11 +14,11 @@
 	<div class="navi">
 		<table>
 			<tr>
-				<td rowspan="2"><h1 class="pagename">MY PORTFOLIO</h1></td>
+				<td rowspan="2"><h1 class="pagename"><a href="<c:url value='/index.do'/>">MY PORTFOLIO</a></h1></td>
 				<td>
 					<ul>
 						<li class="loginfo">로그인</li>
-						<li class="loginfo">회원가입</li>
+						<li class="loginfo"><a href="<c:url value='/user/register.do'/>">회원가입</a></li>
 					</ul>
 				</td>
 			</tr>

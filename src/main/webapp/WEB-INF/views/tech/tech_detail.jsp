@@ -40,7 +40,7 @@
 				replyUL.html(str);
 			});
 		}
-		//  새로운 댓글 처리
+		//  새로운 댓글 추가 처리
 		var modal = $(".modal");
 		var modalInputComm_con = modal.find("textarea[name='comm_con']");
 		var modalInputUser_id = modal.find("input[name='user_id']");
@@ -79,7 +79,6 @@
 				showList(1);
 			})
 		})
-		
 		});
 		
 		/*

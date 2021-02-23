@@ -22,6 +22,7 @@
 		var replyUL = $(".chat");
 		
 		showList(1);
+		
 		// 댓글 목록 처리
 		function showList(page){
 			replyService.getList({tech_num:tech_numValue, page:page|| 1 }, function(list){
@@ -53,6 +54,7 @@
 		$("#addReplyBtn").on("click", function(e){
 			
 			modal.find("input").val("");
+			modal.find("textarea").val("");
 			modalInputIns_dt.closest("div").hide();
 			modal.find("button[id != 'modalCloseBtn']").hide();
 			
@@ -63,12 +65,12 @@
 		
 		modalRegisterBtn.on("click",function(e){
 			
-			var comm_con = {
+			var reply = {
 					comm_con : modalInputComm_con.val(),
 					user_id : modalInputUser_id.val(),
 					tech_num : tech_numValue
 			};
-			replyService.add(comm_con, function(result){
+			replyService.add(reply, function(result){
 				
 				alert(result);
 				
@@ -79,6 +81,48 @@
 				showList(1);
 			})
 		})
+		// 댓글 조회 클릭 이벤트 처리
+		$(".chat").on("click", "li", function(e){
+			
+			var comm_num = $(this).data("comm_num");
+			
+			replyService.get(comm_num, function(reply){
+				modalInputUser_id.val($(reply).find("user_id").text());
+				modalInputComm_con.val($(reply).find("comm_con").text());
+				//modalInputIns_dt.val(replyService.displayTime(reply.ins_dt)).attr("readonly","readonly");
+				//modalInputIns_dt.val($(reply).find("ins_dt").text());
+				//modal.data("comm_num", reply.comm_num);
+				modal.data("comm_num",$(reply).find("comm_num").text());
+				modal.find("button[id != 'modalCloseBtn']").hide();
+				modalModBtn.show();
+				modalRemoveBtn.show();
+				$(".modal").modal("show");
+				console.log("댓글 클릭 이벤트 : " + comm_num);
+				console.log(reply);
+				console.log(reply.comm_num);
+				console.log($(reply).find("comm_num"));
+				console.log(reply.ins_dt);
+				console.log($(reply).find("ins_dt").text());
+			});
+		});
+		// 댓글의 수정 이벤트 처리
+		modalModBtn.on("click", function(e){
+			var reply = {comm_num:modal.data("comm_num"), comm_con:modalInputComm_con.val()};
+			replyService.update(reply, function(result){
+				alert(result);
+				modal.modal("hide");
+				showList(1);
+			});
+		});
+		// 댓글의 삭제 이벤트 처리
+		modalRemoveBtn.on("click", function (e){
+			var comm_num = modal.data("comm_num");
+			replyService.remove(comm_num, function(result){
+				alert(result);
+				modal.modal("hide");
+				showList(1);
+			});
+		});
 		});
 		
 		/*
@@ -157,9 +201,7 @@
 						</tbody>
 					</table>
 			</section>
-			<br>
-			<br>
-			<div class='row'>
+			<div class='tech'>
 					<div class="default">
 					<div class="heading">
 							Reply
@@ -181,7 +223,6 @@
 				</div>	
 				</div>
 			</div>
-	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
 		aria-labelledby="myModalLabel" ari-hidden="true">
@@ -201,17 +242,11 @@
 					<label>내용</label>
 					<textarea class="form-control" cols="40" rosw="10" name='comm_con' value="New Reply!!!"></textarea>
 				</div>
-				<div class="form-group">
-					<label>작성일</label>
-					<input class="form-control" name='ins_dt' value=''>
-				</div>
-				
 			</div>
 		<div class="modal-footer">
 			<button id='modalModBtn' type="button">Modify</button>
 			<button id='modalRemoveBtn' type="button">Remove</button>
 			<button id='modalRegisterBtn' type="button" data-dismiss="modal">Register</button>
-			<button id='modalCloseBtn' type="button" data-dismiss="modal">Close</button>
 			</div>
 		</div>		
 		</div>

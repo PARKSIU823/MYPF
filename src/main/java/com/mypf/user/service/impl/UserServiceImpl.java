@@ -80,9 +80,9 @@ public class UserServiceImpl implements UserService{
 
 	//회원정보 수정
 	@Override
-	public boolean userMod(UserVO user) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public UserVO userMod(UserVO user) throws Exception {
+		log.info("회원 정보 수정 : " + user);
+		return uMapper.userMod(user);
 	}
 	
 	//회원 탈퇴

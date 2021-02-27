@@ -34,7 +34,7 @@ public interface UserMapper {
 	public boolean checkPW(UserVO user) throws Exception;
 
 	// 회원정보 수정
-	public boolean userMod(UserVO user) throws Exception;
+	public UserVO userMod(UserVO user) throws Exception;
 
 	// 회원 탈퇴
 	public boolean userDel(String userID) throws Exception;

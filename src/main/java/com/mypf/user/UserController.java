@@ -74,9 +74,15 @@ public class UserController {
 		return "user/check_pw";
 	}
 
-	//회원정보 수정 페이지
+	//회원정보 수정
+	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
+	public String modifyForm(HttpServletRequest request, Model model) throws Exception{
+		return "user/modify";
+	}
 	@RequestMapping(value = "modify.do", method = RequestMethod.POST)
-	public String modify(HttpServletRequest request, Model model) throws Exception{
+	public String modify(UserVO user, Model model) throws Exception{
+		log.info("회원 정보 수정 : " + user);
+		uService.userMod(user);
 		return "user/modify";
 	}
 	

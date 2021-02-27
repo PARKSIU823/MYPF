@@ -53,4 +53,17 @@
 		WHERE user_id = #{user_id}
 	]]>
 </select>
+
+<!-- 회원 정보 수정 -->
+<update id="userMod">
+	UPDATE user_info SET
+		user_pw = #{user_pw}
+		,user_mail = #{user_mail}
+		,user_addr = #{user_addr}
+		,user_tel = #{user_tel}
+		,user_photo = #{user_photo}
+		,url = #{url}
+		,upt_dt = sysdate
+	WHERE user_id = #{user_id}
+</update>
 </mapper>

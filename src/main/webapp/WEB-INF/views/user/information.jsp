@@ -12,28 +12,23 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<div class="introduce">
-		<img class="int01" src="${path }/resources/img/profile.png"/>
-		<section class="intro012">
-			<p class="intname"> 이름이 나오는 영역 </p>
-			가나다라마바사<br/>
-			가나다라마바사<br/>
-			가나다라마바사<br/>
-			가나다라마바사<br/>
-			가나다라마바사<br/>
-			가나다라마바사<br/>
-			가나다라마바사<br/>
-		</section>
-		<img class="int02" src="${path }/resources/img/profile.png"/>
-		<section class="intro022">
-			<p class="intname">이름이 나오는 영역 </p>
-			아자차카타파하<br/>
-			아자차카타파하<br/>
-			아자차카타파하<br/>
-			아자차카타파하<br/>
-			아자차카타파하<br/>
-			아자차카타파하<br/>
-			아자차카타파하<br/>
-		</section>
+		<h3>INFORMATION</h3>
+		<c:forEach items="${information }" var="info">
+			<img class="int01" src="${path }/resources/img/profile.png"/>
+			<section class="intro012">
+				<p class="intname"> <c:out value="${info.user_nm }"/> </p>
+				<p>GIT : <c:out value="${info.url }"/></p>
+				<p>Mail : <c:out value="${info.user_mail }"/></p>
+				<p>Mail : <c:out value="${info.user_mail }"/></p>
+				<p>Mail : <c:out value="${info.user_mail }"/></p>
+			</section>
+<%-- 			<img class="int02" src="${path }/resources/img/profile.png"/> --%>
+<!-- 			<section class="intro022"> -->
+<%-- 				<p class="intname"> <c:out value="${info.user_nm }"/></p> --%>
+<%-- 				GIT : <c:out value="${info.url }"/><br/> --%>
+<%-- 				Mail : <c:out value="${info.user_mail }"/><br/> --%>
+<!-- 			</section> -->
+			</c:forEach>
 	</div>
 <jsp:include page="../main/footer.jsp"/>
 </body>

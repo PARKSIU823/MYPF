@@ -15,6 +15,7 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<div class="project">
+		<h3>PORTFOLIO</h3>
 		<ul>
 			<li><a href="#">SIU</a></li>
 			<li><a href="#">EJ</a></li>

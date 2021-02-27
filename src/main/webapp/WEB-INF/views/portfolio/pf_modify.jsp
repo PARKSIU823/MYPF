@@ -16,7 +16,7 @@
 <jsp:include page="../main/header.jsp"/>
 <form method="post" action="/portfolio/pf_modify.do">
 	<div class="project">
-		<h3>PROJECT ADD</h3>
+		<h3>PROJECT MODIFY</h3>
 		<input type="hidden" name="user_id" value="mypf01"/>
 		<!-- 등록 테이블 -->
 		<table class="wform">

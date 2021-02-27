@@ -10,7 +10,7 @@
 			,url
 			,user_mail
 		FROM user_info
-		WHERE user_id = 'mypf01' OR user_id = 'mypf02'
+		WHERE user_auth = 'A'
 	]]>
 </select>
 

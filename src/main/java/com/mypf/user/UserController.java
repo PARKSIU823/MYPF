@@ -89,7 +89,7 @@ public class UserController {
 	
 	//회원 관리 페이지
 	@RequestMapping(value = "user_management.do", method = RequestMethod.GET)
-	public String userManagement(HttpSession session, UserVO user, Model model) throws Exception{
+	public String userManagement(UserVO user, Model model) throws Exception{
 		log.info("회원 정보 리스트");
 		/*
 		 * if(!session.getUserAuth == 'A') {

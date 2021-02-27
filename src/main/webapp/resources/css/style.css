@@ -13,8 +13,8 @@ a {color:BLACK; text-decoration: none;}
 .mypffooter .ftext {text-align: center;}
 
 /*회원 가입*/
-.regist {width:80%; margin-left: auto; margin-right: auto;}
-.regist .regform {width:80%; border-spacing: 5px;}
+.regist {width:80%; margin-top:10%; margin-left: auto; margin-right: auto;}
+.regist .regform {width:80%; margin-top:10%; border-spacing: 5px;}
 .regist .regform .title {width:15%; font-weight: bold; }
 .regist .regform .infield {width:70%; border: 0px; border-bottom : 1px solid BLACK; }
 .regist .regform .infield02 {width:50%; border: 0px; border-bottom : 1px solid BLACK; }
@@ -24,7 +24,6 @@ a {color:BLACK; text-decoration: none;}
 .regist .regform .sOpt {vertical-align: middle; text-align-last: center; width:200px; height:30px; padding : 3px; border : 1px solid black; border-radius:0px;}
 
 /*정보 확인 및 수정*/
-.regist {width:80%; margin-left: auto; margin-right: auto;}
 .regist .modform {width:80%; border-spacing: 5px;}
 .regist .modform .title {width:15%; font-weight: bold; }
 .regist .modform .infield {width:70%; border: 0px; border-bottom : 1px solid BLACK; }
@@ -35,7 +34,6 @@ a {color:BLACK; text-decoration: none;}
 .regist .modform .sOpt {vertical-align: middle; text-align-last: center; width:200px; height:30px; padding : 3px; border : 1px solid black; border-radius:0px;}
 
 /*관리자 회원 정보 */
-.regist {width:80%; margin-left: auto; margin-right: auto;}
 .regist .modform {width:80%; border-spacing: 5px;}
 .regist .modform .title {width:15%; font-weight: bold; }
 .regist .modform .infield {width:70%; border: 0px; border-bottom : 1px solid BLACK; }
@@ -124,19 +122,15 @@ a {color:BLACK; text-decoration: none;}
 .inquery .wform .bbtpos2 {padding-left: 60%;}
 .inquery .wform .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
 
-/*헤더*/
-header {
-	height: 10%; padding : 1rem; color:WHITE; background: black; font-weight:bold; display: flex;
-	position:fixed; top: 0; left: 0; right:0; align-items: center;
-}
-/*header 메뉴*/
-.navi .menu, .navi .loginfo {display: inline-block;margin: 0; padding: 0}
-.navi .loginfo {margin: 0}
-.navi .menu a {color:WHITE; text-decoration: none;}
-.navi .pagename {font-family: 'Anton', sans-serif; font-size: 50px;}
+/*회원 관리*/
+.userList {width:80%; margin-top:10%; margin-left: auto; margin-right: auto;}
+.userList .uList {width:80%; border-spacing: 5px;}
+.userList .uList .title {width:15%; font-weight: bold; }
+.userList .uList .sOpt {vertical-align: middle; text-align-last: center; width:150px; padding : 3px; border : 1px solid black; border-radius:0px;}
+.userList .uList .underline {border-bottom : 1px solid BLACK;}
 
 /*footer*/
-footer{
+footer .mypffooter{
 	height: 10%; padding : 1rem; color:WHITE; background: black; font-weight:bold; display: flex;
 	position:fixed; bottom: 0; left: 0; right:0; align-items: center;
 }
@@ -155,3 +149,14 @@ footer .mypffooter {padding-left: 75%;}
 .modal_close{
 	width: 26px;height: 26px; position: absolute; top:-30px; right:0;
 }
+
+/*헤더*/
+header {
+	height: 10%; padding : 1rem; color:WHITE; background: black; font-weight:bold; display: flex;
+	position:fixed; top: 0; left: 0; right:0; align-items: center;
+}
+/*header 메뉴*/
+.navi .menu, .navi .loginfo {display: inline-block;margin: 0; padding: 0;}
+.navi .loginfo {margin: 0;}
+.navi .menu a {color:WHITE; text-decoration: none;}
+.navi .pagename {font-family: 'Anton', sans-serif; font-size: 50px;color:WHITE; text-decoration: none;}

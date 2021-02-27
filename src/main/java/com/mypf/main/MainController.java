@@ -13,7 +13,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class MainController {
 
-	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
+	@RequestMapping(value = {"/index.do","/"}, method = RequestMethod.GET)
 	public String index(HttpServletRequest request, Model model) throws Exception {
 		log.info("index");
 		return "main/index";

@@ -63,11 +63,11 @@ public class UserServiceImpl implements UserService{
 	}
 	
 
-	//정보 관리
+	//회원 리스트
 	@Override
 	public List<UserVO> userInfo() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("회원 리스트");
+		return uMapper.userInfo();
 	}
 
 	

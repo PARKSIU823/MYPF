@@ -89,7 +89,15 @@ public class UserController {
 	
 	//회원 관리 페이지
 	@RequestMapping(value = "user_management.do", method = RequestMethod.GET)
-	public String userManagement(HttpServletRequest request, Model model) throws Exception{
+	public String userManagement(HttpSession session, UserVO user, Model model) throws Exception{
+		log.info("회원 정보 리스트");
+		/*
+		 * if(!session.getUserAuth == 'A') {
+		 * return "redirect:/index.do";
+		 * }else {
+		 * }
+		 */
+		 model.addAttribute("userList", uService.userInfo());
 		return "user/user_management";
 	}
 	
@@ -105,7 +113,7 @@ public class UserController {
 		 * }
 		 */
 		uService.userAuth(user);
-		return "redirect:user/user_management.do";
+		return "redirect:user/user_management";
 	}
 
 	//관리자 소개 페이지

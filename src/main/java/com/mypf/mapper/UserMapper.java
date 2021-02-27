@@ -39,6 +39,9 @@ public interface UserMapper {
 	// 회원 탈퇴
 	public boolean userDel(String userID) throws Exception;
 	
+	//권한 수정
+	public void userAuth(UserVO user) throws Exception;
+	
 	//관리자 소개
 	public List<UserVO> mUserInfoList() throws Exception;
 

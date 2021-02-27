@@ -1,6 +1,7 @@
 package com.mypf.user;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -87,9 +88,24 @@ public class UserController {
 	}
 	
 	//회원 관리 페이지
-	@RequestMapping(value = "user_management.do", method = RequestMethod.POST)
+	@RequestMapping(value = "user_management.do", method = RequestMethod.GET)
 	public String userManagement(HttpServletRequest request, Model model) throws Exception{
 		return "user/user_management";
+	}
+	
+	//회원 정보 수정
+	@RequestMapping(value= "userAuth.do", method = RequestMethod.POST)
+	public String userAuth(HttpSession session, UserVO user, Model model) throws Exception{
+		log.info("회원 권한 수정 : " +user);
+		/*
+		 * if(!session.getUserAuth == 'A') {
+		 * return "redirect:/index.do";
+		 * }else {
+		 * model.addAttribute("userAuth", "success");
+		 * }
+		 */
+		uService.userAuth(user);
+		return "redirect:user/user_management.do";
 	}
 
 	//관리자 소개 페이지

@@ -91,6 +91,13 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	//회원 권한 수정
+	@Override
+	public void userAuth(UserVO user) throws Exception {
+		log.info("회원 권한 수정 : " + user);
+		uMapper.userAuth(user);
+	}
 
 	//관리자 소개
 	@Override

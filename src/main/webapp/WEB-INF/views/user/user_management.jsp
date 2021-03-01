@@ -28,8 +28,8 @@
 			</tr>
 			<c:forEach items="${userList }" var="list">
 			<tr>
-				<td><input type="checkbox" value="${list.user_cnt }"></td>
-				<td class="underline">${list.user_cnt }</td>
+				<td><input type="checkbox" value="${list.user_count }"></td>
+				<td class="underline">${list.user_count }</td>
 				<td class="underline"><input type="hidden" name="user_id" value="${list.user_id }"/>${list.user_id }</td>
 				<td class="underline">${list.user_nm }</td>
 				<td class="underline">${list.user_mail }</td>

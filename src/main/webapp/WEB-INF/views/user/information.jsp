@@ -8,7 +8,9 @@
 <head>
    <meta charset="utf-8">
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
-</head>
+   <script src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<div class="introduce">

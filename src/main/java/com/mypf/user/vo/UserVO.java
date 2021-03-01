@@ -32,6 +32,6 @@ public class UserVO {
 	private char user_auth;
 	private Date join_dt;
 	private Date upt_dt;
-	private int user_cnt;
+	private int user_count;
 	
 }

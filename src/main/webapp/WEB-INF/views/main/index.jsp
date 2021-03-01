@@ -13,7 +13,13 @@
 <jsp:include page="../main/header.jsp"/>
 
 이 안에 내용을 입력하세요 index
-
+<script type="text/javascript">
+$(document).ready(function(){
+	if($("success").val("registercomplete") {
+		alert("회원가입이 완료되었습니다.");
+		}
+	}
+</script>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

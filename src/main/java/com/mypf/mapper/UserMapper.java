@@ -22,10 +22,7 @@ public interface UserMapper {
 	public UserVO findPW(String userId) throws Exception;
 
 	// 로그인
-	public boolean userLogin(UserVO user) throws Exception;
-
-	// 로그아웃
-	public boolean userLogout(UserVO user) throws Exception;
+	public UserVO userLogin(UserVO user) throws Exception;
 
 	// 정보 관리
 	public List<UserVO> userInfo() throws Exception;
@@ -37,7 +34,7 @@ public interface UserMapper {
 	public UserVO userMod(UserVO user) throws Exception;
 
 	// 회원 탈퇴
-	public boolean userDel(String userID) throws Exception;
+	public void userDel(UserVO user) throws Exception;
 	
 	//권한 수정
 	public void userAuth(UserVO user) throws Exception;

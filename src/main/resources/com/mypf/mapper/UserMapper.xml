@@ -16,34 +16,55 @@
 
 <!-- 회원가입 -->
 <insert id="register">
-	<selectKey keyProperty="user_cnt" order="BEFORE" resultType="int">
+	<selectKey keyProperty="user_count" order="BEFORE" resultType="int">
 		<![CDATA[SELECT SEQ_USER_INFO.NEXTVAL FROM DUAL]]>	
 	</selectKey>
 	<![CDATA[
 		INSERT INTO user_info (
 			user_nm
-			,user_cnt
+			,user_count
 			,user_id
 			,user_pw
 			,user_mail
 			,user_addr
-			,user_photo
 			,user_tel
 			,join_dt
 			,user_auth
 		) VALUES (
 			#{user_nm}
-			,#{user_cnt}
+			,#{user_count}
 			,#{user_id}
 			,#{user_pw}
 			,#{user_mail}
 			,#{user_addr}
-			,#{user_photo}
 			,#{user_tel}
 			,sysdate
 			,'U'
 		)
 	]]>
+<!-- 		INSERT INTO user_info ( -->
+<!-- 			user_nm -->
+<!-- 			,user_cnt -->
+<!-- 			,user_id -->
+<!-- 			,user_pw -->
+<!-- 			,user_mail -->
+<!-- 			,user_addr -->
+<!-- 			,user_photo -->
+<!-- 			,user_tel -->
+<!-- 			,join_dt -->
+<!-- 			,user_auth -->
+<!-- 		) VALUES ( -->
+<!-- 			#{user_nm} -->
+<!-- 			,#{user_cnt} -->
+<!-- 			,#{user_id} -->
+<!-- 			,#{user_pw} -->
+<!-- 			,#{user_mail} -->
+<!-- 			,#{user_addr} -->
+<!-- 			,#{user_photo} -->
+<!-- 			,#{user_tel} -->
+<!-- 			,sysdate -->
+<!-- 			,'U' -->
+<!-- 		) -->
 
 </insert>
 <!-- 아이디 중복 확인 -->
@@ -57,16 +78,24 @@
 <!-- 회원 정보 수정 -->
 <update id="userMod">
 	<![CDATA[
-		UPDATE user_info SET
-			user_pw = #{user_pw}
-			,user_mail = #{user_mail}
-			,user_addr = #{user_addr}
-			,user_tel = #{user_tel}
-			,user_photo = #{user_photo}
-			,url = #{url}
-			,upt_dt = sysdate
-		WHERE user_id = #{user_id}
+	UPDATE user_info
+	SET
+		user_mail = #{user_mail}
+		,user_addr = #{user_addr}
+		,user_tel = #{user_tel}
+		,url = #{url}
+		,upt_dt = sysdate
+	WHERE user_id = #{user_id}
 	]]>
+<!-- 		UPDATE user_info SET -->
+<!-- 			user_pw = #{user_pw} -->
+<!-- 			,user_mail = #{user_mail} -->
+<!-- 			,user_addr = #{user_addr} -->
+<!-- 			,user_tel = #{user_tel} -->
+<!-- 			,user_photo = #{user_photo} -->
+<!-- 			,url = #{url} -->
+<!-- 			,upt_dt = sysdate -->
+<!-- 		WHERE user_id = #{user_id} -->
 </update>
 
 <!-- 회원 권한 수정 -->
@@ -83,7 +112,27 @@
 <select id="userInfo" resultType="com.mypf.user.vo.UserVO">
 	<![CDATA[
 		SELECT * FROM user_info
-		ORDER BY user_cnt desc
+		ORDER BY user_count desc
 	]]>
 </select>
+
+<!-- 로그인 -->
+<select id="userLogin" resultType="com.mypf.user.vo.UserVO">
+	SELECT 
+		user_nm 
+		,user_id
+		,user_pw
+		,user_mail
+		,user_addr
+		,user_tel
+		,user_auth
+	FROM user_info
+	WHERE user_id = #{user_id}
+</select>
+
+<!-- 회원탈퇴 -->
+<delete id="userDel">
+	DELETE FROM user_info
+	WHERE user_id = #{user_id}
+</delete>
 </mapper>

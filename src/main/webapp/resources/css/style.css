@@ -158,5 +158,5 @@ header {
 /*header 메뉴*/
 .navi .menu, .navi .loginfo {display: inline-block;margin: 0; padding: 0;}
 .navi .loginfo {margin: 0;}
-.navi .menu a {color:WHITE; text-decoration: none;}
+.navi .loginfo a {color:WHITE; text-decoration: none;}
 .navi .pagename {font-family: 'Anton', sans-serif; font-size: 50px;color:WHITE; text-decoration: none;}

@@ -50,18 +50,10 @@ public class UserServiceImpl implements UserService{
 
 	//로그인
 	@Override
-	public boolean userLogin(UserVO user) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	//로그아웃
-	@Override
-	public boolean userLogout(UserVO user) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
+	public UserVO userLogin(UserVO user) throws Exception {
+		log.info("로그인 : " + user.getUser_id());
+		return uMapper.userLogin(user);
+	}	
 
 	//회원 리스트
 	@Override
@@ -87,9 +79,9 @@ public class UserServiceImpl implements UserService{
 	
 	//회원 탈퇴
 	@Override
-	public boolean userDel(String userID) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public void userDel(UserVO user) throws Exception {
+		log.info("회원 탈퇴 : " + user);
+		uMapper.userDel(user);
 	}
 	
 	//회원 권한 수정

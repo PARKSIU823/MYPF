@@ -21,10 +21,12 @@
 			<li><a href="#">EJ</a></li>
 		</ul>
 		<table class="pfview">
+			<c:if test="${user.user_auth eq 'A'.charAt(0) }">
 			<tr>
 <!-- 				<td colspan="3"><button type="button" class="bbt" name="prtfRegBtn">등록</button></td> -->
 				<td colspan="3"><a href="<c:url value='/portfolio/pf_write.do'/>"> 글 작성</a></td>
 			</tr>
+			</c:if>
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="0" end="2" step="1">
 				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>

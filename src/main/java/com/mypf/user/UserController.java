@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,9 @@ public class UserController {
 	@Autowired
 	private UserService uService;
 	
+	//비밀번호 암호화
+	BCryptPasswordEncoder pwdEncoder;
+	
 	//회원 가입
 	@RequestMapping(value = "register.do", method = RequestMethod.GET)
 	public String registerForm() throws Exception{
@@ -30,11 +34,23 @@ public class UserController {
 	}
 	@RequestMapping(value = "register.do", method = RequestMethod.POST)
 	public String register(UserVO user, Model model) throws Exception{
-		log.info("회원 가입");
-		String user_mail = "testmail@test.com";
-		user.setUser_mail(user_mail);
-		uService.register(user);
-		return "user/register";
+		log.info("회원 가입 : " + user);
+		int result = uService.chkID(user);
+		try {
+			if(result == 1) {
+				return "/user/register";
+			} else if(result == 0) {
+				//암호화 비밀번호
+				String userPW = user.getUser_pw();
+				String encodePW  = pwdEncoder.encode(userPW);
+				user.setUser_pw(encodePW);
+				uService.register(user);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
+		model.addAttribute("success", "registercomplete");
+		return "redirect:/index.do";
 	}
 	
 	//아이디 중복 체크
@@ -58,21 +74,61 @@ public class UserController {
 	}
 	
 	//로그인 페이지
-	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, Model model) throws Exception{
+	@RequestMapping(value="login.do", method=RequestMethod.GET)
+	public String loginForm() throws Exception {
 		return "user/login";
 	}
-	
-	//회원 삭제 페이지
-	@RequestMapping(value = "remove.do", method = RequestMethod.POST)
-	public String remove(HttpServletRequest request, Model model) throws Exception{
-		return "user/remove";
+	//로그인
+	@RequestMapping(value = "login.do", method = RequestMethod.POST)
+	public String login(UserVO user, HttpServletRequest request, Model model) throws Exception{
+		log.info("로그인");
+		HttpSession session = request.getSession();
+		UserVO login = uService.userLogin(user);
+		boolean pwMatch = pwdEncoder.matches(user.getUser_pw(), login.getUser_pw());
+		if(login!= null && pwMatch == true) {
+			session.setAttribute("user", login);
+		}else {
+			session.setAttribute("user", null);
+			model.addAttribute("msg", false);
+		}
+		return "redirect:/index.do";
 	}
 	
-	//비밀번호 확인 페이지
+	//로그아웃
+	@RequestMapping(value="logout.do", method=RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception {
+		session.invalidate();
+		return "redirect:/index.do";
+	}
+	
+	//회원 탈퇴 페이지
+	@RequestMapping(value="remove.do", method= RequestMethod.GET)
+	public String removeForm() throws Exception {
+		return "user/remove";
+	}
+	//회원 삭제
+	@RequestMapping(value = "remove.do", method = RequestMethod.POST)
+	public String remove(UserVO user, HttpSession session, Model model) throws Exception{
+		UserVO sessionUser = (UserVO) session.getAttribute("user");
+		String sessionPW = sessionUser.getUser_pw();
+		String userPW = user.getUser_pw();
+		
+		if(!(sessionPW.equals(userPW))) {
+			model.addAttribute("msg", false);
+			return "redirect:/user/remove.do";
+		}
+		uService.userDel(user);
+		session.invalidate();
+		return "redirect:/index.do";
+	}
+	
+	//비밀번호 확인
+	@ResponseBody
 	@RequestMapping(value = "check_pw.do", method = RequestMethod.POST)
-	public String checkPw(HttpServletRequest request, Model model) throws Exception{
-		return "user/check_pw";
+	public boolean checkPw(UserVO user) throws Exception{
+		UserVO login = uService.userLogin(user);
+		boolean pwdChk = pwdEncoder.matches(user.getUser_pw(), login.getUser_pw());
+		return pwdChk;
 	}
 
 	//회원정보 수정
@@ -81,10 +137,11 @@ public class UserController {
 		return "user/modify";
 	}
 	@RequestMapping(value = "modify.do", method = RequestMethod.POST)
-	public String modify(UserVO user, Model model) throws Exception{
+	public String modify(UserVO user, HttpSession session) throws Exception{
 		log.info("회원 정보 수정 : " + user);
 		uService.userMod(user);
-		return "user/modify";
+		session.invalidate();
+		return "redirect:/index.do";
 	}
 	
 	//회원 관리 페이지

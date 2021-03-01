@@ -299,8 +299,4 @@ public class TechController {
 		log.info("getFileList " + tech_num);
 		return new ResponseEntity<>(service.getFileList(tech_num), HttpStatus.OK);
 	}
-	// 실습
-	@GetMapping("/uploadAjax.do")
-	public void uploadAjax() {
-	}
 }

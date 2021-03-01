@@ -37,10 +37,11 @@
 				console.log(arr);
 				var str = "";
 				$(arr).each(function(i, file){
+					var fileCallPath = encodeURIComponent(file.file_path+"/s_"+file.uuid+"_"+file.file_nm);
 					//image type
 					if(file.file_type) {
-						var fileCallPath = encodeURIComponent(file.file_path+"/s_"+file.uuid+"_"+file.file_nm);
-						str += "<li data-path'"+file.file_path+"' data-uuid='"+file.uuid+"' data-filename = '"+file.file_nm+"' data-type='"+file.file_type+"' ><div>";
+						console.log(file.file_path);
+						str += "<li data-path='"+file.file_path+"' data-uuid='"+file.uuid+"' data-filename = '"+file.file_nm+"' data-type='"+file.file_type+"' ><div>";
 						str += "<img src='/tech/display.do?file_nm="+fileCallPath+"'>";
 						str +="</li>";
 					} else {
@@ -57,14 +58,14 @@
 					console.log("view image");
 					var liObj = $(this);
 					console.log(liObj.data("path"));
+					console.log(e.file_path);
 					console.log(liObj.data("uuid"));
 					console.log(liObj.data("filename"));
 					console.log(liObj.data("type"));
-					var path = encodeURIComponent($(liObj).find("path")+"/" + liObj.data("uuid")+"_" +liObj.data("filename"));
+					var path = encodeURIComponent(liObj.data("path")+"/" + liObj.data("uuid")+"_" +liObj.data("filename"));
 					console.log(path.replace(new RegExp(/\\/g),"/"));
 					if(liObj.data("type")){
-						//showImage(path.replace(new RegExp(/\\/g),"/"));
-						console.log("이미지");
+						showImage(path.replace(new RegExp(/\\/g),"/"));
 					} else {
 						// download
 						console.log(path);

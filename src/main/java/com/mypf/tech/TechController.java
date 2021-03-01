@@ -180,6 +180,7 @@ public class TechController {
 			
 			// IE has file path
 			uploadfile_nm = uploadfile_nm.substring(uploadfile_nm.lastIndexOf("\\")+1);
+			log.info("only file name: " + uploadfile_nm);
 			techfileVO.setFile_nm(uploadfile_nm);
 			
 			UUID uuid = UUID.randomUUID();

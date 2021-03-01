@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.mypf.tech.vo.Criteria;
 import com.mypf.tech.vo.TechCommVO;
+import com.mypf.tech.vo.TechFileVO;
 import com.mypf.tech.vo.TechVO;
 /* 기술 게시판 메퍼 인터페이스 */
 @Mapper
@@ -53,4 +54,16 @@ public interface TechMapper {
 	// 기술 게시판 댓글 목록 조회(TechMapper.xml에서 #{tech_num}이 @Param("tech_num")와 매칭)
 	public List<TechCommVO> getListWithPagingComm(
 			@Param("cri") Criteria cri, @Param("tech_num") int tech_num) throws Exception;
+	
+	// 기술 게시판 첨부파일 등록
+	public void fileInsert(TechFileVO techfileVO) throws Exception;
+	
+	// 기술 게시판 첨부파일 삭제
+	public void fileDelete(String uuid) throws Exception;
+	
+	// 기술 게시판 첨부파일 조회
+	public List<TechFileVO> findByTech_num(int tech_num);
+	
+	// 기술 게시판 게시물 삭제할 경우 첨부파일도 함께 삭제
+	public void deleteAll(int tech_num) throws Exception;
 }

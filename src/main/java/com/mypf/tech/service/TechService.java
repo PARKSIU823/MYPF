@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mypf.tech.vo.Criteria;
 import com.mypf.tech.vo.TechCommVO;
+import com.mypf.tech.vo.TechFileVO;
 import com.mypf.tech.vo.TechVO;
 /* 기술 게시판 서비스 */
 public interface TechService {
@@ -43,4 +44,7 @@ public interface TechService {
 	
 	// 기술 게시판 댓글 목록 조회
 	public List<TechCommVO> getList(Criteria cri, int tech_num) throws Exception;
+	
+	// 기술 게시판 첨부파일 조회
+	public List<TechFileVO> getFileList(int tech_num) throws Exception;
 }

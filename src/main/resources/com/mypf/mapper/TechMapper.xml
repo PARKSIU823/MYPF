@@ -100,4 +100,25 @@
 		where tech_num = #{tech_num}
 		order by comm_num asc
 	</select>
+	
+	<!-- 기술 게시판 첨부파일 등록 -->
+	<insert id="fileInsert" parameterType="com.mypf.tech.vo.TechFileVO">
+		insert into tech_file (tech_num, file_path, file_nm, uuid, file_type)
+		values (#{tech_num}, #{file_path}, #{file_nm}, #{uuid}, #{file_type})
+	</insert>
+	
+	<!-- 기술 게시판 첨부파일 삭제 -->
+	<delete id="fileDelete">
+		delete from tech_file where uuid=#{uuid}
+	</delete>
+	
+	<!-- 기술 게시판 첨부파일 조회 -->
+	<select id="findByTech_num" resultType="com.mypf.tech.vo.TechFileVO">
+		select * from tech_file where tech_num = #{tech_num}
+	</select>
+	
+	<!-- 기술 게시판 게시글, 첨부파일 삭제 -->
+	<delete id="deleteAll">
+		delete tech_file where tech_num = #{tech_num}
+	</delete>
 </mapper>

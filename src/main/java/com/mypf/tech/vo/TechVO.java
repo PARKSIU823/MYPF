@@ -1,6 +1,7 @@
 package com.mypf.tech.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 /* 기술 게시판 브이오 */
@@ -26,5 +27,8 @@ public class TechVO {
 	private int hit;
 	private Date ins_dt;
 	private Date upt_dt;
+	
+	private List<TechFileVO> fileList;
+	
 
 }

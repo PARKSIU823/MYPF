@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mypf.mapper.TechMapper;
 import com.mypf.tech.service.TechService;
 import com.mypf.tech.vo.Criteria;
 import com.mypf.tech.vo.TechCommVO;
+import com.mypf.tech.vo.TechFileVO;
 import com.mypf.tech.vo.TechVO;
 
 import lombok.extern.log4j.Log4j;
@@ -34,10 +36,24 @@ public class TechServiceImpl implements TechService{
 	}
 	
 	// 기술 게시판 글 작성
+	@Transactional
 	@Override
 	public void techWrite(TechVO techVO) throws Exception {
 		mapper.techWriteSelectKey(techVO);
-	}
+		
+		if(techVO.getFileList() == null || techVO.getFileList().size() <= 0) {
+			return;
+		}
+			techVO.getFileList().forEach(file -> {
+				
+				file.setTech_num(techVO.getTech_num());
+				try {
+					mapper.fileInsert(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+	}	
 
 	// 기술 게시판 글 상세 조회
 	@Override
@@ -52,14 +68,31 @@ public class TechServiceImpl implements TechService{
 	}
 	
 	// 기술 게시판 글 수정
+	@Transactional
 	@Override
 	public boolean techMod(TechVO techVO) throws Exception {
-		return mapper.techMod(techVO) == 1;
+		log.info("modify " + techVO);
+		mapper.deleteAll(techVO.getTech_num());
+		boolean modifyResult = mapper.techMod(techVO) == 1;
+		if (modifyResult && techVO.getFileList() != null && techVO.getFileList().size() > 0) {
+			techVO.getFileList().forEach(file -> {
+				file.setTech_num(techVO.getTech_num());
+				try {
+					mapper.fileInsert(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+		}
+		return modifyResult;
 	}
 
 	// 기술 게시판 글 삭제
+	@Transactional
 	@Override
 	public boolean techDel(int tech_num) throws Exception {
+		log.info("remove..." + tech_num);
+		mapper.deleteAll(tech_num);
 		return mapper.techDel(tech_num) == 1;
 	}
 
@@ -91,5 +124,12 @@ public class TechServiceImpl implements TechService{
 	@Override
 	public List<TechCommVO> getList(Criteria cri, int tech_num) throws Exception {
 		return mapper.getListWithPagingComm(cri, tech_num);
+	}
+
+	// 기술 게시판 첨부파일 조회
+	@Override
+	public List<TechFileVO> getFileList(int tech_num) throws Exception {
+		log.info("get file list by tech_num " + tech_num);
+		return mapper.findByTech_num(tech_num);
 	}
 }

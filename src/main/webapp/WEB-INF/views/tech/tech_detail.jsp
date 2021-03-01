@@ -15,6 +15,79 @@
 <!-- jQuery Modal -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<style>
+.uploadResult { width:100%; background-color: gray; }
+.uploadResult ul { display:flex; flex-flow: row; justify-content: center; align-items: center; }
+.uploadResult ul li { list-style: none; padding: 10px; align-content: center; text-align: center; }
+.uploadResult ul li img { width: 100px; }
+.bigPictureWrapper { position: absolute; display: none; justify-content: center;
+					align-items: center; top:0%; width:100%; height:100%; background-color:gray; 
+					z-index: 100px; background:rgba(255,255,255,0.5); }
+.bigPicture { position: relative; display:flex; justify-content:center; align-items: center; }
+.bigPicture img { width:600px; }
+</style>
+<script>
+	$(document).ready(function(){
+		console.log("첨부파일");
+		(function(){
+			console.log("첨부파일");
+			var tech_num = '<c:out value="${board.tech_num}"/>';
+			// 첨부파일 조회
+			$.getJSON("/tech/getFileList.do", {tech_num : tech_num}, function(arr){
+				console.log(arr);
+				var str = "";
+				$(arr).each(function(i, file){
+					//image type
+					if(file.file_type) {
+						var fileCallPath = encodeURIComponent(file.file_path+"/s_"+file.uuid+"_"+file.file_nm);
+						str += "<li data-path'"+file.file_path+"' data-uuid='"+file.uuid+"' data-filename = '"+file.file_nm+"' data-type='"+file.file_type+"' ><div>";
+						str += "<img src='/tech/display.do?file_nm="+fileCallPath+"'>";
+						str +="</li>";
+					} else {
+						str += "<li data-path='"+file.file_path+"' data-uuid='"+file.uuid+"' data-filename = '"+file.file_nm+"' data-type='"+file.file_type+"' ><div>";
+						str += "<span> "+file.file_nm+"</span><br/>";
+						str += "<img src='/resources/img/attach.png'>";
+						str += "</div>";
+						str +"</li>";
+					}
+				});
+				$(".uploadResult ul").html(str);
+				
+				$(".uploadResult").on("click", "li", function(e){
+					console.log("view image");
+					var liObj = $(this);
+					console.log(liObj.data("path"));
+					console.log(liObj.data("uuid"));
+					console.log(liObj.data("filename"));
+					console.log(liObj.data("type"));
+					var path = encodeURIComponent($(liObj).find("path")+"/" + liObj.data("uuid")+"_" +liObj.data("filename"));
+					console.log(path.replace(new RegExp(/\\/g),"/"));
+					if(liObj.data("type")){
+						//showImage(path.replace(new RegExp(/\\/g),"/"));
+						console.log("이미지");
+					} else {
+						// download
+						console.log(path);
+						self.location="/tech/download.do?file_nm="+path
+					}
+				});
+				function showImage(fileCallPath){
+					alert(fileCallPath);
+					$(".bigPictureWrapper").css("display", "flex").show();
+					$(".bigPicture")
+					.html("<img src='/tech/display.do?file_nm="+fileCallPath+"'>")
+					.animate({width: '100%', height: '100%'}, 1000);
+				}
+				$(".bigPictureWrapper").on("click",function(e){
+					$(".bigPicture").animate({width: '0%', height: '0%'}, 1000);
+					setTimeout(function(){
+						$(".bigPictureWrapper").hide();
+					}, 1000);
+				})
+			}); // end getjson
+		})(); // end function
+	});
+</script>
 <script>
 	$(document).ready(function () {
 		
@@ -171,8 +244,8 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-	<div class="tech">
-		<h3 style="text-align: center;">기술 게시판</h3>
+<h3 style="text-align: center;">기술 게시판</h3>
+	<div class="row">
 		<section id="techDetail">
 				<input type="hidden" id="techNum" name="tech_num" value="${board.tech_num}" />
 					<table class="tech" border=1>
@@ -201,7 +274,22 @@
 						</tbody>
 					</table>
 			</section>
-			<div class='tech'>
+			<!-- 첨부파일 원본 -->
+			<div class='bigPictureWrapper'>
+				<div class='bigPicture'>
+				</div>
+			</div>
+			<!-- 첨부파일 목록-->
+			<div class="row">
+				<div class="heading">Files</div>
+				<div class="body">
+					<div class='uploadResult'>
+						<ul>
+						</ul>
+					</div>
+				</div>	
+			</div>
+			<div class='row'>
 					<div class="default">
 					<div class="heading">
 							Reply

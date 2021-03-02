@@ -32,7 +32,7 @@ $(document).ready(function(){
 				//image type
 				if(file.file_type){
 					var fileCallPath = encodeURIComponent(file.file_path+"/s_"+file.uuid+"_"+file.file_nm);
-					str += "<li data-path'"+file.file_path+"' data-uuid='"+file.uuid+"' data-filename = '"+file.file_nm+"' data-type='"+file.file_type+"' ><div>";
+					str += "<li data-path='"+file.file_path+"' data-uuid='"+file.uuid+"' data-filename = '"+file.file_nm+"' data-type='"+file.file_type+"' ><div>";
 					str += "<span> "+ file.file_nm+"</span>";
 					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' "
 					str += ">X</button><br>";
@@ -58,7 +58,7 @@ $(document).ready(function(){
 			var targetLi = $(this).closest("li");
 			targetLi.remove();
 		}
-	})
+	});
 	// 첨부파일 추가
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 	var maxSize = 5242880; //5MB

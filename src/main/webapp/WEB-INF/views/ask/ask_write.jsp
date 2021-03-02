@@ -6,9 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="utf-8">
-   <title>문의 게시판</title>
-   <link href="${path}/resources/css/style.css" rel="stylesheet" >
+<meta charset="utf-8">
+<title>문의 게시판</title>
+ <link href="${path}/resources/css/style.css" rel="stylesheet" >
+ <script>
+ 	function ask() {
+ 		alert("문의가 접수되었습니다.");
+ 	}
+ </script>
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
@@ -40,7 +45,7 @@
 							</tr>
 							<tr>
 								<td>						
-									<input type="submit" class="bbt" value="작성"/>
+									<input type="submit" class="bbt" value="작성" onclick="ask()"/>
 									<input type="button" class="bbt" value="취소" onclick="location.href='ask_write.do'">
 								</td>
 							</tr>			

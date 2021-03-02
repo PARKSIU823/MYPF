@@ -32,7 +32,7 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 <div class="tech">
-	<h3 style="text-align:center;">기술 게시판</h3>
+	<h3>기술 게시판</h3>
 	<table class="tlist" style="text-align: center">
  		<thead>
  			<th class="underline title01">번호</th>

@@ -58,8 +58,7 @@
 					console.log("view image");
 					var liObj = $(this);
 					console.log(liObj.data("path"));
-					console.log(e.file_path);
-					console.log(liObj.data("uuid"));
+					console.log(liObj.data("fuid"));
 					console.log(liObj.data("filename"));
 					console.log(liObj.data("type"));
 					var path = encodeURIComponent(liObj.data("path")+"/" + liObj.data("uuid")+"_" +liObj.data("filename"));
@@ -195,6 +194,8 @@
 				alert(result);
 				modal.modal("hide");
 				showList(1);
+				modal.find("input").val("");
+				modal.find("textarea").val("");
 			});
 		});
 		});
@@ -245,8 +246,8 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-<h3 style="text-align: center;">기술 게시판</h3>
 	<div class="row">
+	<h3 style="text-align: center;">기술 게시판</h3>
 		<section id="techDetail">
 				<input type="hidden" id="techNum" name="tech_num" value="${board.tech_num}" />
 					<table class="tech" border=1>

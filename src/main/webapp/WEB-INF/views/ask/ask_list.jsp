@@ -16,7 +16,7 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 <div class="inquery">
-	<h3 style="text-align: center;">문의 게시판</h3>
+	<h3>문의 게시판</h3>
 			<table class="ilist" style="text-align: center">
 				<thead>
 					<th class="underline title01" style="width:100px">번호</th>

@@ -15,7 +15,7 @@
 <br>
 <br>
 <div class="inquery">
-		<h3 style="text-align: center;">문의 게시판</h3>
+		<h3>문의 게시판</h3>
 		<section id="askDetail">
 				<input type="hidden" id="ask_num" name="ask_num" value="${read.ask_num}" />
 					<table class="ask" border=1>

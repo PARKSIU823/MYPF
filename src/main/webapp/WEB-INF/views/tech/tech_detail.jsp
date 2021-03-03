@@ -58,7 +58,7 @@
 					console.log("view image");
 					var liObj = $(this);
 					console.log(liObj.data("path"));
-					console.log(liObj.data("fuid"));
+					console.log(liObj.data("uuid"));
 					console.log(liObj.data("filename"));
 					console.log(liObj.data("type"));
 					var path = encodeURIComponent(liObj.data("path")+"/" + liObj.data("uuid")+"_" +liObj.data("filename"));

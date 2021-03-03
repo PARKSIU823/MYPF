@@ -105,25 +105,7 @@ $(document).ready(function(){
 		});
 		uploadUL.append(str);
 	}
-	$(".uploadResult").on("click", "button", function(e){
-		console.log("delete file");
-		
-		var targetFile = $(this).data("file");
-		var type = $(this).data("type");
-		
-		var targetLi = $(this).closest("li");
-		
-		$.ajax({
-			url : '/tech/deleteFile.do',
-			data : {file_nm : targetFile, type : type},
-			dataType : 'text',
-			type : 'POST',
-			success : function(result){
-				alert(result);
-				targetLi.remove();
-			}
-		}); //$.ajax
-	})
+	
 	$("input[type='file']").change(function(e){
 		var formData = new FormData();
 		var inputFile = $("input[name='uploadFile']");
@@ -147,7 +129,7 @@ $(document).ready(function(){
 			}
 		}); //$.ajax 
 	});
-})
+});
 </script>
 <script>
 $(document).ready(function(){

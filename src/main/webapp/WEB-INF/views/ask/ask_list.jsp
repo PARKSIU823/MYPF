@@ -10,7 +10,7 @@
    <title>문의 게시판</title>
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
    <style type="text/css">
-			li {list-style: none; float: left; padding: 6px;}
+			li {list-style: none; float: left; padding: 6px; font-family:'Nanum Gothic', sans-serif; font-weight: bold;}
 	</style>
 </head>
 <body>

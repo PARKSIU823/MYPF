@@ -10,7 +10,7 @@
 <title>기술 게시판</title>
 <link href="${path}/resources/css/style.css" rel="stylesheet" >
 <style type="text/css">
-	li {list-style: none; float: left; padding: 6px;}
+	li {list-style: none; float: left; padding: 6px; font-family:'Nanum Gothic', sans-serif; font-weight: bold;}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -71,7 +71,7 @@
 		<ul class="pagination">
 			<c:if test="${pageMaker.prev}">
 				<li class="paginate_button previous">
-					<a href="${pageMaker.startPage -1}">Previous</a>
+					<a href="${pageMaker.startPage -1}">이전</a>
 				</li>
 			</c:if>
 			
@@ -81,7 +81,7 @@
 			
 			<c:if test="${pageMaker.next }">
 				<li class="paginate_button next">
-					<a href="${pageMaker.endPage +1 }">Next</a>
+					<a href="${pageMaker.endPage +1 }">다음</a>
 				</li>
 			</c:if>
 		</ul>

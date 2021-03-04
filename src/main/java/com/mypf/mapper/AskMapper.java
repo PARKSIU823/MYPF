@@ -20,8 +20,11 @@ public interface AskMapper {
 	// 문의 게시판 글 총 갯수
 	public int askCount() throws Exception;
 	
-	// 문의 게시판 글 상세 조회 및 답변
+	// 문의 게시판 문의 조회
 	public AskVO askDetail(int ask_num) throws Exception;
+	
+	// 문의 게시판 답변 조회
+	public AskCommVO commDetail(int ask_num) throws Exception;
 
 	// 문의 게시판 답변 DB 저장
 	public void sendAnswer(AskCommVO askcommVO) throws Exception;

@@ -47,12 +47,18 @@ public class AskServiceImpl implements AskService{
 		return askMapper.askCount();
 	}
 	
-	// 문의 게시판 상세 조회 및 답변
+	// 문의 게시판 문의 조회
 	@Override
 	public AskVO askDetail(int ask_num) throws Exception {
 		return askMapper.askDetail(ask_num);
 	}
 
+	// 문의 게시판 답변 조회
+	@Override
+	public AskCommVO commDetail(int ask_num) throws Exception {
+		return askMapper.commDetail(ask_num);
+	}
+	
 	// 문의 게시판 답변 이메일 전송 
 	@Override
 	public void sendMail(AskCommVO askcommVO) throws Exception {

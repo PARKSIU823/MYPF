@@ -50,10 +50,11 @@ public class AskController {
 		return "ask/ask_list";
 	}
 	
-	// 문의 게시판 상세 조회 및 답변 화면 
+	// 문의 게시판 문의 조회 및 답변 조회 화면 
 	@RequestMapping(value="ask_detail.do", method = RequestMethod.GET)
-	public String askDetail(AskVO askVO, HttpServletRequest request, Model model) throws Exception {
+	public String askDetail(AskVO askVO, AskCommVO askcommVO, HttpServletRequest request, Model model) throws Exception {
 		model.addAttribute("read", askService.askDetail(askVO.getAsk_num()));
+		model.addAttribute("comm", askService.commDetail(askcommVO.getAsk_num()));
 		return "ask/ask_detail";
 	}
 	

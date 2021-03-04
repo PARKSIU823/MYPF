@@ -21,9 +21,14 @@
 		SELECT COUNT(ASK_NUM) FROM ASK_BOARD WHERE ASK_NUM > 0
 	</select>
 	
-	<!-- 문의 게시판 상세 조회 및 답변 -->
+	<!-- 문의 게시판 문의 조회 -->
 	<select id="askDetail" resultType="com.mypf.ask.vo.AskVO">
 		SELECT * FROM ASK_BOARD WHERE ASK_NUM = #{ask_num}
+	</select>
+	
+	<!-- 문의 게시판 답변 조회 -->
+	<select id="commDetail" resultType="com.mypf.ask.vo.AskCommVO">
+		SELECT * FROM ASK_COMM WHERE ASK_NUM = #{ask_num}
 	</select>
 	
 	<!-- 문의 게시판 글 답변 저장  -->

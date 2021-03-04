@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page import="java.util.*"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -74,22 +75,45 @@
 											<input type="text" name="writer_mail" value=${read.writer_mail } readonly>
 										</td>
 									</tr>
-									<tr>
-										<td>
-											<label>답변 제목</label>
-										</td>
-										<td>
-											<input text="text" name="comm_title">
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<label>답변 내용</label>
-										</td>
-										<td>
-											<textarea rows="5"  cols="80" name="comm_con"></textarea>
-										</td>
-									</tr>
+										<c:set var="comm_yn" value="${read.comm_yn }" />
+											<c:choose>
+												<c:when test ="${fn:contains(comm_yn, 'Y')}">
+													<tr>
+														<td>
+															<label>답변 제목</label>
+														</td>
+														<td>
+															${comm.comm_title }
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<label>답변 내용</label>
+														</td>
+														<td>
+															${comm.comm_con }
+														</td>
+													</tr>
+											</c:when>
+											<c:otherwise>
+													<tr>
+														<td>
+															<label>답변 제목</label>
+														</td>
+														<td>
+															<input text="text" name="comm_title">
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<label>답변 내용</label>
+														</td>
+														<td>
+															<textarea rows="5"  cols="80" name="comm_con"></textarea>
+														</td>
+													</tr>
+											</c:otherwise>
+										</c:choose>
 									<tr>
 										<td colspan="2">
 											<input type="submit" class="bbt" value="전송"/>

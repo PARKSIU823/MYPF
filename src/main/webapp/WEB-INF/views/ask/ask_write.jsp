@@ -8,12 +8,12 @@
 <head>
 <meta charset="utf-8">
 <title>문의 게시판</title>
- <link href="${path}/resources/css/style.css" rel="stylesheet" >
- <script>
- 	function ask() {
- 		alert("문의가 접수되었습니다.");
+<link href="${path}/resources/css/style.css" rel="stylesheet" >
+<script>
+ function ask() {
+ 	alert("문의가 접수되었습니다.");
  	}
- </script>
+</script>
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>

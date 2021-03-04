@@ -7,9 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="utf-8">
-   <title>문의 게시판</title>
-   <link href="${path}/resources/css/style.css" rel="stylesheet" >
+<meta charset="utf-8">
+<title>문의 게시판</title>
+<link href="${path}/resources/css/style.css" rel="stylesheet" >
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>

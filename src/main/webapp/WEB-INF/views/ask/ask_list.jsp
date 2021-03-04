@@ -6,12 +6,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="utf-8">
-   <title>문의 게시판</title>
-   <link href="${path}/resources/css/style.css" rel="stylesheet" >
-   <style type="text/css">
-			li {list-style: none; float: left; padding: 6px; font-family:'Nanum Gothic', sans-serif; font-weight: bold;}
-	</style>
+<meta charset="utf-8">
+<title>문의 게시판</title>
+<link href="${path}/resources/css/style.css" rel="stylesheet" >
+<style type="text/css">
+	li {list-style: none; float: left; padding: 6px; font-family:'Nanum Gothic', sans-serif; font-weight: bold;}
+</style>
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>

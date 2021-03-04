@@ -113,6 +113,7 @@ ul { list-style:none;}
 						str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
 						str += " <p>"+list[i].comm_con+"</p></div></li>";
 					} else {
+						str += "<img src='/resources/img/reply.png'>";
 						str += " <li class='left clearfix' data-comm_num='"+list[i].comm_num+"'>";
 						str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
 						str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";

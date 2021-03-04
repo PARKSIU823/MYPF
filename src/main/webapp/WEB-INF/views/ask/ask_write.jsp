@@ -10,9 +10,25 @@
 <title>문의 게시판</title>
 <link href="${path}/resources/css/style.css" rel="stylesheet" >
 <script>
- function ask() {
- 	alert("문의가 접수되었습니다.");
- 	}
+	function ask() {
+		if(document.getElementById('writer_nm').value==""){
+			alert("이름을 입력하세요.");
+			return false;
+		}
+		if(document.getElementById('writer_mail').value==""){
+			alert("이메일을 입력하세요.");
+			return false;
+		}
+		if(document.getElementById('ask_title').value==""){
+			alert("제목을 입력하세요.");
+			return false;
+		}
+		if(document.getElementById('ask_con').value==""){
+			alert("내용을 입력하세요.");
+			return false;
+		}
+		alert("문의가 등록되었습니다.");
+	};
 </script>
 </head>
 <body>
@@ -45,7 +61,7 @@
 							</tr>
 							<tr>
 								<td>						
-									<input type="submit" class="bbt" value="작성" onclick="ask()"/>
+									<input type="submit" class="bbt" value="작성" onclick="return ask()"/>
 									<input type="button" class="bbt" value="취소" onclick="location.href='ask_write.do'">
 								</td>
 							</tr>			

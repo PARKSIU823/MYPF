@@ -25,6 +25,7 @@
 					z-index: 100px; background:rgba(255,255,255,0.5); }
 .bigPicture { position: relative; display:flex; justify-content:center; align-items: center; }
 .bigPicture img { width:600px; }
+ul { list-style:none;}
 </style>
 <script>
 	$(document).ready(function(){
@@ -106,10 +107,17 @@
 					return;
 				}
 				for (var i = 0, len = list.length || 0; i < len; i++) {
-					str += "<li class='left clearfix' data-comm_num='"+list[i].comm_num+"'>";
-					str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
-					str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
-					str += " <p>"+list[i].comm_con+"</p></div></li>";
+					if(list[i].depth == 1) {
+						str += "<li class='left clearfix' data-comm_num='"+list[i].comm_num+"'>";
+						str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
+						str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
+						str += " <p>"+list[i].comm_con+"</p></div></li>";
+					} else {
+						str += " <li class='left clearfix' data-comm_num='"+list[i].comm_num+"'>";
+						str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
+						str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
+						str += " <p>"+list[i].comm_con+"</p></div></li>";
+					}	
 				}
 				replyUL.html(str);
 			});
@@ -120,9 +128,11 @@
 		var modalInputUser_id = modal.find("input[name='user_id']");
 		var modalInputIns_dt = modal.find("input[name='ins_dt']");
 		
+		var modalReCommBtn = $("#modalReCommBtn");
 		var modalModBtn = $("#modalModBtn");
 		var modalRemoveBtn = $("#modalRemoveBtn");
 		var modalRegisterBtn  = $("#modalRegisterBtn");
+		var modalReCommRegBtn = $("#modalReCommRegBtn");
 		
 		$("#addReplyBtn").on("click", function(e){
 			
@@ -141,7 +151,8 @@
 			var reply = {
 					comm_con : modalInputComm_con.val(),
 					user_id : modalInputUser_id.val(),
-					tech_num : tech_numValue
+					tech_num : tech_numValue,
+					depth : 1
 			};
 			replyService.add(reply, function(result){
 				
@@ -158,6 +169,7 @@
 		$(".chat").on("click", "li", function(e){
 			
 			var comm_num = $(this).data("comm_num");
+			console.log("부모 댓글 번호  : " + $(this).data("comm_num"));
 			
 			replyService.get(comm_num, function(reply){
 				modalInputUser_id.val($(reply).find("user_id").text());
@@ -167,17 +179,55 @@
 				//modal.data("comm_num", reply.comm_num);
 				modal.data("comm_num",$(reply).find("comm_num").text());
 				modal.find("button[id != 'modalCloseBtn']").hide();
+				
+				if($(reply).find("depth").text() == 1){
+					modalReCommBtn.show();	
+				};
+				
 				modalModBtn.show();
 				modalRemoveBtn.show();
 				$(".modal").modal("show");
 				console.log("댓글 클릭 이벤트 : " + comm_num);
 				console.log(reply);
 				console.log(reply.comm_num);
-				console.log($(reply).find("comm_num"));
+				console.log($(reply).find("comm_num").text());
 				console.log(reply.ins_dt);
 				console.log($(reply).find("ins_dt").text());
 			});
 		});
+		// 답글 추가 처리
+		$("#modalReCommBtn").on("click", function(e){
+			console.log(modal.data("comm_num"));
+			modal.find("input").val("");
+			modal.find("textarea").val("");
+			modalInputIns_dt.closest("div").hide();
+			modal.find("button[id != 'modalCloseBtn']").hide();
+			
+			modalReCommRegBtn.show();
+			
+			$(".modal").modal("show");
+		});
+		modalReCommRegBtn.on("click",function(e){
+			var reply = {
+					comm_con : modalInputComm_con.val(),
+					user_id : modalInputUser_id.val(),
+					tech_num : tech_numValue,
+					depth : 2,
+					parent_num : modal.data("comm_num")
+
+			};
+			replyService.add(reply, function(result){
+				
+				alert(result);
+				
+				modal.find("input").val("");
+				modal.find("textarea").val("");
+				modal.modal("hide");
+				
+				showList(1);
+			})
+		});
+		
 		// 댓글의 수정 이벤트 처리
 		modalModBtn.on("click", function(e){
 			var reply = {comm_num:modal.data("comm_num"), comm_con:modalInputComm_con.val()};
@@ -192,7 +242,7 @@
 			var comm_num = modal.data("comm_num");
 			replyService.remove(comm_num, function(result){
 				alert(result);
-				modal.modal("hide");
+				modal.modal('hide');
 				showList(1);
 				modal.find("input").val("");
 				modal.find("textarea").val("");
@@ -295,7 +345,7 @@
 					<div class="default">
 					<div class="heading">
 							Reply
-						<button id='addReplyBtn' style="float: right;">New Reply</button>
+						<button id='addReplyBtn' style="float: right;">댓글등록</button>
 					</div>
 					<div class="body">
 						<ul class="chat">
@@ -334,9 +384,11 @@
 				</div>
 			</div>
 		<div class="modal-footer">
-			<button id='modalModBtn' type="button">Modify</button>
-			<button id='modalRemoveBtn' type="button">Remove</button>
-			<button id='modalRegisterBtn' type="button" data-dismiss="modal">Register</button>
+			<button id='modalReCommBtn' type="button">답글</button>
+			<button id='modalReCommRegBtn' type="button">등록</button>
+			<button id='modalModBtn' type="button">수정</button>
+			<button id='modalRemoveBtn' type="button">삭제</button>
+			<button id='modalRegisterBtn' type="button" data-dismiss="modal">등록</button>
 			</div>
 		</div>		
 		</div>

@@ -74,8 +74,8 @@
 	
 	<!-- 기술 게시판 댓글 작성 -->
 	<insert id="insert" parameterType="com.mypf.tech.vo.TechCommVO">
-		insert into tech_comm (user_id, tech_num, comm_num, recomm_num, comm_con)
-		values (#{user_id}, #{tech_num}, tech_comm_seq.nextval, 0, #{comm_con})
+		insert into tech_comm (user_id, tech_num, comm_num, parent_num, comm_con, depth)
+		values (#{user_id}, #{tech_num}, tech_comm_seq.nextval, #{parent_num}, #{comm_con}, #{depth})
 	</insert>
 	
 	<!-- 기술 게시판 댓글 조회 -->
@@ -95,10 +95,20 @@
 	
 	<!-- 기술 게시판 댓글 목록 조회 -->
 	<select id="getListWithPagingComm" resultType="com.mypf.tech.vo.TechCommVO">
-		select user_id, tech_num, comm_num, recomm_num, comm_con, ins_dt, upt_dt
-		from tech_comm
+		select 
+			comm.user_id,
+			comm.tech_num,
+			comm.comm_num,
+			comm.parent_num,
+			comm.comm_con,
+			comm.depth,
+			comm.ins_dt,
+			comm.upt_dt
+		from
+			tech_comm comm
 		where tech_num = #{tech_num}
-		order by comm_num asc
+		start with comm.parent_num = 0
+		connect by prior comm.comm_num = parent_num
 	</select>
 	
 	<!-- 기술 게시판 첨부파일 등록 -->

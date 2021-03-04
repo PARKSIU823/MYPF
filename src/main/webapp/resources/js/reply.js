@@ -94,8 +94,7 @@ var replyService = (function() {
 		error();
 				}
 		});
-	}
-	
+	}	
 	function displayTime(timeValue) {
 		var today = new Date();
 		

@@ -214,7 +214,6 @@ ul { list-style:none;}
 					tech_num : tech_numValue,
 					depth : 2,
 					parent_num : modal.data("comm_num")
-
 			};
 			replyService.add(reply, function(result){
 				

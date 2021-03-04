@@ -118,7 +118,7 @@
 										<td colspan="2">
 											<input type="submit" class="bbt" value="전송"/>
 											<input type="button" class="bbt" value="목록" onclick="location.href='ask_list.do'">
-										<td>
+										</td>
 									</tr>
 								</table>
 							</form>	

@@ -135,7 +135,7 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<div class="tech">
-		<h3 style="text-align: center;">기술 게시판</h3>
+		<h3>기술 게시판</h3>
 		<section id="techWrite">
 			<form role="form" action="/tech/tech_write.do" method="post">
 				<table class="wform">

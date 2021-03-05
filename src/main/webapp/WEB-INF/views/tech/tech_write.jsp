@@ -10,11 +10,11 @@
 <title>기술 게시판 </title>
 <link href="${path}/resources/css/style.css" rel="stylesheet" >
 <style>
-.uploadResult { width:70%; background-color: gray; }
+.uploadResult { width:80%; background-color: ; }
 .uploadResult ul { display:flex; flex-flow: row; justify-content: center; align-items: center; }
 .uploadResult ul li { list-style: none; padding: 10px; align-content: center; text-align: center; }
 .uploadResult ul li img { width: 100px; }
-.uploadResult ul li span { color:white; }
+.uploadResult ul li span { color:BLACK; }
 .bigPictureWrapper { position: absolute; display: none; justify-content: center;
 					align-items: center; top:0%; width:100%; height:100%; background-color:gray; 
 					z-index: 100px; background:rgba(255,255,255,0.5); }
@@ -173,14 +173,18 @@
 							<label for="File">파일</label><input class="con" type="file" name="uploadFile" multiple/>
 						</td>
 					</tr>
-					</table>
-						<div class='uploadResult wform'>
-							<ul>
+					<tr>
+						<td class="infield">
+							<div class='uploadResult'>
+								<ul>
 						
-							</ul>
-						</div>					
-							<button type="submit" class="bbt">작성</button>
-							<input type="button" class="bbt"value="취소" onclick="location.href='tech_list.do'">
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</table>			
+						<button type="submit" class="bbt">작성</button>
+						<input type="button" class="bbt"value="취소" onclick="location.href='tech_list.do'">
 			</form>
 		</section>
 	</div>

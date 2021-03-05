@@ -11,7 +11,7 @@
 <link href="${path}/resources/css/style.css" rel="stylesheet" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
-.uploadResult { width:100%; background-color: gray; }
+.uploadResult { width:80%; background-color: ; }
 .uploadResult ul { display:flex; flex-flow: row; justify-content: center; align-items: center; }
 .uploadResult ul li { list-style: none; padding: 10px; align-content: center; text-align: center; }
 .uploadResult ul li img { width: 100px; }
@@ -198,8 +198,8 @@ $(document).ready(function(){
 								</td>
 							</tr>
 							<tr>
-								<td>
-									<label for="tech_category" class="title">카테고리</label>
+								<td class="title">
+									<label for="tech_category">카테고리</label>
 										<select name="tech_category" class="sOpt">
 											<optgroup label="카테고리 선택">
 												<option value="Java">Java</option>
@@ -212,36 +212,42 @@ $(document).ready(function(){
 								</td>
 							</tr>
 							<tr>
-								<td>
-									<label for="tech_title" class="title">제목</label><input type="text" class="infield" id="tech_title" name="tech_title" value="${board.tech_title}"/>
+								<td class="title">
+									<label for="tech_title">제목</label><input type="text" class="infield" id="tech_title" name="tech_title" value="${board.tech_title}"/>
 								</td>
 							</tr>	
 							<tr>
-								<td>
-									<label for="tech_con" class="title">내용</label><textarea id="tech_con" class="con" name="tech_con" ><c:out value="${board.tech_con}" /></textarea>
+								<td class="title">
+									<label for="tech_con">내용</label><textarea id="tech_con" class="con" name="tech_con" ><c:out value="${board.tech_con}" /></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td class="title">
+									<label for="File">파일</label><input class="con" type="file" name="uploadFile" multiple/>
 								</td>
 							</tr>	
-						</tbody>			
-					</table>
-					<!-- 첨부파일 원본 -->
-					<div class='bigPictureWrapper'>
-						<div class='bigPicture'>
-						</div>
-					</div>
-					<!-- 첨부파일 목록-->
-					<div class="row">
-						<div class="heading"><label class="title">Files</label></div>
-						<div class="body">
-						<div class="form-group" uploadDiv">
-							<input type="file" name='uploadFile' multiple="multiple">
-						</div>
-						<div class='uploadResult'>
-							<ul>
+							<tr>
+								<td class="infield">
+									<!-- 첨부파일 원본 -->
+									<div class='bigPictureWrapper'>
+										<div class='bigPicture'>
+										</div>
+									</div>
+									<!-- 첨부파일 목록-->
+									<div class="row">
+										<div class="heading"><label class="title">첨부파일</label></div>
+											<div class="body">
+												<div class='uploadResult'>
+													<ul>
 							
-							</ul>
-						</div>
-					</div>	
-					</div>
+													</ul>
+												</div>
+											</div>	
+										</div>
+									</td>
+								</tr>
+						</tbody>			
+						</table>
 						<div>
 							<button type="submit" data-oper='tech_modify.do' class="bbt btn-default">수정</button>
 							<button type="submit" data-oper='tech_del.do' class="bbt btn-danger">삭제</button>

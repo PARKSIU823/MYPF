@@ -310,7 +310,7 @@ ul { list-style:none;}
 				<tbody>
 					<tr>
 						<td class="underline">
-							<label for="user_id" class="title">글 번호</label> ${board.tech_num }
+							<label for="tech_num" class="title">글 번호</label> ${board.tech_num }
 						</td>
 					</tr>
 					<tr>

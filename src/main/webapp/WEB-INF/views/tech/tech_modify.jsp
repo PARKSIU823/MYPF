@@ -181,25 +181,25 @@ $(document).ready(function(){
 					<table class="wform">
 						<tbody>
 							<tr>
-								<td class="title">
-									<label for="tech_num">번호</label><input type="text" class="infiled" id="tech_num" name="tech_num" value="${board.tech_num}" readonly="readonly"/>
+								<td>
+									<label for="tech_num" class="title">번호</label><input type="text" class="infield" id="tech_num" name="tech_num" value="${board.tech_num}" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>
-								<td class="title">
-									<label for="user_id">이름</label><input type="text" class="infiled" id="user_id" name="user_id" value="${board.user_id}" readonly="readonly"/>
+								<td>
+									<label for="user_id" class="title">이름</label><input type="text" class="infield" id="user_id" name="user_id" value="${board.user_id}" readonly="readonly"/>
 								</td>
 							</tr>
 							<tr>
-								<td class="title">
-									<label for="upt_dt">수정일</label>
-									<input name="upt_dt" value='<fmt:formatDate pattern = 'yyyy/MM/dd' value = "${board.
+								<td>
+									<label for="upt_dt" class="title">수정일</label>
+									<input name="upt_dt" class="infield" value='<fmt:formatDate pattern = 'yyyy/MM/dd' value = "${board.
 									upt_dt}" />' readonly="readonly">						
 								</td>
 							</tr>
 							<tr>
-								<td class="title">
-									<label for="tech_category">카테고리</label>
+								<td>
+									<label for="tech_category" class="title">카테고리</label>
 										<select name="tech_category" class="sOpt">
 											<optgroup label="카테고리 선택">
 												<option value="Java">Java</option>
@@ -212,13 +212,13 @@ $(document).ready(function(){
 								</td>
 							</tr>
 							<tr>
-								<td class="title">
-									<label for="tech_title">제목</label><input type="text" class="infiled" id="tech_title" name="tech_title" value="${board.tech_title}"/>
+								<td>
+									<label for="tech_title" class="title">제목</label><input type="text" class="infield" id="tech_title" name="tech_title" value="${board.tech_title}"/>
 								</td>
 							</tr>	
 							<tr>
-								<td class="title">
-									<label for="tech_con">내용</label><textarea id="tech_con" class="con" name="tech_con"><c:out value="${board.tech_con}" /></textarea>
+								<td>
+									<label for="tech_con" class="title">내용</label><textarea id="tech_con" class="con" name="tech_con" ><c:out value="${board.tech_con}" /></textarea>
 								</td>
 							</tr>	
 						</tbody>			
@@ -230,7 +230,7 @@ $(document).ready(function(){
 					</div>
 					<!-- 첨부파일 목록-->
 					<div class="row">
-						<div class="heading">Files</div>
+						<div class="heading"><label class="title">Files</label></div>
 						<div class="body">
 						<div class="form-group" uploadDiv">
 							<input type="file" name='uploadFile' multiple="multiple">
@@ -243,9 +243,9 @@ $(document).ready(function(){
 					</div>	
 					</div>
 						<div>
-							<button type="submit" data-oper='tech_modify.do' class="btn btn-default">수정</button>
-							<button type="submit" data-oper='tech_del.do' class="btn btn-danger">삭제</button>
-							<button type="submit" data-oper='tech_list.do' class="btn btn-info">목록</button>
+							<button type="submit" data-oper='tech_modify.do' class="bbt btn-default">수정</button>
+							<button type="submit" data-oper='tech_del.do' class="bbt btn-danger">삭제</button>
+							<button type="submit" data-oper='tech_list.do' class="bbt btn-info">목록</button>
 						</div>
 				</form>
 		</section>

@@ -387,9 +387,9 @@ ul { list-style:none;}
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-					 aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">댓글</h4> 
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<!-- 					<h4 class="modal-title" id="myModalLabel">댓글</h4>  -->
+					<h4 id="myModalLabel">댓글</h4> 
 				</div>
 			<div class="modal-body">
 				<div class="form-group">
@@ -398,15 +398,15 @@ ul { list-style:none;}
 				</div>
 				<div class="form-group">
 					<label>내용</label>
-					<textarea class="form-control" cols="40" rosw="10" name='comm_con' value="New Reply!!!"></textarea>
+					<textarea class="form-control" cols="40" rosw="10" style="resize: none;" name='comm_con' value="New Reply!!!"></textarea>
 				</div>
 			</div>
 		<div class="modal-footer">
-			<button id='modalReCommBtn' type="button">답글</button>
-			<button id='modalReCommRegBtn' type="button">등록</button>
-			<button id='modalModBtn' type="button">수정</button>
-			<button id='modalRemoveBtn' type="button">삭제</button>
-			<button id='modalRegisterBtn' type="button" data-dismiss="modal">등록</button>
+			<button id='modalReCommBtn' type="button" class="bbt">답글</button>
+			<button id='modalReCommRegBtn' type="button" class="bbt">등록</button>
+			<button id='modalModBtn' type="button" class="bbt">수정</button>
+			<button id='modalRemoveBtn' type="button" class="bbt">삭제</button>
+			<button id='modalRegisterBtn' type="button" data-dismiss="modal" class="bbt">등록</button>
 			</div>
 		</div>		
 		</div>

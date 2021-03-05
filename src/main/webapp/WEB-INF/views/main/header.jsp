@@ -36,8 +36,13 @@
 						<li class="menu"><a href="<c:url value='/user/information.do'/>">INFORMATION</a></li>
 						<li class="menu"><a href="<c:url value='/portfolio/pf_list.do'/>">PORTFOLIO</a></li>
 						<li class="menu"><a href="<c:url value='/tech/tech_list.do'/>">TECHNOLOGY</a></li>
+						<!-- session의 유저 권한이 A(관리자/admin)가 아닌 경우 문의는 문의하기로 이동 -->
+						<c:if test="${user.user_auth ne 'A'.charAt(0)  }">
 						<li class="menu"><a href="<c:url value='/ask/ask_write.do'/>">INQUERY</a></li>
+						</c:if>
+						<!-- session의 유저 권한이 A(관리자/admin)인 경우, 문의는 문의 내역으로 이동. 회원 관리 메뉴 생성 -->
 						<c:if test="${user.user_auth eq 'A'.charAt(0) }">
+						<li class="menu"><a href="<c:url value='/ask/ask_list.do'/>">INQUERY</a></li>
 						<li class="menu"><a href="<c:url value='/user/user_management.do'/>">MANAGEMENT</a></li>
 						</c:if>
 					</ul>

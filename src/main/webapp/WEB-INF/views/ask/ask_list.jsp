@@ -10,7 +10,7 @@
 <title>문의 게시판</title>
 <link href="${path}/resources/css/style.css" rel="stylesheet" >
 <style type="text/css">
-	li {list-style: none; float: left; padding: 6px; font-family:'Nanum Gothic', sans-serif; font-weight: bold;}
+	.pagination	li {list-style: none; float: left; padding: 6px; font-family:'Nanum Gothic', sans-serif; font-weight: bold;}
 </style>
 </head>
 <body>
@@ -39,7 +39,7 @@
  					<td colspan="5" class="underline"></td>
  				</tr>
 			</table>
-		<div style="margin: 0 auto; width:70%; border: 3px">
+		<div class="pagination" style="margin: 0 auto; width:70%; border: 3px">
  						 <ul>
     						<c:if test="${pageMaker.prev}">
     							<li><a href="ask_list.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>

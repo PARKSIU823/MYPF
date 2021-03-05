@@ -174,7 +174,7 @@
 						</td>
 					</tr>
 					</table>
-						<div class='uploadResult'>
+						<div class='uploadResult wform'>
 							<ul>
 						
 							</ul>

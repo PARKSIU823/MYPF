@@ -34,14 +34,14 @@
 <div class="tech">
 	<h3>기술 게시판</h3>
 	<table class="tlist" style="text-align: center">
- 		<thead>
+ 		<tr>
  			<th class="underline title01">번호</th>
  			<th class="underline title01">제목</th>
  			<th class="underline title01">이름</th>
  			<th class="underline title01">작성일</th>
  			<th class="underline title01">수정일</th>
  			<th class="underline title01">조회</th>
- 		</thead>
+ 		</tr>
  			<c:forEach items="${list }" var="board">
  				<tr>
  					<td class="title02"><c:out value="${board.tech_num}" /></td>

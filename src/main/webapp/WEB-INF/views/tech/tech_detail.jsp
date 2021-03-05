@@ -16,7 +16,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <style>
-.uploadResult { width:100%; background-color: gray; }
+.uploadResult { width:80%; background-color: ; }
+/* .uploadResult { width:100%; background-color: gray; } */
 .uploadResult ul { display:flex; flex-flow: row; justify-content: center; align-items: center; }
 .uploadResult ul li { list-style: none; padding: 10px; align-content: center; text-align: center; }
 .uploadResult ul li img { width: 100px; }
@@ -297,55 +298,71 @@ ul { list-style:none;}
 <body>
 <jsp:include page="../main/header.jsp"/>
 	<div class="row">
-	<h3 style="text-align: center;">기술 게시판</h3>
+	</div>
 		<section id="techDetail">
-				<input type="hidden" id="techNum" name="tech_num" value="${board.tech_num}" />
-					<table class="tech" border=1>
-						<tbody>
-							<tr>
-								<td>
-									<label for="user_id">이름</label> ${board.user_id }
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<label for="tech_title">제목</label> [${board.tech_category }]${board.tech_title }
-								</td>
-							</tr>	
-							<tr>
-								<td>
-									<label for="tech_con">내용</label> ${board.tech_con }
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<button data-oper='tech_modify.do' onclick="location.href='tech_modify.do?tech_num=<c:out value="${board.tech_num}"/>'">수정</button>
-									<button data-oper='tech_list.do' onclick="location.href='tech_list.do'">목록</button>
-								</td>
-							</tr>		
-						</tbody>
-					</table>
-			</section>
-			<!-- 첨부파일 원본 -->
-			<div class='bigPictureWrapper'>
-				<div class='bigPicture'>
-				</div>
-			</div>
-			<!-- 첨부파일 목록-->
-			<div class="row">
-				<div class="heading">Files</div>
-				<div class="body">
-					<div class='uploadResult'>
-						<ul>
-						</ul>
-					</div>
-				</div>	
-			</div>
+		<div class="tech">
+		<h3>기술게시판</h3>
+<!-- 		<h3 style="text-align: center;">기술 게시판</h3> -->
+		<input type="hidden" id="techNum" name="tech_num" value="${board.tech_num}" />
+			<!-- 본문 글 시작 -->
+			<table class="tboard">
+<!-- 			<table class="tech" border=1> -->
+				<tbody>
+					<tr>
+						<td class="underline">
+							<label for="user_id" class="title">글 번호</label> ${board.tech_num }
+						</td>
+					</tr>
+					<tr>
+						<td class="underline">
+							<label for="user_id" class="title">이름</label> ${board.user_id }
+						</td>
+					</tr>
+					<tr>
+						<td class="underline">
+							<label for="tech_title" class="title">제목</label> [${board.tech_category }]${board.tech_title }
+						</td>
+					</tr>	
+					<tr>
+						<td class="underline">
+							<label for="tech_con" class="title">내용</label> ${board.tech_con }
+						</td>
+					</tr>
+					<tr>
+						<td class="underline">
+						<!-- 첨부파일 원본 -->
+							<div class='bigPictureWrapper'>
+								<div class='bigPicture'>
+								</div>
+							</div>
+							<!-- 첨부파일 목록-->
+							<div class="row">
+								<div class="heading"><label class="title">첨부파일</label></div>
+								<div class="body">
+									<div class='uploadResult'>
+										<ul>
+										</ul>
+									</div> 
+								</div>	
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="bbtpos1">
+							<button data-oper='tech_modify.do' class="bbt" onclick="location.href='tech_modify.do?tech_num=<c:out value="${board.tech_num}"/>'">수정</button>
+							<button data-oper='tech_list.do' class="bbt" onclick="location.href='tech_list.do'">목록</button>
+						</td>
+					</tr>		
+				</tbody>
+			</table>
+			<!-- 글 테이블 종료 -->
+			<!-- 댓글 등록 -->
 			<div class='row'>
 					<div class="default">
 					<div class="heading">
-							Reply
-						<button id='addReplyBtn' style="float: right;">댓글등록</button>
+							<label class="title">Reply</label>
+						<button id='addReplyBtn' class="bbt">댓글등록</button>
+		<!-- 						<button id='addReplyBtn' style="float: right;">댓글등록</button> -->
 					</div>
 					<div class="body">
 						<ul class="chat">
@@ -361,8 +378,9 @@ ul { list-style:none;}
 						</ul>
 					</div>
 				</div>	
-				</div>
-			</div>
+		</div>
+	</section>
+<!-- 		</div> -->
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
 		aria-labelledby="myModalLabel" ari-hidden="true">

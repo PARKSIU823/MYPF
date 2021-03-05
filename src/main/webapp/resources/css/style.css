@@ -94,15 +94,14 @@ a {color:BLACK; text-decoration: none;}
 .tech .searcht .sOpt {vertical-align: middle; text-align-last: center; width:100px; padding : 3px; border : 1px solid black; border-radius:0px;}
 
 /* 기술 게시판 상세 내역*/
-.tech {width: 80%; margin-top:10%; margin-left: auto; margin-right: auto; margin-bottom:10%;}
+.tech {width: 80%; margin-top:10%; margin-left: auto; margin-right: auto; margin-bottom: 10%;}
 .tech .tboard {width:70%; border-spacing:5px 5px;}
 .tech .tboard .info {height : 30px;}
-.tech .tboard .thumb {width:210px; height:210px;} 
-.tech .tboard .thumb img {width:200px; height:200px;} 
 .tech .tboard .underline {border-bottom:  1px solid BLACK;}
 .tech .tboard .title {font-weight: bold;}
+.tech .tboard .underline .title {font-weight: bold;}
 .tech .tboard .bbtpos1 {padding-left: 80%;}
-.tech .tboard .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+.tech .tboard .bbtpos1 .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
 
 /*기술 게시판 등록 및 수정*/
 .tech .wform {width:80%; border-spacing: 5px;}
@@ -112,6 +111,7 @@ a {color:BLACK; text-decoration: none;}
 .tech .infield{width:70%; border: 0px; border-bottom : 1px solid BLACK; }
 .tech .wform .bbtpos2 {padding-left: 60%;}
 .tech .wform .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+.tech .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
 
 /*문의 게시판 리스트*/
 .inquery {width:80%; margin-top:10%; margin-left: auto; margin-right: auto;}

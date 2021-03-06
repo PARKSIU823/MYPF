@@ -8,6 +8,9 @@
 <head>
    <meta charset="utf-8">
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
+      <script src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
@@ -50,4 +53,34 @@
 			</tr>
 		</table>
 	</div>
+		<!-- 	modal 추가 -->
+	<div class="modal_wrap" class="informModal">
+		<div class="modal_header">
+			<button type="button" class="modal_close" data-dismiss="modal">&times;</button>
+		</div>
+		<div class="modal_body">
+			처리가 완료되었습니다.
+		</div>
+		<div class="modal_footer"></div>
+	</div>
 </header>
+
+<script type="text/javascript">
+// modal
+$(document).ready(function(){
+	var result = '<c:out value="${user.user_nm}"/>';
+	
+	// 	modal 
+	checkModal(result);
+	function checkModal(result){
+		//user_nm 값이 null일 경우 return;
+		if(result==='') {return;}
+		//result_nm 값이 있을 경우
+		if(result!=null){
+			alert(result + "님 로그인 완료");
+		}
+		$(".informModal").modal("show");
+	}
+
+});
+</script>

@@ -161,12 +161,12 @@
 			dataType : "json",
 			data : {"user_mail" : $("#user_mail").val()},
 			success : function(data){
-				if(data != 1){
+				if(data > 0){
 					alert("회원 가입된 메일입니다.");
 					$('#user_mail').val('');
 			         $('#user_mail').focus();
 				}else if(data == 0){
-					$("#user_mail").attr("value", "Y");
+					$("#chkMail").attr("value", "Y");
 					alert("사용가능한 메일입니다.");
 				}
 			}

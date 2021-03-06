@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -169,17 +170,19 @@ public class UserController {
 	
 	//회원 정보 수정
 	@RequestMapping(value= "userAuth.do", method = RequestMethod.POST)
-	public String userAuth(HttpSession session, UserVO user, Model model) throws Exception{
+	public String userAuth(HttpServletRequest request, UserVO user, Model model) throws Exception{
 		log.info("회원 권한 수정 : " +user);
-		/*
-		 * if(!session.getUserAuth == 'A') {
-		 * return "redirect:/index.do";
-		 * }else {
-		 * model.addAttribute("userAuth", "success");
-		 * }
-		 */
-		uService.userAuth(user);
-		return "redirect:user/user_management";
+//
+//		HttpSession session = request.getSession();
+//		UserVO sessionUser = (UserVO) session.getAttribute("user_auth");
+//		  if(sessionUser.getUser_auth() != 'A') {
+//		  return "redirect:/index.do";
+//		  }else {
+		  model.addAttribute("userAuth", "success");
+		  uService.userAuth(user);
+//		  }
+		 
+		return "redirect:/user/user_management.do";
 	}
 
 	//관리자 소개 페이지

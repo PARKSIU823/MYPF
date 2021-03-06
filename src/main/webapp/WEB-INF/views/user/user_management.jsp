@@ -14,10 +14,18 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 
-<form method="post" action="user/userAuth.do">
+<form id="authForm" method="post" action="/user/userAuth.do">
 <div class="userList">
 	<h3>MANAGEMENT</h3>
 		<table class="uList">
+			<colgroup>
+				<col width="15px;"/>
+				<col width="10%"/>
+				<col width="10%"/>
+				<col width="10%"/>
+				<col width="30%"/>
+				<col width="30%"/>
+			</colgroup>
 			<tr>
 				<td></td>
 				<td class="title underline">회원번호</td>
@@ -28,7 +36,7 @@
 			</tr>
 			<c:forEach items="${userList }" var="list">
 			<tr>
-				<td><input type="checkbox" value="${list.user_count }"></td>
+				<td><input type="checkbox" value="${list.user_count }" name="authCheck"></td>
 				<td class="underline">${list.user_count }</td>
 				<td class="underline"><input type="hidden" name="user_id" value="${list.user_id }"/>${list.user_id }</td>
 				<td class="underline">${list.user_nm }</td>
@@ -39,19 +47,32 @@
 						<option value="A" <c:if test="${list.user_auth eq'A'.charAt(0) }"> selected='selected'</c:if>>관리자</option>
 						<option value="U" <c:if test="${list.user_auth eq'U'.charAt(0) }"> selected='selected'</c:if>>일반회원</option>
 					</select>
-<%-- 				${list.user_auth } --%>
 				</td>
 			</tr>
 			</c:forEach>
 			<tr>
 				<td colspan="6">
-				<button type="submit">권한 수정</button>
+				<button type="submit" name="authBbt">권한 수정</button>
 				</td>
 			</tr>
 		</table>
 	</div>
 </form>
+<script type="text/javascript">
+//체크된 항목만 변경
+var authForm = $('#authForm');
+var arrayAuth = new Array();
 
+$('.authBbt').on("click", function(e) {
+	e.preventDefault();
+	console.log('click');
+	authForm.find("input[name='authCheck']:checked").each(function(){
+		arrayAuth.push($(this).val());
+	})
+	authForm.submit();
+	
+})
+</script>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

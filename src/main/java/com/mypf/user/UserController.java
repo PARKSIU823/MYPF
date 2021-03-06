@@ -61,6 +61,14 @@ public class UserController {
 		return chkResult;
 	}
 	
+	//이메일 중복 체크
+	@ResponseBody
+	@RequestMapping(value="chkMail.do", method = RequestMethod.POST)
+	public int chkMail(UserVO user) throws Exception{
+		int chkResult = uService.chkMail(user);
+		return chkResult;
+	}
+	
 	//아이디 찾기 페이지
 	@RequestMapping(value = "find_id.do", method = RequestMethod.POST)
 	public String findId(HttpServletRequest request, Model model) throws Exception{

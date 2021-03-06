@@ -18,9 +18,6 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserMapper uMapper;
 	
-	@Autowired
-	private UserService uService;
-	
 	//회원 가입
 	@Override
 	public void register(UserVO user) throws Exception {
@@ -29,12 +26,21 @@ public class UserServiceImpl implements UserService{
 		
 	}
 	
-	//@아이디 중복 찾기
+	//아이디 중복 찾기
 	@Override
 	public int chkID(UserVO user) throws Exception{
 		log.info("아이디 중복 체크 : " + user);
 		return uMapper.chkID(user);
 	}
+
+	//이메일 중복 찾기
+	@Override
+	public int chkMail(UserVO user) throws Exception{
+		log.info("아이디 중복 체크 : " + user);
+		return uMapper.chkMail(user);
+	}
+	
+	
 	//아이디 찾기
 	@Override
 	public UserVO findID(String userId) throws Exception {

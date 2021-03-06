@@ -75,6 +75,13 @@
 	]]>
 </select>
 
+<!-- 이메일 중복 확인 -->
+<select id="chkMail" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*) FROM user_info
+		WHERE user_mail = #{user_mail}
+	]]>
+</select>
 <!-- 회원 정보 수정 -->
 <update id="userMod">
 	<![CDATA[

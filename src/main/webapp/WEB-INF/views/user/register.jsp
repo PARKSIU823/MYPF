@@ -40,7 +40,8 @@
 			  <tr>
 			  	<td class="title">이메일</td>
 			  	<td>
-			  	<input type="text" class="infield" name="user_mail" id="user_mail"/>
+			  	<input type="hidden" name="chkMail" id="chkMail" value="N"/>
+			  	<input type="text" class="infield" name="user_mail" id="user_mail" onchange="fn_mailChk();"/>
 <!-- 			  		<input type="text" name="mailBody" class="infield03"/> @ -->
 <!-- 			  		<select class="sOpt" name="mailDomain"> -->
 <!-- 			  			<option>naver.com</option> -->
@@ -95,6 +96,11 @@
 				$("#user_id").focus();
 				return false;
 			}
+			if($("#chkMail").val()=="N"){
+				alert("다른 메일을 입력해주세요.");
+				$("#user_id").focus();
+				return false;
+			}
 			if($("#user_id").val()==""){
 				alert("아이디를 입력해주세요.");
 				$("#user_id").focus();
@@ -142,6 +148,26 @@
 				}else if(data == 0){
 					$("#chkID").attr("value", "Y");
 					alert("사용가능한 아이디입니다.");
+				}
+			}
+		})
+	}
+	
+	//이메일 중복 체크
+	function fn_mailChk(){
+		$.ajax({
+			url : "/user/chkMail.do",
+			type : "post",
+			dataType : "json",
+			data : {"user_mail" : $("#user_mail").val()},
+			success : function(data){
+				if(data != 1){
+					alert("회원 가입된 메일입니다.");
+					$('#user_mail').val('');
+			         $('#user_mail').focus();
+				}else if(data == 0){
+					$("#user_mail").attr("value", "Y");
+					alert("사용가능한 메일입니다.");
 				}
 			}
 		})

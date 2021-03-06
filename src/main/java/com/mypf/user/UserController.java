@@ -41,16 +41,16 @@ public class UserController {
 				return "/user/register";
 			} else if(result == 0) {
 				//암호화 비밀번호
-				String userPW = user.getUser_pw();
-				String encodePW  = pwdEncoder.encode(userPW);
-				user.setUser_pw(encodePW);
+//				String userPW = user.getUser_pw();
+//				String encodePW  = pwdEncoder.encode(userPW);
+//				user.setUser_pw(encodePW);
 				uService.register(user);
 			}
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
 		model.addAttribute("success", "registercomplete");
-		return "redirect:/index.do";
+		return "redirect:/user/login.do";
 	}
 	
 	//아이디 중복 체크
@@ -84,8 +84,9 @@ public class UserController {
 		log.info("로그인");
 		HttpSession session = request.getSession();
 		UserVO login = uService.userLogin(user);
-		boolean pwMatch = pwdEncoder.matches(user.getUser_pw(), login.getUser_pw());
-		if(login!= null && pwMatch == true) {
+//		boolean pwMatch = pwdEncoder.matches(user.getUser_pw(), login.getUser_pw());
+//		if(login!= null && pwMatch == true) {
+		if(login!= null) {
 			session.setAttribute("user", login);
 		}else {
 			session.setAttribute("user", null);

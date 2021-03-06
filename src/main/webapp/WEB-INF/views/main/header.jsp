@@ -64,23 +64,3 @@
 		<div class="modal_footer"></div>
 	</div>
 </header>
-
-<script type="text/javascript">
-// modal
-$(document).ready(function(){
-	var result = '<c:out value="${user.user_nm}"/>';
-	
-	// 	modal 
-	checkModal(result);
-	function checkModal(result){
-		//user_nm 값이 null일 경우 return;
-		if(result==='') {return;}
-		//result_nm 값이 있을 경우
-		if(result!=null){
-			alert(result + "님 로그인 완료");
-		}
-		$(".informModal").modal("show");
-	}
-
-});
-</script>

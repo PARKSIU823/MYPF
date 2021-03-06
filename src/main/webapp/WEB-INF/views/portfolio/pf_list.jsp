@@ -14,6 +14,10 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
+	<form id='actionForm' action="/portfolio/pf_list.do" method="get">
+		<input type="hidden" name="pageNum" value="${pageMaker.pfCri.pageNum }"/>
+		<input type="hidden" name="amount" value="${pageMaker.pfCri.amount}"/>
+	</form>
 	<div class="project">
 		<h3>PORTFOLIO</h3>
 		<ul>
@@ -43,6 +47,19 @@
 				</c:forEach>
 			</tr>
 		</table>
+		
+		<!-- 포트폴리오 페이징 -->
+		<div class="pfPage">
+			<c:if test="${pageMaker.prev }">
+				<a href="<c:out value='${pageMaker.startPage - 1 }'/>">이전</a>
+			</c:if>
+			<c:forEach var="num" begin="${pageMaker.startPage }" end ="${pageMaker.endPage }">
+				<li class="pfPagination"><a href="<c:out value='${num}'/>">${num}</a></li>
+			</c:forEach>
+			<c:if test="${pageMaker.next }">
+				<a href="<c:out value='${pageMaker.endPage + 1 }'/>">다음</a>
+			</c:if>
+		</div>
 	</div>
 	<!-- 	modal 추가 -->
 	<div class="modal_wrap" class="informModal">
@@ -76,6 +93,15 @@ $(document).ready(function(){
 	$("#prtfRegBtn").on("click",function(){
 		self.location="/portfolio/pf_write.do";
 	});
+	
+	//페이지 이동
+	var actionForm = $('#actionForm');
+	$('.pfPagination a').on("click", function(e) {
+		e.preventDefault();
+		console.log('click');
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.submit();
+	})
 });
 </script>
 <jsp:include page="../main/footer.jsp"/>

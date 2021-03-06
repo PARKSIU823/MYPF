@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.mypf.mapper.PortfolioMapper;
 import com.mypf.portfolio.service.PortfolioService;
+import com.mypf.portfolio.vo.PfCriteria;
 import com.mypf.portfolio.vo.PfFileVO;
 import com.mypf.portfolio.vo.PortfolioVO;
 
@@ -27,9 +28,9 @@ public class PortfolioServiceImpl implements PortfolioService{
 	
 	//포폴 리스트 불러오기
 	@Override
-	public List<PortfolioVO> pfList() throws Exception {
-		log.info("목록 조회");
-		return pfMapper.pfList();
+	public List<PortfolioVO> pfList(PfCriteria cri) throws Exception {
+		log.info("목록 조회 : " + cri);
+		return pfMapper.pfList(cri);
 	}
 
 	//포폴 조회하기

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mypf.portfolio.vo.PfCriteria;
 import com.mypf.portfolio.vo.PfFileVO;
 import com.mypf.portfolio.vo.PortfolioVO;
 
@@ -11,7 +12,7 @@ import com.mypf.portfolio.vo.PortfolioVO;
 public interface PortfolioMapper {
 
 	//포폴 리스트
-	public List<PortfolioVO> pfList() throws Exception;
+	public List<PortfolioVO> pfList(PfCriteria cri) throws Exception;
 	
 	//포폴 등록
 	public void pfAdd(PortfolioVO pf) throws Exception;

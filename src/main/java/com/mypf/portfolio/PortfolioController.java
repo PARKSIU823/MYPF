@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mypf.portfolio.service.PortfolioService;
+import com.mypf.portfolio.vo.PfCriteria;
 import com.mypf.portfolio.vo.PfFileVO;
+import com.mypf.portfolio.vo.PfPageDTO;
 import com.mypf.portfolio.vo.PortfolioVO;
 
 import lombok.extern.log4j.Log4j;
@@ -54,9 +56,10 @@ public class PortfolioController {
 	
 	//포트폴리오 게시판 리스트
 	@RequestMapping(value = "pf_list.do", method=RequestMethod.GET)
-	public String pfList(Model model)  throws Exception{
-		log.info("pfList");
-		model.addAttribute("pfList", pfService.pfList());
+	public String pfList(Model model, PfCriteria cri)  throws Exception{
+		log.info("pfList : " + cri);
+		model.addAttribute("pfList", pfService.pfList(cri));
+		model.addAttribute("pageMaker", new PfPageDTO(cri, 10));
 		return "portfolio/pf_list";
 	}
 

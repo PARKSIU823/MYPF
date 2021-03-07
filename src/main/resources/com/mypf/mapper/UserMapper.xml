@@ -171,13 +171,33 @@
 	WHERE user_id = #{user_id}
 </delete>
 
-<!-- 비밀번호 찾기 -->
+<!-- 비밀번호 확인 -->
 <select id="chkPW" resultType="int">
 	<![CDATA[
 		SELECT COUNT(*)
 		FROM user_info
 		WHERE user_id = #{user_id}
 			AND user_pw = #{user_pw}
+	]]>
+</select>
+
+<!-- 아이디 찾기 -->
+<select id="findID" resultType="string">
+	<![CDATA[
+		SELECT user_id
+		FROM user_info
+		WHERE user_nm = #{user_nm}
+			AND user_mail = #{user_mail}
+	]]>
+</select>
+
+<!-- 비밀번호 찾기 -->
+<select id="findPW" resultType="string">
+	<![CDATA[
+		SELECT user_pw
+		FROM user_info
+		WHERE user_id = #{user_id}
+			AND user_nm = #{user_nm}
 	]]>
 </select>
 

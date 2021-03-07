@@ -45,15 +45,15 @@ public class UserServiceImpl implements UserService{
 	
 	//아이디 찾기
 	@Override
-	public UserVO findID(String userId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public String findID(UserVO user) throws Exception {
+		log.info("아이디 찾기 : " + user);
+		return uMapper.findID(user);
 	}
 
 	//비밀번호 찾기
-	public UserVO findPW(String userId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public String findPW(UserVO user) throws Exception {
+		log.info("아이디 찾기 : " + user);
+		return uMapper.findPW(user);
 	}
 
 	//로그인

@@ -32,6 +32,12 @@
 			  		<button type="submit" class="bbt">로그인</button>
 			  	</td>
 			  </tr>
+			  <tr>
+			  	<td colspan="3" class="bbtpos2">
+			  		<label> <a href="<c:url value='/user/find_id.do'/>">아이디 찾기</a></label> / 
+			  		<label> <a href="<c:url value='/user/find_pw.do'/>">비밀번호 찾기</a></label>
+			  	</td>
+			  </tr>
 			</table>
 		</form>
 	</div>

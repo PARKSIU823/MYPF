@@ -21,10 +21,10 @@ public interface UserMapper {
 	public int chkMail(UserVO user) throws Exception;
 
 	// 아이디 찾기
-	public UserVO findID(String userId) throws Exception;
+	public String findID(UserVO user) throws Exception;
 
 	// 비밀번호 찾기
-	public UserVO findPW(String userId) throws Exception;
+	public String findPW(UserVO user) throws Exception;
 
 	// 로그인
 	public UserVO userLogin(UserVO user) throws Exception;

@@ -79,16 +79,30 @@ public class UserController {
 		return "user/check_pw";
 	}
 	
-	//아이디 찾기 페이지
-	@RequestMapping(value = "find_id.do", method = RequestMethod.POST)
-	public String findId(HttpServletRequest request, Model model) throws Exception{
+	//아이디 찾기
+	@RequestMapping(value = "find_id.do", method = RequestMethod.GET)
+	public String findIdForm(HttpServletRequest request, Model model) throws Exception{
 		return "user/find_id";
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "find_id.do", method = RequestMethod.POST)
+	public String findId(UserVO user, Model model) throws Exception{
+		String user_id=  uService.findID(user);
+		return user_id;
+	}
 	
-	//비밀번호 찾기 페이지
-	@RequestMapping(value = "find_pw.do", method = RequestMethod.POST)
-	public String findPw(HttpServletRequest request, Model model) throws Exception{
+	//비밀번호 찾기
+	@RequestMapping(value = "find_pw.do", method = RequestMethod.GET)
+	public String findPwForm(HttpServletRequest request, Model model) throws Exception{
 		return "user/find_pw";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "find_pw.do", method = RequestMethod.POST)
+	public String findPw(UserVO user, Model model) throws Exception{
+		String user_pw = uService.findPW(user);
+		return user_pw;
 	}
 	
 	//로그인 페이지

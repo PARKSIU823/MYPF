@@ -135,6 +135,7 @@
 		,user_auth
 	FROM user_info
 	WHERE user_id = #{user_id}
+		AND user_pw = #{user_pw}
 </select>
 
 <!-- 회원탈퇴 -->

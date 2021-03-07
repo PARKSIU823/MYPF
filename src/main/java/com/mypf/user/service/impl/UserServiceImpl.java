@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mypf.mapper.UserMapper;
 import com.mypf.user.service.UserService;
+import com.mypf.user.vo.UserCriteria;
 import com.mypf.user.vo.UserVO;
 
 import lombok.extern.log4j.Log4j;
@@ -63,9 +64,9 @@ public class UserServiceImpl implements UserService{
 
 	//회원 리스트
 	@Override
-	public List<UserVO> userInfo() throws Exception {
+	public List<UserVO> userInfo(UserCriteria cri) throws Exception {
 		log.info("회원 리스트");
-		return uMapper.userInfo();
+		return uMapper.userInfo(cri);
 	}
 
 	

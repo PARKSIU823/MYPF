@@ -3,7 +3,9 @@ package com.mypf.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.security.core.userdetails.UserCache;
 
+import com.mypf.user.vo.UserCriteria;
 import com.mypf.user.vo.UserVO;
 
 @Mapper
@@ -28,7 +30,7 @@ public interface UserMapper {
 	public UserVO userLogin(UserVO user) throws Exception;
 
 	// 정보 관리
-	public List<UserVO> userInfo() throws Exception;
+	public List<UserVO> userInfo(UserCriteria cri) throws Exception;
 
 	// 비밀번호 확인
 	public int chkPW(UserVO user) throws Exception;

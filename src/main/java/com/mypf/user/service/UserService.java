@@ -2,6 +2,7 @@ package com.mypf.user.service;
 
 import java.util.List;
 
+import com.mypf.user.vo.UserCriteria;
 import com.mypf.user.vo.UserVO;
 
 public interface UserService {
@@ -26,7 +27,7 @@ public interface UserService {
 	public UserVO userLogin(UserVO user) throws Exception;
 	
 	//정보 관리
-	public List<UserVO> userInfo() throws Exception;
+	public List<UserVO> userInfo(UserCriteria cri) throws Exception;
 	
 	//비밀번호 확인
 	public int chkPW(UserVO user) throws Exception;

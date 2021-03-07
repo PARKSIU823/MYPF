@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mypf.user.service.UserService;
+import com.mypf.user.vo.UserCriteria;
+import com.mypf.user.vo.UserPageDTO;
 import com.mypf.user.vo.UserVO;
 
 import lombok.extern.log4j.Log4j;
@@ -164,7 +166,7 @@ public class UserController {
 	
 	//회원 관리 페이지
 	@RequestMapping(value = "user_management.do", method = RequestMethod.GET)
-	public String userManagement(UserVO user, Model model) throws Exception{
+	public String userManagement(UserCriteria cri, UserVO user, Model model) throws Exception{
 		log.info("회원 정보 리스트");
 		/*
 		 * if(!session.getUserAuth == 'A') {
@@ -172,7 +174,8 @@ public class UserController {
 		 * }else {
 		 * }
 		 */
-		 model.addAttribute("userList", uService.userInfo());
+		 model.addAttribute("userList", uService.userInfo(cri));
+		 model.addAttribute("pageMaker", new UserPageDTO(cri, 10));
 		return "user/user_management";
 	}
 	

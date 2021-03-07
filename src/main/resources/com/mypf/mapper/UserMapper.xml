@@ -118,8 +118,25 @@
 <!-- 회원 리스트 -->
 <select id="userInfo" resultType="com.mypf.user.vo.UserVO">
 	<![CDATA[
-		SELECT * FROM user_info
-		ORDER BY user_count desc
+		SELECT 
+			user_count
+			,user_id
+			,user_nm
+			,user_mail
+			,user_auth
+		FROM (
+			SELECT /*+ INDEX DESC(user_info pk_user_info) */
+				rownum rn
+				,user_count
+				,user_id
+				,user_nm
+				,user_mail
+				,user_auth
+			FROM user_info
+			WHERE rownum <= #{pageNum} * #{amount}
+			)
+		WHERE rn> (#{pageNum} -1 ) * #{amount}
+		ORDER BY rn DESC
 	]]>
 </select>
 

@@ -14,7 +14,11 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 
-<form id="authForm" method="post" action="/user/userAuth.do">
+<form id="actionForm" method="get" action="/user/user_management.do">
+	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"/>
+	<input type="hidden" name="amount" value="${pageMaker.cri.amount }"/>
+</form>
+<form>
 <div class="userList">
 	<h3>MANAGEMENT</h3>
 		<table class="uList">
@@ -56,22 +60,32 @@
 				</td>
 			</tr>
 		</table>
+		
+		<!-- 회원관리 페이징 -->
+		<div class="userPage">
+			<c:if test="${pageMaker.prev }">
+				<li><a href="<c:out value='${pageMaker.startPage-1}'/>">이전</a></li>
+			</c:if>
+			<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+				<li class="userPagination"><a href="<c:out value='${num}'/>">${num }</a></li>
+			</c:forEach>
+			<c:if test="${pageMaker.next }">
+				<li><a href="<c:out value='${pageMaker.endPage+1}'/>">다음</a></li>
+			</c:if>
+		</div>
 	</div>
 </form>
 <script type="text/javascript">
-//체크된 항목만 변경
-var authForm = $('#authForm');
-var arrayAuth = new Array();
-
-$('.authBbt').on("click", function(e) {
-	e.preventDefault();
-	console.log('click');
-	authForm.find("input[name='authCheck']:checked").each(function(){
-		arrayAuth.push($(this).val());
+$(document).ready(function(){
+	var actionForm = $("#actionForm");
+	var actionForm = $('#actionForm');
+	$('.userPagination a').on("click", function(e) {
+		e.preventDefault();
+		console.log('click');
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.submit();
 	})
-	authForm.submit();
-	
-})
+});
 </script>
 <jsp:include page="../main/footer.jsp"/>
 </body>

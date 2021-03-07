@@ -63,7 +63,7 @@
 			data : {"user_id" : $("#user_id").val(), "user_pw" : $("#user_pw").val()},
 			success : function(data){
 				if(data == 1){
-					alert("확인 완료");
+					alert("비밀번호 확인 완료");
 					$('#pwSubmitForm').submit();
 				}else if(data == 0){
 					alert("비밀번호가 일치하지 않습니다.");

@@ -41,7 +41,7 @@
 			  	<td class="title">이메일</td>
 			  	<td>
 			  	<input type="hidden" name="chkMail" id="chkMail" value="N"/>
-			  	<input type="text" class="infield" name="user_mail" id="user_mail" onchange="fn_mailChk();"/>
+			  	<input type="email" class="infield" name="user_mail" id="user_mail" pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" onchange="fn_mailChk();"/>
 <!-- 			  		<input type="text" name="mailBody" class="infield03"/> @ -->
 <!-- 			  		<select class="sOpt" name="mailDomain"> -->
 <!-- 			  			<option>naver.com</option> -->
@@ -109,6 +109,11 @@
 			if($("#user_pw").val()==""){
 				alert("비밀번호를 입력해주세요.");
 				$("#user_pw").focus();
+				return false;
+			}
+			if($("#user_pw_chk").val()==""){
+				alert("비밀번호 확인을 입력해주세요.");
+				$("#user_pw_chk").focus();
 				return false;
 			}
 			if($("#user_nm").val()==""){

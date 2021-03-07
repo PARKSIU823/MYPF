@@ -70,6 +70,12 @@ public class UserController {
 		return chkResult;
 	}
 	
+	//비밀번호 확인 페이지
+	@RequestMapping(value="check_pw.do", method= RequestMethod.GET)
+	public String chkPwForm() throws Exception {
+		return "user/check_pw";
+	}
+	
 	//아이디 찾기 페이지
 	@RequestMapping(value = "find_id.do", method = RequestMethod.POST)
 	public String findId(HttpServletRequest request, Model model) throws Exception{
@@ -135,15 +141,17 @@ public class UserController {
 	//비밀번호 확인
 	@ResponseBody
 	@RequestMapping(value = "check_pw.do", method = RequestMethod.POST)
-	public boolean checkPw(UserVO user) throws Exception{
-		UserVO login = uService.userLogin(user);
-		boolean pwdChk = pwdEncoder.matches(user.getUser_pw(), login.getUser_pw());
+	public int checkPw(UserVO user) throws Exception{
+		int pwdChk = uService.chkPW(user);
+//		boolean pwdChk = pwdEncoder.matches(user.getUser_pw(), login.getUser_pw());
 		return pwdChk;
 	}
 
 	//회원정보 수정
-	@RequestMapping(value = "modify.do", method = RequestMethod.GET)
-	public String modifyForm(HttpServletRequest request, Model model) throws Exception{
+	@RequestMapping(value = "modifyForm.do", method = RequestMethod.POST)
+	public String modifyForm(UserVO user, HttpServletRequest request, Model model) throws Exception{
+		log.info("회원 정보 수정 페이지 : " + user);
+		model.addAttribute("model", user);
 		return "user/modify";
 	}
 	@RequestMapping(value = "modify.do", method = RequestMethod.POST)

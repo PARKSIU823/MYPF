@@ -13,9 +13,70 @@
   crossorigin="anonymous"></script>
 <body>
 <jsp:include page="../main/header.jsp"/>
+	<div class="regist">
+		<h3>USER INFORMATION</h3>
+		<form action="/user/modifyForm.do" method="post" id="pwSubmitForm">
+			<input type="hidden" name="user_id" id="user_id" value="<c:out value='${user.user_id}'/>"/>
+			<table class="regform">
+			  <tr>
+			  <tr>
+			  	<td class="title">비밀번호</td>
+			  	<td colspan="2"><input type="password" class="infield" name="user_pw" id="user_pw"/></td>
+			  </tr>
+			  <tr>
+			  	<td class="title">비밀번호 확인</td>
+			  	<td colspan="2"><input type="password" class="infield" id="user_pw_chk"/></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="3" class="bbtpos2">
+			  		<button type="reset" class="bbt">취소</button>
+			  		<button type="submit" class="bbt" onclick="fn_pwChk();">확인</button>
+			  	</td>
+			  </tr>
+			</table>
+		</form>
+	</div>
+	<script type="text/javascript">
+	
+	//비밀번호 동일 체크
+	$(function(){
+		$('#user_pw_chk').blur(function(){
+		   if($('#user_pw').val() != $('#user_pw_chk').val()){
+		    	if($('#user_pw_chk').val()!=''){
+			    alert("비밀번호가 일치하지 않습니다.");
+		    	    $('#user_pw_chk').val('');
+		          $('#user_pw_chk').focus();
+		       }
+		    }
+		})  	   
+	});
 
-이 안에 내용을 입력하세요 check_pw
-
+	
+	//아이디 중복 체크
+	
+	function fn_pwChk(){
+		var pwSubmitForm = $('#pwSubmitForm');
+		$.ajax({
+			url : "/user/check_pw.do",
+			type : "post",
+			dataType : "json",
+			data : {"user_id" : $("#user_id").val(), "user_pw" : $("#user_pw").val()},
+			success : function(data){
+				if(data == 1){
+					alert("확인 완료");
+					$('#pwSubmitForm').submit();
+				}else if(data == 0){
+					alert("비밀번호가 일치하지 않습니다.");
+					$('#user_pw').val('');
+					$('#user_pw_chk').val('');
+					$('#user_pw').focus();
+					
+				}
+			}
+		})
+	}
+	
+	</script>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

@@ -15,6 +15,7 @@ public interface UserService {
 	//이메일 중복 체크
 	public int chkMail(UserVO user) throws Exception;
 	
+	
 	//아이디 찾기
 	public UserVO findID(String user_id) throws Exception;
 	
@@ -28,7 +29,7 @@ public interface UserService {
 	public List<UserVO> userInfo() throws Exception;
 	
 	//비밀번호 확인
-	public boolean checkPW(UserVO user) throws Exception;
+	public int chkPW(UserVO user) throws Exception;
 
 	//회원정보 수정
 	public UserVO userMod(UserVO user) throws Exception;

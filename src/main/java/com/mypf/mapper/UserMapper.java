@@ -31,7 +31,7 @@ public interface UserMapper {
 	public List<UserVO> userInfo() throws Exception;
 
 	// 비밀번호 확인
-	public boolean checkPW(UserVO user) throws Exception;
+	public int chkPW(UserVO user) throws Exception;
 
 	// 회원정보 수정
 	public UserVO userMod(UserVO user) throws Exception;

@@ -27,7 +27,7 @@
 						<c:if test="${user != null }">
 						<li class="menu">${user.user_nm }님 </li>
 						<li class="menu"><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
-						<li class="menu"><a href="<c:url value='/user/modify.do'/>">정보관리</a></li>
+						<li class="menu"><a href="<c:url value='/user/check_pw.do'/>">정보관리</a></li>
 						</c:if>
 					</ul>
 				</td>

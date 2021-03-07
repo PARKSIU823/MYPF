@@ -71,9 +71,9 @@ public class UserServiceImpl implements UserService{
 	
 	//비밀번호 확인
 	@Override
-	public boolean checkPW(UserVO user) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public int chkPW(UserVO user) throws Exception {
+		log.info("비밀번호 확인 : " + user);
+		return uMapper.chkPW(user);
 	}
 
 	//회원정보 수정

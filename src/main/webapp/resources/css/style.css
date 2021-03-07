@@ -135,11 +135,16 @@ a {color:BLACK; text-decoration: none;}
 .inquery .wform .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
 
 /*회원 관리*/
-.userList {width:80%; margin-top:10%; margin-left: auto; margin-right: auto;}
+.userList {width:80%; margin-top:10%; margin-left: auto; margin-right: auto; margin-bottom: 10%;}
 .userList .uList {width:80%; border-spacing: 5px;}
 .userList .uList .title {width:15%; font-weight: bold; }
 .userList .uList .sOpt {vertical-align: middle; text-align-last: center; width:150px; padding : 3px; border : 1px solid black; border-radius:0px;}
 .userList .uList .underline {border-bottom : 1px solid BLACK;}
+.userList .uList .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+.userList .userSearch {margin-left: auto; margin-right: auto;}
+.userList .userSearch .underline {width:20%; border: 0px; border-bottom : 1px solid BLACK; }
+.userList .userSearch .userOpt  {vertical-align: middle; text-align-last: center; width:150px; padding : 3px; border : 1px solid black; border-radius:0px;}
+.userList .userSearch .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
 
 /*footer*/
 footer .mypffooter{

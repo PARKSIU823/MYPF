@@ -3,7 +3,6 @@ package com.mypf.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.security.core.userdetails.UserCache;
 
 import com.mypf.user.vo.UserCriteria;
 import com.mypf.user.vo.UserVO;

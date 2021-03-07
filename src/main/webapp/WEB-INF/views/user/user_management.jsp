@@ -19,8 +19,8 @@
 	<input type="hidden" name="amount" value="${pageMaker.cri.amount }"/>
 </form>
 <form>
-<div class="userList">
-	<h3>MANAGEMENT</h3>
+	<div class="userList">
+		<h3>MANAGEMENT</h3>
 		<table class="uList">
 			<colgroup>
 				<col width="15px;"/>
@@ -56,10 +56,22 @@
 			</c:forEach>
 			<tr>
 				<td colspan="6">
-				<button type="submit" name="authBbt">권한 수정</button>
+				<button type="submit" name="authBbt" class="bbt" style="float: right;">권한 수정</button>
 				</td>
 			</tr>
 		</table>
+			
+		<!-- 검색 -->
+		<div class="userSearch">
+			<select name="userOpt" class="userOpt">
+				<option>선택</option>
+				<option value="user_id">아이디</option>
+				<option value="user_nm">이름</option>
+				<option value="user_mail">이메일</option>
+			</select>
+			<input type="text" name="searchWord" class="underline"/>
+			<button type="submit" name="searchBbt" class="bbt" onclick="fn_userSearch();">검색</button>
+		</div>
 		
 		<!-- 회원관리 페이징 -->
 		<div class="userPage">
@@ -78,13 +90,15 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	var actionForm = $("#actionForm");
-	var actionForm = $('#actionForm');
 	$('.userPagination a').on("click", function(e) {
 		e.preventDefault();
 		console.log('click');
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		actionForm.submit();
 	})
+	
+	
+	
 });
 </script>
 <jsp:include page="../main/footer.jsp"/>

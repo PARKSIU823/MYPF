@@ -8,6 +8,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,7 +53,7 @@ public class UserController {
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
-		model.addAttribute("success", "registercomplete");
+		model.addAttribute("msg_register", user);
 		return "redirect:/user/login.do";
 	}
 	
@@ -107,7 +108,7 @@ public class UserController {
 			session.setAttribute("user", login);
 		}else {
 			session.setAttribute("user", null);
-			model.addAttribute("msg", false);
+			return "redirect:/user/login.do";
 		}
 		return "redirect:/index.do";
 	}
@@ -166,21 +167,22 @@ public class UserController {
 	
 	//회원 관리 페이지
 	@RequestMapping(value = "user_management.do", method = RequestMethod.GET)
-	public String userManagement(UserCriteria cri, UserVO user, Model model) throws Exception{
+	public String userManagement(UserCriteria cri, UserVO user, Model model, HttpServletRequest request) throws Exception{
 		log.info("회원 정보 리스트");
-		/*
-		 * if(!session.getUserAuth == 'A') {
-		 * return "redirect:/index.do";
-		 * }else {
-		 * }
-		 */
-		 model.addAttribute("userList", uService.userInfo(cri));
-		 model.addAttribute("pageMaker", new UserPageDTO(cri, 10));
-		return "user/user_management";
+//		if((request.getSession().getAttribute("user_auth")).equals('U')) {
+//			return "redirect:/index.do";
+//		}else {
+			int total = uService.getTotal(cri);
+			model.addAttribute("userList", uService.userInfo(cri));
+			model.addAttribute("pageMaker", new UserPageDTO(cri, total));
+			return "user/user_management";
+//		}
+		
 	}
 	
 	//회원 정보 수정
 	@RequestMapping(value= "userAuth.do", method = RequestMethod.POST)
+	@ResponseBody
 	public String userAuth(HttpServletRequest request, UserVO user, Model model) throws Exception{
 		log.info("회원 권한 수정 : " +user);
 //

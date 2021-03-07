@@ -14,26 +14,20 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-
-<script type="text/javascript">
-// modal
-$(document).ready(function(){
-	var result = '<c:out value="${user.user_nm}"/>';
-	
-	// 	modal 
-	checkModal(result);
-	function checkModal(result){
-		//user_nm 값이 null일 경우 return;
-		if(result==='') {return;}
-		//result_nm 값이 있을 경우
-		if(result!=null){
-			alert(result + "님 로그인 완료");
-		}
-		$(".informModal").modal("show");
-	}
-
-});
-</script>
+<div>
+	<table>
+		<tr>
+			<c:forEach items="techList" var="techList">
+			
+			<td></td>
+			</c:forEach>
+		</tr>
+	</table>
+	<table>
+		<tr>
+		</tr>
+	</table>
+</div>
 
 <jsp:include page="../main/footer.jsp"/>
 </body>

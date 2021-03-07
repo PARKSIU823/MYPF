@@ -14,7 +14,7 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-<form method="post" action="/portfolio/pf_write.do">
+<form method="post" action="/portfolio/pf_write.do" enctype="multipart/form-data">
 	<div class="project">
 		<h3>PROJECT ADD</h3>
 		<input type="hidden" name="user_id" value="mypf01"/>
@@ -60,18 +60,94 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="bbtpos2">
-					<button type="submit" class="bbt">작성</button>
+					<button type="submit" class="bbt" id="uploadPf">작성</button>
 					<button type="reset" class="bbt">초기화</button>
 					<button type="button" class="bbt" onclick="location.href='/portfolio/pf_list.do'">목록</button>
 				</td>
 			</tr>
 		</table>
 	</div>
-	<div class="pf_thumb">
 	
+	<!-- 파일 업로드시 섬네일 출력 -->
+	<div class="pf_thumb">
+		<ul>
+		</ul>
 	</div>
+	
 </form>
 <script>
+$(document).ready(function(e){
+	
+	var formObj = $("form[role='form']");
+
+	//파일 업로드 처리
+	//이미지 파일만 업로드
+	var regex = new RegExp("/\.(jpg|gif|tif|bmp|png)$/i");
+	//파일 최대 크기5MB;
+	var maxSize = 5242880; 
+	
+	function checkExtenstion(fileName, fileSize) {
+		if(fileSize >= maxSize) {
+			alert("파일 크기 초과");
+			return false;
+		}
+		if(regex.test(fileName)) {
+			alert("이미지 파일만 업로드 가능합니다.");
+			return false;
+		}
+		return true;
+	}
+
+	$("#uploadPf").on("click", function(e){
+		var formData = new FormData();
+		var inputFile = $("input[name='file_nm']");
+		var files = inputFile[0].files;
+		console.log(files);
+		
+		for(var i = 0; i <files.length; i++) {{
+			if(!checkExtenstion(files[i].name, files[i].size)) {
+				return false;
+			}
+			formData.append("file_nm", files[i]);
+		}}
+		
+	})
+
+	$.ajax({
+		url:'/portfolio/pf_write.do';
+		,processData : false;
+		,contentType : false,data;
+		,dataType : 'json'
+		,formData, type : 'POST'
+		,success : function(result) {
+			alert("업로드 성공");
+// 			showUploadedFile(result);
+// 			$(".project").html(cloneObj.html());
+		}
+	});
+	//$.ajax 종료
+	$("buttin[type='submit']").on("click", function(e) {
+		e.preventDefault();
+		console.log("등록 버튼 클릭");
+	});
+});
+	
+	
+	
+// 	var cloneObj = $(".project").clone();
+	
+// 	//파일 섬네일 출력
+// 	var uploadResult = $(".pf_thumb ul");
+// 		function showUploadedFile(uploadResultArr) {
+// 			var str ="";
+// 			$(uploadResultArr).each(function(i, obj) {
+// 				var fileCallPath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.file_nm);
+// 				str += "<li><img src='/pfDisplay.do?file_nm="+fileCallPath"'><li>";
+// 			});
+// 			uploadResult.append(str);
+// 		}
+	
+// });
 </script>
 <jsp:include page="../main/footer.jsp"/>
 </body>

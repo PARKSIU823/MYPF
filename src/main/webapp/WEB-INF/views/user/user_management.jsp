@@ -96,10 +96,9 @@ $(document).ready(function(){
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		actionForm.submit();
 	})
-	
-	
-	
 });
+
+
 </script>
 <jsp:include page="../main/footer.jsp"/>
 </body>

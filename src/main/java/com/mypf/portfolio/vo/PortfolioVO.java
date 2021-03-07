@@ -1,6 +1,7 @@
 package com.mypf.portfolio.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -35,6 +36,9 @@ public class PortfolioVO {
 	private int hit;
 	private Date ins_dt;
 	private Date upt_dt;
+	
+	public List<PfFileVO> attachList;
+	
 	public String getUser_id() {
 		return user_id;
 	}

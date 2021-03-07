@@ -35,7 +35,16 @@
 			</table>
 		</form>
 	</div>
-
+	<script type="text/javascript">
+		
+		//
+		$(document).ready(function() {
+			var msgReg = '<c:out value="${msg_register}"/>"';
+			if(msgReg === '') {return;}
+			if(mgsReg != null) {alert (msgReg.user_nm+"님 회원 가입 완료");}
+			
+		});
+	</script>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

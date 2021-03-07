@@ -2,6 +2,7 @@ package com.mypf.user.service;
 
 import java.util.List;
 
+import com.mypf.tech.vo.Criteria;
 import com.mypf.user.vo.UserCriteria;
 import com.mypf.user.vo.UserVO;
 
@@ -28,6 +29,9 @@ public interface UserService {
 	
 	//정보 관리
 	public List<UserVO> userInfo(UserCriteria cri) throws Exception;
+	
+	//회원 리스트 전체 회원 수
+	public int getTotal(UserCriteria cri) throws Exception;
 	
 	//비밀번호 확인
 	public int chkPW(UserVO user) throws Exception;

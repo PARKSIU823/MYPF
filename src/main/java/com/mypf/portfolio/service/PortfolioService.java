@@ -15,8 +15,8 @@ public interface PortfolioService {
 	public PortfolioVO pfDetail(int prtfNum) throws Exception;
 	
 	//포폴 등록하기
-	public void pfAdd(PortfolioVO pf) throws Exception;
-//	public void pfAdd(PortfolioVO pf, PfFileVO pfFile) throws Exception;
+//	public void pfAdd(PortfolioVO pf) throws Exception;
+	public void pfAdd(PortfolioVO pf, PfFileVO pfFile) throws Exception;
 	
 	//포폴 수정하기
 	public boolean pfMod(PortfolioVO pf) throws Exception;

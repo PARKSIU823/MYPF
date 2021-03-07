@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mypf.mapper.UserMapper;
+import com.mypf.tech.vo.Criteria;
 import com.mypf.user.service.UserService;
 import com.mypf.user.vo.UserCriteria;
 import com.mypf.user.vo.UserVO;
@@ -103,6 +104,12 @@ public class UserServiceImpl implements UserService{
 	public List<UserVO> mUserInfoList() throws Exception {
 		log.info("관리자 소개");
 		return uMapper.mUserInfoList();
+	}
+
+	//회원 리스트 전체 회원 수
+	@Override
+	public int getTotal(UserCriteria cri) throws Exception {
+		return uMapper.getTotalCount(cri);
 	}
 
 }

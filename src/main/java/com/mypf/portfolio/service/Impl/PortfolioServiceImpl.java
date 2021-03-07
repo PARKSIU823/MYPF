@@ -42,8 +42,8 @@ public class PortfolioServiceImpl implements PortfolioService{
 
 	//포폴 등록하기
 	@Override
-	public void pfAdd(PortfolioVO pf) throws Exception {
-//	public void pfAdd(PortfolioVO pf, PfFileVO pfFile) throws Exception {
+//	public void pfAdd(PortfolioVO pf) throws Exception {
+	public void pfAdd(PortfolioVO pf, PfFileVO pfFile) throws Exception {
 		log.info("등록 : " + pf);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		Date frm_dt = new Date();
@@ -51,7 +51,7 @@ public class PortfolioServiceImpl implements PortfolioService{
 		pf.setFrm_dt(frm_dt);
 		pf.setTo_dt(to_dt);
 		pfMapper.pfAdd(pf);
-//		pfMapper.pfFileAdd(pfFile);
+		pfMapper.pfFileAdd(pfFile);
 	}
 
 	//포폴 수정하기

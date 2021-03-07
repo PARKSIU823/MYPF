@@ -2,6 +2,7 @@ package com.mypf.portfolio;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,12 +11,17 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mypf.portfolio.service.PortfolioService;
@@ -80,11 +86,13 @@ public class PortfolioController {
 	
 	//포트폴리오 게시판 글 작성
 	@RequestMapping(value="pf_write.do", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//	public String pfWrite(PortfolioVO pf, Model model)  throws Exception{
-//	public String pfWrite(PortfolioVO pf, PfFileVO pfFile, Model model, MultipartFile[] uploadFile)  throws Exception{
-	public String pfWrite(Model model, MultipartFile[] uploadFile)  throws Exception{
-		log.info("register" + uploadFile);
-//		log.info("register" + pf);
+	@ResponseBody
+	public ResponseEntity<List<PfFileVO>> pfWrite(PortfolioVO pf, PfFileVO pfFile, Model model, MultipartFile[] uploadFile)  throws Exception{
+//		public String pfWrite(PortfolioVO pf, PfFileVO pfFile, Model model, MultipartFile[] uploadFile)  throws Exception{
+		log.info("포트폴리오 작성 : " + pf);
+		log.info("포트폴리오 작성 : " + pfFile);
+		log.info("포트폴리오 작성 : " + uploadFile);
+		
 		//파일 업로드
 		List<PfFileVO> pfFileList = new ArrayList<>();
 		
@@ -105,6 +113,7 @@ public class PortfolioController {
 			//IE 파일 path 수정
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
 			log.info("File Name : "+ uploadFileName);
+			pfFileVO.setFileNm(uploadFileName);
 			
 			//중복방지 UUID 생성 후 파일 이름에 붙여넣기
 			UUID uuid = UUID.randomUUID();
@@ -129,12 +138,30 @@ public class PortfolioController {
 		}
 		
 //		pfService.pfAdd(pf);
-//		pfService.pfAdd(pf,pfFile);
-//		model.addAttribute("result", pf.getPrtf_num());
-//		model.addAttribute("fileResult", pfFile.getPrtfNum());
-		return "redirect:/portfolio/pf_read.do?prtf_num=\"+pf.getPrtf_num()";
+		pfService.pfAdd(pf,pfFile);
+		model.addAttribute("result", pf.getPrtf_num());
+		model.addAttribute("fileResult", pfFile.getPrtfNum());
+		return new ResponseEntity<>(pfFileList, HttpStatus.OK);
+//		return "redirect:/portfolio/pf_list.do";
 	}
 	
+	//포트폴리오 작성시 섬네일 보여주기
+	@RequestMapping(value="/pfDisplay.do", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<byte[]> getFile(String file_nm) {
+		log.info("파일 이름 : " + file_nm);
+		File file = new File("C:\\upload\\mypf\\"+file_nm);
+		log.info("파일 : " + file);
+		ResponseEntity<byte[]> result = null;
+		try {
+			HttpHeaders header = new HttpHeaders();
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			result= new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	//포트폴리오 게시판 글 수정 페이지
 	@RequestMapping(value = "pf_modify.do", method = RequestMethod.GET)
 	public String pfModForm(@RequestParam("prtf_num") int prtf_num, Model model) throws Exception{

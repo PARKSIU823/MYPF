@@ -133,11 +133,21 @@
 				,user_mail
 				,user_auth
 			FROM user_info
-			WHERE rownum <= #{pageNum} * #{amount}
+			WHERE
+			 rownum <= #{pageNum} * #{amount}
 			)
 		WHERE rn> (#{pageNum} -1 ) * #{amount}
 		ORDER BY rn DESC
 	]]>
+<!-- 			<if test="type == 'user_id'.toString()"> -->
+<!-- 				(user_id like '%'||#{keyword}||'%') AND -->
+<!-- 			</if> -->
+<!-- 			<if test="type == 'user_nm'.toString()"> -->
+<!-- 				(user_nm like '%'||#{keyword}||'%') AND -->
+<!-- 			</if> -->
+<!-- 			<if test="type == 'user_mail'.toString()"> -->
+<!-- 				(user_mail like '%'||#{keyword}||'%') AND -->
+<!-- 			</if> -->
 </select>
 
 <!-- 로그인 -->
@@ -169,5 +179,10 @@
 		WHERE user_id = #{user_id}
 			AND user_pw = #{user_pw}
 	]]>
+</select>
+
+<!-- 회원 리스트 전체 회원 수 -->
+<select id="getTotalCount" resultType="int">
+	SELECT COUNT(*) FROM user_info where user_count > 0
 </select>
 </mapper>

@@ -177,6 +177,7 @@
 			}
 		})
 	}
+	
 	</script>
 <jsp:include page="../main/footer.jsp"/>
 </body>

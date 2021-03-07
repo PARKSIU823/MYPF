@@ -20,6 +20,7 @@ public class PfFileVO {
 	private String userId;
 	private int prtfNum;
 	private String fileNm;
+	private String uuid;
 	private int fileNum;
 	private String filePath;
 	private Date insDt;

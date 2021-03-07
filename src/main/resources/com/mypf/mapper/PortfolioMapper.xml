@@ -121,4 +121,41 @@
 	DELETE FROM PRTF_BOARD
 	WHERE prtf_num = #{prtf_num}
 </delete>
+
+<!-- 포폴 파일 등록 -->
+<insert id ="pfFileAdd">
+	<![CDATA[
+		INSERT INTO prtf_file (
+			uuid
+			,file_path
+			,file_nm
+			,file_num
+			,int_dt
+			,prtf_num
+			,user_id
+		) VALUES (
+			#{uuid}
+			,#{file_path}
+			,#{file_nm}
+			,#{file_num}
+			,sysdate
+			,#{prtf_num}
+			,#{user_id} )
+	]]>
+</insert>
+
+<!-- 포폴 파일 삭제  -->
+<delete id="pfFileDelete">
+	<![CDATA[
+		DELETE FROM prtf_file
+		WHERE uuid = #{uuid}
+	]]>
+</delete>
+
+<!-- 파일 리스트 -->
+<select id ="findByPrtfNum" resultType="com.mypf.portfolio.vo.PfFileVO">
+	<![CDATA[
+		SELECT * FROM prtf_file WHERE prft_num = #{prft_num}
+	]]>
+</select>
 </mapper>

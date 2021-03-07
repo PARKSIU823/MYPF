@@ -296,7 +296,77 @@ ul { list-style:none;}
 </script>
 </head>
 <body>
-<jsp:include page="../main/header.jsp"/>
+<header>
+	<div class="navi">
+		<table>
+			<tr>
+				<td rowspan="2"><h1 class="pagename menu"><a href="<c:url value='/index.do'/>">MY PORTFOLIO</a></h1></td>
+				<td>
+					<ul>
+						<c:if test="${user == null }">
+						<li class="menu"><a href="<c:url value='/user/login.do'/>">로그인</a></li>
+						<li class="menu"><a href="<c:url value='/user/register.do'/>">회원가입</a></li>
+						</c:if>
+						<c:if test="${user != null }">
+						<li class="menu">${user.user_nm }님 </li>
+						<li class="menu"><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
+						<li class="menu"><a href="<c:url value='/user/modify.do'/>">정보관리</a></li>
+						</c:if>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<ul>
+						<li class="menu"><a href="<c:url value='/index.do'/>">MAIN</a></li>
+						<li class="menu"><a href="<c:url value='/user/information.do'/>">INFORMATION</a></li>
+						<li class="menu"><a href="<c:url value='/portfolio/pf_list.do'/>">PORTFOLIO</a></li>
+						<li class="menu"><a href="<c:url value='/tech/tech_list.do'/>">TECHNOLOGY</a></li>
+						<!-- session의 유저 권한이 A(관리자/admin)가 아닌 경우 문의는 문의하기로 이동 -->
+						<c:if test="${user.user_auth ne 'A'.charAt(0)  }">
+						<li class="menu"><a href="<c:url value='/ask/ask_write.do'/>">INQUERY</a></li>
+						</c:if>
+						<!-- session의 유저 권한이 A(관리자/admin)인 경우, 문의는 문의 내역으로 이동. 회원 관리 메뉴 생성 -->
+						<c:if test="${user.user_auth eq 'A'.charAt(0) }">
+						<li class="menu"><a href="<c:url value='/ask/ask_list.do'/>">INQUERY</a></li>
+						<li class="menu"><a href="<c:url value='/user/user_management.do'/>">MANAGEMENT</a></li>
+						</c:if>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+		<!-- 	modal 추가 -->
+	<div class="modal_wrap" class="informModal">
+		<div class="modal_header">
+			<button type="button" class="modal_close" data-dismiss="modal">&times;</button>
+		</div>
+		<div class="modal_body">
+			처리가 완료되었습니다.
+		</div>
+		<div class="modal_footer"></div>
+	</div>
+</header>
+
+<script type="text/javascript">
+// modal
+$(document).ready(function(){
+	var result = '<c:out value="${user.user_nm}"/>';
+	
+	// 	modal 
+	checkModal(result);
+	function checkModal(result){
+		//user_nm 값이 null일 경우 return;
+		if(result==='') {return;}
+		//result_nm 값이 있을 경우
+		if(result!=null){
+			alert(result + "님 로그인 완료");
+		}
+		$(".informModal").modal("show");
+	}
+
+});
+</script>
 	<div class="row">
 	</div>
 		<section id="techDetail">

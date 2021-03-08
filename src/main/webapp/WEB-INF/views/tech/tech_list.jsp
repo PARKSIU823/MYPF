@@ -55,10 +55,11 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 <div class="tech">
-	<h3>기술 게시판</h3>
+	<h3><a href="tech_list.do">기술 게시판</a></h3>
 	<table class="tlist" style="text-align: center">
  		<tr>
  			<th class="underline title01">번호</th>
+ 			<th class="underline title01">카테고리</th>
  			<th class="underline title01">제목</th>
  			<th class="underline title01">이름</th>
  			<th class="underline title01">작성일</th>
@@ -68,9 +69,10 @@
  			<c:forEach items="${list }" var="board">
  				<tr>
  					<td class="title02"><c:out value="${board.tech_num}" /></td>
+ 					<td class="title02"><c:out value="[${board.tech_category }]" /></td>
  					<td class="title02" style="text-align: left;">
  						<a class='move' href='<c:out value="${board.tech_num }"/>'>
-						<c:out value="[${board.tech_category }]${board.tech_title}" /></a></td>
+						<c:out value="${board.tech_title}" /></a></td>
  					<td class="title02"><c:out value="${board.user_id}" /></td>
  					<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.ins_dt}" /></td>
  					<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.upt_dt}" /></td>
@@ -78,10 +80,10 @@
 		 		</tr>
  		</c:forEach>
 		 		<tr>
- 					<td colspan="6" class="underline"></td>
+ 					<td colspan="7" class="underline"></td>
  				</tr>
  			<tr>
-					<td colspan="6">
+					<td colspan="7">
 						<input type="button" class="bbt" value="글작성" style="float: right;" onclick="location.href='tech_write.do'">
 					</td>
 			</tr>
@@ -89,13 +91,13 @@
 	
 	<div class='searcht'>
 			<form id='searchForm' action='tech_list.do' method='get'>
-				<select name='type'>
+				<select class='sOpt' name='type'>
 					<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected' :'' }"/>>제목</option>
 					<option value="U" <c:out value="${pageMaker.cri.type eq 'U'?'selected' :'' }"/>>이름</option>
 					<option value="G" <c:out value="${pageMaker.cri.type eq 'G'?'selected' :'' }"/>>카테고리</option>
-					<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected' :'' }"/>>내용</option>
+					<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected' :'' }"/>>내용</option>		
 				</select>
-				<input type='text' placeholder="키워드를 입력하세요." name='keyword' value='<c:out value="${pageMaker.cri.keyword }"/>' />
+				<input class='underline' type='text' placeholder="키워드를 입력하세요." name='keyword' value='<c:out value="${pageMaker.cri.keyword }"/>' />
 				<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum }"/>' />
 				<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount }"/>' />
 				<button class='bbt'>검색</button>

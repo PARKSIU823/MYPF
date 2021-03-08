@@ -89,7 +89,7 @@ a {color:BLACK; text-decoration: none;}
 .tech .tlist .underline {border-bottom : 1px solid BLACK;}
 .tech .tlist .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
 .tech .searcht {width:70%; border-spacing: 5px; margin-left: auto; margin-right:auto;}
-.tech .searcht .underline {width : 70%;  border : 0px solid black; border-bottom: 1px solid black;}
+.tech .searcht .underline {width : 20%;  border : 0px solid black; border-bottom: 1px solid black;}
 .tech .searcht .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
 .tech .searcht .sOpt {vertical-align: middle; text-align-last: center; width:100px; padding : 3px; border : 1px solid black; border-radius:0px;}
 

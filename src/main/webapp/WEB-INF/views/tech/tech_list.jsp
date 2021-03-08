@@ -26,6 +26,14 @@
 			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 			actionForm.submit();
 		})
+		
+		$(".move").on("click", function(e){
+			
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='tech_num' value='"+$(this).attr("href")+"'>");
+			actionForm.attr("action", "tech_detail.do");
+			actionForm.submit();
+		})
 	});
 </script>
 </head>
@@ -46,8 +54,8 @@
  				<tr>
  					<td class="title02"><c:out value="${board.tech_num}" /></td>
  					<td class="title02" style="text-align: left;">
- 						<a href='tech_detail.do?tech_num=<c:out value="${board.tech_num }"/>'>
- 						<c:out value="[${board.tech_category }]${board.tech_title}" /></a></td>
+ 						<a class='move' href='<c:out value="${board.tech_num }"/>'>
+						<c:out value="[${board.tech_category }]${board.tech_title}" /></a></td>
  					<td class="title02"><c:out value="${board.user_id}" /></td>
  					<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.ins_dt}" /></td>
  					<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.upt_dt}" /></td>

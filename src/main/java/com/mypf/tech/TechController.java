@@ -28,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,29 +86,33 @@ public class TechController {
 	
 	// 기술 게시판 글 상세 조회
 	@RequestMapping(value="tech_detail.do")
-	public void techDetail(@RequestParam("tech_num") int tech_num, Model model) throws Exception {
+	public void techDetail(@RequestParam("tech_num") int tech_num, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 		model.addAttribute("board", service.techDetail(tech_num));
 		service.updateHit(tech_num);
 	}
 	
 	// 기술 게시판 글 수정 화면
 	@RequestMapping(value="tech_modify.do", method=RequestMethod.GET)
-	public void techMod(@RequestParam("tech_num") int tech_num, Model model) throws Exception {
+	public void techMod(@RequestParam("tech_num") int tech_num, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 		model.addAttribute("board", service.techDetail(tech_num));
 	}
 	
 	// 기술 게시판 글 수정
 	@RequestMapping(value="tech_modify.do", method=RequestMethod.POST)
-	public String techMod(TechVO techVO, RedirectAttributes rttr) throws Exception {
+	public String techMod(TechVO techVO, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) throws Exception {
 		if (service.techMod(techVO)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		
 		return "redirect:tech_list.do";
 	}
 	
 	// 기술 게시판 글 삭제
 	@RequestMapping(value="tech_del.do", method=RequestMethod.POST)
-	public String techDel(@RequestParam("tech_num") int tech_num, Criteria cri, RedirectAttributes rttr) throws Exception {
+	public String techDel(@RequestParam("tech_num") int tech_num, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) throws Exception {
 		log.info("delete ... " + tech_num);
 		List<TechFileVO> fileList = service.getFileList(tech_num);
 		if (service.techDel(tech_num)) {
@@ -115,6 +120,9 @@ public class TechController {
 			deleteFiles(fileList);
 			rttr.addFlashAttribute("result", "success");
 		}
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		
 		return "redirect:tech_list.do" + cri.getListLink();
 	}
 	

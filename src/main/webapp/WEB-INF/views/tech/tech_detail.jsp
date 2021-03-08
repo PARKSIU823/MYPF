@@ -294,6 +294,25 @@ ul { list-style:none;}
 		});
 		*/
 </script>
+<script>
+	$(document).ready(function(){
+		
+		var openForm = $("#openForm");
+		
+		$("button[data-oper='tech_modify.do']").on("click", function(e){
+			
+			openForm.attr("action", "tech_modify.do").submit();
+			
+		});
+		
+		$("button[data-oper='tech_list.do']").on("click", function(e){
+			
+			openForm.find("#tech_num").remove();
+			openForm.attr("action", "tech_list.do");
+			openForm.submit();
+		})
+	})
+</script>
 </head>
 <body>
 <header>
@@ -373,7 +392,11 @@ $(document).ready(function(){
 		<div class="tech">
 		<h3>기술게시판</h3>
 <!-- 		<h3 style="text-align: center;">기술 게시판</h3> -->
-		<input type="hidden" id="techNum" name="tech_num" value="${board.tech_num}" />
+		<form id='openForm' action="tech_modify.do" method="get">
+		<input type='hidden' id='techNum' name='tech_num' value='<c:out value="${board.tech_num}"/>'>
+		<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+		<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
+		</form>
 			<!-- 본문 글 시작 -->
 			<table class="tboard">
 <!-- 			<table class="tech" border=1> -->
@@ -419,8 +442,8 @@ $(document).ready(function(){
 					</tr>
 					<tr>
 						<td class="bbtpos1">
-							<button data-oper='tech_modify.do' class="bbt" onclick="location.href='tech_modify.do?tech_num=<c:out value="${board.tech_num}"/>'">수정</button>
-							<button data-oper='tech_list.do' class="bbt" onclick="location.href='tech_list.do'">목록</button>
+							<button data-oper='tech_modify.do' class="bbt">수정</button>
+							<button data-oper='tech_list.do' class="bbt">목록</button>
 						</td>
 					</tr>		
 				</tbody>

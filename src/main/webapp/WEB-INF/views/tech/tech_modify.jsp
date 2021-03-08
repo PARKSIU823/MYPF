@@ -147,7 +147,10 @@ $(document).ready(function(){
 	if(operation === 'tech_del.do'){
 		formObj.attr("action", "tech_del.do");
 	}else if(operation === 'tech_list.do'){
+		//move to list
 		formObj.attr("action", "tech_list.do").attr("method","get");
+		var pageNumTag = $("input[name='pageNum']").clone();
+		var amountTag = $("input[name='amount']").clone();
 	}else if(operation === 'tech_modify.do') {
 		console.log("submit clicked");
 		var str = "";
@@ -178,6 +181,8 @@ $(document).ready(function(){
 	<section id="techDetail">
 		<form action="tech_modify.do" method="post">
 			<input type="hidden" name="tech_num" value="${board.tech_num}" />
+			<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+			<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
 					<table class="wform">
 						<tbody>
 							<tr>

@@ -34,6 +34,21 @@
 			actionForm.attr("action", "tech_detail.do");
 			actionForm.submit();
 		})
+		
+		var searchForm = $("#searchForm");
+		
+		$("#searchForm button").on("click", function(e){
+			
+			if(!searchForm.find("input[name='keyword']").val()){
+				alert("키워드를 입력하세요.");
+				return false;
+			}
+			
+			searchForm.find("input[name='pageNum']").val("1");
+			e.preventDefault();
+			
+			searchForm.submit();
+		})
 	});
 </script>
 </head>
@@ -71,9 +86,26 @@
 					</td>
 			</tr>
 	</table>
+	
+	<div class='searcht'>
+			<form id='searchForm' action='tech_list.do' method='get'>
+				<select name='type'>
+					<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected' :'' }"/>>제목</option>
+					<option value="U" <c:out value="${pageMaker.cri.type eq 'U'?'selected' :'' }"/>>이름</option>
+					<option value="G" <c:out value="${pageMaker.cri.type eq 'G'?'selected' :'' }"/>>카테고리</option>
+					<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected' :'' }"/>>내용</option>
+				</select>
+				<input type='text' placeholder="키워드를 입력하세요." name='keyword' value='<c:out value="${pageMaker.cri.keyword }"/>' />
+				<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum }"/>' />
+				<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount }"/>' />
+				<button class='bbt'>검색</button>
+			</form>
+	</div>
 	<form id='actionForm' action="tech_list.do" method='get'>
 		<input type='hidden' name='pageNum' value = '${pageMaker.cri.pageNum }'>
 		<input type='hidden' name='amount' value = '${pageMaker.cri.amount }'>
+		<input type='hidden' name='type' value = '<c:out value="${pageMaker.cri.type }"/>'>
+		<input type='hidden' name='keyword' value = '<c:out value="${pageMaker.cri.keyword }"/>'>
 	</form>
 	<div class='paging' style="margin: 0 auto; width:70%; border: 3px">
 		<ul class="pagination">

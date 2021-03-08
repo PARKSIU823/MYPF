@@ -104,10 +104,7 @@ public class TechController {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		
-		return "redirect:tech_list.do";
+		return "redirect:tech_list.do" + cri.getListLink();
 	}
 	
 	// 기술 게시판 글 삭제
@@ -120,8 +117,6 @@ public class TechController {
 			deleteFiles(fileList);
 			rttr.addFlashAttribute("result", "success");
 		}
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
 		
 		return "redirect:tech_list.do" + cri.getListLink();
 	}

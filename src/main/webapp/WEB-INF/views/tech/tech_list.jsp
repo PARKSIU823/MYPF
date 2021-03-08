@@ -58,13 +58,13 @@
 	<h3><a href="tech_list.do">기술 게시판</a></h3>
 	<table class="tlist" style="text-align: center">
  		<tr>
- 			<th class="underline title01">번호</th>
- 			<th class="underline title01">카테고리</th>
- 			<th class="underline title01">제목</th>
- 			<th class="underline title01">이름</th>
- 			<th class="underline title01">작성일</th>
- 			<th class="underline title01">수정일</th>
- 			<th class="underline title01">조회</th>
+ 			<th class="underline title01" style="width:100px">번호</th>
+ 			<th class="underline title01" style="width:150px">카테고리</th>
+ 			<th class="underline title01" style="width:450px">제목</th>
+ 			<th class="underline title01" style="width:150px">이름</th>
+ 			<th class="underline title01" style="width:200px">작성일</th>
+ 			<th class="underline title01" style="width:200px">수정일</th>
+ 			<th class="underline title01" style="width:100px">조회</th>
  		</tr>
  			<c:forEach items="${list }" var="board">
  				<tr>

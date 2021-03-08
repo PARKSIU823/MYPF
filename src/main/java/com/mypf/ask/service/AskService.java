@@ -5,6 +5,7 @@ import java.util.List;
 import com.mypf.ask.vo.AskCommVO;
 import com.mypf.ask.vo.AskVO;
 import com.mypf.ask.vo.Criteria;
+import com.mypf.ask.vo.SearchCriteria;
 /* 문의 게시판 서비스 */
 public interface AskService {
 
@@ -12,10 +13,10 @@ public interface AskService {
 	public void sendAsk(AskVO askVO) throws Exception;
 	
 	// 문의 게시판 글 목록
-	public List<AskVO> askList(Criteria cri) throws Exception;
+	public List<AskVO> askList(SearchCriteria scri) throws Exception;
 
 	// 문의 게시판 글 총 갯수
-	public int askCount() throws Exception;
+	public int askCount(SearchCriteria scri) throws Exception;
 	
 	// 문의 게시판 문의 조회
 	public AskVO askDetail(int ask_num) throws Exception;

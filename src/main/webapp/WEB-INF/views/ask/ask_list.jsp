@@ -33,7 +33,7 @@
 					<th class="underline title01" style="width:100px">번호</th>
 					<th class="underline title01" style="width:450px">제목</th>
 					<th class="underline title01" style="width:200px">이름</th>
-					<th class="underline title01" style="width:100px">답변여부</th>		
+					<th class="underline title01" style="width:100px">답변 여부</th>		
 					<th class="underline title01" style="width:200px">작성일</th>
 				</thead>
 					<c:forEach items="${list}" var="list">
@@ -56,6 +56,7 @@
 				<option value="T"<c:out value="${scri.searchType eq 'T' ? 'selected': ''}"/>>제목</option>
 				<option value="W"<c:out value="${scri.searchType eq 'W' ? 'selected': ''}"/>>이름</option>
 				<option value="C"<c:out value="${scri.searchType eq 'C' ? 'selected': ''}"/>>내용</option>
+				<option value="Y"<c:out value="${scri.searchType eq 'C' ? 'selected': ''}"/>>답변 여부</option>
 			</select>
 			<input class="underline" type="text" placeholder="키워드를 입력하세요." name="keyword" id="keywordInput" value="${scri.keyword }"/>
 			<button id="searchBtn" class="bbt" type="button">검색</button>

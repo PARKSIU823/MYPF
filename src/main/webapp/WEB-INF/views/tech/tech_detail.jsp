@@ -526,8 +526,8 @@ $(document).ready(function(){
 			<!-- 댓글 등록 -->
 			<div class='row'>
 					<div class="heading">
-							<label class="title">Reply</label>
-						<button id='addReplyBtn' class="bbt">댓글등록</button>
+							<label class="title">댓글</label>
+						<button id='addReplyBtn' class="bbt">등록</button>
 		<!-- 						<button id='addReplyBtn' style="float: right;">댓글등록</button> -->
 					</div>
 					<div class="body">

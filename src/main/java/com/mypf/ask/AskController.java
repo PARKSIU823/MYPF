@@ -14,6 +14,7 @@ import com.mypf.ask.vo.AskCommVO;
 import com.mypf.ask.vo.AskVO;
 import com.mypf.ask.vo.Criteria;
 import com.mypf.ask.vo.PageMaker;
+import com.mypf.ask.vo.SearchCriteria;
 
 import lombok.extern.log4j.Log4j;
 /* 문의 게시판 컨트롤러 */
@@ -39,12 +40,12 @@ public class AskController {
 	
 	// 문의 게시판 글 목록
 	@RequestMapping(value="ask_list.do", method = RequestMethod.GET)
-	public String askList(Criteria cri, HttpServletRequest request, Model model) throws Exception {
-		model.addAttribute("list",askService.askList(cri));
+	public String askList(SearchCriteria scri, HttpServletRequest request, Model model) throws Exception {
+		model.addAttribute("list",askService.askList(scri));
 		
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(askService.askCount());
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(askService.askCount(scri));
 		
 		model.addAttribute("pageMaker", pageMaker);
 		return "ask/ask_list";

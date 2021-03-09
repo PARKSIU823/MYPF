@@ -27,6 +27,7 @@
 .bigPicture { position: relative; display:flex; justify-content:center; align-items: center; }
 .bigPicture img { width:600px; }
 ul { list-style:none;}
+.paging	.page-item {list-style: none; float: left; padding: 6px; font-family:'Nanum Gothic', sans-serif; font-weight: bold;}
 </style>
 <script>
 	$(document).ready(function(){
@@ -100,11 +101,22 @@ ul { list-style:none;}
 		
 		// 댓글 목록 처리
 		function showList(page){
-			replyService.getList({tech_num:tech_numValue, page:page|| 1 }, function(list){
+			console.log("show list : " + page);
+			replyService.getList({tech_num:tech_numValue, page:page|| 1 }, function(commCnt, list){
+				
+				console.log("commCnt : " + commCnt);
+				console.log("list : " + list);
+				console.log(list);
+				
+				if(page == -1) {
+					pageNum = Math.ceil(commCnt/10.0);
+					showList(pageNum);
+					return;
+				}
+				
 				var str="";
+				
 				if(list == null || list.length == 0 ) {
-					replyUL.html("");
-					
 					return;
 				}
 				for (var i = 0, len = list.length || 0; i < len; i++) {
@@ -119,11 +131,73 @@ ul { list-style:none;}
 						str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
 						str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
 						str += " <p>"+list[i].comm_con+"</p></div></li>";
-					}	
+					}
 				}
 				replyUL.html(str);
-			});
+				
+				showCommPage(commCnt);
+			});// end function
+			
+		} // end showList
+		
+		var pageNum = 1;
+		var commPageFooter = $(".footer");
+		
+		// 댓글 페이지 번호 출력
+		function showCommPage(commCnt) {
+			
+			var endNum = Math.ceil(pageNum / 10.0) * 10;
+			var startNum = endNum - 9;
+			
+			var prev = startNum != 1;
+			var next = false;
+			
+			if(endNum * 10 >= commCnt) {
+				endNum = Math.ceil(commCnt/10.0);
+			}
+			
+			if(endNum * 10 < commCnt) {
+				next = true;
+			}
+			
+			var str = "<ul class='paging'>";
+			
+			if(prev) {
+				str += "<li class='page-item'><a class='page-link' href='"+(startNum -1)+"'>이전</a></li>";
+			}
+			
+			for(var i = startNum ; i <= endNum; i++) {
+				
+				var active = pageNum == i? "active":"";
+				
+				str += "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+			}
+			
+			if(next) {
+				str += "<li class='page-item'><a class='page-link' href='"+(endNum + 1)+"'>다음</a></li>";
+			}
+			
+			str += "</ul></div>";
+			
+			console.log(str);
+			
+			commPageFooter.html(str);
 		}
+		
+		// 페이지의 번호를 클릭했을 때 새로운 댓글 불러오기
+		commPageFooter.on("click", "li a", function(e){
+			e.preventDefault();
+			console.log("page click");
+			
+			var targetPageNum = $(this).attr("href");
+			
+			console.log("targetPageNum : " + targetPageNum);
+			
+			pageNum = targetPageNum;
+			
+			showList(pageNum);
+		});
+		
 		//  새로운 댓글 추가 처리
 		var modal = $(".modal");
 		var modalInputComm_con = modal.find("textarea[name='comm_con']");
@@ -164,7 +238,8 @@ ul { list-style:none;}
 				modal.find("textarea").val("");
 				modal.modal("hide");
 				
-				showList(1);
+				//showList(1);
+				showList(-1);
 			})
 		})
 		// 댓글 조회 클릭 이벤트 처리
@@ -225,7 +300,8 @@ ul { list-style:none;}
 				modal.find("textarea").val("");
 				modal.modal("hide");
 				
-				showList(1);
+				//showList(1);
+				showList(pageNum);
 			})
 		});
 		
@@ -235,7 +311,7 @@ ul { list-style:none;}
 			replyService.update(reply, function(result){
 				alert(result);
 				modal.modal("hide");
-				showList(1);
+				showList(pageNum);
 			});
 		});
 		// 댓글의 삭제 이벤트 처리
@@ -244,13 +320,12 @@ ul { list-style:none;}
 			replyService.remove(comm_num, function(result){
 				alert(result);
 				modal.modal('hide');
-				showList(1);
+				showList(pageNum);
 				modal.find("input").val("");
 				modal.find("textarea").val("");
 			});
 		});
 		});
-		
 		/*
 		//for replyService add test
 		
@@ -293,6 +368,25 @@ ul { list-style:none;}
 		});
 		});
 		*/
+</script>
+<script>
+	$(document).ready(function(){
+		
+		var openForm = $("#openForm");
+		
+		$("button[data-oper='tech_modify.do']").on("click", function(e){
+			
+			openForm.attr("action", "tech_modify.do").submit();
+			
+		});
+		
+		$("button[data-oper='tech_list.do']").on("click", function(e){
+			
+			openForm.find("#tech_num").remove();
+			openForm.attr("action", "tech_list.do");
+			openForm.submit();
+		})
+	})
 </script>
 </head>
 <body>
@@ -367,13 +461,16 @@ $(document).ready(function(){
 
 });
 </script>
-	<div class="row">
-	</div>
-		<section id="techDetail">
-		<div class="tech">
+	<div class="tech">
 		<h3>기술게시판</h3>
 <!-- 		<h3 style="text-align: center;">기술 게시판</h3> -->
-		<input type="hidden" id="techNum" name="tech_num" value="${board.tech_num}" />
+		<form id='openForm' action="tech_modify.do" method="get">
+			<input type='hidden' id='techNum' name='tech_num' value='<c:out value="${board.tech_num}"/>'>
+			<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+			<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
+			<input type='hidden' name='keyword' value='<c:out value="${cri.keyword }"/>'>
+			<input type='hidden' name='type' value='<c:out value="${cri.type }"/>'>
+		</form>
 			<!-- 본문 글 시작 -->
 			<table class="tboard">
 <!-- 			<table class="tech" border=1> -->
@@ -419,8 +516,8 @@ $(document).ready(function(){
 					</tr>
 					<tr>
 						<td class="bbtpos1">
-							<button data-oper='tech_modify.do' class="bbt" onclick="location.href='tech_modify.do?tech_num=<c:out value="${board.tech_num}"/>'">수정</button>
-							<button data-oper='tech_list.do' class="bbt" onclick="location.href='tech_list.do'">목록</button>
+							<button data-oper='tech_modify.do' class="bbt">수정</button>
+							<button data-oper='tech_list.do' class="bbt">목록</button>
 						</td>
 					</tr>		
 				</tbody>
@@ -428,10 +525,9 @@ $(document).ready(function(){
 			<!-- 글 테이블 종료 -->
 			<!-- 댓글 등록 -->
 			<div class='row'>
-					<div class="default">
 					<div class="heading">
-							<label class="title">Reply</label>
-						<button id='addReplyBtn' class="bbt">댓글등록</button>
+							<label class="title">댓글</label>
+						<button id='addReplyBtn' class="bbt">등록</button>
 		<!-- 						<button id='addReplyBtn' style="float: right;">댓글등록</button> -->
 					</div>
 					<div class="body">
@@ -439,17 +535,19 @@ $(document).ready(function(){
 							<li class="left clearfix" data-comm_num='12'>
 								<div>
 									<div class="header">
-										<strong class="primary-font">user00</strong>
-										<small class="pull-right text-muted">2021-0202 13:13</small>
+										<strong class="primary-font"></strong>
+										<small class="pull-right text-muted"></small>
 									</div>
-									<p>안녕!</p>
+									<p></p>
 								</div>
 							</li>					
 						</ul>
 					</div>
-				</div>	
+					<div class="footer">
+					
+					</div>
+			</div>
 		</div>
-	</section>
 <!-- 		</div> -->
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 

@@ -26,28 +26,53 @@
 			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 			actionForm.submit();
 		})
+		
+		$(".move").on("click", function(e){
+			
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='tech_num' value='"+$(this).attr("href")+"'>");
+			actionForm.attr("action", "tech_detail.do");
+			actionForm.submit();
+		})
+		
+		var searchForm = $("#searchForm");
+		
+		$("#searchForm button").on("click", function(e){
+			
+			if(!searchForm.find("input[name='keyword']").val()){
+				alert("키워드를 입력하세요.");
+				return false;
+			}
+			
+			searchForm.find("input[name='pageNum']").val("1");
+			e.preventDefault();
+			
+			searchForm.submit();
+		})
 	});
 </script>
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
 <div class="tech">
-	<h3>기술 게시판</h3>
+	<h3><a href="tech_list.do">기술 게시판</a></h3>
 	<table class="tlist" style="text-align: center">
  		<tr>
- 			<th class="underline title01">번호</th>
- 			<th class="underline title01">제목</th>
- 			<th class="underline title01">이름</th>
- 			<th class="underline title01">작성일</th>
- 			<th class="underline title01">수정일</th>
- 			<th class="underline title01">조회</th>
+ 			<th class="underline title01" style="width:100px">번호</th>
+ 			<th class="underline title01" style="width:150px">카테고리</th>
+ 			<th class="underline title01" style="width:450px">제목</th>
+ 			<th class="underline title01" style="width:150px">이름</th>
+ 			<th class="underline title01" style="width:200px">작성일</th>
+ 			<th class="underline title01" style="width:200px">수정일</th>
+ 			<th class="underline title01" style="width:100px">조회</th>
  		</tr>
  			<c:forEach items="${list }" var="board">
  				<tr>
  					<td class="title02"><c:out value="${board.tech_num}" /></td>
+ 					<td class="title02"><c:out value="${board.tech_category }" /></td>
  					<td class="title02" style="text-align: left;">
- 						<a href='tech_detail.do?tech_num=<c:out value="${board.tech_num }"/>'>
- 						<c:out value="[${board.tech_category }]${board.tech_title}" /></a></td>
+ 						<a class='move' href='<c:out value="${board.tech_num }"/>'>
+						<c:out value="${board.tech_title}" />&nbsp;<b>[<c:out value="${board.commCnt }" />]</b></a></td>
  					<td class="title02"><c:out value="${board.user_id}" /></td>
  					<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.ins_dt}" /></td>
  					<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.upt_dt}" /></td>
@@ -55,17 +80,34 @@
 		 		</tr>
  		</c:forEach>
 		 		<tr>
- 					<td colspan="6" class="underline"></td>
+ 					<td colspan="7" class="underline"></td>
  				</tr>
  			<tr>
-					<td colspan="6">
+					<td colspan="7">
 						<input type="button" class="bbt" value="글작성" style="float: right;" onclick="location.href='tech_write.do'">
 					</td>
 			</tr>
 	</table>
+	
+	<div class='searcht'>
+			<form id='searchForm' action='tech_list.do' method='get'>
+				<select class='sOpt' name='type'>
+					<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected' :'' }"/>>제목</option>
+					<option value="U" <c:out value="${pageMaker.cri.type eq 'U'?'selected' :'' }"/>>이름</option>
+					<option value="G" <c:out value="${pageMaker.cri.type eq 'G'?'selected' :'' }"/>>카테고리</option>
+					<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected' :'' }"/>>내용</option>		
+				</select>
+				<input class='underline' type='text' placeholder="키워드를 입력하세요." name='keyword' value='<c:out value="${pageMaker.cri.keyword }"/>' />
+				<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum }"/>' />
+				<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount }"/>' />
+				<button class='bbt'>검색</button>
+			</form>
+	</div>
 	<form id='actionForm' action="tech_list.do" method='get'>
 		<input type='hidden' name='pageNum' value = '${pageMaker.cri.pageNum }'>
 		<input type='hidden' name='amount' value = '${pageMaker.cri.amount }'>
+		<input type='hidden' name='type' value = '<c:out value="${pageMaker.cri.type }"/>'>
+		<input type='hidden' name='keyword' value = '<c:out value="${pageMaker.cri.keyword }"/>'>
 	</form>
 	<div class='paging' style="margin: 0 auto; width:70%; border: 3px">
 		<ul class="pagination">

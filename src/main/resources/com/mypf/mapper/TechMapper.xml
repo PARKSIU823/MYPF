@@ -8,26 +8,60 @@
 		select * from tech_board where tech_num > 0
 	</select>
 	
+	<sql id="criteria">
+			<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+				<foreach item='type' collection="typeArr">
+					<trim prefix="OR">
+						<choose>
+							<when test="type == 'U'.toString()">
+								user_id like '%'||#{keyword}||'%'
+							</when>
+							<when test="type == 'G'.toString()">
+								tech_category like '%'||#{keyword}||'%'
+							</when>
+							<when test="type == 'T'.toString()">
+								tech_title like '%'||#{keyword}||'%'
+							</when>
+							<when test="type == 'C'.toString()">
+								tech_con like '%'||#{keyword}||'%'
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+		</sql>
+	
 	<!-- 기술게시판 목록 페이징 -->
 	<select id="getListWithPaging" resultType="com.mypf.tech.vo.TechVO">
 		<![CDATA[
-			select
-				tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit
-			from
+		select
+			tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit, commcnt
+		from
 			(
-				select /*+INDEX_DESC(tech_board pk_tech_board)*/
-					rownum rn, tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit
-				from
-					tech_board
-			where rownum <= #{pageNum} * #{amount}
+			select /*+INDEX_DESC(tech_board pk_tech_board)*/
+				rownum rn, tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit, commcnt
+			from
+				tech_board
+			where
+		]]>
+		
+		<include refid="criteria"></include>
+		
+		<![CDATA[
+			rownum <= #{pageNum} * #{amount}
 			)
-			where rn > (#{pageNum} -1) * #{amount}
+		where rn > (#{pageNum} -1) * #{amount}
 		]]>
 	</select>
 	
 	<!-- 기술 게시판 전체 데이터의 개수 처리 -->
 	<select id="getTotalCount" resultType="int">
-		select count(*) from tech_board where tech_num > 0
+		select count(*) from tech_board
+		where
+		
+		<include refid="criteria"></include> 
+		
+		tech_num > 0
 	</select>
 	
 	<!-- 기술 게시판 글 작성 -->
@@ -72,6 +106,11 @@
 		delete from tech_board where tech_num = #{tech_num}
 	</delete>
 	
+	<!-- 기술 게시판 댓글 수(목록에 표시) -->
+	<update id="updateCommCnt">
+		update tech_board set commcnt = commcnt + #{amount} where tech_num = #{tech_num}
+	</update>
+	
 	<!-- 기술 게시판 댓글 작성 -->
 	<insert id="insert" parameterType="com.mypf.tech.vo.TechCommVO">
 		insert into tech_comm (user_id, tech_num, comm_num, parent_num, comm_con, depth)
@@ -95,20 +134,27 @@
 	
 	<!-- 기술 게시판 댓글 목록 조회 -->
 	<select id="getListWithPagingComm" resultType="com.mypf.tech.vo.TechCommVO">
-		select 
-			comm.user_id,
-			comm.tech_num,
-			comm.comm_num,
-			comm.parent_num,
-			comm.comm_con,
-			comm.depth,
-			comm.ins_dt,
-			comm.upt_dt
+		<![CDATA[
+		select user_id, tech_num, comm_num, comm_con, ins_dt, upt_dt, parent_num, depth
 		from
-			tech_comm comm
-		where tech_num = #{tech_num}
-		start with comm.parent_num = 0
-		connect by prior comm.comm_num = parent_num
+			(
+			select /*INDEX(tech_comm idx_tech_comm) */
+				rownum rn, user_id, tech_num, comm_num, comm_con, ins_dt, upt_dt, parent_num, depth
+			from tech_comm
+			where tech_num = #{tech_num}
+			and comm_num > 0
+			and rownum <= #{cri.pageNum} * #{cri.amount}
+			start with parent_num = 0
+			connect by prior comm_num = parent_num
+			) where rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
+
+	<!-- 기술 게시판 댓글 수 -->
+	<select id="getCountByTech_num" resultType="int">
+		<![CDATA[
+		select count(comm_num) from tech_comm where tech_num = #{tech_num}
+		]]>
 	</select>
 	
 	<!-- 기술 게시판 첨부파일 등록 -->

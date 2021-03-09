@@ -146,8 +146,23 @@ $(document).ready(function(){
 
 	if(operation === 'tech_del.do'){
 		formObj.attr("action", "tech_del.do");
+		
 	}else if(operation === 'tech_list.do'){
+		//move to list
 		formObj.attr("action", "tech_list.do").attr("method","get");
+		
+		var pageNumTag = $("input[name='pageNum']").clone();
+		var amountTag = $("input[name='amount']").clone();
+		var keywordTag = $("input[name='keyword']").clone();
+		var typeTag = $("input[name='type']").clone();
+		
+		formObj.empty();
+		
+		formObj.append(pageNumTag);
+		formObj.append(amountTag);
+		formObj.append(keywordTag);
+		formObj.append(typeTag);
+		
 	}else if(operation === 'tech_modify.do') {
 		console.log("submit clicked");
 		var str = "";
@@ -176,8 +191,12 @@ $(document).ready(function(){
 <div class="tech">
 	<h3 style="text-align:center;">기술 게시판</h3>
 	<section id="techDetail">
-		<form action="tech_modify.do" method="post">
-			<input type="hidden" name="tech_num" value="${board.tech_num}" />
+		<form role="form" action="tech_modify.do" method="post">
+			<input type='hidden' name="tech_num" value="${board.tech_num}" />
+			<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
+			<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
+			<input type='hidden' name='type' value='<c:out value="${cri.type }"/>'>
+			<input type='hidden' name='keyword' value='<c:out value="${cri.keyword }"/>'>
 					<table class="wform">
 						<tbody>
 							<tr>
@@ -249,9 +268,9 @@ $(document).ready(function(){
 						</tbody>			
 						</table>
 						<div>
-							<button type="submit" data-oper='tech_modify.do' class="bbt btn-default">수정</button>
-							<button type="submit" data-oper='tech_del.do' class="bbt btn-danger">삭제</button>
-							<button type="submit" data-oper='tech_list.do' class="bbt btn-info">목록</button>
+							<button type="submit" data-oper='tech_modify.do' class="bbt">수정</button>
+							<button type="submit" data-oper='tech_del.do' class="bbt">삭제</button>
+							<button type="submit" data-oper='tech_list.do' class="bbt">목록</button>
 						</div>
 				</form>
 		</section>

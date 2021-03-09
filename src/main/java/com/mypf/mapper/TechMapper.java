@@ -40,6 +40,9 @@ public interface TechMapper {
 	// 기술 게시판 글 삭제
 	public int techDel(int tech_num) throws Exception;
 	
+	// 기술 게시판 댓글 수(목록에 표시)
+	public void updateCommCnt(@Param("tech_num") int tech_num, @Param("amount") int amount) throws Exception;
+	
 	// 기술 게시판 댓글 작성
 	public int insert(TechCommVO techcommVO) throws Exception;
 	
@@ -55,6 +58,9 @@ public interface TechMapper {
 	// 기술 게시판 댓글 목록 조회(TechMapper.xml에서 #{tech_num}이 @Param("tech_num")와 매칭)
 	public List<TechCommVO> getListWithPagingComm(
 			@Param("cri") Criteria cri, @Param("tech_num") int tech_num) throws Exception;
+	
+	// 기술 게시판 댓글 수
+	public int getCountByTech_num(int tech_num) throws Exception;
 	
 	// 기술 게시판 첨부파일 등록
 	public void fileInsert(TechFileVO techfileVO) throws Exception;

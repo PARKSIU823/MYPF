@@ -535,10 +535,10 @@ $(document).ready(function(){
 							<li class="left clearfix" data-comm_num='12'>
 								<div>
 									<div class="header">
-										<strong class="primary-font">user00</strong>
-										<small class="pull-right text-muted">2021-0202 13:13</small>
+										<strong class="primary-font"></strong>
+										<small class="pull-right text-muted"></small>
 									</div>
-									<p>안녕!</p>
+									<p></p>
 								</div>
 							</li>					
 						</ul>

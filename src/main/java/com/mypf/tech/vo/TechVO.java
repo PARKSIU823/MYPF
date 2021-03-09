@@ -17,6 +17,7 @@ public class TechVO {
 	 * hit : 조회수
 	 * ins_dt : 작성일
 	 * upt_dt : 수정일
+	 * commCnt : 댓글 수
 	 */
 	private String user_nm;
 	private String user_id;
@@ -27,6 +28,8 @@ public class TechVO {
 	private int hit;
 	private Date ins_dt;
 	private Date upt_dt;
+	
+	private int commCnt;
 	
 	private List<TechFileVO> fileList;
 	

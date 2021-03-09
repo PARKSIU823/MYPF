@@ -98,8 +98,10 @@ public class TechServiceImpl implements TechService{
 	}
 
 	// 기술 게시판 댓글 작성
+	@Transactional
 	@Override
 	public int register(TechCommVO techcommVO) throws Exception {
+		mapper.updateCommCnt(techcommVO.getTech_num(), 1);
 		return mapper.insert(techcommVO);
 	}
 
@@ -116,8 +118,11 @@ public class TechServiceImpl implements TechService{
 	}
 	
 	// 기술 게시판 댓글 삭제
+	@Transactional
 	@Override
 	public int remove(int comm_num) throws Exception {
+		TechCommVO techcommVO = mapper.read(comm_num);
+		mapper.updateCommCnt(techcommVO.getTech_num(), -1);
 		return mapper.delete(comm_num);
 	}
 

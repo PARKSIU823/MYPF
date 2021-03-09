@@ -35,11 +35,11 @@
 	<select id="getListWithPaging" resultType="com.mypf.tech.vo.TechVO">
 		<![CDATA[
 		select
-			tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit
+			tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit, commcnt
 		from
 			(
 			select /*+INDEX_DESC(tech_board pk_tech_board)*/
-				rownum rn, tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit
+				rownum rn, tech_num, tech_category, tech_title, user_id, ins_dt, upt_dt, hit, commcnt
 			from
 				tech_board
 			where
@@ -105,6 +105,11 @@
 	<delete id="techDel">
 		delete from tech_board where tech_num = #{tech_num}
 	</delete>
+	
+	<!-- 기술 게시판 댓글 수(목록에 표시) -->
+	<update id="updateCommCnt">
+		update tech_board set commcnt = commcnt + #{amount} where tech_num = #{tech_num}
+	</update>
 	
 	<!-- 기술 게시판 댓글 작성 -->
 	<insert id="insert" parameterType="com.mypf.tech.vo.TechCommVO">

@@ -4,7 +4,7 @@
 console.log("Reply Module.......");
 
 var replyService = (function() {
-	
+	// 댓글 작성
 	function add(comm_con, callback, error) {
 		console.log("add reply.............");
 		
@@ -25,7 +25,7 @@ var replyService = (function() {
 				}
 		})
 	}
-	
+	// 댓글 목록 조회
 	function getList(param, callback, error) {
 		
 		var tech_num = param.tech_num;
@@ -42,7 +42,7 @@ var replyService = (function() {
 			}
 		});
 	}
-	
+	// 댓글 삭제
 	function remove(comm_num, callback, error) {
 		$.ajax({
 			type : 'delete',
@@ -59,7 +59,7 @@ var replyService = (function() {
 			}
 		});
 	}
-
+	// 댓글 수정
 	function update(comm_con, callback, error) {
 		
 		console.log("tech_num", comm_con.comm_num);
@@ -77,24 +77,25 @@ var replyService = (function() {
 			error : function(xhr, status, er) {
 				if (error) {
 					error(er);
-					}
+				}
 			}
 		});
 	}
-
+	// 댓글 조회
 	function get(comm_num, callback, error) {
 		$.get("/replies/" + comm_num + ".do", function(result){
 		
-		if(callback) {
-			callback(result);
-		}
+			if(callback) {
+				callback(result);
+			}
 		
-	}).fail(function(xhr, status, err) {
-		if(error) {
-		error();
-				}
+		}).fail(function(xhr, status, err) {
+			if(error) {
+				error();
+			}
 		});
 	}	
+	// 댓글 시간 처리(당일 등록 : 시/분/초, 24시간 전 등록 : 년/월/일)
 	function displayTime(timeValue) {
 		var today = new Date();
 		
@@ -119,8 +120,7 @@ var replyService = (function() {
 			return [ yy, '/', (mm > 9 ? '' : '0') + mm, '/',
 				(dd > 9 ? '' : '0') + dd ].join('');
 		}
-	}
-	;
+	};
 	return {
 		add : add,
 		getList : getList,

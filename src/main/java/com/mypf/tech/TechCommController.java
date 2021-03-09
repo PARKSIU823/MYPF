@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mypf.tech.service.TechService;
+import com.mypf.tech.vo.CommPageDTO;
 import com.mypf.tech.vo.Criteria;
 import com.mypf.tech.vo.TechCommVO;
 
@@ -46,12 +47,15 @@ public class TechCommController {
 			produces = {
 					MediaType.APPLICATION_XML_VALUE,
 					MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<List<TechCommVO>> getList(
+	public ResponseEntity<CommPageDTO> getList(
 			@PathVariable("page") int page,
 			@PathVariable("tech_num") int tech_num) throws Exception {
-			
+				
 			Criteria cri = new Criteria(page, 10);
-			return new ResponseEntity<>(service.getList(cri, tech_num), HttpStatus.OK);
+			
+			log.info("get Comm List tech_num : " + tech_num);
+			log.info("cri : " + cri);
+			return new ResponseEntity<>(service.getListPage(cri, tech_num), HttpStatus.OK);
 	}
 	
 	// 기술 게시판 댓글 조회

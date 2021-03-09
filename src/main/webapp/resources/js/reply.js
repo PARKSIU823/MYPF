@@ -34,7 +34,7 @@ var replyService = (function() {
 		$.getJSON("/replies/pages/" + tech_num + "/" + page + ".do",
 				function(data) {
 					if (callback) {
-						callback(data);
+						callback(data.commCnt, data.list); // 댓글 숫자와 목록을 가져오는 경우
 					}
 		}).fail(function(xhr, status, err){
 			if (error) {

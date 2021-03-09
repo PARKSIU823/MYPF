@@ -56,6 +56,9 @@ public interface TechMapper {
 	public List<TechCommVO> getListWithPagingComm(
 			@Param("cri") Criteria cri, @Param("tech_num") int tech_num) throws Exception;
 	
+	// 기술 게시판 댓글 수
+	public int getCountByTech_num(int tech_num) throws Exception;
+	
 	// 기술 게시판 첨부파일 등록
 	public void fileInsert(TechFileVO techfileVO) throws Exception;
 	

@@ -103,6 +103,7 @@ a {color:BLACK; text-decoration: none;}
 .tech .tboard .bbtpos1 {padding-left: 80%;}
 .tech .tboard .bbtpos1 .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
 .tech .row .heading .title {font-weight: bold;}
+.modal fade .modal-dialog .modal-body .form-group .title {font-weight: bold;}
 
 /*기술 게시판 등록 및 수정*/
 .tech .wform {width:80%; border-spacing: 5px;}

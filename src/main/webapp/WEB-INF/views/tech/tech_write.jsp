@@ -67,7 +67,7 @@
 					str += " data-uuid='"+obj.uuid+"' data-filename='"+obj.file_nm+"' data-type='"+obj.file_type+"'";
 					str += " ><div>";
 					str += "<span> "+ obj.file_nm+"</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+					str += "<button type='button' class='bbt02' data-file=\'"+fileCallPath+"\' "
 					str += "data-type='image'>X</button><br>";
 					str += "<img src='/tech/display.do?file_nm="+fileCallPath+"'>";
 					str += "</div>";
@@ -79,7 +79,7 @@
 					str += "<li ";
 					str += "data-path='"+obj.file_path+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.file_nm+"' data-type='"+obj.file_type+"'><div>";
 					str += "<span> "+obj.file_nm + "</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file'>X</button><br>";
+					str += "<button type='button' class='bbt02' data-file=\'"+fileCallPath+"\' data-type='file'>X</button><br>";
 					str += "<img src='/resources/img/attach.png'></a>";
 					str += "</div>";
 					str +"</li>";

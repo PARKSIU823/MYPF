@@ -113,6 +113,7 @@ a {color:BLACK; text-decoration: none;}
 .tech .wform .bbtpos2 {padding-left: 60%;}
 .tech .wform .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
 .tech .bbt {width: 80px; height:30px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
+.tech .bbt02 {width: 25px; height:25px; border : 1px solid BLACK; background: #ffffff; padding: 3px;}
 
 /*문의 게시판 리스트*/
 .inquery {width:80%; margin-top:10%; margin-left: auto; margin-right: auto;}

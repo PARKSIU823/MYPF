@@ -508,7 +508,7 @@ $(document).ready(function(){
 							</div>
 							<!-- 첨부파일 목록-->
 							<div class="row">
-								<div class="heading"><label class="title">첨부파일(※클릭 시 : 이미지 파일 -> 원본 파일, 그 외 파일 -> 다운로드)</label></div>
+								<div class="heading"><label class="title">첨부파일(※클릭 시 이미지 파일은 원본 파일을 보실 수 있고, 그 외 파일은 다운로드됩니다.)</label></div>
 								<div class="body">
 									<div class='uploadResult'>
 										<ul>

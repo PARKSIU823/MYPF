@@ -14,17 +14,21 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-<div>
+<div class="pfMain">
 	<table>
 		<tr>
-			<c:forEach items="techList" var="techList">
-			
-			<td></td>
-			</c:forEach>
+		<c:forEach items="${pfList}" var="pfList" begin="1" end="3" step="1">
+			<td>
+				<a href="/portfolio/pf_read.do?prtf_num=<c:out value='${pfList.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/>
+			</td>
+		</c:forEach>
 		</tr>
-	</table>
-	<table>
 		<tr>
+		<c:forEach items="${techList}" var="techList" begin="1" end="5" step="1">
+			<td>
+				<a href='tech_detail.do?tech_num=<c:out value="${techList.tech_num }"/>'>${techList.tech_title}</a>
+			</td>
+		</c:forEach>
 		</tr>
 	</table>
 </div>

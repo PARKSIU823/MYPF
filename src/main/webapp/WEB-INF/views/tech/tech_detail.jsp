@@ -132,14 +132,12 @@ ul { list-style:none;}
 						}
 					} else {
 						if(list[i].del_yn == 'Y') {
-							str += "<img src='/resources/img/reply.png'>";
-							str += "<li class='chat-li'>삭제된 댓글입니다.</li>";
+							str += "<li class='chat-li'><img src='/resources/img/reply.png' style='width:23px;'>삭제된 댓글입니다.</li>";
 						} else {
-							str += "<img src='/resources/img/reply.png'>";
 							str += " <li class='chat-li' data-comm_num='"+list[i].comm_num+"'>";
-							str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
+							str += " <div><div class='header'><strong class='primary-font'><img src='/resources/img/reply.png' style='width:23px;'>"+list[i].user_id+"</strong>";
 							str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
-							str += " <p>"+list[i].comm_con+"</p></div></li>";
+							str += " <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+list[i].comm_con+"</p></div></li>";
 						}
 					}
 				}

@@ -69,7 +69,7 @@
 	</div>
 	
 	<!-- 파일 업로드시 섬네일 출력 -->
-	<div class="pf_thumb">
+	<div class="pf_thumb" id="pf_thumb">
 		<ul>
 		</ul>
 	</div>
@@ -79,14 +79,14 @@
 <script>
 $(document).ready(function(e){
 	
+	
+	//파일 형식, 크기 체크
+	function checkExtenstion(fileName, fileSize) {
 	//파일 업로드 처리
 	//이미지 파일만 업로드
 	var regex = new RegExp("/\.(jpg|gif|tif|bmp|png)$/i");
 	//파일 최대 크기5MB;
 	var maxSize = 5242880; 
-	
-	//파일 형식, 크기 체크
-	function checkExtenstion(fileName, fileSize) {
 		if(fileSize >= maxSize) {
 			alert("파일 크기 초과");
 			return false;
@@ -126,7 +126,7 @@ $(document).ready(function(e){
 	//파일 섬네일 출력
 	function showUploadedFile(uploadResultArr) {
 		if(!uploadResultArr || uploadResultArr.length == 0) { return;}
-		var uploadUl = $(".pf_thumb ul");
+		var uploadUl = $("#pf_thumb ul");
 		var str = "";
 		$(uploadResultArr).each(function(i,obj) {
 			var fileCallPath = encodeURIComponent(obj.file_path+"/s_"+obj.uuid+"_"+obj.file_nm);
@@ -135,7 +135,7 @@ $(document).ready(function(e){
 			str += " ><div>";
 			str += "<span> "+ obj.file_nm+"</span>";
 			str += "<button type='button' data-file=\'"+fileCallPath+"\' "
-			str += "<img src='/portfolio/display.do?file_nm="+fileCallPath+"'>";
+			str += "<img src='/portfolio/pfDisplay.do?file_nm="+fileCallPath+"'>";
 			str += "</div>";
 			str +"</li>";
 		}); //$(uploadResultArr) 종료

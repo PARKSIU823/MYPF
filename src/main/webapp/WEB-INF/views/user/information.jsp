@@ -39,15 +39,15 @@
 				<p>GIT : <a href="https://github.com/PARKSIU823/MYPF"> MYPF GIT</a></p>
 				<p>Mail : parksiu823@gmail.com</p>
 				<p class="intname">하고 싶은 말</p>
-				<p>어쩌구 저쩌구</p>
+				<p>하고 싶은 말 적어놓기</p>
 			</section>
 			<img class="int02" src="${path }/resources/img/profile.png"/>
 			<section class="intro022">
 				<p class="intname"> 차은주</p>
-				<p>GIT : <c:out value="${info.url }"/></p>
-				<p>Mail : <c:out value="${info.user_mail }"/></p>
-				<p>Mail : <c:out value="${info.user_mail }"/></p>
-				<p>Mail : <c:out value="${info.user_mail }"/></p>
+				<p>GIT : <a href="https://github.com/PARKSIU823/MYPF"> MYPF GIT</a></p>
+				<p>Mail : 은주 대리님 메일 주소 적기</p>
+				<p class="intname">하고 싶은 말</p>
+				<p>은주 대리님 하고 싶은 말 적어놓기</p>
 			</section>
 	</div>
 <jsp:include page="../main/footer.jsp"/>

@@ -10,6 +10,12 @@
 <meta charset="utf-8">
 <title>문의 게시판</title>
 <link href="${path}/resources/css/style.css" rel="stylesheet" >
+<script>
+	function send(){
+		alert("이미 답변을 전송하였습니다.");
+		return false;
+	}
+</script>
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
@@ -100,6 +106,12 @@
 															${comm.comm_con }
 														</td>
 													</tr>
+													<tr>
+														<td colspan="2">
+															<input type="submit" class="bbt" value="전송" onclick="return send()"/>
+															<input type="button" class="bbt" value="목록" onclick="location.href='ask_list.do'">
+														</td>
+													</tr>
 											</c:when>
 											<c:otherwise>
 													<tr>
@@ -118,14 +130,14 @@
 															<textarea rows="5" class="infield" cols="80" name="comm_con" style="resize: none;"></textarea>
 														</td>
 													</tr>
+													<tr>
+														<td colspan="2">
+															<input type="submit" class="bbt" value="전송"/>
+															<input type="button" class="bbt" value="목록" onclick="location.href='ask_list.do'">
+														</td>
+													</tr>
 											</c:otherwise>
 										</c:choose>
-									<tr>
-										<td colspan="2">
-											<input type="submit" class="bbt" value="전송"/>
-											<input type="button" class="bbt" value="목록" onclick="location.href='ask_list.do'">
-										</td>
-									</tr>
 								</table>
 							</form>	
 					</section>

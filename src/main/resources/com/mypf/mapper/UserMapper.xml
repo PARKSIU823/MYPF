@@ -82,6 +82,7 @@
 		WHERE user_mail = #{user_mail}
 	]]>
 </select>
+
 <!-- 회원 정보 수정 -->
 <update id="userMod">
 	<![CDATA[
@@ -94,15 +95,6 @@
 		,upt_dt = sysdate
 	WHERE user_id = #{user_id}
 	]]>
-<!-- 		UPDATE user_info SET -->
-<!-- 			user_pw = #{user_pw} -->
-<!-- 			,user_mail = #{user_mail} -->
-<!-- 			,user_addr = #{user_addr} -->
-<!-- 			,user_tel = #{user_tel} -->
-<!-- 			,user_photo = #{user_photo} -->
-<!-- 			,url = #{url} -->
-<!-- 			,upt_dt = sysdate -->
-<!-- 		WHERE user_id = #{user_id} -->
 </update>
 
 <!-- 회원 권한 수정 -->

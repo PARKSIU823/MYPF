@@ -47,7 +47,7 @@ public class UserController {
 				String userPW = user.getUser_pw();
 				String encodePW  = pwdEncoder.encode(userPW);
 				user.setUser_pw(encodePW);
-				user.setUser_addr((String)(user.getUser_addr01()+user.getUser_addr02()+user.getUser_addr03()));
+				user.setUser_addr((String)(user.getUser_addr01()+user.getUser_addr02()+" "+user.getUser_addr03()));
 				uService.register(user);
 			}
 		} catch (Exception e) {
@@ -145,7 +145,7 @@ public class UserController {
 	public String removeForm() throws Exception {
 		return "user/remove";
 	}
-	//회원 삭제
+	//회원 탈퇴
 	@RequestMapping(value = "remove.do", method = RequestMethod.POST)
 	public String remove(UserVO user, HttpSession session, Model model) throws Exception{
 		UserVO sessionUser = (UserVO) session.getAttribute("user");
@@ -180,6 +180,7 @@ public class UserController {
 	@RequestMapping(value = "modify.do", method = RequestMethod.POST)
 	public String modify(UserVO user, HttpSession session) throws Exception{
 		log.info("회원 정보 수정 : " + user);
+		user.setUser_addr((String)(user.getUser_addr01()+user.getUser_addr02()+user.getUser_addr03()));
 		uService.userMod(user);
 		session.invalidate();
 		return "redirect:/index.do";
@@ -200,7 +201,7 @@ public class UserController {
 		
 	}
 	
-	//회원 정보 수정
+	//회원 권한 수정
 	@RequestMapping(value= "userAuth.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String userAuth(HttpServletRequest request, UserVO user, Model model) throws Exception{

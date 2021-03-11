@@ -39,7 +39,7 @@ public interface UserMapper {
 	public int chkPW(UserVO user) throws Exception;
 
 	// 회원정보 수정
-	public UserVO userMod(UserVO user) throws Exception;
+	public void userMod(UserVO user) throws Exception;
 
 	// 회원 탈퇴
 	public void userDel(UserVO user) throws Exception;

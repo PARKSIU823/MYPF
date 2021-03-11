@@ -57,21 +57,21 @@
 			  		<input type="text" id="sample6_postcode" placeholder="우편번호" class="infield02" readonly="readonly">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호" class="bbt">
 				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="text" id="sample6_address" placeholder="주소" class="infield" readonly="readonly" name="user_addr01"><br>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="infield" name="user_addr02"><br>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="infield" readonly="readonly" name="user_addr03">
-			  	</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="text" id="sample6_address" placeholder="주소" class="infield" readonly="readonly" name="user_addr01"><br>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="infield" name="user_addr02"><br>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="infield" readonly="readonly" name="user_addr03">
+				  	</td>
 <!-- 			  	<td colspan="2"><input type="text" class="infield" name="user_addr" id="user_addr"/></td> -->
 			  </tr>
 			  <tr>

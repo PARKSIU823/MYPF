@@ -80,9 +80,9 @@ public class UserServiceImpl implements UserService{
 
 	//회원정보 수정
 	@Override
-	public UserVO userMod(UserVO user) throws Exception {
+	public void userMod(UserVO user) throws Exception {
 		log.info("회원 정보 수정 : " + user);
-		return uMapper.userMod(user);
+		uMapper.userMod(user);
 	}
 	
 	//회원 탈퇴

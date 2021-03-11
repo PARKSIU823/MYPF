@@ -55,7 +55,7 @@
 							<td class="title02"><c:out value="${list.comm_yn}"/></td>
 								<c:choose>
 									<c:when test="${cdate eq date }">
-										<td class="title02"><fmt:formatDate value="${list.ins_dt}" pattern="hh:mm"/></td>
+										<td class="title02"><fmt:formatDate value="${list.ins_dt}" pattern="HH:mm"/></td>
 									</c:when>
 									<c:otherwise>
 										<td class="title02"><fmt:formatDate value="${list.ins_dt}" pattern="yyyy-MM-dd"/></td>

@@ -85,7 +85,7 @@
  					<td class="title02"><c:out value="${board.user_id}" /></td>
  						<c:choose>
  							<c:when test="${cdate eq date }">
- 								<td class="title02"><fmt:formatDate pattern="hh:mm" value="${board.ins_dt}" /></td>
+ 								<td class="title02"><fmt:formatDate pattern="HH:mm" value="${board.ins_dt}" /></td>
  							</c:when>
  							<c:otherwise>
  								<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.ins_dt}" /></td>

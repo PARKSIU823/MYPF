@@ -11,9 +11,20 @@
 <title>문의 게시판</title>
 <link href="${path}/resources/css/style.css" rel="stylesheet" >
 <script>
-	function send(){
+	function send_comm_yn_y(){
 		alert("이미 답변을 전송하였습니다.");
 		return false;
+	}
+	function send_comm_yn_n(){
+		if(document.getElementById('comm_title').value==""){
+			alert("답변 제목을 입력하세요.");
+			return false;
+		}
+		if(document.getElementById('comm_con').value==""){
+			alert("답변 내용을 입력하세요.");
+			return false;
+		}
+		alert("답변이 전송되었습니다.");
 	}
 </script>
 </head>
@@ -108,7 +119,7 @@
 													</tr>
 													<tr>
 														<td colspan="2">
-															<input type="submit" class="bbt" value="전송" onclick="return send()"/>
+															<input type="submit" class="bbt" value="전송" onclick="return send_comm_yn_y()"/>
 															<input type="button" class="bbt" value="목록" onclick="location.href='ask_list.do'">
 														</td>
 													</tr>
@@ -119,7 +130,7 @@
 															<label class="title">답변 제목</label>
 														</td>
 														<td>
-															<input text="text" name="comm_title" class="infield">
+															<input text="text" name="comm_title" class="infield" id="comm_title">
 														</td>
 													</tr>
 													<tr>
@@ -127,12 +138,12 @@
 															<label class="title">답변 내용</label>
 														</td>
 														<td>
-															<textarea rows="5" class="infield" cols="80" name="comm_con" style="resize: none;"></textarea>
+															<textarea rows="5" class="infield" cols="80" name="comm_con" id="comm_con" style="resize: none;"></textarea>
 														</td>
 													</tr>
 													<tr>
 														<td colspan="2">
-															<input type="submit" class="bbt" value="전송"/>
+															<input type="submit" class="bbt" value="전송" onclick="return send_comm_yn_n()"/>
 															<input type="button" class="bbt" value="목록" onclick="location.href='ask_list.do'">
 														</td>
 													</tr>

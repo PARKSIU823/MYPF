@@ -46,7 +46,7 @@
 				return false;
 			}
 			if($("#tech_title").val()==""){
-				alert("제목 입력하세요.");
+				alert("제목을 입력하세요.");
 				return false;
 			}
 			if($("#tech_con").val()==""){

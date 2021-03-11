@@ -175,6 +175,17 @@ $(document).ready(function(){
 			str += "<input type = 'hidden' name = 'fileList["+i+"].file_path'value='"+jobj.data("path")+"'>";
 			str += "<input type = 'hidden' name = 'fileList["+i+"].file_type'value='"+jobj.data("type")+"'>";
 		});
+		
+		if($("#tech_title").val()=="") {
+			alert("제목을 입력하세요.");
+			return false;
+		}
+		if($("#tech_con").val()=="") {
+			alert("내용을 입력하세요.");
+			return false;
+		}
+		alert("수정 완료되었습니다.")
+		
 		formObj.append(str).submit();
 	}
 

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +44,91 @@ public class PortfolioController {
 	@Autowired
 	private PortfolioService pfService;
 	
+	//포트폴리오 게시판 리스트
+	@RequestMapping(value = "pf_list.do", method=RequestMethod.GET)
+	public String pfList(Model model, PfCriteria cri)  throws Exception{
+		log.info("pfList : " + cri);
+		model.addAttribute("pfList", pfService.pfList(cri));
+		model.addAttribute("pageMaker", new PfPageDTO(cri, 10));
+		return "portfolio/pf_list";
+	}
+
+	//포트폴리오 게시판 글 내용 조회
+	@RequestMapping(value="pf_read.do", method=RequestMethod.GET)
+	public String pfRead(@RequestParam("prtf_num") int prtf_num, @ModelAttribute("pfCri") PfCriteria pfCri, Model model) throws Exception{
+		log.info("포트폴리오 조회 : " + prtf_num);
+		model.addAttribute("pfRead", pfService.pfDetail(prtf_num));
+		return "portfolio/pf_read";
+	}
+	
+	//포트폴리오 게시판 글 작성 페이지
+	@RequestMapping(value="pf_write.do", method = RequestMethod.GET)
+	public String pfWriteform(Model model) throws Exception {
+		log.info("포트폴리오 작성화면");
+		return "portfolio/pf_write";
+	}
+	
+	//포트폴리오 게시판 글 작성
+	@RequestMapping(value="pf_write.do", method = RequestMethod.POST)
+	public String pfWrite(PortfolioVO pf, Model model)  throws Exception{
+		log.info("포트폴리오 작성 : " + pf);
+		pf.setFrm_dt((String)pf.getFrm_dt());
+		pf.setTo_dt((String)pf.getTo_dt());
+		pfService.pfAdd(pf);
+		model.addAttribute("result", pf.getPrtf_num());
+		return "portfolio/pf_read.do?prtf_num="+pf.getPrtf_num();
+	}
+	
+	//포트폴리오 작성시 섬네일 출력
+	@RequestMapping(value="pfDisplay.do")
+	@ResponseBody
+	public ResponseEntity<byte[]> getFile(String file_nm) {
+		log.info("파일 이름 : " + file_nm);
+		File file = new File("C:\\upload\\"+file_nm);
+		log.info("파일 : " + file);
+		ResponseEntity<byte[]> result = null;
+		try {
+			HttpHeaders header = new HttpHeaders();
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			result= new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	//포트폴리오 게시판 글 수정 페이지
+	@RequestMapping(value = "pf_modify.do", method = RequestMethod.GET)
+	public String pfModForm(@RequestParam("prtf_num") int prtf_num, Model model) throws Exception{
+		log.info("포폴 글 수정 페이지");
+		model.addAttribute("pfModify", pfService.pfDetail(prtf_num));
+		return "portfolio/pf_modify";
+	}
+	
+	//포트폴리오 게시판 글 수정
+	@RequestMapping(value = "pf_modify.do", method = RequestMethod.POST)
+	public String pfMod(PortfolioVO pf ,@ModelAttribute("pfCri") PfCriteria pfCri, Model model)  throws Exception{
+		log.info("포트폴리오 수정 : " + pf);
+		if(pfService.pfMod(pf)) {
+			pf.setFrm_dt((String)pf.getFrm_dt());
+			pf.setTo_dt((String)pf.getTo_dt());
+			model.addAttribute("result", pf);
+		}
+		return "redirect:/portfolio/pf_read.do?prtf_num="+pf.getPrtf_num();
+	}
+	
+	//포트폴리오 게시판 글 삭제
+	@RequestMapping(value = "pf_delete.do", method = RequestMethod.POST)
+	public String pfDel(@RequestParam("prtf_num") int prtf_num, @ModelAttribute("pfCri") PfCriteria pfCri, Model model)  throws Exception{
+		log.info("포트폴리오 삭제 : " + prtf_num);
+		List<PfFileVO> pfFileList = pfService.getFileList(prtf_num);
+		if(pfService.pfDel(prtf_num)) {
+			deleteFiles(pfFileList);
+			model.addAttribute("result", prtf_num);
+		}
+		return "redirect:/portfolio/pf_list.do";
+	}
+	
 	//업로드한 파일 형식 확인
 	private boolean checkFileType(File file) {
 		try {
@@ -60,44 +148,17 @@ public class PortfolioController {
 		return str.replace("-", File.separator);
 	}
 	
-	//포트폴리오 게시판 리스트
-	@RequestMapping(value = "pf_list.do", method=RequestMethod.GET)
-	public String pfList(Model model, PfCriteria cri)  throws Exception{
-		log.info("pfList : " + cri);
-		model.addAttribute("pfList", pfService.pfList(cri));
-		model.addAttribute("pageMaker", new PfPageDTO(cri, 10));
-		return "portfolio/pf_list";
-	}
-
-	//포트폴리오 게시판 글 내용 조회
-	@RequestMapping(value="pf_read.do", method=RequestMethod.GET)
-	public String pfRead(@RequestParam("prtf_num") int prtf_num, Model model) throws Exception{
-		log.info("pf_read");
-		model.addAttribute("pfRead", pfService.pfDetail(prtf_num));
-		return "portfolio/pf_read";
-	}
-	
-	//포트폴리오 게시판 글 작성 페이지
-	@RequestMapping(value="pf_write.do", method = RequestMethod.GET)
-	public String pfWriteform(Model model) throws Exception {
-		log.info("포트폴리오 작성화면");
-		return "portfolio/pf_write";
-	}
-	
-	//포트폴리오 게시판 글 작성
-	@RequestMapping(value="pf_write.do", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	//포트폴리오 파일 업로드
+	@RequestMapping(value="pf_file_write.do", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<PfFileVO>> pfWrite(PortfolioVO pf, PfFileVO pfFile, Model model, MultipartFile[] uploadFile)  throws Exception{
-//		public String pfWrite(PortfolioVO pf, PfFileVO pfFile, Model model, MultipartFile[] uploadFile)  throws Exception{
-		log.info("포트폴리오 작성 : " + pf);
-		log.info("포트폴리오 작성 : " + pfFile);
-		log.info("포트폴리오 작성 : " + uploadFile);
+	public ResponseEntity<List<PfFileVO>> pfFileWrite(MultipartFile[] uploadFile)  throws Exception{
+		log.info("포트폴리오 파일 업로드 : " + uploadFile);
 		
 		//파일 업로드
 		List<PfFileVO> pfFileList = new ArrayList<>();
 		
 		//파일 저장 경로
-		String uploadFolder = "C:\\upload\\mypf";
+		String uploadFolder = "C:\\upload";
 		String uploadFolderPath = getFolder();
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
 		
@@ -113,7 +174,7 @@ public class PortfolioController {
 			//IE 파일 path 수정
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
 			log.info("File Name : "+ uploadFileName);
-			pfFileVO.setFileNm(uploadFileName);
+			pfFileVO.setFile_nm(uploadFileName);
 			
 			//중복방지 UUID 생성 후 파일 이름에 붙여넣기
 			UUID uuid = UUID.randomUUID();
@@ -122,8 +183,8 @@ public class PortfolioController {
 			try {
 				File saveFile = new File(uploadPath, uploadFileName);
 				multipartFile.transferTo(saveFile);
-				pfFileVO.setFileNm(uuid.toString());
-				pfFileVO.setFilePath(uploadFolderPath);
+				pfFileVO.setFile_nm(uuid.toString());
+				pfFileVO.setFile_path(uploadFolderPath);
 				
 				//이미지 파일 thumbnail 보여주기
 				if(checkFileType(saveFile)) {
@@ -136,57 +197,26 @@ public class PortfolioController {
 				e.printStackTrace();
 			}
 		}
-		
-//		pfService.pfAdd(pf);
-		pfService.pfAdd(pf,pfFile);
-		model.addAttribute("result", pf.getPrtf_num());
-		model.addAttribute("fileResult", pfFile.getPrtfNum());
 		return new ResponseEntity<>(pfFileList, HttpStatus.OK);
-//		return "redirect:/portfolio/pf_list.do";
 	}
 	
-	//포트폴리오 작성시 섬네일 보여주기
-	@RequestMapping(value="/pfDisplay.do", method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<byte[]> getFile(String file_nm) {
-		log.info("파일 이름 : " + file_nm);
-		File file = new File("C:\\upload\\mypf\\"+file_nm);
-		log.info("파일 : " + file);
-		ResponseEntity<byte[]> result = null;
-		try {
-			HttpHeaders header = new HttpHeaders();
-			header.add("Content-Type", Files.probeContentType(file.toPath()));
-			result= new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
-		} catch (IOException e) {
-			e.printStackTrace();
+	//포트폴리오 파일 DB와 비교 후 삭제
+	private void deleteFiles(List<PfFileVO> pfFileList) {
+		log.info("포트폴리오 파일 DB 삭제");
+		log.info("삭제 파일 리스트 : " + pfFileList);
+		if(pfFileList == null || pfFileList.size() ==0) {
+			return;
 		}
-		return result;
-	}
-	//포트폴리오 게시판 글 수정 페이지
-	@RequestMapping(value = "pf_modify.do", method = RequestMethod.GET)
-	public String pfModForm(@RequestParam("prtf_num") int prtf_num, Model model) throws Exception{
-		log.info("포폴 글 수정 페이지");
-		model.addAttribute("pfModify", pfService.pfDetail(prtf_num));
-		return "portfolio/pf_modify";
-	}
-	
-	//포트폴리오 게시판 글 수정
-	@RequestMapping(value = "pf_modify.do", method = RequestMethod.POST)
-	public String pfMod(PortfolioVO pf , Model model)  throws Exception{
-		log.info("modify : " + pf);
-		if(pfService.pfMod(pf)) {
-			model.addAttribute("result", pf);
-		}
-		return "redirect:/portfolio/pf_read.do?prtf_num="+pf.getPrtf_num();
-	}
-	
-	//포트폴리오 게시판 글 삭제
-	@RequestMapping(value = "pf_delete.do", method = RequestMethod.POST)
-	public String pfDel(@RequestParam("prtf_num") int prtf_num, Model model)  throws Exception{
-		log.info("remove : " + prtf_num);
-		if(pfService.pfDel(prtf_num)) {
-			model.addAttribute("result", prtf_num);
-		}
-		return "redirect:/portfolio/pf_list.do";
+		
+		pfFileList.forEach(file -> {
+			try {
+				Path pfFile = Paths.get("C:\\upload\\" + file.getFile_path()+ "\\" +file.getUuid()+"_"+file.getFile_nm()); 
+				Files.deleteIfExists(pfFile);
+				Path thumbnail = Paths.get("C:\\upload\\" + file.getFile_path()+"\\s_"+ file.getUuid()+"_"+file.getFile_nm());
+				Files.delete(thumbnail);
+			} catch (Exception e) {
+				log.error("파일 삭제 오류 : " + e.getMessage());
+			}
+		});
 	}
 }

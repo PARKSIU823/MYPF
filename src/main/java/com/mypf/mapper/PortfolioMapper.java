@@ -20,6 +20,9 @@ public interface PortfolioMapper {
 	//포폴 상세 보기
 	public PortfolioVO pfDetail(int prtfNum) throws Exception;
 	
+	//포폴 조회수 증가
+	public void addHit(int prtfNum) throws Exception;
+	
 	//포폴 수정
 	public int pfMod(PortfolioVO pf) throws Exception;
 	

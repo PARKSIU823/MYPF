@@ -1,12 +1,10 @@
 package com.mypf.portfolio.service.Impl;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mypf.mapper.PortfolioMapper;
 import com.mypf.portfolio.service.PortfolioService;
@@ -23,9 +21,6 @@ public class PortfolioServiceImpl implements PortfolioService{
 	@Autowired
 	private PortfolioMapper pfMapper;
 	
-	@Autowired
-	private PortfolioService pfService;
-	
 	//포폴 리스트 불러오기
 	@Override
 	public List<PortfolioVO> pfList(PfCriteria cri) throws Exception {
@@ -36,44 +31,68 @@ public class PortfolioServiceImpl implements PortfolioService{
 	//포폴 조회하기
 	@Override
 	public PortfolioVO pfDetail(int prtf_num) throws Exception {
-		log.info("조회 : " + prtf_num);
+		log.info("포폴 게시글 조회 : " + prtf_num);
 		return pfMapper.pfDetail(prtf_num);
 	}
 
 	//포폴 등록하기
 	@Override
-//	public void pfAdd(PortfolioVO pf) throws Exception {
-	public void pfAdd(PortfolioVO pf, PfFileVO pfFile) throws Exception {
+	public void pfAdd(PortfolioVO pf) throws Exception {
 		log.info("등록 : " + pf);
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		Date frm_dt = new Date();
-		Date to_dt = new Date();
-		pf.setFrm_dt(frm_dt);
-		pf.setTo_dt(to_dt);
 		pfMapper.pfAdd(pf);
-		pfMapper.pfFileAdd(pfFile);
+		//파일 리스트가 없으면 실행 종료
+		if(pf.getPfFileList() == null || pf.getPfFileList().size() <= 0) {return;}
+		//파일 리스트가 있으면 파일 저장 반복 실행
+		pf.getPfFileList().forEach(pfFile -> {
+			pfFile.setPrtf_num(pf.getPrtf_num());
+			try {
+				pfMapper.pfFileAdd(pfFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
 	//포폴 수정하기
 	@Override
 	public boolean pfMod(PortfolioVO pf) throws Exception {
-//	public boolean pfMod(PortfolioVO pf, PfFileVO pfFile) throws Exception {
-		log.info("modify : " + pf);
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		Date frm_dt = new Date();
-		Date to_dt = new Date();
-		pf.setFrm_dt(frm_dt);
-		pf.setTo_dt(to_dt);
-		return pfMapper.pfMod(pf) == 1;
-//		return pfMapper.pfMod(pf) == 1 && pfMapper.pfFileMod(pfFile) == 1;
+		log.info("포폴 수정 : " + pf);
+		pfMapper.pfDel(pf.getPrtf_num());
+		boolean pfModResult = pfMapper.pfMod(pf) == 1;
+		if(pfModResult && pf.getPfFileList() != null && pf.getPfFileList().size() > 0) {
+			pf.getPfFileList().forEach(pfFile -> {
+				pfFile.setPrtf_num(pf.getPrtf_num());
+				try {
+					pfMapper.pfFileAdd(pfFile);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+		}
+		return pfModResult;
 	}
 	
-
 	//포폴 삭제하기
+	@Transactional
 	@Override
 	public boolean pfDel(int prft_num) throws Exception {
-		log.info("remove : " + prft_num);
+		log.info("포폴 삭제 : " + prft_num);
+		pfMapper.pfDel(prft_num);
 		return pfMapper.pfDel(prft_num)==1;
+	}
+
+	//포폴 조회수 증가
+	@Override
+	public void addHit(int prtfNum) throws Exception {
+		pfMapper.addHit(prtfNum);
+		
+	}
+
+	//포폴 첨부파일 조회
+	@Override
+	public List<PfFileVO> getFileList(int prtfNum) throws Exception {
+		log.info("포폴 첨부파일 조회 : " + prtfNum);
+		return pfMapper.findByPrtfNum(prtfNum);
 	}
 	
 	

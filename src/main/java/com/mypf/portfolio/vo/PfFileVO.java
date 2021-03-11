@@ -1,6 +1,7 @@
 package com.mypf.portfolio.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -17,13 +18,12 @@ public class PfFileVO {
 	 * uptDt : 수정일
 	 */
 	
-	private String userId;
-	private int prtfNum;
-	private String fileNm;
+	private int prtf_num;
+	private String file_nm;
 	private String uuid;
-	private int fileNum;
-	private String filePath;
-	private Date insDt;
-	private Date uptDt;
+	private String file_path;
+	private Date ins_dt;
+	private Date upt_dt;
+	
 
 }

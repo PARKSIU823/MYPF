@@ -5,6 +5,7 @@ import java.util.List;
 
 import lombok.Data;
 
+@Data
 public class PortfolioVO {
 
 	/*
@@ -28,8 +29,10 @@ public class PortfolioVO {
 	private int prtf_num;
 	private String prtf_title;
 	private String prtf_con;
-	private Date frm_dt;
-	private Date to_dt;
+	private String frm_dt;
+	private String to_dt;
+//	private Date frm_dt;
+//	private Date to_dt;
 	private String url;
 	private String position;
 	private String idea;
@@ -37,86 +40,7 @@ public class PortfolioVO {
 	private Date ins_dt;
 	private Date upt_dt;
 	
-	public List<PfFileVO> attachList;
-	
-	public String getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	public int getPrtf_num() {
-		return prtf_num;
-	}
-	public void setPrtf_num(int prtf_num) {
-		this.prtf_num = prtf_num;
-	}
-	public String getPrtf_title() {
-		return prtf_title;
-	}
-	public void setPrtf_title(String prtf_title) {
-		this.prtf_title = prtf_title;
-	}
-	public String getPrtf_con() {
-		return prtf_con;
-	}
-	public void setPrtf_con(String prtf_con) {
-		this.prtf_con = prtf_con;
-	}
-	public Date getFrm_dt() {
-		return frm_dt;
-	}
-	public void setFrm_dt(Date frm_dt) {
-		this.frm_dt = frm_dt;
-	}
-	public Date getTo_dt() {
-		return to_dt;
-	}
-	public void setTo_dt(Date to_dt) {
-		this.to_dt = to_dt;
-	}
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	public String getPosition() {
-		return position;
-	}
-	public void setPosition(String position) {
-		this.position = position;
-	}
-	public String getIdea() {
-		return idea;
-	}
-	public void setIdea(String idea) {
-		this.idea = idea;
-	}
-	public int getHit() {
-		return hit;
-	}
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
-	public Date getIns_dt() {
-		return ins_dt;
-	}
-	public void setIns_dt(Date ins_dt) {
-		this.ins_dt = ins_dt;
-	}
-	public Date getUpt_dt() {
-		return upt_dt;
-	}
-	public void setUpt_dt(Date upt_dt) {
-		this.upt_dt = upt_dt;
-	}
+	public List<PfFileVO> pfFileList;
 
 	
 }

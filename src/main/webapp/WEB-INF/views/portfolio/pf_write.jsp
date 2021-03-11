@@ -14,7 +14,7 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-<form method="post" action="/portfolio/pf_write.do" enctype="multipart/form-data">
+<form method="post" action="/portfolio/pf_write.do">
 	<div class="project">
 		<h3>PROJECT ADD</h3>
 		<input type="hidden" name="user_id" value="mypf01"/>
@@ -34,10 +34,10 @@
 				<td class="title">프로젝트명</td>
 				<td><input type="text" class="infield" name="prtf_title"/></td>
 			</tr>
-<!-- 			<tr> -->
-<!-- 				<td class="title">개발 기간</td> -->
-<!-- 				<td><input type="date" class="infield" name="frm_dt"/> ~ <input type="date" class="infield" name="to_dt"/></td> -->
-<!-- 			</tr> -->
+			<tr>
+				<td class="title">개발 기간</td>
+				<td><input type="date" class="infield" name="frm_dt"/> ~ <input type="date" class="infield" name="to_dt"/></td>
+			</tr>
 			<tr>
 				<td class="title">프로젝트 내용 <br>(최대 2,000자)</td>
 				<td><textarea class="con" name="prtf_con"></textarea></td>
@@ -56,11 +56,11 @@
 			</tr>
 			<tr>
 				<td class="title">첨부파일</td>
-				<td><input type="file" class="infield" name="file_nm"  multiple/></td>
+				<td><input type="file" class="infield" name="uploadFile"  multiple/></td>
 			</tr>
 			<tr>
 				<td colspan="2" class="bbtpos2">
-					<button type="submit" class="bbt" id="uploadPf">작성</button>
+					<button type="submit" class="bbt" id="uploadPf">등록</button>
 					<button type="reset" class="bbt">초기화</button>
 					<button type="button" class="bbt" onclick="location.href='/portfolio/pf_list.do'">목록</button>
 				</td>
@@ -75,17 +75,17 @@
 	</div>
 	
 </form>
+
 <script>
 $(document).ready(function(e){
 	
-	var formObj = $("form[role='form']");
-
 	//파일 업로드 처리
 	//이미지 파일만 업로드
 	var regex = new RegExp("/\.(jpg|gif|tif|bmp|png)$/i");
 	//파일 최대 크기5MB;
 	var maxSize = 5242880; 
 	
+	//파일 형식, 크기 체크
 	function checkExtenstion(fileName, fileSize) {
 		if(fileSize >= maxSize) {
 			alert("파일 크기 초과");
@@ -98,56 +98,69 @@ $(document).ready(function(e){
 		return true;
 	}
 
-	$("#uploadPf").on("click", function(e){
+	//파일 버튼 변경 시
+	$("input[type='file']").change( function(e){
 		var formData = new FormData();
-		var inputFile = $("input[name='file_nm']");
+		var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files;
-		console.log(files);
-		
-		for(var i = 0; i <files.length; i++) {{
+		for(var i = 0; i <files.length; i++) {
 			if(!checkExtenstion(files[i].name, files[i].size)) {
 				return false;
 			}
-			formData.append("file_nm", files[i]);
-		}}
-		
-	})
-
-	$.ajax({
-		url:'/portfolio/pf_write.do';
-		,processData : false;
-		,contentType : false,data;
-		,dataType : 'json'
-		,formData, type : 'POST'
-		,success : function(result) {
-			alert("업로드 성공");
-// 			showUploadedFile(result);
-// 			$(".project").html(cloneObj.html());
+			formData.append("uploadFile", files[i]);
 		}
+		$.ajax({
+			url:'/portfolio/pf_file_write.do'
+			,processData : false
+			,contentType : false
+			,dataType : 'json'
+			,data : formData
+			,type : 'POST'
+			,success : function(result) {
+				alert("업로드 성공");
+				showUploadedFile(result);
+			}
+		}); //$.ajax 종료
 	});
-	//$.ajax 종료
+	
+	//파일 섬네일 출력
+	function showUploadedFile(uploadResultArr) {
+		if(!uploadResultArr || uploadResultArr.length == 0) { return;}
+		var uploadUl = $(".pf_thumb ul");
+		var str = "";
+		$(uploadResultArr).each(function(i,obj) {
+			var fileCallPath = encodeURIComponent(obj.file_path+"/s_"+obj.uuid+"_"+obj.file_nm);
+			str += "<li data-path='"+obj.file_path+"'";
+			str += " data-uuid='"+obj.uuid+"' data-filename='"+obj.file_nm+"' data-type='"+obj.file_type+"'";
+			str += " ><div>";
+			str += "<span> "+ obj.file_nm+"</span>";
+			str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+			str += "<img src='/portfolio/display.do?file_nm="+fileCallPath+"'>";
+			str += "</div>";
+			str +"</li>";
+		}); //$(uploadResultArr) 종료
+		uploadUl.append(str);
+	}
+	
+	//작성 버튼 클릭
+	var formObj = $("form[role='form']");
 	$("buttin[type='submit']").on("click", function(e) {
 		e.preventDefault();
 		console.log("등록 버튼 클릭");
+		var str = "";
+		$(".pf_thumb ul li").each(function(i, obj) {
+			var objResult = $(obj);
+			console.dir(objResult);
+			str += "<input type = 'hidden' name = 'pfFileList["+i+"].file_nm'value='"+objResult.data("filename")+"'>";
+			str += "<input type = 'hidden' name = 'pfFileList["+i+"].uuid'value='"+objResult.data("uuid")+"'>";
+			str += "<input type = 'hidden' name = 'pfFileList["+i+"].file_path'value='"+objResult.data("path")+"'>";
+			str += "<input type = 'hidden' name = 'pfFileList["+i+"].file_type'value='"+objResult.data("type")+"'>";
+		});
+		formObj.append(str).submit();
 	});
+	
 });
 	
-	
-	
-// 	var cloneObj = $(".project").clone();
-	
-// 	//파일 섬네일 출력
-// 	var uploadResult = $(".pf_thumb ul");
-// 		function showUploadedFile(uploadResultArr) {
-// 			var str ="";
-// 			$(uploadResultArr).each(function(i, obj) {
-// 				var fileCallPath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.file_nm);
-// 				str += "<li><img src='/pfDisplay.do?file_nm="+fileCallPath"'><li>";
-// 			});
-// 			uploadResult.append(str);
-// 		}
-	
-// });
 </script>
 <jsp:include page="../main/footer.jsp"/>
 </body>

@@ -59,8 +59,8 @@
 			,#{prtf_num}
 			,#{prtf_title}
 			,#{prtf_con}
-			,#{frm_dt}
-			,#{to_dt}
+			,to_date(#{frm_dt}, 'yyyy/mm/dd')
+			,to_date(#{to_dt}, 'yyyy/mm/dd')
 			,#{position}
 			,#{idea}
 			,#{url}
@@ -70,7 +70,7 @@
 	]]>
 </insert>
 
-<!-- 포폴 조회 -->
+<!-- 포폴 상세보기 -->
 <select id="pfDetail" resultType="com.mypf.portfolio.vo.PortfolioVO">
 	<![CDATA[
 		SELECT 
@@ -91,12 +91,24 @@
 	]]>
 </select>
 
+<!--  조회수 증가 -->
+<update id="addHit">
+	<![CDATA[
+		UPDATE PRTF_BOARD
+		SET hit = (
+			SELECT NVL(hit,0) + 1 FROM PRTF_BOARD WHERE prtf_num = #{prtf_num})
+		WHERE prtf_num = #{prtf_num}
+	]]>
+</update>
+
 <!-- 포폴 수정 -->
 <update id="pfMod" parameterType="com.mypf.portfolio.vo.PortfolioVO">
 	<![CDATA[
 		UPDATE PRTF_BOARD SET
 			prtf_title = #{prtf_title}
 			,prtf_con = #{prtf_con}
+			,frm_dt = #{frm_dt}
+			,to_dt = #{to_dt}
 			,position = #{position}
 			,idea = #{idea}
 			,category = #{category}
@@ -104,43 +116,36 @@
 			,upt_dt = sysdate
 		WHERE prtf_num = #{prtf_num}
 	]]>
-<!-- 		UPDATE PRTF_BOARD SET -->
-<!-- 			prtf_title = #{prtf_title} -->
-<!-- 			,prtf_con = #{prtf_con} -->
-<!-- 			,frm_dt = #{frm_dt} -->
-<!-- 			,to_dt = #{to_dt} -->
-<!-- 			,position = #{position} -->
-<!-- 			,idea = #{idea} -->
-<!-- 			,category = #{category} -->
-<!-- 			,upt_dt = sysdate -->
-<!-- 		WHERE prtf_num = #{prtf_num} -->
 </update>
 
 <!-- 포폴 삭제 -->
 <delete id="pfDel">
-	DELETE FROM PRTF_BOARD
-	WHERE prtf_num = #{prtf_num}
+	<![CDATA[
+		DELETE FROM PRTF_BOARD
+		WHERE prtf_num = #{prtf_num}
+	]]>
 </delete>
+
+<!-- 파일 리스트 -->
+<select id ="findByPrtfNum" resultType="com.mypf.portfolio.vo.PfFileVO">
+	<![CDATA[
+		SELECT * FROM prtf_file WHERE prft_num = #{prft_num}
+	]]>
+</select>
 
 <!-- 포폴 파일 등록 -->
 <insert id ="pfFileAdd">
 	<![CDATA[
 		INSERT INTO prtf_file (
-			uuid
-			,file_path
+			file_path
 			,file_nm
-			,file_num
-			,int_dt
+			,ins_dt
 			,prtf_num
-			,user_id
 		) VALUES (
-			#{uuid}
-			,#{file_path}
+			#{file_path}
 			,#{file_nm}
-			,#{file_num}
 			,sysdate
 			,#{prtf_num}
-			,#{user_id} )
 	]]>
 </insert>
 
@@ -152,10 +157,4 @@
 	]]>
 </delete>
 
-<!-- 파일 리스트 -->
-<select id ="findByPrtfNum" resultType="com.mypf.portfolio.vo.PfFileVO">
-	<![CDATA[
-		SELECT * FROM prtf_file WHERE prft_num = #{prft_num}
-	]]>
-</select>
 </mapper>

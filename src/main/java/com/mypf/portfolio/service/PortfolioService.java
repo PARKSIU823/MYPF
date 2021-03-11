@@ -14,15 +14,19 @@ public interface PortfolioService {
 	//포폴 조회하기
 	public PortfolioVO pfDetail(int prtfNum) throws Exception;
 	
+	//포폴 조회수 증가
+	public void addHit(int prtfNum) throws Exception;
+	
 	//포폴 등록하기
-//	public void pfAdd(PortfolioVO pf) throws Exception;
-	public void pfAdd(PortfolioVO pf, PfFileVO pfFile) throws Exception;
+	public void pfAdd(PortfolioVO pf) throws Exception;
 	
 	//포폴 수정하기
 	public boolean pfMod(PortfolioVO pf) throws Exception;
-//	public boolean pfMod(PortfolioVO pf, PfFileVO pfFile) throws Exception;
 	
 	//포폴 삭제하기
 	public boolean pfDel(int prftNum) throws Exception;
+	
+	//포폴 첨부파일 조회
+	public List<PfFileVO> getFileList(int prtfNum) throws Exception;
 
 }

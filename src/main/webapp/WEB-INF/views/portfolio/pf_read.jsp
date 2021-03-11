@@ -30,7 +30,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="info title"> 개발기간  <fmt:formatDate value="${pfRead.frm_dt }" pattern="yyyy년 MM월 dd일" type="date"/> ~ <fmt:formatDate value="${pfRead.to_dt }"  pattern="yyyy년 MM월 dd일" type="date"/></td>
+			<td class="info title"> 개발기간  <c:out value="${pfRead.frm_dt }"/> ~ <c:out value="${pfRead.to_dt }" /></td>
 		</tr>
 		<tr>
 			<td class="info title"> 사용 툴 </td>

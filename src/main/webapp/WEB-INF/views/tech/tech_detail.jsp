@@ -121,16 +121,25 @@ ul { list-style:none;}
 				}
 				for (var i = 0, len = list.length || 0; i < len; i++) {
 					if(list[i].depth == 1) {
-						str += "<li class='left clearfix' data-comm_num='"+list[i].comm_num+"'>";
-						str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
-						str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
-						str += " <p>"+list[i].comm_con+"</p></div></li>";
+						if(list[i].del_yn == 'Y') {
+							str += "<li class='left clearfix'>삭제된 댓글입니다.</li>";
+						} else {
+							str += "<li class='left clearfix' data-comm_num='"+list[i].comm_num+"'>";
+							str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
+							str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
+							str += " <p>"+list[i].comm_con+"</p></div></li>";
+						}
 					} else {
-						str += "<img src='/resources/img/reply.png'>";
-						str += " <li class='left clearfix' data-comm_num='"+list[i].comm_num+"'>";
-						str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
-						str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
-						str += " <p>"+list[i].comm_con+"</p></div></li>";
+						if(list[i].del_yn == 'Y') {
+							str += "<img src='/resources/img/reply.png'>";
+							str += "<li class='left clearfix'>삭제된 댓글입니다.</li>";
+						} else {
+							str += "<img src='/resources/img/reply.png'>";
+							str += " <li class='left clearfix' data-comm_num='"+list[i].comm_num+"'>";
+							str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
+							str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
+							str += " <p>"+list[i].comm_con+"</p></div></li>";
+						}
 					}
 				}
 				replyUL.html(str);

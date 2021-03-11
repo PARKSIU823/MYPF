@@ -27,6 +27,12 @@ public class PortfolioServiceImpl implements PortfolioService{
 		log.info("목록 조회 : " + cri);
 		return pfMapper.pfList(cri);
 	}
+	
+	//포폴 전체 개수
+	@Override
+	public int getTotalCount(PfCriteria cri) throws Exception{
+		return pfMapper.getTotalCount(cri);
+	}
 
 	//포폴 조회하기
 	@Override
@@ -47,6 +53,7 @@ public class PortfolioServiceImpl implements PortfolioService{
 			pfFile.setPrtf_num(pf.getPrtf_num());
 			try {
 				pfMapper.pfFileAdd(pfFile);
+				log.info("포폴 파일 저장 : " + pfFile);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -1,5 +1,7 @@
 package com.mypf.user.vo;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class UserCriteria {
 
 	private int pageNum;
@@ -7,6 +9,16 @@ public class UserCriteria {
 	
 	private String type;
 	private String keyword;
+	
+	public String getListLink() {
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+				.queryParam("pageNum", this.pageNum)
+				.queryParam("amount", this.getAmount())
+				.queryParam("type", this.getType())
+				.queryParam("keyword", this.getKeyword());
+		
+		return builder.toUriString();
+	}
 	
 	public UserCriteria() {
 		this(1,10);

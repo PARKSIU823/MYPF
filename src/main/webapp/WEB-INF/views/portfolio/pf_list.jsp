@@ -20,10 +20,10 @@
 	</form>
 	<div class="project">
 		<h3>PORTFOLIO</h3>
-		<ul>
-			<li><a href="#">SIU</a></li>
-			<li><a href="#">EJ</a></li>
-		</ul>
+<!-- 		<ul> -->
+<!-- 			<li><a href="#">SIU</a></li> -->
+<!-- 			<li><a href="#">EJ</a></li> -->
+<!-- 		</ul> -->
 		<table class="pfview">
 			<c:if test="${user.user_auth eq 'A'.charAt(0) }">
 			<tr>
@@ -34,22 +34,28 @@
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="0" end="2" step="1">
 				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+<%-- 				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${pfFile.file_nm }"/></a><br/> <c:out value="${list.prtf_title }"/></td> --%>
 				</c:forEach>
 			</tr>
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="3" end="5" step="1">
 				<td ><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+<%-- 				<td ><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${pfFile.file_nm }"/></a><br/> <c:out value="${list.prtf_title }"/></td> --%>
 				</c:forEach>
 			</tr>
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="6" end="8" step="1">
 				<td ><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+<%-- 				<td ><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${pfFile.file_nm }"/></a><br/> <c:out value="${list.prtf_title }"/></td> --%>
 				</c:forEach>
 			</tr>
 		</table>
 		
 		<!-- 포트폴리오 페이징 -->
 		<div class="pfPage">
+		<form id="actionForm" action="/portfolio/pf_list.do" method="get">
+			<input type='hidden' name='pageNum' value = '${pageMaker.pfCri.pageNum }'>
+			<input type='hidden' name='amount' value = '${pageMaker.pfCri.amount }'>
 			<c:if test="${pageMaker.prev }">
 				<a href="<c:out value='${pageMaker.startPage - 1 }'/>">이전</a>
 			</c:if>
@@ -59,6 +65,7 @@
 			<c:if test="${pageMaker.next }">
 				<a href="<c:out value='${pageMaker.endPage + 1 }'/>">다음</a>
 			</c:if>
+		</form>
 		</div>
 	</div>
 	<!-- 	modal 추가 -->

@@ -14,6 +14,9 @@ public interface PortfolioMapper {
 	//포폴 리스트
 	public List<PortfolioVO> pfList(PfCriteria cri) throws Exception;
 	
+	//포폴 전체 개수
+	public int getTotalCount(PfCriteria cri) throws Exception;
+	
 	//포폴 등록
 	public void pfAdd(PortfolioVO pf) throws Exception;
 	

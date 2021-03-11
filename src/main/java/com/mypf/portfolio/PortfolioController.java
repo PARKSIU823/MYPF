@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,10 +47,12 @@ public class PortfolioController {
 	
 	//포트폴리오 게시판 리스트
 	@RequestMapping(value = "pf_list.do", method=RequestMethod.GET)
-	public String pfList(Model model, PfCriteria cri)  throws Exception{
+	public String pfList(Model model, PfCriteria cri, PfFileVO pfFile, PortfolioVO pf)  throws Exception{
 		log.info("pfList : " + cri);
+		int total = pfService.getTotalCount(cri);
 		model.addAttribute("pfList", pfService.pfList(cri));
-		model.addAttribute("pageMaker", new PfPageDTO(cri, 10));
+		model.addAttribute("pfFile", pfService.getFileList(pfFile.getPrtf_num()));
+		model.addAttribute("pageMaker", new PfPageDTO(cri, total));
 		return "portfolio/pf_list";
 	}
 
@@ -74,12 +77,15 @@ public class PortfolioController {
 		log.info("포트폴리오 작성 : " + pf);
 		pf.setFrm_dt((String)pf.getFrm_dt());
 		pf.setTo_dt((String)pf.getTo_dt());
+		if(pf.getPfFileList() != null) {
+			pf.getPfFileList().forEach(file -> log.info("포트폴리오 파일 : " + file));
+		}
 		pfService.pfAdd(pf);
 		model.addAttribute("result", pf.getPrtf_num());
-		return "portfolio/pf_read.do?prtf_num="+pf.getPrtf_num();
+		return "redirect:/portfolio/pf_list.do";
 	}
 	
-	//포트폴리오 작성시 섬네일 출력
+	//포트폴리오 작성시 썸네일 출력
 	@RequestMapping(value="pfDisplay.do")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String file_nm) {

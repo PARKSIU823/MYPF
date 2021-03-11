@@ -11,6 +11,9 @@ public interface PortfolioService {
 	//포폴 리스트 불러오기
 	public List<PortfolioVO> pfList(PfCriteria cri) throws Exception;
 	
+	//포폴 전체 개수
+	public int getTotalCount(PfCriteria cri) throws Exception;
+	
 	//포폴 조회하기
 	public PortfolioVO pfDetail(int prtfNum) throws Exception;
 	
@@ -28,5 +31,6 @@ public interface PortfolioService {
 	
 	//포폴 첨부파일 조회
 	public List<PfFileVO> getFileList(int prtfNum) throws Exception;
+	
 
 }

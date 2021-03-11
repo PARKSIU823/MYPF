@@ -1,5 +1,8 @@
 package com.mypf.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -203,18 +207,16 @@ public class UserController {
 	
 	//회원 권한 수정
 	@RequestMapping(value= "userAuth.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String userAuth(HttpServletRequest request, UserVO user, Model model) throws Exception{
+	public String userAuth(UserVO user) throws Exception{
 		log.info("회원 권한 수정 : " +user);
-//
-//		HttpSession session = request.getSession();
-//		UserVO sessionUser = (UserVO) session.getAttribute("user_auth");
-//		  if(sessionUser.getUser_auth() != 'A') {
-//		  return "redirect:/index.do";
-//		  }else {
-		  model.addAttribute("userAuth", "success");
-		  uService.userAuth(user);
-//		  }
+		List<UserVO> userList = new ArrayList<UserVO>();
+		userList.forEach(users -> {
+			try {
+				uService.userAuth(user);
+			}catch (Exception e) {
+				log.error("권한 수정 오류 : " + e.getMessage());
+			}
+		});
 		 
 		return "redirect:/user/user_management.do";
 	}

@@ -33,12 +33,12 @@
 			<td class="info title"> 개발기간  <c:out value="${pfRead.frm_dt }"/> ~ <c:out value="${pfRead.to_dt }" /></td>
 		</tr>
 		<tr>
-			<td class="info title"> 사용 툴 </td>
+<!-- 			<td class="info title"> 사용 툴 </td> -->
 		</tr>
 		<tr>
 			<td class="info">
 <%-- 				 ◀ <c:forEach items="${pfFileList }" var="fList"> <img src="<c:out value='${thumb.file_path }'/>"></c:forEach>▶</td> --%>
-				 ◀ <img src="${path }/resources/img/pfview.png" style="height: 150px; width: 150px;"> ▶</td>
+<%-- 				 ◀ <img src="${path }/resources/img/pfview.png" style="height: 150px; width: 150px;"> ▶</td> --%>
 		</tr>	
 	</table>
 	<!-- 상세 내용 테이블 -->

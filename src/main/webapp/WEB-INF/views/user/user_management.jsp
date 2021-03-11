@@ -14,11 +14,11 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 
-<form id="actionForm" method="get" action="/user/user_management.do">
+<form id="actionForm" method="post" action="/user/user_management.do">
 	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"/>
 	<input type="hidden" name="amount" value="${pageMaker.cri.amount }"/>
 </form>
-<form>
+<form id="authForm" method="post" action="/user/userAuth.do">
 	<div class="userList">
 		<h3>MANAGEMENT</h3>
 		<table class="uList">
@@ -56,39 +56,45 @@
 			</c:forEach>
 			<tr>
 				<td colspan="6">
-				<button type="submit" name="authBbt" class="bbt" style="float: right;">권한 수정</button>
+				<button type="submit" id="authBbt" name="authBbt" class="bbt" style="float: right;">권한 수정</button>
 				</td>
 			</tr>
 		</table>
-			
-		<!-- 검색 -->
-		<div class="userSearch">
-			<select name="userOpt" class="userOpt">
-				<option>선택</option>
-				<option value="user_id">아이디</option>
-				<option value="user_nm">이름</option>
-				<option value="user_mail">이메일</option>
-			</select>
-			<input type="text" name="searchWord" class="underline"/>
-			<button type="submit" name="searchBbt" class="bbt" onclick="fn_userSearch();">검색</button>
-		</div>
-		
-		<!-- 회원관리 페이징 -->
-		<div class="userPage">
-			<c:if test="${pageMaker.prev }">
-				<li><a href="<c:out value='${pageMaker.startPage-1}'/>">이전</a></li>
-			</c:if>
-			<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-				<li class="userPagination"><a href="<c:out value='${num}'/>">${num }</a></li>
-			</c:forEach>
-			<c:if test="${pageMaker.next }">
-				<li><a href="<c:out value='${pageMaker.endPage+1}'/>">다음</a></li>
-			</c:if>
-		</div>
+	</div>
+</form>
+
+<form id="searchForm" action="/user/user_management.do" method="get">
+	<!-- 검색 -->
+	<div class="userSearch">
+		<select name="userOpt" class="userOpt">
+			<option>선택</option>
+			<option value="user_id" <c:out value="${pageMaker.cri.type eq 'user_id'?'selected' :'' }"/>>아이디</option>
+			<option value="user_nm" <c:out value="${pageMaker.cri.type eq 'user_nm'?'selected' :'' }"/>>이름</option>
+			<option value="user_mail" <c:out value="${pageMaker.cri.type eq 'user_mail'?'selected' :'' }"/>>이메일</option>
+		</select>
+		<input type="text" name="keyword" class="underline" value='<c:out value="${pageMaker.cri.keyword }"/>'/>
+		<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum }"/>' />
+		<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount }"/>' />
+		<button type="submit" name="searchBbt" class="bbt">검색</button>
+	</div>
+</form>			
+<form id='actionForm' action="/user/user_management.do" method='get'>
+	<!-- 회원관리 페이징 -->
+	<div class="userPage">
+		<c:if test="${pageMaker.prev }">
+			<li class="userPagination"><a href="<c:out value='${pageMaker.startPage-1}'/>">이전</a></li>
+		</c:if>
+		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+			<li class="userPagination"><a href="<c:out value='${num}'/>">${num }</a></li>
+		</c:forEach>
+		<c:if test="${pageMaker.next }">
+			<li class="userPagination"><a href="<c:out value='${pageMaker.endPage+1}'/>">다음</a></li>
+		</c:if>
 	</div>
 </form>
 <script type="text/javascript">
 $(document).ready(function(){
+	//페이징
 	var actionForm = $("#actionForm");
 	$('.userPagination a').on("click", function(e) {
 		e.preventDefault();
@@ -96,6 +102,25 @@ $(document).ready(function(){
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		actionForm.submit();
 	})
+	
+	//검색
+	var searchForm = $("#searchForm");
+	$("#searchForm button").on("click", function(e){
+		if(!searchForm.find("input[name='keyword']").val()){
+			alert("키워드를 입력하세요.");
+			return false;
+		}
+		searchForm.find("input[name='pageNum']").val("1");
+		e.preventDefault();
+		searchForm.submit();
+	})
+
+	//권한 수정
+	var authForm = $("#authForm");
+	$('#authBbt').on("click", function(e) {
+		authForm.submit();
+	})
+	
 });
 
 

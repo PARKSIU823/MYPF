@@ -42,31 +42,8 @@
 			,'U'
 		)
 	]]>
-<!-- 		INSERT INTO user_info ( -->
-<!-- 			user_nm -->
-<!-- 			,user_cnt -->
-<!-- 			,user_id -->
-<!-- 			,user_pw -->
-<!-- 			,user_mail -->
-<!-- 			,user_addr -->
-<!-- 			,user_photo -->
-<!-- 			,user_tel -->
-<!-- 			,join_dt -->
-<!-- 			,user_auth -->
-<!-- 		) VALUES ( -->
-<!-- 			#{user_nm} -->
-<!-- 			,#{user_cnt} -->
-<!-- 			,#{user_id} -->
-<!-- 			,#{user_pw} -->
-<!-- 			,#{user_mail} -->
-<!-- 			,#{user_addr} -->
-<!-- 			,#{user_photo} -->
-<!-- 			,#{user_tel} -->
-<!-- 			,sysdate -->
-<!-- 			,'U' -->
-<!-- 		) -->
-
 </insert>
+
 <!-- 아이디 중복 확인 -->
 <select id="chkID" resultType="int">
 	<![CDATA[
@@ -128,39 +105,38 @@
 			WHERE
 			 rownum <= #{pageNum} * #{amount}
 			)
-		WHERE rn> (#{pageNum} -1 ) * #{amount}
+		WHERE 
+		]]>
+		<include refid="userCriteria"></include>
+		<![CDATA[
+		rn> (#{pageNum} -1 ) * #{amount}
 		ORDER BY rn DESC
 	]]>
-<!-- 			<if test="type == 'user_id'.toString()"> -->
-<!-- 				(user_id like '%'||#{keyword}||'%') AND -->
-<!-- 			</if> -->
-<!-- 			<if test="type == 'user_nm'.toString()"> -->
-<!-- 				(user_nm like '%'||#{keyword}||'%') AND -->
-<!-- 			</if> -->
-<!-- 			<if test="type == 'user_mail'.toString()"> -->
-<!-- 				(user_mail like '%'||#{keyword}||'%') AND -->
-<!-- 			</if> -->
 </select>
 
 <!-- 로그인 -->
 <select id="userLogin" resultType="com.mypf.user.vo.UserVO">
-	SELECT 
-		user_nm 
-		,user_id
-		,user_pw
-		,user_mail
-		,user_addr
-		,user_tel
-		,user_auth
-	FROM user_info
-	WHERE user_id = #{user_id}
-		AND user_pw = #{user_pw}
+	<![CDATA[
+		SELECT 
+			user_nm 
+			,user_id
+			,user_pw
+			,user_mail
+			,user_addr
+			,user_tel
+			,user_auth
+		FROM user_info
+		WHERE user_id = #{user_id}
+			AND user_pw = #{user_pw}
+	]]>
 </select>
 
 <!-- 회원탈퇴 -->
 <delete id="userDel">
-	DELETE FROM user_info
-	WHERE user_id = #{user_id}
+	<![CDATA[
+		DELETE FROM user_info
+		WHERE user_id = #{user_id}
+	]]>
 </delete>
 
 <!-- 비밀번호 확인 -->
@@ -195,6 +171,33 @@
 
 <!-- 회원 리스트 전체 회원 수 -->
 <select id="getTotalCount" resultType="int">
-	SELECT COUNT(*) FROM user_info where user_count > 0
+	<![CDATA[
+		SELECT COUNT(*) FROM user_info where 
+	]]>
+	<include refid="userCriteria"></include>
+	<![CDATA[
+		user_count > 0
+	]]>
 </select>
+
+<!-- UserCriteria -->
+<sql id="userCriteria">
+	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<foreach item='type' collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type == 'user_id'.toString()">
+						user_id like '%'||#{keyword}||'%'
+					</when>
+					<when test="type == 'user_nm'.toString()">
+						user_nm like '%'||#{keyword}||'%'
+					</when>
+					<when test="type == 'user_mail'.toString()">
+						user_mail like '%'||#{keyword}||'%'
+					</when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+</sql>
 </mapper>

@@ -54,7 +54,7 @@ $(document).ready(function(){
 	})(); // end function
 	$(".uploadResult").on("click", "button", function(e){
 		console.log("delete file");
-		if(confirm("Remove this file? ")) {
+		if(confirm("이 파일을 삭제하시겠습니까? ")) {
 			var targetLi = $(this).closest("li");
 			targetLi.remove();
 		}

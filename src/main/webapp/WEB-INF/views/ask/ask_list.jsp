@@ -24,6 +24,7 @@
 </script>
 </head>
 <body>
+<fmt:formatDate var="cdate" value="${cdate }" pattern="yyyy-MM-dd"/>
 <jsp:include page="../main/header.jsp"/>
 <div class="inquery">
 	<h3><a href="ask_list.do">문의 게시판</a></h3>
@@ -39,11 +40,27 @@
 					<c:forEach items="${list}" var="list">
 						<tr>
 							<td class="title02"><c:out value="${list.ask_num}"/></td>
-							<td class="title02" style="text-align: left;">
-								<a href="ask_detail.do?ask_num=${list.ask_num}">${list.ask_title}</a></td>
+								<fmt:formatDate var="date" value="${list.ins_dt }" pattern="yyyy-MM-dd"/>
+									<c:choose>
+										<c:when test="${cdate eq date }">
+											<td class="title02" style="text-align: left;">
+											<a href="ask_detail.do?ask_num=${list.ask_num}">${list.ask_title}&nbsp;<img src="/resources/img/new.png" style="width:25px;"></a></td>
+										</c:when>
+										<c:otherwise>
+											<td class="title02" style="text-align: left;">
+											<a href="ask_detail.do?ask_num=${list.ask_num}">${list.ask_title}</a></td>
+										</c:otherwise>
+									</c:choose>
 							<td class="title02"><c:out value="${list.writer_nm}"/></td>
 							<td class="title02"><c:out value="${list.comm_yn}"/></td>
-							<td class="title02"><fmt:formatDate value="${list.ins_dt}" pattern="yyyy-MM-dd"/></td>
+								<c:choose>
+									<c:when test="${cdate eq date }">
+										<td class="title02"><fmt:formatDate value="${list.ins_dt}" pattern="hh:mm"/></td>
+									</c:when>
+									<c:otherwise>
+										<td class="title02"><fmt:formatDate value="${list.ins_dt}" pattern="yyyy-MM-dd"/></td>
+									</c:otherwise>
+								</c:choose>
 						</tr>
 					</c:forEach>
 					<tr>

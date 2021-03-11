@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -54,6 +55,8 @@ public class TechController {
 	
 	@Autowired
 	private TechService service;
+	@Autowired
+	private HttpSession session;
 	
 	// 기술 게시판 목록 조회
 	@RequestMapping(value="tech_list.do", method=RequestMethod.GET)
@@ -63,6 +66,9 @@ public class TechController {
 		int total = service.getTotal(cri);
 		
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		
+		Date cdate = new Date();
+		session.setAttribute("cdate", cdate);
 	}
 	
 	// 기술 게시판 글 작성 화면

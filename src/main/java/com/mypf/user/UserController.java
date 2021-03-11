@@ -28,8 +28,6 @@ public class UserController {
 	@Autowired
 	private UserService uService;
 	
-	//비밀번호 암호화
-	BCryptPasswordEncoder pwdEncoder;
 	
 	//회원 가입
 	@RequestMapping(value = "register.do", method = RequestMethod.GET)
@@ -44,10 +42,12 @@ public class UserController {
 			if(result == 1) {
 				return "/user/register";
 			} else if(result == 0) {
-				//암호화 비밀번호
-//				String userPW = user.getUser_pw();
-//				String encodePW  = pwdEncoder.encode(userPW);
-//				user.setUser_pw(encodePW);
+				//비밀번호 암호화
+				BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+				String userPW = user.getUser_pw();
+				String encodePW  = pwdEncoder.encode(userPW);
+				user.setUser_pw(encodePW);
+				user.setUser_addr((String)(user.getUser_addr01()+user.getUser_addr02()+user.getUser_addr03()));
 				uService.register(user);
 			}
 		} catch (Exception e) {
@@ -101,8 +101,11 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "find_pw.do", method = RequestMethod.POST)
 	public String findPw(UserVO user, Model model) throws Exception{
-		String user_pw = uService.findPW(user);
-		return user_pw;
+		//비밀번호 암호화
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		String userPW = user.getUser_pw();
+		String encodePW  = pwdEncoder.encode(userPW);
+		return encodePW;
 	}
 	
 	//로그인 페이지
@@ -114,8 +117,11 @@ public class UserController {
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String login(UserVO user, HttpServletRequest request, Model model) throws Exception{
 		log.info("로그인");
+		//세션 생성
 		HttpSession session = request.getSession();
 		UserVO login = uService.userLogin(user);
+		//비밀번호 암호화
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
 //		boolean pwMatch = pwdEncoder.matches(user.getUser_pw(), login.getUser_pw());
 //		if(login!= null && pwMatch == true) {
 		if(login!= null) {

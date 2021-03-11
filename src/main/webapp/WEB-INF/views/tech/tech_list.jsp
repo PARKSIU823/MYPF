@@ -10,6 +10,7 @@
 <title>기술 게시판</title>
 <link href="${path}/resources/css/style.css" rel="stylesheet" >
 <style type="text/css">
+.pagination {margin-left: 5%;}
 .pagination	li {list-style: none; float: left; padding: 6px; font-family:'Nanum Gothic', sans-serif; font-weight: bold;}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

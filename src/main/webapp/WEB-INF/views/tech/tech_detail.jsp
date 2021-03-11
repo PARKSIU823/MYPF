@@ -27,6 +27,7 @@
 .bigPicture { position: relative; display:flex; justify-content:center; align-items: center; }
 .bigPicture img { width:600px; }
 ul { list-style:none;}
+.paging {margin-left: 30%;}
 .paging	.page-item {list-style: none; float: left; padding: 6px; font-family:'Nanum Gothic', sans-serif; font-weight: bold;}
 </style>
 <script>

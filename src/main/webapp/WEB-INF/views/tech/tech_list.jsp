@@ -92,6 +92,7 @@
 	<div class='searcht'>
 			<form id='searchForm' action='tech_list.do' method='get'>
 				<select class='sOpt' name='type'>
+					<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'?'selected' :'' }"/>>제목or내용</option>
 					<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected' :'' }"/>>제목</option>
 					<option value="U" <c:out value="${pageMaker.cri.type eq 'U'?'selected' :'' }"/>>이름</option>
 					<option value="G" <c:out value="${pageMaker.cri.type eq 'G'?'selected' :'' }"/>>카테고리</option>

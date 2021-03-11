@@ -42,6 +42,7 @@
 	
 	<sql id="search">
 		<if test="searchType != null">
+			<if test="searchType == 'TC'.toString()">AND ASK_TITLE LIKE '%' || #{keyword} || '%' OR ASK_CON LIKE '%' || #{keyword} || '%'</if>
 			<if test="searchType == 'T'.toString()">AND ASK_TITLE LIKE '%' || #{keyword} || '%'</if>
 			<if test="searchType == 'W'.toString()">AND WRITER_NM LIKE '%' || #{keyword} || '%'</if>
 			<if test="searchType == 'C'.toString()">AND ASK_CON LIKE '%' || #{keyword} || '%'</if>

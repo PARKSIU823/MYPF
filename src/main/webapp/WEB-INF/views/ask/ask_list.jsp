@@ -31,7 +31,7 @@
 			<table class="ilist" style="text-align: center">
 				<thead>
 					<th class="underline title01" style="width:100px">번호</th>
-					<th class="underline title01" style="width:450px">제목</th>
+					<th class="underline title01" style="width:450px">문의 제목</th>
 					<th class="underline title01" style="width:200px">이름</th>
 					<th class="underline title01" style="width:100px">답변 여부</th>		
 					<th class="underline title01" style="width:200px">작성일</th>
@@ -53,9 +53,10 @@
 		</form>	
 		<div class="searcht">
 			<select class="sOpt" name="searchType">
-				<option value="T"<c:out value="${scri.searchType eq 'T' ? 'selected': ''}"/>>제목</option>
+				<option value="TC"<c:out value="${scri.searchType eq 'TC' ? 'selected': ''}"/>>문의 제목or문의 내용</option>
+				<option value="T"<c:out value="${scri.searchType eq 'T' ? 'selected': ''}"/>>문의 제목</option>
 				<option value="W"<c:out value="${scri.searchType eq 'W' ? 'selected': ''}"/>>이름</option>
-				<option value="C"<c:out value="${scri.searchType eq 'C' ? 'selected': ''}"/>>내용</option>
+				<option value="C"<c:out value="${scri.searchType eq 'C' ? 'selected': ''}"/>>문의 내용</option>
 				<option value="Y"<c:out value="${scri.searchType eq 'C' ? 'selected': ''}"/>>답변 여부</option>
 			</select>
 			<input class="underline" type="text" placeholder="키워드를 입력하세요." name="keyword" id="keywordInput" value="${scri.keyword }"/>

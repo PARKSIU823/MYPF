@@ -1,6 +1,9 @@
 package com.mypf.ask;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.mypf.ask.service.AskService;
 import com.mypf.ask.vo.AskCommVO;
 import com.mypf.ask.vo.AskVO;
-import com.mypf.ask.vo.Criteria;
 import com.mypf.ask.vo.PageMaker;
 import com.mypf.ask.vo.SearchCriteria;
 
@@ -25,6 +27,8 @@ public class AskController {
 	
 	@Autowired
 	private AskService askService;
+	@Autowired
+	private HttpSession session;
 	
 	// 문의 게시판 글 작성 화면
 	@RequestMapping(value="ask_write.do", method = RequestMethod.GET)
@@ -38,7 +42,7 @@ public class AskController {
 		return "redirect:ask_write.do";
 	}
 	
-	// 문의 게시판 글 목록
+	// 문의 게시판 목록 조회
 	@RequestMapping(value="ask_list.do", method = RequestMethod.GET)
 	public String askList(SearchCriteria scri, HttpServletRequest request, Model model) throws Exception {
 		model.addAttribute("list",askService.askList(scri));
@@ -48,6 +52,9 @@ public class AskController {
 		pageMaker.setTotalCount(askService.askCount(scri));
 		
 		model.addAttribute("pageMaker", pageMaker);
+		
+		Date cdate = new Date();
+		session.setAttribute("cdate", cdate);
 		return "ask/ask_list";
 	}
 	

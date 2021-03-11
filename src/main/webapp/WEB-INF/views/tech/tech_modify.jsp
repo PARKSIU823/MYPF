@@ -34,7 +34,7 @@ $(document).ready(function(){
 					var fileCallPath = encodeURIComponent(file.file_path+"/s_"+file.uuid+"_"+file.file_nm);
 					str += "<li data-path='"+file.file_path+"' data-uuid='"+file.uuid+"' data-filename = '"+file.file_nm+"' data-type='"+file.file_type+"' ><div>";
 					str += "<span> "+ file.file_nm+"</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' "
+					str += "<button type='button' class='bbt02' data-file=\'"+fileCallPath+"\' data-type='image' "
 					str += ">X</button><br>";
 					str += "<img src='/tech/display.do?file_nm="+fileCallPath+"'>";
 					str += "</div>";
@@ -42,7 +42,7 @@ $(document).ready(function(){
 				} else {
 					str += "<li data-path='"+file.file_path+"' data-uuid='"+file.uuid+"' data-filename='"+file.file_nm+"' data-type='"+file.file_type+"' ><div>";
 					str += "<span> "+file.file_nm+"</span><br/>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' "
+					str += "<button type='button' class='bbt02' data-file=\'"+fileCallPath+"\' data-type='file' "
 					str += ">x</button><br>";
 					str += "<img src='/resources/img/attach.png'></a>";
 					str += "</div>";
@@ -54,7 +54,7 @@ $(document).ready(function(){
 	})(); // end function
 	$(".uploadResult").on("click", "button", function(e){
 		console.log("delete file");
-		if(confirm("Remove this file? ")) {
+		if(confirm("이 파일을 삭제하시겠습니까? ")) {
 			var targetLi = $(this).closest("li");
 			targetLi.remove();
 		}
@@ -85,7 +85,7 @@ $(document).ready(function(){
 				str += " data-uuid='"+obj.uuid+"' data-filename='"+obj.file_nm+"' data-type='"+obj.file_type+"'";
 				str += " ><div>";
 				str += "<span> "+ obj.file_nm+"</span>";
-				str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+				str += "<button type='button' class='bbt02' data-file=\'"+fileCallPath+"\' "
 				str += "data-type='image'>X</button><br>";
 				str += "<img src='/tech/display.do?file_nm="+fileCallPath+"'>";
 				str += "</div>";
@@ -97,7 +97,7 @@ $(document).ready(function(){
 				str += "<li ";
 				str += "data-path='"+obj.file_path+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.file_nm+"' data-type='"+obj.file_type+"'><div>";
 				str += "<span> "+obj.file_nm + "</span>";
-				str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file'>X</button><br>";
+				str += "<button type='button' class='bbt02' data-file=\'"+fileCallPath+"\' data-type='file'>X</button><br>";
 				str += "<img src='/resources/img/attach.png'></a>";
 				str += "</div>";
 				str +"</li>";
@@ -175,6 +175,17 @@ $(document).ready(function(){
 			str += "<input type = 'hidden' name = 'fileList["+i+"].file_path'value='"+jobj.data("path")+"'>";
 			str += "<input type = 'hidden' name = 'fileList["+i+"].file_type'value='"+jobj.data("type")+"'>";
 		});
+		
+		if($("#tech_title").val()=="") {
+			alert("제목을 입력하세요.");
+			return false;
+		}
+		if($("#tech_con").val()=="") {
+			alert("내용을 입력하세요.");
+			return false;
+		}
+		alert("수정 완료되었습니다.")
+		
 		formObj.append(str).submit();
 	}
 

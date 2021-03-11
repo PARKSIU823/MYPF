@@ -15,6 +15,7 @@ public class TechCommVO {
 	 *	depth : 댓글 깊이
 	 *	ins_dt : 작성일
 	 *	upt_dt : 수정일
+	 *	del_yn : 삭제 여부
 	 */
 	private String user_id;
 	private int tech_num;
@@ -24,5 +25,6 @@ public class TechCommVO {
 	private int depth;
 	private Date ins_dt;
 	private Date upt_dt;
+	private char del_yn;
 	
 }

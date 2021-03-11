@@ -53,6 +53,7 @@
 </script>
 </head>
 <body>
+<fmt:formatDate var="cdate" value="${cdate }" pattern="yyyy-MM-dd"/>
 <jsp:include page="../main/header.jsp"/>
 <div class="tech">
 	<h3><a href="tech_list.do">기술 게시판</a></h3>
@@ -63,7 +64,6 @@
  			<th class="underline title01" style="width:450px">제목</th>
  			<th class="underline title01" style="width:150px">이름</th>
  			<th class="underline title01" style="width:200px">작성일</th>
- 			<th class="underline title01" style="width:200px">수정일</th>
  			<th class="underline title01" style="width:100px">조회</th>
  		</tr>
  			<c:forEach items="${list }" var="board">
@@ -71,19 +71,34 @@
  					<td class="title02"><c:out value="${board.tech_num}" /></td>
  					<td class="title02"><c:out value="${board.tech_category }" /></td>
  					<td class="title02" style="text-align: left;">
- 						<a class='move' href='<c:out value="${board.tech_num }"/>'>
-						<c:out value="${board.tech_title}" />&nbsp;<b>[<c:out value="${board.commCnt }" />]</b></a></td>
+ 						<fmt:formatDate var="date" value="${board.ins_dt }"  pattern="yyyy-MM-dd"/>
+ 							<c:choose>
+ 								<c:when test="${cdate eq date }">
+ 									<a class='move' href='<c:out value="${board.tech_num }"/>'>
+									<c:out value="${board.tech_title}" />&nbsp;<b>[<c:out value="${board.commCnt }" />]</b>&nbsp;<img src="/resources/img/new.png" style="width:25px;"></a></td>
+ 								</c:when>
+ 								<c:otherwise>
+ 									<a class='move' href='<c:out value="${board.tech_num }"/>'>
+									<c:out value="${board.tech_title}" />&nbsp;<b>[<c:out value="${board.commCnt }" />]</b></a></td>
+ 								</c:otherwise>
+ 							</c:choose>
  					<td class="title02"><c:out value="${board.user_id}" /></td>
- 					<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.ins_dt}" /></td>
- 					<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.upt_dt}" /></td>
+ 						<c:choose>
+ 							<c:when test="${cdate eq date }">
+ 								<td class="title02"><fmt:formatDate pattern="HH:mm" value="${board.ins_dt}" /></td>
+ 							</c:when>
+ 							<c:otherwise>
+ 								<td class="title02"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.ins_dt}" /></td>
+ 							</c:otherwise>
+ 						</c:choose>
  					<td class="title02"><c:out value="${board.hit}" /></td>
 		 		</tr>
  		</c:forEach>
 		 		<tr>
- 					<td colspan="7" class="underline"></td>
+ 					<td colspan="6" class="underline"></td>
  				</tr>
  			<tr>
-					<td colspan="7">
+					<td colspan="6">
 						<input type="button" class="bbt" value="글작성" style="float: right;" onclick="location.href='tech_write.do'">
 					</td>
 			</tr>
@@ -92,6 +107,7 @@
 	<div class='searcht'>
 			<form id='searchForm' action='tech_list.do' method='get'>
 				<select class='sOpt' name='type'>
+					<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'?'selected' :'' }"/>>제목or내용</option>
 					<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected' :'' }"/>>제목</option>
 					<option value="U" <c:out value="${pageMaker.cri.type eq 'U'?'selected' :'' }"/>>이름</option>
 					<option value="G" <c:out value="${pageMaker.cri.type eq 'G'?'selected' :'' }"/>>카테고리</option>

@@ -40,7 +40,23 @@
 				str += "<input type = 'hidden' name = 'fileList["+i+"].file_path'value='"+jobj.data("path")+"'>";
 				str += "<input type = 'hidden' name = 'fileList["+i+"].file_type'value='"+jobj.data("type")+"'>";
 			});
+			
+			if($("#user_id").val()==""){
+				alert("이름을 입력하세요.");
+				return false;
+			}
+			if($("#tech_title").val()==""){
+				alert("제목을 입력하세요.");
+				return false;
+			}
+			if($("#tech_con").val()==""){
+				alert("내용을 입력하세요.");
+				return false;
+			}
+			alert("작성 완료되었습니다.");
+			
 			formObj.append(str).submit();
+			
 		});
 		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 		var maxSize = 5242880; //5MB
@@ -67,7 +83,7 @@
 					str += " data-uuid='"+obj.uuid+"' data-filename='"+obj.file_nm+"' data-type='"+obj.file_type+"'";
 					str += " ><div>";
 					str += "<span> "+ obj.file_nm+"</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+					str += "<button type='button' class='bbt02' data-file=\'"+fileCallPath+"\' "
 					str += "data-type='image'>X</button><br>";
 					str += "<img src='/tech/display.do?file_nm="+fileCallPath+"'>";
 					str += "</div>";
@@ -79,7 +95,7 @@
 					str += "<li ";
 					str += "data-path='"+obj.file_path+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.file_nm+"' data-type='"+obj.file_type+"'><div>";
 					str += "<span> "+obj.file_nm + "</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file'>X</button><br>";
+					str += "<button type='button' class='bbt02' data-file=\'"+fileCallPath+"\' data-type='file'>X</button><br>";
 					str += "<img src='/resources/img/attach.png'></a>";
 					str += "</div>";
 					str +"</li>";
@@ -141,7 +157,7 @@
 				<table class="wform">
 					<tr>
 						<td class="title">
-							<label for="user_id">이름</label><input class="infield" type="text" name="user_id"/>
+							<label for="user_id">이름</label><input class="infield" type="text" name="user_id" id="user_id"/>
 						</td>
 					</tr>
 					<tr>
@@ -160,12 +176,12 @@
 					</tr>
 					<tr>
 						<td class="title">
-							<label for="tech_title">제목</label><input class="infield" type="text" name="tech_title"/>
+							<label for="tech_title">제목</label><input class="infield" type="text" name="tech_title" id="tech_title"/>
 						</td>
 					</tr>	
 					<tr>
 						<td class="title">
-							<label for="tech_con">내용</label><textarea class="con" name="tech_con"></textarea>
+							<label for="tech_con">내용</label><textarea class="con" name="tech_con" id="tech_con"></textarea>
 						</td>
 					</tr>
 					<tr>

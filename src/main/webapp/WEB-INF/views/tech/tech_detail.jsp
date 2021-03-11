@@ -27,6 +27,7 @@
 .bigPicture { position: relative; display:flex; justify-content:center; align-items: center; }
 .bigPicture img { width:600px; }
 ul { list-style:none;}
+.paging {margin-left: 30%;}
 .paging	.page-item {list-style: none; float: left; padding: 6px; font-family:'Nanum Gothic', sans-serif; font-weight: bold;}
 </style>
 <script>
@@ -75,7 +76,7 @@ ul { list-style:none;}
 					}
 				});
 				function showImage(fileCallPath){
-					alert(fileCallPath);
+					console.log(fileCallPath);
 					$(".bigPictureWrapper").css("display", "flex").show();
 					$(".bigPicture")
 					.html("<img src='/tech/display.do?file_nm="+fileCallPath+"'>")
@@ -121,16 +122,23 @@ ul { list-style:none;}
 				}
 				for (var i = 0, len = list.length || 0; i < len; i++) {
 					if(list[i].depth == 1) {
-						str += "<li class='left clearfix' data-comm_num='"+list[i].comm_num+"'>";
-						str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
-						str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
-						str += " <p>"+list[i].comm_con+"</p></div></li>";
+						if(list[i].del_yn == 'Y') {
+							str += "<li class='chat-li'>삭제된 댓글입니다.</li>";
+						} else {
+							str += "<li class='chat-li' data-comm_num='"+list[i].comm_num+"'>";
+							str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
+							str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
+							str += " <p>"+list[i].comm_con+"</p></div></li>";
+						}
 					} else {
-						str += "<img src='/resources/img/reply.png'>";
-						str += " <li class='left clearfix' data-comm_num='"+list[i].comm_num+"'>";
-						str += " <div><div class='header'><strong class='primary-font'>"+list[i].user_id+"</strong>";
-						str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
-						str += " <p>"+list[i].comm_con+"</p></div></li>";
+						if(list[i].del_yn == 'Y') {
+							str += "<li class='chat-li'><img src='/resources/img/reply.png' style='width:23px;'>삭제된 댓글입니다.</li>";
+						} else {
+							str += " <li class='chat-li' data-comm_num='"+list[i].comm_num+"'>";
+							str += " <div><div class='header'><strong class='primary-font'><img src='/resources/img/reply.png' style='width:23px;'>"+list[i].user_id+"</strong>";
+							str += " <small class='pull-right text-muted'>"+replyService.displayTime(list[i].ins_dt)+"</small></div>";
+							str += " <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+list[i].comm_con+"</p></div></li>";
+						}
 					}
 				}
 				replyUL.html(str);
@@ -232,7 +240,8 @@ ul { list-style:none;}
 			};
 			replyService.add(reply, function(result){
 				
-				alert(result);
+				console.log(result);
+				alert("댓글이 등록되었습니다.");
 				
 				modal.find("input").val("");
 				modal.find("textarea").val("");
@@ -294,7 +303,8 @@ ul { list-style:none;}
 			};
 			replyService.add(reply, function(result){
 				
-				alert(result);
+				console.log(result);
+				alert("답글이 등록되었습니다.");
 				
 				modal.find("input").val("");
 				modal.find("textarea").val("");
@@ -309,7 +319,8 @@ ul { list-style:none;}
 		modalModBtn.on("click", function(e){
 			var reply = {comm_num:modal.data("comm_num"), comm_con:modalInputComm_con.val()};
 			replyService.update(reply, function(result){
-				alert(result);
+				console.log(result);
+				alert("댓글이 수정되었습니다.");
 				modal.modal("hide");
 				showList(pageNum);
 			});
@@ -318,7 +329,8 @@ ul { list-style:none;}
 		modalRemoveBtn.on("click", function (e){
 			var comm_num = modal.data("comm_num");
 			replyService.remove(comm_num, function(result){
-				alert(result);
+				console.log(result);
+				alert("댓글이 삭제되었습니다.");
 				modal.modal('hide');
 				showList(pageNum);
 				modal.find("input").val("");
@@ -504,7 +516,7 @@ $(document).ready(function(){
 							</div>
 							<!-- 첨부파일 목록-->
 							<div class="row">
-								<div class="heading"><label class="title">첨부파일</label></div>
+								<div class="heading"><label class="title">첨부파일(※클릭 시 이미지 파일은 원본 파일이 생성되고, 그 외 파일은 다운로드됩니다.)</label></div>
 								<div class="body">
 									<div class='uploadResult'>
 										<ul>
@@ -532,7 +544,7 @@ $(document).ready(function(){
 					</div>
 					<div class="body">
 						<ul class="chat">
-							<li class="left clearfix" data-comm_num='12'>
+							<li class="chat-li" data-comm_num='12'>
 								<div>
 									<div class="header">
 										<strong class="primary-font"></strong>
@@ -561,12 +573,12 @@ $(document).ready(function(){
 				</div>
 			<div class="modal-body">
 				<div class="form-group">
-				 	<label>이름</label>
-				 	<input class="form-control" name='user_id' value='user_id'>
+				 	<label class="title">이름</label>
+				 	<input type="text" name='user_id' value='user_id'/>
 				</div>
 				<div class="form-group">
-					<label>내용</label>
-					<textarea class="form-control" cols="40" rosw="10" style="resize: none;" name='comm_con' value="New Reply!!!"></textarea>
+					<label class="title">내용</label>
+					<textarea style="width:350px; height:70px; resize: none;" name='comm_con' value="New Reply!!!"></textarea>
 				</div>
 			</div>
 		<div class="modal-footer">

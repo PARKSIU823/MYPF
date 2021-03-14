@@ -2,19 +2,23 @@ package com.mypf.user;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mypf.user.service.UserService;
@@ -31,15 +35,21 @@ public class UserController {
 
 	@Autowired
 	private UserService uService;
+		
+	@Autowired
+	private JavaMailSender mailSender;
 	
-	
+	private boolean lowerCheck;
+	private int size;
+
 	//회원 가입
 	@RequestMapping(value = "register.do", method = RequestMethod.GET)
 	public String registerForm() throws Exception{
 		return "user/register";
 	}
+
 	@RequestMapping(value = "register.do", method = RequestMethod.POST)
-	public String register(UserVO user, Model model) throws Exception{
+	public String register(UserVO user, Model model, HttpServletRequest request) throws Exception{
 		log.info("회원 가입 : " + user);
 		int result = uService.chkID(user);
 		try {
@@ -52,14 +62,57 @@ public class UserController {
 				String encodePW  = pwdEncoder.encode(userPW);
 				user.setUser_pw(encodePW);
 				uService.register(user);
+//				String key = getKey(false, 20);
+//				String user_mail = user.getUser_mail();
+//				MimeMessage mail = mailSender.createMimeMessage();
+//				String htmlStr = "<h2>안녕하세요. </h2><br><br>" 
+//						+ "<h3>" + user.getUser_id() + "님</h3>" + "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : " 
+//						+ "<a href='http://localhost:8520" + request.getContextPath() + "/user/user_key.do?user_id="+ user.getUser_id() +"&user_key="+key+"'>인증하기</a></p>";
+//				try {
+//					mail.setSubject("[MYPF] 회원 가입 인증 메일입니다", "utf-8");
+//					mail.setText(htmlStr,"utf-8","html");
+//					mail.addRecipient(RecipientType.TO, new InternetAddress(user_mail));
+//					mailSender.send(mail);
+//				} catch (MessagingException e) {
+//					e.printStackTrace();
+//				}
+	
 			}
+
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
 		model.addAttribute("msg_register", user);
 		return "redirect:/user/login.do";
 	}
-	
+
+//	//회원 가입 난수 생성 
+//	private String init() {
+//		Random random = new Random();
+//		StringBuffer sb = new StringBuffer();
+//		int num = 0;
+//		do {
+//			num = random.nextInt(75) + 48;
+//			if ((num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)) {
+//				sb.append((char) num);
+//			} else {
+//				continue;
+//			}
+//			
+//		} while (sb.length() < size);
+//		if (lowerCheck) {
+//			return sb.toString().toLowerCase();
+//		}
+//		return sb.toString();
+//	}
+//	
+//	//회원 가입 시 난수 이용 키 생성
+//	private String getKey(boolean lowerCheck, int size) {
+//		this.lowerCheck = lowerCheck;
+//		this.size = size;
+//		return init();
+//	}
+//		
 	//아이디 중복 체크
 	@ResponseBody
 	@RequestMapping(value="chkID.do", method = RequestMethod.POST)

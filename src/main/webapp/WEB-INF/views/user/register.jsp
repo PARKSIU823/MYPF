@@ -54,7 +54,7 @@
 			  <tr>
 			  	<td class="title" rowspan="4">주소</td>
 			  	<td colspan="2">
-			  		<input type="text" id="sample6_postcode" placeholder="우편번호" class="infield02" readonly="readonly">
+			  		<input type="text" id="sample6_postcode" placeholder="우편번호" class="infield02" readonly="readonly" name="zipcode">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호" class="bbt">
 				</td>
 				</tr>

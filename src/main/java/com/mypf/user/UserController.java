@@ -51,7 +51,6 @@ public class UserController {
 				String userPW = user.getUser_pw();
 				String encodePW  = pwdEncoder.encode(userPW);
 				user.setUser_pw(encodePW);
-				user.setUser_addr((String)(user.getUser_addr01()+user.getUser_addr02()+" "+user.getUser_addr03()));
 				uService.register(user);
 			}
 		} catch (Exception e) {
@@ -126,9 +125,8 @@ public class UserController {
 		UserVO login = uService.userLogin(user);
 		//비밀번호 암호화
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
-//		boolean pwMatch = pwdEncoder.matches(user.getUser_pw(), login.getUser_pw());
-//		if(login!= null && pwMatch == true) {
-		if(login!= null) {
+		boolean pwMatch = pwdEncoder.matches(user.getUser_pw(), login.getUser_pw());
+		if(login!= null && pwMatch == true) {
 			session.setAttribute("user", login);
 		}else {
 			session.setAttribute("user", null);
@@ -168,9 +166,12 @@ public class UserController {
 	//비밀번호 확인
 	@ResponseBody
 	@RequestMapping(value = "check_pw.do", method = RequestMethod.POST)
-	public int checkPw(UserVO user) throws Exception{
-		int pwdChk = uService.chkPW(user);
-//		boolean pwdChk = pwdEncoder.matches(user.getUser_pw(), login.getUser_pw());
+	public boolean checkPw(UserVO user) throws Exception{
+//		int pwdChk = uService.chkPW(user);
+		UserVO login = uService.userLogin(user);
+		//비밀번호 암호화
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		boolean pwdChk = pwdEncoder.matches(user.getUser_pw(), login.getUser_pw());
 		return pwdChk;
 	}
 
@@ -184,7 +185,10 @@ public class UserController {
 	@RequestMapping(value = "modify.do", method = RequestMethod.POST)
 	public String modify(UserVO user, HttpSession session) throws Exception{
 		log.info("회원 정보 수정 : " + user);
-		user.setUser_addr((String)(user.getUser_addr01()+user.getUser_addr02()+user.getUser_addr03()));
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
+		String userPW = user.getUser_pw();
+		String encodePW  = pwdEncoder.encode(userPW);
+		user.setUser_pw(encodePW);
 		uService.userMod(user);
 		session.invalidate();
 		return "redirect:/index.do";

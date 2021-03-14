@@ -53,23 +53,23 @@
 			  <tr>
 			  	<td class="title" rowspan="4">주소</td>
 			  	<td colspan="2">
-			  		<input type="text" id="sample6_postcode" placeholder="우편번호" class="infield02" readonly="readonly">
+			  		<input type="text" id="sample6_postcode" placeholder="우편번호" class="infield02" readonly="readonly" name="zipcode">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호" class="bbt">
 				</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" id="sample6_address" placeholder="주소" class="infield" readonly="readonly" name="user_addr01"><br>
+						<input type="text" id="sample6_address" placeholder="주소" class="infield" readonly="readonly" name="addr01"><br>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="infield" name="user_addr02"><br>
+						<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="infield" name="addr02"><br>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="infield" readonly="readonly" name="user_addr03">
+						<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="infield" readonly="readonly" name="addr03">
 				  	</td>
 				  	</tr>
 			  <tr>
@@ -126,9 +126,9 @@
 					$("#user_tel").focus();
 					return false;
 				}
-				if($("#user_addr").val()==""){
+				if($("#sample6_postcode").val()==""){
 					alert("주소를 입력해주세요.");
-					$("#user_addr").focus();
+					$("#sample6_postcode").focus();
 					return false;
 				}
 								$("#modifyForm").submit();

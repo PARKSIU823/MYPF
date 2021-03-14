@@ -27,9 +27,9 @@ public class UserVO {
 	private String user_mail;
 	private String zipcode;
 	private String user_addr;
-	private String user_addr01;
-	private String user_addr02;
-	private String user_addr03;
+	private String addr01;
+	private String addr02;
+	private String addr03;
 	private String user_tel;
 	private String user_photo;
 	private String url;

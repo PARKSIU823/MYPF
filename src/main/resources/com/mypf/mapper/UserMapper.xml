@@ -66,7 +66,11 @@
 	UPDATE user_info
 	SET
 		user_mail = #{user_mail}
-		,user_addr = #{user_addr}
+		,user_pw = #{user_pw}
+		,zipcode = #{zipcode}
+		,addr01 = #{addr01}
+		,addr02 = #{addr02}
+		,addr03 = #{addr03}
 		,user_tel = #{user_tel}
 		,url = #{url}
 		,upt_dt = sysdate
@@ -127,8 +131,8 @@
 			,user_auth
 		FROM user_info
 		WHERE user_id = #{user_id}
-			AND user_pw = #{user_pw}
 	]]>
+<!-- 			AND user_pw = #{user_pw} -->
 </select>
 
 <!-- 회원탈퇴 -->

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mypf.mapper.PfFileMapper;
 import com.mypf.mapper.PortfolioMapper;
 import com.mypf.portfolio.service.PortfolioService;
 import com.mypf.portfolio.vo.PfCriteria;
@@ -20,6 +21,9 @@ public class PortfolioServiceImpl implements PortfolioService{
 
 	@Autowired
 	private PortfolioMapper pfMapper;
+	
+	@Autowired
+	private PfFileMapper pfFileMapper;
 	
 	//포폴 리스트 불러오기
 	@Override
@@ -42,6 +46,7 @@ public class PortfolioServiceImpl implements PortfolioService{
 	}
 
 	//포폴 등록하기
+	@Transactional
 	@Override
 	public void pfAdd(PortfolioVO pf) throws Exception {
 		log.info("등록 : " + pf);
@@ -52,7 +57,7 @@ public class PortfolioServiceImpl implements PortfolioService{
 		pf.getPfFileList().forEach(pfFile -> {
 			pfFile.setPrtf_num(pf.getPrtf_num());
 			try {
-				pfMapper.pfFileAdd(pfFile);
+				pfFileMapper.insert(pfFile);
 				log.info("포폴 파일 저장 : " + pfFile);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -61,19 +66,16 @@ public class PortfolioServiceImpl implements PortfolioService{
 	}
 
 	//포폴 수정하기
+	@Transactional
 	@Override
 	public boolean pfMod(PortfolioVO pf) throws Exception {
 		log.info("포폴 수정 : " + pf);
-		pfMapper.pfDel(pf.getPrtf_num());
+		pfFileMapper.deleteAll(pf.getPrtf_num());
 		boolean pfModResult = pfMapper.pfMod(pf) == 1;
-		if(pfModResult && pf.getPfFileList() != null && pf.getPfFileList().size() > 0) {
+		if(pfModResult && pf.getPfFileList()!= null && pf.getPfFileList().size()>0 ) {
 			pf.getPfFileList().forEach(pfFile -> {
 				pfFile.setPrtf_num(pf.getPrtf_num());
-				try {
-					pfMapper.pfFileAdd(pfFile);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				pfFileMapper.insert(pfFile);
 			});
 		}
 		return pfModResult;
@@ -82,10 +84,10 @@ public class PortfolioServiceImpl implements PortfolioService{
 	//포폴 삭제하기
 	@Transactional
 	@Override
-	public boolean pfDel(int prft_num) throws Exception {
-		log.info("포폴 삭제 : " + prft_num);
-		pfMapper.pfDel(prft_num);
-		return pfMapper.pfDel(prft_num)==1;
+	public boolean pfDel(int prtf_num) throws Exception {
+		log.info("포폴 삭제 : " + prtf_num);
+		pfFileMapper.deleteAll(prtf_num);
+		return pfMapper.pfDel(prtf_num)==1;
 	}
 
 	//포폴 조회수 증가
@@ -97,9 +99,9 @@ public class PortfolioServiceImpl implements PortfolioService{
 
 	//포폴 첨부파일 조회
 	@Override
-	public List<PfFileVO> getFileList(int prtfNum) throws Exception {
-		log.info("포폴 첨부파일 조회 : " + prtfNum);
-		return pfMapper.findByPrtfNum(prtfNum);
+	public List<PfFileVO> getFileList(int prtf_num) throws Exception {
+		log.info("포폴 첨부파일 조회 : " + prtf_num);
+		return pfFileMapper.findByPrtf_num(prtf_num);
 	}
 	
 	

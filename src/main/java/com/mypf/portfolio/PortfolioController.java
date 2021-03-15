@@ -18,9 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,8 +50,9 @@ public class PortfolioController {
 	public String pfList(Model model, PfCriteria cri, PfFileVO pfFile, PortfolioVO pf)  throws Exception{
 		log.info("pfList : " + cri);
 		int total = pfService.getTotalCount(cri);
+		String filePath = "C:\\upload"+ pfFile.getFile_path() +"\s_" + pfFile.getUuid() + pfFile.getFile_nm();
 		model.addAttribute("pfList", pfService.pfList(cri));
-		model.addAttribute("pfFile", pfService.getFileList(pfFile.getPrtf_num()));
+		model.addAttribute("pfFile", filePath);
 		model.addAttribute("pageMaker", new PfPageDTO(cri, total));
 		return "portfolio/pf_list";
 	}
@@ -78,7 +79,7 @@ public class PortfolioController {
 		pf.setFrm_dt((String)pf.getFrm_dt());
 		pf.setTo_dt((String)pf.getTo_dt());
 		if(pf.getPfFileList() != null) {
-			pf.getPfFileList().forEach(file -> log.info("포트폴리오 파일 : " + file));
+			pf.getPfFileList().forEach(pfFile -> log.info("포트폴리오 파일 : " + pfFile));
 		}
 		pfService.pfAdd(pf);
 		model.addAttribute("result", pf.getPrtf_num());
@@ -86,7 +87,7 @@ public class PortfolioController {
 	}
 	
 	//포트폴리오 작성시 썸네일 출력
-	@RequestMapping(value="pfDisplay.do")
+	@RequestMapping(value="pfDisplay.do", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String file_nm) {
 		log.info("파일 이름 : " + file_nm);
@@ -96,7 +97,7 @@ public class PortfolioController {
 		try {
 			HttpHeaders header = new HttpHeaders();
 			header.add("Content-Type", Files.probeContentType(file.toPath()));
-			result= new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),header,HttpStatus.OK);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -124,6 +125,7 @@ public class PortfolioController {
 	}
 	
 	//포트폴리오 게시판 글 삭제
+	@Transactional
 	@RequestMapping(value = "pf_delete.do", method = RequestMethod.POST)
 	public String pfDel(@RequestParam("prtf_num") int prtf_num, @ModelAttribute("pfCri") PfCriteria pfCri, Model model)  throws Exception{
 		log.info("포트폴리오 삭제 : " + prtf_num);
@@ -155,7 +157,7 @@ public class PortfolioController {
 	}
 	
 	//포트폴리오 파일 업로드
-	@RequestMapping(value="pf_file_write.do", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="file_write.do", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<List<PfFileVO>> pfFileWrite(MultipartFile[] uploadFile)  throws Exception{
 		log.info("포트폴리오 파일 업로드 : " + uploadFile);
@@ -189,7 +191,7 @@ public class PortfolioController {
 			try {
 				File saveFile = new File(uploadPath, uploadFileName);
 				multipartFile.transferTo(saveFile);
-				pfFileVO.setFile_nm(uuid.toString());
+				pfFileVO.setUuid(uuid.toString());
 				pfFileVO.setFile_path(uploadFolderPath);
 				
 				//이미지 파일 thumbnail 보여주기
@@ -206,23 +208,31 @@ public class PortfolioController {
 		return new ResponseEntity<>(pfFileList, HttpStatus.OK);
 	}
 	
-	//포트폴리오 파일 DB와 비교 후 삭제
+	//포폴 파일 조회
+	@RequestMapping(value="/getPfFileList.do", method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<PfFileVO>> getPfFileList(int prtf_num) throws Exception {
+		log.info("포트폴리오 파일 리스트 : " + prtf_num);
+		return new ResponseEntity<> (pfService.getFileList(prtf_num),HttpStatus.OK);
+	}
+	
+	//포폴 파일 삭제
 	private void deleteFiles(List<PfFileVO> pfFileList) {
-		log.info("포트폴리오 파일 DB 삭제");
-		log.info("삭제 파일 리스트 : " + pfFileList);
 		if(pfFileList == null || pfFileList.size() ==0) {
 			return;
 		}
-		
-		pfFileList.forEach(file -> {
+		log.info("포폴 파일 삭제 : " + pfFileList);
+		pfFileList.forEach(pfFile -> {
 			try {
-				Path pfFile = Paths.get("C:\\upload\\" + file.getFile_path()+ "\\" +file.getUuid()+"_"+file.getFile_nm()); 
-				Files.deleteIfExists(pfFile);
-				Path thumbnail = Paths.get("C:\\upload\\" + file.getFile_path()+"\\s_"+ file.getUuid()+"_"+file.getFile_nm());
-				Files.delete(thumbnail);
+				Path file = Paths.get("C:\\upload\\" + pfFile.getFile_path()+"\\"+pfFile.getUuid()+"_"+pfFile.getFile_nm());
+				Files.deleteIfExists(file);
+				Path thumbNail = Paths.get("C:\\upload\\"+pfFile.getFile_path()+"\\s_"+pfFile.getUuid()+"_"+pfFile.getFile_nm());
+				Files.delete(thumbNail);
 			} catch (Exception e) {
 				log.error("파일 삭제 오류 : " + e.getMessage());
 			}
 		});
 	}
+	
+	
 }

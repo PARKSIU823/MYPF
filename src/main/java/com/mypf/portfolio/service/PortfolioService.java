@@ -27,10 +27,10 @@ public interface PortfolioService {
 	public boolean pfMod(PortfolioVO pf) throws Exception;
 	
 	//포폴 삭제하기
-	public boolean pfDel(int prftNum) throws Exception;
+	public boolean pfDel(int prtf_num) throws Exception;
 	
 	//포폴 첨부파일 조회
-	public List<PfFileVO> getFileList(int prtfNum) throws Exception;
+	public List<PfFileVO> getFileList(int prtf_num) throws Exception;
 	
 
 }

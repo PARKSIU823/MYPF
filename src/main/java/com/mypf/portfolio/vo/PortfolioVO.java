@@ -31,8 +31,6 @@ public class PortfolioVO {
 	private String prtf_con;
 	private String frm_dt;
 	private String to_dt;
-//	private Date frm_dt;
-//	private Date to_dt;
 	private String url;
 	private String position;
 	private String idea;

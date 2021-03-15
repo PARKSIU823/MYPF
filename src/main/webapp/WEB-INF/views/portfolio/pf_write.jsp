@@ -17,7 +17,7 @@
 <form method="post" action="/portfolio/pf_write.do">
 	<div class="project">
 		<h3>PROJECT ADD</h3>
-		<input type="hidden" name="user_id" value="mypf01"/>
+		<input type="hidden" name="user_id" value="${user.user_id }"/>
 		<!-- 등록 테이블 -->
 		<table class="wform">
 			<tr>
@@ -69,26 +69,40 @@
 	</div>
 	
 	<!-- 파일 업로드시 섬네일 출력 -->
-	<div class="pf_thumb" id="pf_thumb">
+	<div class="uploadResult">
 		<ul>
 		</ul>
 	</div>
 	
 </form>
 
-<script>
+<script type="text/javascript">
 $(document).ready(function(e){
+	var formObj = $("form[role='form']");
+	$("button[type='submit']").on("click",function(e){
+		e.preventDefault();
+		console.log("등록 버튼 클릭");
+		var str ="";
+		$(".uploadResult ul li").each(function(i, obj){
+			var jobj = $(obj);
+			console.dir(jobj);
+			str += "<input type='hidden' name='pfFileList["+i+"].file_nm' value='"+jobj.data("filename")+"'>";
+			str += "<input type='hidden' name='pfFileList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+			str += "<input type='hidden' name='pfFileList["+i+"].file_path' value='"+jobj.data("path")+"'>";
+			str += "<input type='hidden' name='pfFileList["+i+"].file_type'value='"+jobj.data("type")+"'>";
+		});
+		
+		formObj.append(str).submit();
+	});
 	
-	
-	//파일 형식, 크기 체크
-	function checkExtenstion(fileName, fileSize) {
-	//파일 업로드 처리
+	//파일 크기, 형식 체크
 	//이미지 파일만 업로드
-	var regex = new RegExp("/\.(jpg|gif|tif|bmp|png)$/i");
-	//파일 최대 크기5MB;
-	var maxSize = 5242880; 
-		if(fileSize >= maxSize) {
-			alert("파일 크기 초과");
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	//파일 최대 크기 5MB
+	var maxSize = 5242880;
+	function checkExtension(fileName, fileSize) {
+		if(fileSize>=maxSize) {
+			alert("파일 사이즈 제한 초과");
 			return false;
 		}
 		if(regex.test(fileName)) {
@@ -98,69 +112,70 @@ $(document).ready(function(e){
 		return true;
 	}
 
-	//파일 버튼 변경 시
-	$("input[type='file']").change( function(e){
+	//섬네일 처리
+	function showUploadResult(uploadResultArr) {
+		if(!uploadResultArr || uploadResultArr.length == 0) { return; }
+		var uploadUL = $(".uploadResult ul");
+		var str ="";
+		
+		$(uploadResultArr).each(function(i, obj){
+			var fileCallPath = encodeURIComponent(obj.file_path+"\\s_"+obj.uuid+"_"+obj.file_nm);
+			str += "<li data-path='"+obj.file_path+"'";
+			str += "data-uuid='"+obj.uuid+"'data-filename='"+obj.file_nm+"'data-type='"+obj.file_type+"'";
+			str += "><div>";
+			str += "<span>"+obj.file_nm+"</span>";
+			str += "<button type='button' class='bbt02' data-file=\'"+fileCallPath+"\'"
+			str += "data-type='image'>X</button><br>";
+			str += "<img src='/portfolio/pfDisplay.do?file_nm="+fileCallPath+"'>";
+			str += "</div>";
+			str + "</li>";
+		});
+		uploadUL.append(str);
+	}
+	
+	//첨부파일 삭제 처리
+	$(".uploadResult").on("click","button",function(e){
+		console.log("포트폴리오 첨부 파일 삭제");
+		var targetFile = $(this).data("file");
+		var type= $(this).data("type");
+		var targetLi= $(this).closest("li");
+		$.ajax({
+			url : 'portfolio/deleteFile.do'
+			,data : {fileName : tagetFile, type: type}
+			,dataType : 'text'
+			,type : 'POST'
+			,success : function(result) {
+					alert(result);
+					targetLi.remove();
+			}
+		}); //.$.ajax
+	})
+	
+	//파일 입력 변경시 업로드 처리
+	$("input[type='file']").change(function(e){
 		var formData = new FormData();
 		var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files;
-		for(var i = 0; i <files.length; i++) {
-			if(!checkExtenstion(files[i].name, files[i].size)) {
+		for(var i = 0; i< files.length; i++) {
+			if(!checkExtension(files[i].name, files[i].size)) {
 				return false;
 			}
 			formData.append("uploadFile", files[i]);
 		}
 		$.ajax({
-			url:'/portfolio/pf_file_write.do'
-			,processData : false
-			,contentType : false
-			,dataType : 'json'
-			,data : formData
-			,type : 'POST'
-			,success : function(result) {
-				alert("업로드 성공");
-				showUploadedFile(result);
+			url : '/portfolio/file_write.do',
+			processData : false,
+			contentType : false,
+			data : formData,
+			type : 'POST',
+			dataType : 'json',
+			success : function(result) {
+				console.log(result);
+				showUploadResult(result);
 			}
-		}); //$.ajax 종료
+		}); //$.ajax
 	});
-	
-	//파일 섬네일 출력
-	function showUploadedFile(uploadResultArr) {
-		if(!uploadResultArr || uploadResultArr.length == 0) { return;}
-		var uploadUl = $("#pf_thumb ul");
-		var str = "";
-		$(uploadResultArr).each(function(i,obj) {
-			var fileCallPath = encodeURIComponent(obj.file_path+"/s_"+obj.uuid+"_"+obj.file_nm);
-			str += "<li data-path='"+obj.file_path+"'";
-			str += " data-uuid='"+obj.uuid+"' data-filename='"+obj.file_nm+"' data-type='"+obj.file_type+"'";
-			str += " ><div>";
-			str += "<span> "+ obj.file_nm+"</span>";
-			str += "<button type='button' data-file=\'"+fileCallPath+"\' "
-			str += "<img src='/portfolio/pfDisplay.do?file_nm="+fileCallPath+"'>";
-			str += "</div>";
-			str +"</li>";
-		}); //$(uploadResultArr) 종료
-		uploadUl.append(str);
-	}
-	
-	//작성 버튼 클릭
-	var formObj = $("form[role='form']");
-	$("buttin[type='submit']").on("click", function(e) {
-		e.preventDefault();
-		console.log("등록 버튼 클릭");
-		var str = "";
-		$(".pf_thumb ul li").each(function(i, obj) {
-			var objResult = $(obj);
-			console.dir(objResult);
-			str += "<input type = 'hidden' name = 'pfFileList["+i+"].file_nm'value='"+objResult.data("filename")+"'>";
-			str += "<input type = 'hidden' name = 'pfFileList["+i+"].uuid'value='"+objResult.data("uuid")+"'>";
-			str += "<input type = 'hidden' name = 'pfFileList["+i+"].file_path'value='"+objResult.data("path")+"'>";
-			str += "<input type = 'hidden' name = 'pfFileList["+i+"].file_type'value='"+objResult.data("type")+"'>";
-		});
-		formObj.append(str).submit();
-	});
-	
 });
-	
 </script>
 <jsp:include page="../main/footer.jsp"/>
 </body>

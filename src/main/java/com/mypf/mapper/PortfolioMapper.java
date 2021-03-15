@@ -35,13 +35,4 @@ public interface PortfolioMapper {
 	//포폴 파일 리스트
 	public List<PfFileVO> findByPrtfNum(int prtfNum) throws Exception;
 	
-	//포폴 파일 등록
-	public void pfFileAdd(PfFileVO pfFile) throws Exception;
-	
-	//포폴 파일 삭제
-	public void pfFileDelete(String uuid) throws Exception;
-	
-	//포폴 파일 수정
-	public int pfFileMod(PfFileVO pfFile) throws Exception;
-	
 }

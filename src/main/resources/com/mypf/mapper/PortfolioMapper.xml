@@ -134,39 +134,4 @@
 	]]>
 </delete>
 
-<!-- 파일 리스트 -->
-<select id ="findByPrtfNum" resultType="com.mypf.portfolio.vo.PfFileVO">
-	<![CDATA[
-		SELECT * FROM prtf_file
-	]]>
-</select>
-<!-- 		SELECT * FROM PRTF_FILE WHERE PRTF_NUM = #{PRTF_NUM} -->
-
-<!-- 포폴 파일 등록 -->
-<insert id ="pfFileAdd">
-	<![CDATA[
-		INSERT INTO prtf_file (
-			file_path
-			,file_nm
-			,ins_dt
-			,prtf_num
-			,uuid
-		) VALUES (
-			#{file_path}
-			,#{file_nm}
-			,sysdate
-			,#{prtf_num}
-			,#{uuid}
-		)
-	]]>
-</insert>
-
-<!-- 포폴 파일 삭제  -->
-<delete id="pfFileDelete">
-	<![CDATA[
-		DELETE FROM prtf_file
-		WHERE uuid = #{uuid}
-	]]>
-</delete>
-
 </mapper>

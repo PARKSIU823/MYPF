@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mypf.mapper.PfFileMapper">
+
+<!-- 파일 등록 -->
+<insert id="insert">
+	<![CDATA[
+		INSERT INTO PRTF_FILE (
+			uuid
+			,file_nm
+			,file_path
+			,prtf_num
+		) VALUES (
+			#{uuid}
+			,#{file_nm}
+			,#{file_path}
+			,#{prtf_num}
+		)
+	]]>
+</insert>
+
+<!-- 파일 삭제 -->
+<delete id="delete">
+	<![CDATA[
+		DELETE FROM PRTF_FILE WHERE uuid = #{uuid}
+	]]>
+</delete>
+
+<!-- 파일 조회 -->
+<select id="findByPrtf_num" resultType="com.mypf.portfolio.vo.PfFileVO">
+	<![CDATA[
+		SELECT * FROM PRTF_FILE
+		WHERE prtf_num = #{prtf_num}
+	]]>
+</select>
+
+<!-- 파일 삭제 -->
+<delete id="deleteAll">
+	<![CDATA[
+		DELETE PRTF_FILE WHERE prtf_num = #{prtf_num}
+	]]>
+</delete>
+</mapper>

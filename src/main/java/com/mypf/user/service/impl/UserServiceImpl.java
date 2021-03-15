@@ -112,4 +112,11 @@ public class UserServiceImpl implements UserService{
 		return uMapper.getTotalCount(cri);
 	}
 
+	//회원 권한 보기
+	@Override
+	public UserVO userAuthForm(UserVO user) throws Exception {
+		log.info("회원 권한 수정");
+		return uMapper.userAuthForm(user);
+	}
+
 }

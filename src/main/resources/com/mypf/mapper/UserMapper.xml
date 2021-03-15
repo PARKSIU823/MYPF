@@ -88,6 +88,19 @@
 	]]>
 </update>
 
+<!-- 회원 권한 보기 -->
+<select id="userAuthForm" resultType="com.mypf.user.vo.UserVO">
+	<![CDATA[
+		SELECT
+			user_id
+			,user_nm
+			,user_mail
+			,user_count
+			,user_auth
+		FROM user_info
+		WHERE user_id = #{user_id}
+	]]>
+</select>
 <!-- 회원 리스트 -->
 <select id="userInfo" resultType="com.mypf.user.vo.UserVO">
 	<![CDATA[

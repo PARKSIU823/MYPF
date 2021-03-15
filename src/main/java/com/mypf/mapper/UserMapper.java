@@ -44,6 +44,9 @@ public interface UserMapper {
 	// 회원 탈퇴
 	public void userDel(UserVO user) throws Exception;
 	
+	//회원 권한 보기
+	public UserVO userAuthForm(UserVO user) throws Exception;
+	
 	//권한 수정
 	public void userAuth(UserVO user) throws Exception;
 	

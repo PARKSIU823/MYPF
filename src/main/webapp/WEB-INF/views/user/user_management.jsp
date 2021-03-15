@@ -18,12 +18,12 @@
 	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"/>
 	<input type="hidden" name="amount" value="${pageMaker.cri.amount }"/>
 </form>
-<form id="authForm" method="post" action="/user/userAuth.do">
+<form id="authForm" method="get" action="/user/userAuth.do">
+	<input type="hidden" name="user_id" value="${list.user_id }"/>
 	<div class="userList">
 		<h3>MANAGEMENT</h3>
 		<table class="uList">
 			<colgroup>
-				<col width="15px;"/>
 				<col width="10%"/>
 				<col width="10%"/>
 				<col width="10%"/>
@@ -31,7 +31,6 @@
 				<col width="30%"/>
 			</colgroup>
 			<tr>
-				<td></td>
 				<td class="title underline">회원번호</td>
 				<td class="title underline">아이디</td>
 				<td class="title underline">이름</td>
@@ -40,9 +39,8 @@
 			</tr>
 			<c:forEach items="${userList }" var="list">
 			<tr>
-				<td><input type="checkbox" value="${list.user_count }" name="authCheck"></td>
 				<td class="underline">${list.user_count }</td>
-				<td class="underline"><input type="hidden" name="user_id" value="${list.user_id }"/>${list.user_id }</td>
+				<td class="underline"><a href="<c:url value='/user/userAuth.do?user_id=${list.user_id }'/>">${list.user_id }</a></td>
 				<td class="underline">${list.user_nm }</td>
 				<td class="underline">${list.user_mail }</td>
 				<td class="underline">
@@ -54,11 +52,11 @@
 				</td>
 			</tr>
 			</c:forEach>
-			<tr>
-				<td colspan="6">
-				<button type="submit" id="authBbt" name="authBbt" class="bbt" style="float: right;">권한 수정</button>
-				</td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td colspan="6"> -->
+<!-- 				<button type="submit" id="authBbt" name="authBbt" class="bbt" style="float: right;">권한 수정</button> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 		</table>
 	</div>
 </form>

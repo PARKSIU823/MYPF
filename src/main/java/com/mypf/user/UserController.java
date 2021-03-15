@@ -1,5 +1,7 @@
 package com.mypf.user;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -262,19 +264,17 @@ public class UserController {
 		
 	}
 	
-	//회원 권한 수정
+	//회원 권한 수정 페이지
+	@RequestMapping(value="userAuth.do", method=RequestMethod.GET)
+	public String userAuthForm(@RequestParam("user_id") String user_id, UserVO user,Model model) throws Exception {
+		log.info("회원 권한 수정 페이지");
+		model.addAttribute("userAuth", uService.userAuthForm(user));
+		return "user/user_auth";
+	}
 	@RequestMapping(value= "userAuth.do", method = RequestMethod.POST)
 	public String userAuth(UserVO user) throws Exception{
 		log.info("회원 권한 수정 : " +user);
-		List<UserVO> userList = new ArrayList<UserVO>();
-		userList.forEach(users -> {
-			try {
-				uService.userAuth(user);
-			}catch (Exception e) {
-				log.error("권한 수정 오류 : " + e.getMessage());
-			}
-		});
-		 
+		uService.userAuth(user);
 		return "redirect:/user/user_management.do";
 	}
 

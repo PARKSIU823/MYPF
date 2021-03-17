@@ -416,7 +416,7 @@ ul { list-style:none;}
 						<c:if test="${user != null }">
 						<li class="menu">${user.user_nm }님 </li>
 						<li class="menu"><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
-						<li class="menu"><a href="<c:url value='/user/modify.do'/>">정보관리</a></li>
+						<li class="menu"><a href="<c:url value='/user/check_pw.do'/>">정보관리</a></li>
 						</c:if>
 					</ul>
 				</td>
@@ -456,22 +456,22 @@ ul { list-style:none;}
 
 <script type="text/javascript">
 // modal
-$(document).ready(function(){
-	var result = '<c:out value="${user.user_nm}"/>';
+ $(document).ready(function(){
+ 	var result = '<c:out value="${user.user_nm}"/>';
 	
-	// 	modal 
-	checkModal(result);
-	function checkModal(result){
-		//user_nm 값이 null일 경우 return;
-		if(result==='') {return;}
-		//result_nm 값이 있을 경우
-		if(result!=null){
-			alert(result + "님 로그인 완료");
-		}
-		$(".informModal").modal("show");
-	}
+ 	// 	modal 
+ 	checkModal(result);
+ 	function checkModal(result){
+ 		//user_nm 값이 null일 경우 return;
+ 		if(result==='') {return;}
+ 		//result_nm 값이 있을 경우
+ 		if(result!=null){
+ 			alert(result + "님 로그인 완료");
+ 		}
+ 		$(".informModal").modal("show");
+ 	}
 
-});
+// });
 </script>
 	<div class="tech">
 		<h3>기술게시판</h3>

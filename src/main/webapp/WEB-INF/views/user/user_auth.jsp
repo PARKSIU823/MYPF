@@ -22,17 +22,8 @@
 	<div class="userList">
 		<h3>MANAGEMENT</h3>
 		<table class="uList">
-			<colgroup>
-				<col width="5%"/>
-				<col width="10%"/>
-				<col width="10%"/>
-				<col width="21%"/>
-				<col width="18%"/>
-				<col width="18%"/>
-				<col width="18%"/>
-			</colgroup>
 			<tr>
-				<td class="title underline">회원번호</td>
+				<td class="title underline" width="15px;">회원번호</td>
 				<td class="title underline">아이디</td>
 				<td class="title underline">이름</td>
 				<td class="title underline">이메일</td>
@@ -52,11 +43,11 @@
 						<option value="U" <c:if test="${userAuth.user_auth eq'U'.charAt(0) }"> selected='selected'</c:if>>일반회원</option>
 					</select>
 				</td>
-				<td class="underline"><input type="text" style="border: 0" name="join_dt" value="<fmt:formatDate value='${userAuth.join_dt}'/>" pattern="yyyy-MM-dd"/>
-				<td class="underline"><input type="text" style="border: 0" name="upt_dt" value="<fmt:formatDate value='${userAuth.upt_dt}'/>" pattern="yyyy-MM-dd"/>
+				<td class="underline"><fmt:formatDate value='${userAuth.join_dt}' pattern="yyyy-MM-dd"/>
+				<td class="underline"><fmt:formatDate value='${userAuth.upt_dt}' pattern="yyyy-MM-dd"/>
 			</tr>
 			<tr>
-				<td colspan="6">
+				<td colspan="7">
 				<button type="submit" id="authBbt" name="authBbt" class="bbt" style="float: right;">권한 수정</button>
 				</td>
 			</tr>

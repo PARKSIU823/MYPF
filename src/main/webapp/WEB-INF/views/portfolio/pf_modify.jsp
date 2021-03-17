@@ -12,7 +12,6 @@
 	  crossorigin="anonymous"></script>
    <link href="${path}/resources/css/style.css" rel="stylesheet" >
    <style type="text/css">
-   	.uploadResult {width : 75%;}
    	.uploadResult ul { display:flex; flex-flow: row; justify-content: center; align-items: center;}
    	.uploadResult ul li {list-style: none; padding: 10px; align-content: center; text-align: center;}
    	.uploadResult ul li img {width: 200px; height: 200px;}
@@ -74,6 +73,12 @@
 				<td class="title">첨부파일</td>
 				<td><input type="file" class="infield" name="uploadFile" multiple="multiple"/></td>
 			</tr>
+			<tr class="uploadResult">
+				<td colspan="2">
+					<ul>
+					</ul>
+				</td>
+			</tr>
 			<tr>
 				<td colspan="2" class="bbtpos2">
 					<button type="submit" data-oper="modify" class="bbt">수정</button>
@@ -82,10 +87,6 @@
 				</td>
 			</tr>
 		</table>
-	</div>
-	<div class="uploadResult">
-		<ul>
-		</ul>
 	</div>
 	<div class="bigPictureWrapper">
 		<div class="bigPicture"></div>

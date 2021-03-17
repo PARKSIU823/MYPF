@@ -14,10 +14,6 @@
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
-	<form id='actionForm' action="/portfolio/pf_list.do" method="get">
-		<input type="hidden" name="pageNum" value="${pageMaker.pfCri.pageNum }"/>
-		<input type="hidden" name="amount" value="${pageMaker.pfCri.amount}"/>
-	</form>
 	<div class="project">
 		<h3>PORTFOLIO</h3>
 <!-- 		<ul> -->
@@ -33,38 +29,56 @@
 			</c:if>
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="0" end="2" step="1">
-				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src='${pfFile}'/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+<%-- 				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src='${list.file_nm}'/></a><br/> <c:out value="${list.prtf_title }"/></td> --%>
 				</c:forEach>
 			</tr>
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="3" end="5" step="1">
-				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src='${pfFile}'/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+<%-- 				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src='${list.file_nm}'/></a><br/> <c:out value="${list.prtf_title }"/></td> --%>
 				</c:forEach>
 			</tr>
 			<tr>
 				<c:forEach items="${pfList}" var="list" begin="6" end="8" step="1">
-				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src='${pfFile}'/></a><br/> <c:out value="${list.prtf_title }"/></td>
+				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/> <c:out value="${list.prtf_title }"/></td>
+<%-- 				<td><a href="/portfolio/pf_read.do?prtf_num=<c:out value='${list.prtf_num}'/>"><img src='${list.file_nm}'/></a><br/> <c:out value="${list.prtf_title }"/></td> --%>
 				</c:forEach>
 			</tr>
 		</table>
 		
+		<!-- 포트폴리오 검색 -->
+		<form id="searchForm" action="/portfolio/pf_list.do" method="get">
+		<!-- 검색 -->
+		<div class="pfSearch">
+			<select name="type" class="pfOpt">
+				<option>선택</option>
+				<option value="user_id" <c:out value="${pageMaker.pfCri.type eq 'user_id'?'selected' :'' }"/>>아이디</option>
+			</select>
+			<input type="text" name="keyword" class="underline" value='<c:out value="${pageMaker.pfCri.keyword }"/>'/>
+			<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.pfCri.pageNum }"/>' />
+			<input type='hidden' name='amount' value='<c:out value="${pageMaker.pfCri.amount }"/>' />
+			<button type="submit" name="searchBbt" class="bbt">검색</button>
+		</div>
+		</form>			
 		<!-- 포트폴리오 페이징 -->
-		<div class="pfPage">
 		<form id="actionForm" action="/portfolio/pf_list.do" method="get">
+		<div class="pfPage">
 			<input type='hidden' name='pageNum' value = '${pageMaker.pfCri.pageNum }'>
 			<input type='hidden' name='amount' value = '${pageMaker.pfCri.amount }'>
+			<input type='hidden' name="keyword" value="${pageMaker.pfCri.keyword }"/>
+			<input type='hidden' name="type" value="${pageMaker.pfCri.type }"/>
 			<c:if test="${pageMaker.prev }">
-				<a href="<c:out value='${pageMaker.startPage - 1 }'/>">이전</a>
+				<li class="pagination"><a href="<c:out value='${pageMaker.startPage-1}'/>">이전</a></li>
 			</c:if>
 			<c:forEach var="num" begin="${pageMaker.startPage }" end ="${pageMaker.endPage }">
-				<li class="pfPagination" style="float: left;
-				"><a href="<c:out value='${num}'/>">${num}</a></li>
+				<li class="pagination ${pageMaker.pfCri.pageNum == num ? "active":"" }" style="float: left; list-style: none; font-weight: bold; "> <a href="<c:out value='${num}'/>">${num}</a></li>
 			</c:forEach>
 			<c:if test="${pageMaker.next }">
-				<a href="<c:out value='${pageMaker.endPage + 1 }'/>">다음</a>
+				<li class="pagination"><a href="<c:out value='${pageMaker.startPage-1}'/>">이전</a></li>
 			</c:if>
-		</form>
 		</div>
+		</form>
 	</div>
 	<!-- 	modal 추가 -->
 	<div class="modal_wrap" class="informModal">
@@ -101,11 +115,29 @@ $(document).ready(function(){
 	
 	//페이지 이동
 	var actionForm = $('#actionForm');
-	$('.pfPagination a').on("click", function(e) {
+	$('.pagination a').on("click", function(e) {
 		e.preventDefault();
 		console.log('click');
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 		actionForm.submit();
+	})
+	
+	//검색
+	var searchForm = $("#searchForm");
+	$("#searchForm button").on("click", function(e){
+		if(!searchForm.find("option:selected").val()){
+			alert("키워드를 입력하세요.");
+			$(".userOpt").focus();
+			return false;
+		}
+		if(!searchForm.find("input[name='keyword']").val()){
+			alert("키워드를 입력하세요.");
+			$(".keyword").focus();
+			return false;
+		}
+		searchForm.find("input[name='pageNum']").val("1");
+		e.preventDefault();
+		searchForm.submit();
 	})
 });
 </script>

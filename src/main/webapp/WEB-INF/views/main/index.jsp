@@ -15,20 +15,30 @@
 <body>
 <jsp:include page="../main/header.jsp"/>
 <div class="pfMain">
-	<table>
+	<table class="mainForm">
 		<tr>
-		<c:forEach items="${pfList}" var="pfList" begin="1" end="3" step="1">
-			<td>
-				<a href="/portfolio/pf_read.do?prtf_num=<c:out value='${pfList.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a><br/>
+			<td class="tdfield01">
+				<span class="title">PORTFOLIO</span>
 			</td>
-		</c:forEach>
+			<td width="2%" rowspan="2">
+				
+			</td>
+			<td class="tdfield02">
+				<span class="title">TECH</span>		
+			</td>
 		</tr>
 		<tr>
-		<c:forEach items="${techList}" var="techList" begin="1" end="5" step="1">
 			<td>
-				<a href='tech_detail.do?tech_num=<c:out value="${techList.tech_num }"/>'>${techList.tech_title}</a>
+				<c:forEach items="${pfList}" var="pfList" begin="0" end="3" step="1">
+					<a href="/portfolio/pf_read.do?prtf_num=<c:out value='${pfList.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a>
+				</c:forEach>
 			</td>
-		</c:forEach>
+			<td>
+				<c:forEach items="${techList}" var="techList" begin="0" end="4" step="1">
+					<a href='/tech/tech_detail.do?tech_num=<c:out value="${techList.tech_num }"/>'>${techList.tech_title}</a>
+				</c:forEach>
+			</td>
+			
 		</tr>
 	</table>
 </div>

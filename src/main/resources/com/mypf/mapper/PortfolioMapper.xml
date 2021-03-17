@@ -22,12 +22,49 @@
 				,category
 				,ins_dt
 			FROM PRTF_BOARD
-			WHERE rownum <= #{pageNum} * #{amount})
+			WHERE
+	]]>
+			<include refid="pfCriteria"></include>
+	<![CDATA[
+		 rownum <= #{pageNum} * #{amount})
             WHERE rn > (#{pageNum}-1) * #{amount}
 	]]>
-<!-- 		SELECT * FROM PRTF_BOARD -->
-<!-- 		WHERE PRTF_NUM > 0 -->
-<!-- 	ORDER BY PRTF_NUM DESC -->
+<!-- 		SELECT -->
+<!-- 		    ROWNUM rn, -->
+<!-- 		    a.prtf_num, -->
+<!-- 		    a.prtf_title, -->
+<!-- 		    a.prtf_con, -->
+<!-- 		    a.category, -->
+<!-- 		    concat('C:\upload\', concat(concat(b.file_path, concat('\s_', concat(b.uuid,'_'))), b.file_nm)) AS file_nm -->
+<!-- 		FROM -->
+<!-- 	         ( -->
+<!-- 	        SELECT -->
+<!-- 	             * -->
+<!-- 	        FROM -->
+<!-- 	            ( -->
+<!-- 	                SELECT /*+INDEX_DESC(prtf_board pk_prtf_board) */  -->
+<!-- 	                                ROWNUM rn, -->
+<!-- 	                    prtf_num, -->
+<!-- 	                    prtf_title, -->
+<!-- 	                    prtf_con, -->
+<!-- 	                    frm_dt, -->
+<!-- 	                    to_dt, -->
+<!-- 	                    position, -->
+<!-- 	                    idea, -->
+<!-- 	                    url, -->
+<!-- 	                    hit, -->
+<!-- 	                    category, -->
+<!-- 	                    ins_dt -->
+<!-- 	                FROM -->
+<!-- 	                    prtf_board -->
+<!-- 	                WHERE -->
+<!-- 		<include refid="pfCriteria"></include> -->
+<!-- 	                    ROWNUM <= #{pageNum} * #{amount} -->
+<!-- 	            ) -->
+<!-- 	        WHERE -->
+<!-- 	            rn > ( #{pageNum} - 1 ) * #{amount} -->
+<!-- 	    ) a -->
+<!-- 	    INNER JOIN prtf_file b ON a.prtf_num = b.prtf_num -->
 <!-- 	<if test="'category' =='siu'"> -->
 <!-- 	</if> -->
 <!-- 	<if test="'category' == 'ej'"> -->
@@ -134,4 +171,21 @@
 	]]>
 </delete>
 
+<!-- pfCriteria -->
+<sql id="pfCriteria">
+	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<foreach item='type' collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type == 'user_id'.toString()">
+						(user_id like '%'||#{keyword}||'%')
+					</when>
+					<otherwise>
+						(user_id like '%'||#{keyword}||'%')
+					</otherwise>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+</sql>
 </mapper>

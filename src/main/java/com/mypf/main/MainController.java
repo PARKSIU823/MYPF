@@ -25,7 +25,7 @@ public class MainController {
 	@Autowired
 	private PortfolioService pfService;
 
-	@RequestMapping(value = {"/index.do","/",""}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/index.do","/"}, method = RequestMethod.GET)
 	public String index(HttpServletRequest request, Model model, Criteria cri, PfCriteria pfCri) throws Exception {
 		log.info("index");
 		model.addAttribute("pfList", pfService.pfList(pfCri));

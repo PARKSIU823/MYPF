@@ -97,10 +97,13 @@
 			,user_mail
 			,user_count
 			,user_auth
+			,join_dt
+			,upt_dt
 		FROM user_info
 		WHERE user_id = #{user_id}
 	]]>
 </select>
+
 <!-- 회원 리스트 -->
 <select id="userInfo" resultType="com.mypf.user.vo.UserVO">
 	<![CDATA[
@@ -120,14 +123,14 @@
 				,user_auth
 			FROM user_info
 			WHERE
-			 rownum <= #{pageNum} * #{amount}
-			)
-		WHERE 
 		]]>
 		<include refid="userCriteria"></include>
 		<![CDATA[
+			 rownum <= #{pageNum} * #{amount}
+			)
+		WHERE 
 		rn> (#{pageNum} -1 ) * #{amount}
-		ORDER BY rn DESC
+		ORDER BY user_count DESC
 	]]>
 </select>
 
@@ -188,13 +191,10 @@
 
 <!-- 회원 리스트 전체 회원 수 -->
 <select id="getTotalCount" resultType="int">
-	<![CDATA[
-		SELECT COUNT(*) FROM user_info where 
-	]]>
-	<include refid="userCriteria"></include>
-	<![CDATA[
+		SELECT COUNT(*) FROM user_info WHERE
+		
+		<include refid="userCriteria"></include>
 		user_count > 0
-	]]>
 </select>
 
 <!-- UserCriteria -->
@@ -204,14 +204,17 @@
 			<trim prefix="OR">
 				<choose>
 					<when test="type == 'user_id'.toString()">
-						user_id like '%'||#{keyword}||'%'
+						(user_id like '%'||#{keyword}||'%')
 					</when>
 					<when test="type == 'user_nm'.toString()">
-						user_nm like '%'||#{keyword}||'%'
+						(user_nm like '%'||#{keyword}||'%')
 					</when>
 					<when test="type == 'user_mail'.toString()">
-						user_mail like '%'||#{keyword}||'%'
+						(user_mail like '%'||#{keyword}||'%')
 					</when>
+					<otherwise>
+						(user_id like '%'||#{keyword}||'%' OR user_nm like '%'||#{keyword}||'%' OR user_mail like '%'||#{keyword}||'%')
+					</otherwise>
 				</choose>
 			</trim>
 		</foreach>

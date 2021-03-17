@@ -23,11 +23,13 @@
 		<h3>MANAGEMENT</h3>
 		<table class="uList">
 			<colgroup>
+				<col width="5%"/>
 				<col width="10%"/>
 				<col width="10%"/>
-				<col width="10%"/>
-				<col width="30%"/>
-				<col width="30%"/>
+				<col width="21%"/>
+				<col width="18%"/>
+				<col width="18%"/>
+				<col width="18%"/>
 			</colgroup>
 			<tr>
 				<td class="title underline">회원번호</td>
@@ -35,12 +37,14 @@
 				<td class="title underline">이름</td>
 				<td class="title underline">이메일</td>
 				<td class="title underline">권한</td>
+				<td class="title underline">가입일</td>
+				<td class="title underline">최종 수정일</td>
 			</tr>
 			<tr>
-				<td class="underline"><input type="text" name="user_count" value="${userAuth.user_count }" readonly="readonly"/></td>
-				<td class="underline"><input type="text" name="user_id" value="${userAuth.user_id }" readonly="readonly"/></td>
-				<td class="underline"><input type="text" name="user_nm" value="${userAuth.user_nm }" readonly="readonly"/></td>
-				<td class="underline"><input type="text" name="user_mail" value="${userAuth.user_mail }" readonly="readonly"/></td>
+				<td class="underline"><input type="text" style="border: 0" name="user_count" value="${userAuth.user_count }" readonly="readonly"/></td>
+				<td class="underline"><input type="text" style="border: 0" name="user_id" value="${userAuth.user_id }" readonly="readonly"/></td>
+				<td class="underline"><input type="text" style="border: 0" name="user_nm" value="${userAuth.user_nm }" readonly="readonly"/></td>
+				<td class="underline"><input type="text" style="border: 0" name="user_mail" value="${userAuth.user_mail }" readonly="readonly"/></td>
 				<td class="underline">
 					<select name="user_auth" class="sOpt">
 						<option>권한</option>
@@ -48,6 +52,8 @@
 						<option value="U" <c:if test="${userAuth.user_auth eq'U'.charAt(0) }"> selected='selected'</c:if>>일반회원</option>
 					</select>
 				</td>
+				<td class="underline"><input type="text" style="border: 0" name="join_dt" value="<fmt:formatDate value='${userAuth.join_dt}'/>" pattern="yyyy-MM-dd"/>
+				<td class="underline"><input type="text" style="border: 0" name="upt_dt" value="<fmt:formatDate value='${userAuth.upt_dt}'/>" pattern="yyyy-MM-dd"/>
 			</tr>
 			<tr>
 				<td colspan="6">

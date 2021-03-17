@@ -50,9 +50,7 @@ public class PortfolioController {
 	public String pfList(Model model, PfCriteria cri, PfFileVO pfFile, PortfolioVO pf)  throws Exception{
 		log.info("pfList : " + cri);
 		int total = pfService.getTotalCount(cri);
-		String filePath = "C:\\upload"+ pfFile.getFile_path() +"\s_" + pfFile.getUuid() + pfFile.getFile_nm();
 		model.addAttribute("pfList", pfService.pfList(cri));
-		model.addAttribute("pfFile", filePath);
 		model.addAttribute("pageMaker", new PfPageDTO(cri, total));
 		return "portfolio/pf_list";
 	}

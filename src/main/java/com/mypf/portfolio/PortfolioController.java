@@ -3,6 +3,7 @@ package com.mypf.portfolio;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -82,6 +83,23 @@ public class PortfolioController {
 		pfService.pfAdd(pf);
 		model.addAttribute("result", pf.getPrtf_num());
 		return "redirect:/portfolio/pf_list.do";
+	}
+	
+	//포트폴리오 작성시 리스트 썸네일 출력
+	@RequestMapping(value="pfListDisplay.do", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<byte[]> getListFile(String file_nm) {
+		File file = new File(file_nm);
+		log.info("파일 : " + file);
+		ResponseEntity<byte[]> result = null;
+		try {
+			HttpHeaders header = new HttpHeaders();
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),header,HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	//포트폴리오 작성시 썸네일 출력

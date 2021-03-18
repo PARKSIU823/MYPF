@@ -19,6 +19,9 @@ public interface UserMapper {
 	
 	// 이메일 중복 체크
 	public int chkMail(UserVO user) throws Exception;
+	
+	//이메일 인증
+	public String authKey(UserVO user) throws Exception;
 
 	// 아이디 찾기
 	public String findID(UserVO user) throws Exception;

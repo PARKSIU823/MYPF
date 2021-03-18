@@ -43,26 +43,18 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("button[type='submit']").on("click", function(){
-		if($("#user_id").val()==""){
-			alert("아이디를 입력해주세요.");
-			$("#user_id").focus();
-			return false;
-		}
-		if($("#user_pw").val()==""){
-			alert("비밀번호를 입력해주세요.");
-			$("#user_pw").focus();
-			return false;
-		}
+		
 		$.ajax({
 			url : "/user/check_pw.do",
 			type : "POST",
 			dateType : "json",
-			data : $("#delForm").serializeArray(),
+			data : {"user_id" : $("#user_id").val(),"user_pw" : $("#user_pw").val()},
 			success: function(data){
 				
 				if(data==true){
 					if(confirm("회원 탈퇴 하시겠습니까?")){
 						$("#delForm").submit();
+						alert("탈퇴되었습니다.");
 					}
 				}else{
 					alert("비밀번호가 틀렸습니다.");
@@ -70,7 +62,6 @@ $(document).ready(function(){
 				}
 			}
 		})
-		
 	});
 })
 </script>

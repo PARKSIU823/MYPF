@@ -60,17 +60,17 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" id="sample6_address" placeholder="주소" class="infield" readonly="readonly" name="user_addr01"><br>
+						<input type="text" id="sample6_address" placeholder="주소" class="infield" readonly="readonly" name="addr01"><br>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="infield" name="user_addr02"><br>
+						<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="infield" name="addr02"><br>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="infield" readonly="readonly" name="user_addr03">
+						<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="infield" readonly="readonly" name="addr03">
 				  	</td>
 <!-- 			  	<td colspan="2"><input type="text" class="infield" name="user_addr" id="user_addr"/></td> -->
 			  </tr>
@@ -80,7 +80,7 @@
 			  </tr>
 			  <tr>
 			  	<td class="title">URL</td>
-			  	<td colspan="2"><input type="url" class="infield" name="user_tel" id="url"/></td>
+			  	<td colspan="2"><input type="url" class="infield" name="url" id="url"/></td>
 			  </tr>
 			  <tr>
 			  	<td colspan="3" class="bbtpos2">
@@ -155,6 +155,7 @@
 				$("#user_addr").focus();
 				return false;
 			}
+			alert("회원 가입이 완료되었습니다");
 		});
 			
 	});

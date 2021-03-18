@@ -6,33 +6,38 @@
 <select id="pfList" resultType="com.mypf.portfolio.vo.PortfolioVO">
 	<![CDATA[
 		SELECT
-		    ROWNUM rn,
-		    a.prtf_num,
-		    a.prtf_title,
-		    a.prtf_con,
-		    a.category,
-		    concat('C:\upload\', concat(concat(b.file_path, concat('\s_', concat(b.uuid,'_'))), b.file_nm)) AS file_nm
-		FROM
-	         (
-	        SELECT
-	             *
+	             rn,
+            prtf_num,
+            prtf_title,
+            prtf_con,
+            frm_dt,
+            to_dt,
+            position,
+            idea,
+            url,
+            hit,
+            category,
+            ins_dt,
+            replace(file_nm,'\','%5C') as file_nm
 	        FROM
 	            (
 	                SELECT /*+INDEX_DESC(prtf_board pk_prtf_board) */ 
 	                                ROWNUM rn,
-	                    prtf_num,
-	                    prtf_title,
-	                    prtf_con,
-	                    frm_dt,
-	                    to_dt,
-	                    position,
-	                    idea,
-	                    url,
-	                    hit,
-	                    category,
-	                    ins_dt
+	                    a.prtf_num,
+	                    a.prtf_title,
+	                    a.prtf_con,
+	                    a.frm_dt,
+	                    a.to_dt,
+	                    a.position,
+	                    a.idea,
+	                    a.url,
+	                    a.hit,
+	                    a.category,
+	                    a.ins_dt,
+                        CONCAT(B.file_path,CONCAT('%5Cs_',CONCAT(B.uuid, CONCAT('_',B.file_nm)))) AS FILE_NM
 	                FROM
-	                    prtf_board
+	                    prtf_board A
+	                LEFT OUTER JOIN PRTF_FILE B ON A.prtf_num = B.prtf_num
 	                WHERE
 	]]>
 		<include refid="pfCriteria"></include>
@@ -41,8 +46,6 @@
 	            )
 	        WHERE
 	            rn > ( #{pageNum} - 1 ) * #{amount}
-	    ) a
-	    INNER JOIN prtf_file b ON a.prtf_num = b.prtf_num
 	]]>
 <!-- 	<if test="'category' =='siu'"> -->
 <!-- 	</if> -->

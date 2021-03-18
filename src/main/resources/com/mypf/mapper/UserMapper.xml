@@ -26,6 +26,9 @@
 			,user_id
 			,user_pw
 			,user_mail
+			,addr01
+			,addr02
+			,addr03
 			,user_addr
 			,user_tel
 			,join_dt
@@ -36,7 +39,10 @@
 			,#{user_id}
 			,#{user_pw}
 			,#{user_mail}
-			,#{user_addr}
+			,#{addr01}
+			,#{addr02}
+			,#{addr03}
+			,CONCAT(#{addr01}, CONCAT(#{addr02},#{addr03}))
 			,#{user_tel}
 			,sysdate
 			,'U'
@@ -60,6 +66,15 @@
 	]]>
 </select>
 
+<!-- 이메일 인증 -->
+<update id="authKey">
+	<![CDATA[
+	UPDATE user_info
+	SET user_auth = 'U'
+	WHERE user_id = #{user_id}
+	]]>
+</update>
+
 <!-- 회원 정보 수정 -->
 <update id="userMod">
 	<![CDATA[
@@ -71,6 +86,7 @@
 		,addr01 = #{addr01}
 		,addr02 = #{addr02}
 		,addr03 = #{addr03}
+		,user_addr = CONCAT(#{addr01}, CONCAT(#{addr02},#{addr03}))
 		,user_tel = #{user_tel}
 		,url = #{url}
 		,upt_dt = sysdate

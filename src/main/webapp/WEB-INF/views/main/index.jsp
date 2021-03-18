@@ -30,7 +30,7 @@
 		<tr>
 			<td>
 				<c:forEach items="${pfList}" var="pfList" begin="0" end="2" step="1">
-					<a href="/portfolio/pf_read.do?prtf_num=<c:out value='${pfList.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a>
+					<a href="/portfolio/pf_read.do?prtf_num=<c:out value='${pfList.prtf_num}'/>"><img src='/portfolio/pfDisplay.do?file_nm=${pfList.file_nm}'/></a>
 				</c:forEach>
 			</td>
 			<td>

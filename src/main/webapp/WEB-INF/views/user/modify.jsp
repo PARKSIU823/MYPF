@@ -53,23 +53,23 @@
 			  <tr>
 			  	<td class="title" rowspan="4">주소</td>
 			  	<td colspan="2">
-			  		<input type="text" id="sample6_postcode" placeholder="우편번호" class="infield02" readonly="readonly" name="zipcode">
+			  		<input type="text" id="sample6_postcode" placeholder="우편번호" class="infield02" readonly="readonly" name="zipcode" value="${user.zipcode }">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호" class="bbt">
 				</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" id="sample6_address" placeholder="주소" class="infield" readonly="readonly" name="addr01"><br>
+						<input type="text" id="sample6_address" placeholder="주소" class="infield" readonly="readonly" name="addr01" value="${user.addr01 }"><br>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="infield" name="addr02"><br>
+						<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="infield" name="addr02" value="${user.addr02 }"><br>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="infield" readonly="readonly" name="addr03">
+						<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="infield" readonly="readonly" name="addr03" value="${user.addr03 }">
 				  	</td>
 				  	</tr>
 			  <tr>
@@ -131,7 +131,8 @@
 					$("#sample6_postcode").focus();
 					return false;
 				}
-								$("#modifyForm").submit();
+				alert("수정 완료되었습니다");				
+				$("#modifyForm").submit();
 				//비밀번호 암호화 확인 후 수정
 // 				$.ajax({
 // 					url : "/user/check_pw.do",

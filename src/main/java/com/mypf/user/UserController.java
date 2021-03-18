@@ -205,14 +205,6 @@ public class UserController {
 	//회원 탈퇴
 	@RequestMapping(value = "remove.do", method = RequestMethod.POST)
 	public String remove(UserVO user, HttpSession session, Model model) throws Exception{
-		UserVO sessionUser = (UserVO) session.getAttribute("user");
-		String sessionPW = sessionUser.getUser_pw();
-		String userPW = user.getUser_pw();
-		
-		if(!(sessionPW.equals(userPW))) {
-			model.addAttribute("msg", false);
-			return "redirect:/user/remove.do";
-		}
 		uService.userDel(user);
 		session.invalidate();
 		return "redirect:/index.do";

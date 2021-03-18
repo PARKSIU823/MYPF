@@ -42,6 +42,13 @@ public class UserServiceImpl implements UserService{
 		return uMapper.chkMail(user);
 	}
 	
+	//이메일 인증
+	@Override
+	public void authKey(UserVO user) throws Exception{
+		log.info("이메일 인증 : " + user);
+		uMapper.authKey(user);
+	}
+	
 	
 	//아이디 찾기
 	@Override

@@ -29,13 +29,13 @@
 		</tr>
 		<tr>
 			<td>
-				<c:forEach items="${pfList}" var="pfList" begin="0" end="3" step="1">
+				<c:forEach items="${pfList}" var="pfList" begin="0" end="2" step="1">
 					<a href="/portfolio/pf_read.do?prtf_num=<c:out value='${pfList.prtf_num}'/>"><img src="${path }/resources/img/prthumb.png"/></a>
 				</c:forEach>
 			</td>
 			<td>
 				<c:forEach items="${techList}" var="techList" begin="0" end="4" step="1">
-					<a href='/tech/tech_detail.do?tech_num=<c:out value="${techList.tech_num }"/>'>${techList.tech_title}</a>
+					<p><a href='/tech/tech_detail.do?tech_num=<c:out value="${techList.tech_num }"/>'>${techList.tech_title}</a> </p>
 				</c:forEach>
 			</td>
 			

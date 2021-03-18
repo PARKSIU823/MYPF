@@ -5,66 +5,45 @@
 <!-- 포폴 리스트 -->
 <select id="pfList" resultType="com.mypf.portfolio.vo.PortfolioVO">
 	<![CDATA[
-		SELECT 
-			*
-		FROM (
-			SELECT /*+INDEX_DESC(prtf_board pk_prtf_board) */
-				rownum rn
-				,prtf_num
-				,prtf_title
-				,prtf_con
-				,frm_dt
-				,to_dt
-				,position
-				,idea
-				,url
-				,hit
-				,category
-				,ins_dt
-			FROM PRTF_BOARD
-			WHERE
+		SELECT
+		    ROWNUM rn,
+		    a.prtf_num,
+		    a.prtf_title,
+		    a.prtf_con,
+		    a.category,
+		    concat('C:\upload\', concat(concat(b.file_path, concat('\s_', concat(b.uuid,'_'))), b.file_nm)) AS file_nm
+		FROM
+	         (
+	        SELECT
+	             *
+	        FROM
+	            (
+	                SELECT /*+INDEX_DESC(prtf_board pk_prtf_board) */ 
+	                                ROWNUM rn,
+	                    prtf_num,
+	                    prtf_title,
+	                    prtf_con,
+	                    frm_dt,
+	                    to_dt,
+	                    position,
+	                    idea,
+	                    url,
+	                    hit,
+	                    category,
+	                    ins_dt
+	                FROM
+	                    prtf_board
+	                WHERE
 	]]>
-			<include refid="pfCriteria"></include>
+		<include refid="pfCriteria"></include>
 	<![CDATA[
-		 rownum <= #{pageNum} * #{amount})
-            WHERE rn > (#{pageNum}-1) * #{amount}
+	                    ROWNUM <= #{pageNum} * #{amount}
+	            )
+	        WHERE
+	            rn > ( #{pageNum} - 1 ) * #{amount}
+	    ) a
+	    INNER JOIN prtf_file b ON a.prtf_num = b.prtf_num
 	]]>
-<!-- 		SELECT -->
-<!-- 		    ROWNUM rn, -->
-<!-- 		    a.prtf_num, -->
-<!-- 		    a.prtf_title, -->
-<!-- 		    a.prtf_con, -->
-<!-- 		    a.category, -->
-<!-- 		    concat('C:\upload\', concat(concat(b.file_path, concat('\s_', concat(b.uuid,'_'))), b.file_nm)) AS file_nm -->
-<!-- 		FROM -->
-<!-- 	         ( -->
-<!-- 	        SELECT -->
-<!-- 	             * -->
-<!-- 	        FROM -->
-<!-- 	            ( -->
-<!-- 	                SELECT /*+INDEX_DESC(prtf_board pk_prtf_board) */  -->
-<!-- 	                                ROWNUM rn, -->
-<!-- 	                    prtf_num, -->
-<!-- 	                    prtf_title, -->
-<!-- 	                    prtf_con, -->
-<!-- 	                    frm_dt, -->
-<!-- 	                    to_dt, -->
-<!-- 	                    position, -->
-<!-- 	                    idea, -->
-<!-- 	                    url, -->
-<!-- 	                    hit, -->
-<!-- 	                    category, -->
-<!-- 	                    ins_dt -->
-<!-- 	                FROM -->
-<!-- 	                    prtf_board -->
-<!-- 	                WHERE -->
-<!-- 		<include refid="pfCriteria"></include> -->
-<!-- 	                    ROWNUM <= #{pageNum} * #{amount} -->
-<!-- 	            ) -->
-<!-- 	        WHERE -->
-<!-- 	            rn > ( #{pageNum} - 1 ) * #{amount} -->
-<!-- 	    ) a -->
-<!-- 	    INNER JOIN prtf_file b ON a.prtf_num = b.prtf_num -->
 <!-- 	<if test="'category' =='siu'"> -->
 <!-- 	</if> -->
 <!-- 	<if test="'category' == 'ej'"> -->

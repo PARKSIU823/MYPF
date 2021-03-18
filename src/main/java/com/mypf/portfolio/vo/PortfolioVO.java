@@ -37,6 +37,7 @@ public class PortfolioVO {
 	private int hit;
 	private Date ins_dt;
 	private Date upt_dt;
+	private String file_nm;
 	
 	public List<PfFileVO> pfFileList;
 

@@ -153,7 +153,25 @@ $(document).ready(function(e){
 	
 	//파일 입력 변경시 업로드 처리
 	$("input[type='file']").change(function(e){
-		var formData = new FormData();
+		  // 인풋 태그에 파일이 있는 경우
+	    if(this.files && this.files[0]) {
+	        // 이미지 파일인지 검사 (생략)
+	        // FileReader 인스턴스 생성
+	        const reader = new FileReader()
+	        // 이미지가 로드가 된 경우
+	        reader.onload = function(event) { 
+	       // 	var img = document.createElement("img"); 
+	        	//img.setAttribute("src", event.target.result); 
+	        	//document.querySelector("div#image_container").appendChild(img); 
+	        	$(".uploadResult ul").append($("<img>").attr("src",event.target.result));
+        	};
+
+	        
+	        // reader가 이미지 읽도록 하기
+	        reader.readAsDataURL(this.files[0]);
+	    }
+		
+		/* var formData = new FormData();
 		var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files;
 		for(var i = 0; i< files.length; i++) {
@@ -173,7 +191,7 @@ $(document).ready(function(e){
 				console.log(result);
 				showUploadResult(result);
 			}
-		}); //$.ajax
+		}); //$.ajax */
 	});
 });
 </script>

@@ -59,6 +59,11 @@
 				<td><input type="file" class="infield" name="uploadFile"  multiple/></td>
 			</tr>
 			<tr>
+				<td colspan="2" class="uploadResult">
+					<ul></ul>
+				</td>
+			</tr>
+			<tr>
 				<td colspan="2" class="bbtpos2">
 					<button type="submit" class="bbt" id="uploadPf">등록</button>
 					<button type="reset" class="bbt">초기화</button>
@@ -68,17 +73,17 @@
 		</table>
 	</div>
 	
-	<!-- 파일 업로드시 섬네일 출력 -->
-	<div class="uploadResult">
-		<ul>
-		</ul>
-	</div>
+<!-- 	<!-- 파일 업로드시 섬네일 출력 --> -->
+<!-- 	<div class="uploadResult"> -->
+<!-- 		<ul> -->
+<!-- 		</ul> -->
+<!-- 	</div> -->
 	
 </form>
 
 <script type="text/javascript">
 $(document).ready(function(e){
-	var formObj = $("form[role='form']");
+	var formObj = $("form");
 	$("button[type='submit']").on("click",function(e){
 		e.preventDefault();
 		console.log("등록 버튼 클릭");

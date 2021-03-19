@@ -187,7 +187,7 @@ $(document).ready(function(){
 <script>
 //파일 수정
 $(document).ready(function(){
-	var formObj = $("form");
+	var formObj = $("form[role='form']");
 	$('button').on("click",function(e){
 		e.preventDefault();
 		var operation = $(this).data("oper");
